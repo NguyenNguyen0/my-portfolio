@@ -1,3 +1,36 @@
 @import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Smooth transitions for theme changes */
+html {
+	transition: color-scheme 0.3s ease;
+}
+
+body,
+body * {
+	transition:
+		background-color 0.3s ease,
+		border-color 0.3s ease,
+		color 0.3s ease,
+		fill 0.3s ease,
+		stroke 0.3s ease,
+		opacity 0.3s ease,
+		box-shadow 0.3s ease;
+}
+
+/* Preserve existing transform and position transitions */
+body *:where([class*='transition-']) {
+	transition-property: var(--tw-transition-property, all);
+	transition-timing-function: var(
+		--tw-transition-timing-function,
+		cubic-bezier(0.4, 0, 0.2, 1)
+	);
+	transition-duration: var(--tw-transition-duration, 150ms);
+}
+
+/* Prevent transitions on initial load to avoid flash */
+.preload,
+.preload * {
+	transition: none !important;
+}
