@@ -1,6 +1,6 @@
 'use client';
 
-import { SmartBackground } from './layouts';
+import { SmartBackground, Header } from './layouts';
 
 interface AppLayoutProps {
 	children: React.ReactNode;
@@ -10,8 +10,8 @@ export function AppLayout({ children }: AppLayoutProps) {
 	return (
 		<SmartBackground>
 			<div className='min-h-screen'>
-				{/* Your app content goes here */}
-				{children}
+				<Header />
+				<main className='pt-20'>{children}</main>
 			</div>
 		</SmartBackground>
 	);

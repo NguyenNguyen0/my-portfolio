@@ -149,7 +149,7 @@ export function PetalFallBackground({ children }: PetalFallBackgroundProps) {
 	}, []);
 
 	return (
-		<div className='relative h-full w-full transition-colors bg-gradient-to-br from-pink-50 via-blue-50 to-purple-50'>
+		<div className='relative h-full w-full transition-colors bg-gradient-to-br from-pink-100 via-blue-100 to-purple-100'>
 			{/* Petal canvas */}
 			<canvas
 				ref={canvasRef}

@@ -34,3 +34,60 @@ body *:where([class*='transition-']) {
 .preload * {
 	transition: none !important;
 }
+
+/* Custom Font Families */
+.font-montserrat {
+	font-family: var(--font-montserrat), sans-serif;
+}
+
+.font-anton {
+	font-family: var(--font-anton), sans-serif;
+}
+
+.font-dancing-script {
+	font-family: var(--font-dancing-script), cursive;
+}
+
+/* Typing Animation */
+@keyframes typing {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+
+@keyframes blink-caret {
+	from,
+	to {
+		border-color: transparent;
+	}
+	50% {
+		border-color: currentColor;
+	}
+}
+
+.typing-animation {
+	overflow: hidden;
+	white-space: nowrap;
+	border-right: 3px solid;
+	animation:
+		typing 3s steps(40, end),
+		blink-caret 1s step-end infinite;
+}
+
+/* Hover Effects */
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+.hover-float:hover {
+	animation: float 2s ease-in-out infinite;
+}
