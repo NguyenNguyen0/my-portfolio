@@ -4,7 +4,7 @@ import { TransitionDemo } from '@/components/transition-demo';
 
 export default function Home() {
 	return (
-		<div className='min-h-screen bg-white p-8 transition-colors dark:bg-gray-900'>
+		<div className='min-h-screen  p-8 transition-colors '>
 			<div className='mx-auto max-w-4xl'>
 				<header className='mb-8'>
 					<div className='flex items-center justify-between'>

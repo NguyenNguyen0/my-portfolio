@@ -1,5 +1,6 @@
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { SmartBackground } from '@/components/layouts';
 
 export default function RootLayout({
 	children,
@@ -14,7 +15,9 @@ export default function RootLayout({
 					defaultTheme='system'
 					enableSystem
 				>
-					{children}
+					<SmartBackground>
+						{children}
+					</SmartBackground>
 				</ThemeProvider>
 			</body>
 		</html>
