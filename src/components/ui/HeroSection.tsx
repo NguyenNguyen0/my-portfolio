@@ -18,6 +18,7 @@ export function HeroSection() {
 
 	return (
 		<section
+			id='hero'
 			className={clsx(
 				'relative flex min-h-screen',
 				'items-center justify-center',

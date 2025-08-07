@@ -53,7 +53,7 @@ export function Header() {
 						}}
 					>
 						<Link
-							href='/'
+							href='#hero'
 							className='text-xl sm:text-2xl font-bold text-gray-900 dark:text-white'
 						>
 							Trung Nguyen

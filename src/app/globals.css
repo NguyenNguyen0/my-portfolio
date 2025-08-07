@@ -5,6 +5,7 @@
 /* Smooth transitions for theme changes */
 html {
 	transition: color-scheme 0.3s ease;
+	scroll-behavior: smooth;
 }
 
 body,

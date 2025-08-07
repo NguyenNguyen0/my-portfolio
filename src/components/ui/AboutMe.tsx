@@ -30,12 +30,12 @@ const personalInfo = [
 	{
 		icon: <HiAcademicCap className='text-xl' />,
 		label: 'Education',
-		value: 'Self-study + online courses (Udemy, Coursera, etc.)',
+		value: 'Self-study + online courses',
 	},
 	{
 		icon: <HiBookOpen className='text-xl' />,
 		label: 'Favorite topics',
-		value: 'API Design, DevOps, UI/UX',
+		value: 'API Design, AI and UI/UX',
 	},
 	{
 		icon: <HiLightBulb className='text-xl' />,
@@ -92,7 +92,10 @@ export function AboutMe() {
 	};
 
 	return (
-		<section className='py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800'>
+		<section
+			id='about'
+			className='py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800'
+		>
 			<div className='container mx-auto px-4 max-w-6xl'>
 				{/* Header */}
 				<div className='text-center mb-16'>
