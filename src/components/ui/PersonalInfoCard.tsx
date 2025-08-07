@@ -1,7 +1,9 @@
 'use client';
 
+import { ReactNode } from 'react';
+
 interface PersonalInfoCardProps {
-	icon: string;
+	icon: string | ReactNode;
 	label: string;
 	value: string;
 }

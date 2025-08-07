@@ -4,31 +4,41 @@ import { Avatar } from './Avatar';
 import { PersonalInfoCard } from './PersonalInfoCard';
 import { SkillsSection } from './SkillsSection';
 import { Quote } from './Quote';
-import { title } from 'process';
+import {
+	HiLocationMarker,
+	HiChat,
+	HiAcademicCap,
+	HiBookOpen,
+	HiLightBulb,
+	HiCode,
+	HiBookmark,
+	HiLightningBolt,
+} from 'react-icons/hi';
+import { RiRocketLine } from 'react-icons/ri';
 
 const personalInfo = [
 	{
-		icon: '📍',
+		icon: <HiLocationMarker className='text-xl' />,
 		label: 'Location',
 		value: 'Ho Chi Minh City',
 	},
 	{
-		icon: '🗣️',
+		icon: <HiChat className='text-xl' />,
 		label: 'Foreign language',
 		value: 'Good English communication, reading and understanding technical documents',
 	},
 	{
-		icon: '🎓',
+		icon: <HiAcademicCap className='text-xl' />,
 		label: 'Education',
 		value: 'Self-study + online courses (Udemy, Coursera, etc.)',
 	},
 	{
-		icon: '📚',
+		icon: <HiBookOpen className='text-xl' />,
 		label: 'Favorite topics',
 		value: 'API Design, DevOps, UI/UX',
 	},
 	{
-		icon: '💡',
+		icon: <HiLightBulb className='text-xl' />,
 		label: 'Goal',
 		value: 'Become a Fullstack Developer with beautiful design thinking & strong technical skills',
 	},
@@ -122,28 +132,28 @@ export function AboutMe() {
 							{/* Timeline list */}
 							<div className='space-y-3'>
 								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
-									<span className='text-xl'>👨‍💻</span>
+									<HiCode className='text-xl mt-1 flex-shrink-0' />
 									<p className='leading-relaxed'>
 										Self-taught developer driven by
 										curiosity
 									</p>
 								</div>
 								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
-									<span className='text-xl'>📚</span>
+									<HiBookmark className='text-xl mt-1 flex-shrink-0' />
 									<p className='leading-relaxed'>
 										Learned through building real projects
 										&amp; online courses
 									</p>
 								</div>
 								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
-									<span className='text-xl'>⚡</span>
+									<HiLightningBolt className='text-xl mt-1 flex-shrink-0' />
 									<p className='leading-relaxed'>
 										Passion for full-stack with maintainable
 										code &amp; intuitive UIs
 									</p>
 								</div>
 								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
-									<span className='text-xl'>🚀</span>
+									<RiRocketLine className='text-xl mt-1 flex-shrink-0' />
 									<p className='leading-relaxed'>
 										Exploring modern tech, design
 										principles, and open-source
