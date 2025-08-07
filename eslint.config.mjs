@@ -14,8 +14,7 @@ const eslintConfig = [
 	...compat.extends('prettier'),
 	{
 		plugins: {
-			prettier: (await import('eslint-plugin-prettier'))
-				.default,
+			prettier: (await import('eslint-plugin-prettier')).default,
 		},
 		rules: {
 			'prettier/prettier': 'error',

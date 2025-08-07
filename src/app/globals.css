@@ -22,10 +22,7 @@ body * {
 /* Preserve existing transform and position transitions */
 body *:where([class*='transition-']) {
 	transition-property: var(--tw-transition-property, all);
-	transition-timing-function: var(
-		--tw-transition-timing-function,
-		cubic-bezier(0.4, 0, 0.2, 1)
-	);
+	transition-timing-function: var(--tw-transition-timing-function, cubic-bezier(0.4, 0, 0.2, 1));
 	transition-duration: var(--tw-transition-duration, 150ms);
 }
 

@@ -65,13 +65,7 @@ export function StarryBackground({ children }: StarryBackgroundProps) {
 				ctx.shadowColor = 'white';
 				ctx.shadowBlur = star.radius * 2;
 				ctx.beginPath();
-				ctx.arc(
-					star.x,
-					star.y,
-					star.radius,
-					0,
-					Math.PI * 2
-				);
+				ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
 				ctx.fill();
 				ctx.restore();
 
@@ -93,25 +87,14 @@ export function StarryBackground({ children }: StarryBackgroundProps) {
 				for (let j = i + 1; j < numStars; j++) {
 					const dx = stars[i].x - stars[j].x;
 					const dy = stars[i].y - stars[j].y;
-					const distance = Math.sqrt(
-						dx * dx + dy * dy
-					);
+					const distance = Math.sqrt(dx * dx + dy * dy);
 					if (distance < 120) {
-						const opacity =
-							((120 - distance) /
-								120) *
-							0.3;
+						const opacity = ((120 - distance) / 120) * 0.3;
 						ctx.save();
 						ctx.globalAlpha = opacity;
 						ctx.beginPath();
-						ctx.moveTo(
-							stars[i].x,
-							stars[i].y
-						);
-						ctx.lineTo(
-							stars[j].x,
-							stars[j].y
-						);
+						ctx.moveTo(stars[i].x, stars[i].y);
+						ctx.lineTo(stars[j].x, stars[j].y);
 						ctx.stroke();
 						ctx.restore();
 					}
@@ -141,11 +124,7 @@ export function StarryBackground({ children }: StarryBackgroundProps) {
 	return (
 		<div className='relative h-full w-full transition-colors bg-gradient-to-br from-gray-900 via-blue-900 to-black'>
 			{/* Starry canvas */}
-			<canvas
-				ref={canvasRef}
-				className='fixed inset-0 h-full w-full'
-				style={{ zIndex: 1 }}
-			/>
+			<canvas ref={canvasRef} className='fixed inset-0 h-full w-full' style={{ zIndex: 1 }} />
 
 			{/* Content */}
 			<div className='relative z-10'>{children}</div>

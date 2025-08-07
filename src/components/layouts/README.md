@@ -79,18 +79,12 @@ Update your `app/layout.tsx`:
 import { SmartBackground } from '@/components/layouts';
 import { ThemeProvider } from '@/components/theme-provider';
 
-export default function RootLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='en'>
 			<body>
 				<ThemeProvider>
-					<SmartBackground>
-						{children}
-					</SmartBackground>
+					<SmartBackground>{children}</SmartBackground>
 				</ThemeProvider>
 			</body>
 		</html>

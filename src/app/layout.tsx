@@ -28,12 +28,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className={`preload ${montserrat.variable} ${anton.variable} ${dancingScript.variable}`}>
-				<ThemeProvider
-					attribute='class'
-					defaultTheme='system'
-					enableSystem
-				>
+			<body
+				className={`preload overflow-x-hidden ${montserrat.variable} ${anton.variable} ${dancingScript.variable}`}
+			>
+				<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
 					<AppLayout>{children}</AppLayout>
 				</ThemeProvider>
 			</body>

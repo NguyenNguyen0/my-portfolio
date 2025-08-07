@@ -39,17 +39,10 @@ export function SmartBackground({ children }: SmartBackgroundProps) {
 		if (theme === 'dark') {
 			return <StarryBackground>{children}</StarryBackground>;
 		} else {
-			return (
-				<PetalFallBackground>
-					{children}
-				</PetalFallBackground>
-			);
+			return <PetalFallBackground>{children}</PetalFallBackground>;
 		}
 	} catch (error) {
-		console.warn(
-			'Background component failed, using fallback:',
-			error
-		);
+		console.warn('Background component failed, using fallback:', error);
 		return <FallbackBackground>{children}</FallbackBackground>;
 	}
 }

@@ -44,19 +44,13 @@ export function PetalFallBackground({ children }: PetalFallBackgroundProps) {
 		for (let i = 0; i < numPetals; i++) {
 			petals.push({
 				x: Math.random() * window.innerWidth,
-				y:
-					Math.random() * window.innerHeight -
-					window.innerHeight,
+				y: Math.random() * window.innerHeight - window.innerHeight,
 				size: Math.random() * 8 + 4,
 				speedX: Math.random() * 1 - 1,
 				speedY: Math.random() * 2 + 1,
 				rotation: Math.random() * Math.PI * 2,
 				rotationSpeed: Math.random() * 0.04 - 0.02,
-				color: colors[
-					Math.floor(
-						Math.random() * colors.length
-					)
-				],
+				color: colors[Math.floor(Math.random() * colors.length)],
 				opacity: Math.random() * 0.7 + 0.3,
 			});
 		}
@@ -77,14 +71,7 @@ export function PetalFallBackground({ children }: PetalFallBackgroundProps) {
 			ctx.beginPath();
 			// Petal shape using bezier curves
 			ctx.moveTo(0, -petal.size);
-			ctx.bezierCurveTo(
-				petal.size / 2,
-				-petal.size,
-				petal.size / 2,
-				petal.size / 2,
-				0,
-				petal.size
-			);
+			ctx.bezierCurveTo(petal.size / 2, -petal.size, petal.size / 2, petal.size / 2, 0, petal.size);
 			ctx.bezierCurveTo(
 				-petal.size / 2,
 				petal.size / 2,
@@ -149,13 +136,9 @@ export function PetalFallBackground({ children }: PetalFallBackgroundProps) {
 	}, []);
 
 	return (
-		<div className='relative h-full w-full transition-colors bg-gradient-to-br from-pink-100 via-blue-100 to-purple-100'>
+		<div className='relative h-full w-full transition-colors bg-gradient-to-br from-pink-200 via-blue-200 to-purple-200'>
 			{/* Petal canvas */}
-			<canvas
-				ref={canvasRef}
-				className='fixed inset-0 h-full w-full'
-				style={{ zIndex: 1 }}
-			/>
+			<canvas ref={canvasRef} className='fixed inset-0 h-full w-full' style={{ zIndex: 1 }} />
 
 			{/* Content */}
 			<div className='relative z-10'>{children}</div>

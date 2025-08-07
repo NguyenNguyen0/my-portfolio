@@ -1,0 +1,198 @@
+'use client';
+
+import { Avatar } from './Avatar';
+import { PersonalInfoCard } from './PersonalInfoCard';
+import { SkillsSection } from './SkillsSection';
+import { Quote } from './Quote';
+import { title } from 'process';
+
+const personalInfo = [
+	{
+		icon: '📍',
+		label: 'Location',
+		value: 'Ho Chi Minh City',
+	},
+	{
+		icon: '🗣️',
+		label: 'Foreign language',
+		value: 'Good English communication, reading and understanding technical documents',
+	},
+	{
+		icon: '🎓',
+		label: 'Education',
+		value: 'Self-study + online courses (Udemy, Coursera, etc.)',
+	},
+	{
+		icon: '📚',
+		label: 'Favorite topics',
+		value: 'API Design, DevOps, UI/UX',
+	},
+	{
+		icon: '💡',
+		label: 'Goal',
+		value: 'Become a Fullstack Developer with beautiful design thinking & strong technical skills',
+	},
+];
+
+const technicalSkills = [
+	{
+		title: 'Programing languages',
+		skills: ['JavaScript', 'TypeScript', 'Java', 'Python'],
+		variant: 'primary' as const,
+	},
+	{
+		title: 'Frontend',
+		skills: ['HTML', 'CSS', 'React', 'Next.js', 'Tailwind CSS'],
+		variant: 'primary' as const,
+	},
+	{
+		title: 'Backend',
+		skills: [
+			'Node.js',
+			'Express',
+			'RESTful APIs',
+			'FastAPI',
+			'Flask',
+			'MongoDB',
+			'PostgreSQL',
+			'Redis',
+			'Microsoft SQL Server',
+		],
+		variant: 'secondary' as const,
+	},
+	{
+		title: 'Tools & Others',
+		skills: ['Git', 'Docker', 'Postman', 'Vercel', 'Linux CLI'],
+		variant: 'accent' as const,
+	},
+];
+
+const softSkills = [
+	{
+		title: 'Communication & Learning',
+		skills: ['English reading & communication', 'Self-learning & documentation'],
+		variant: 'primary' as const,
+	},
+];
+
+export function AboutMe() {
+	const handleContactClick = () => {
+		// Scroll to contact section or open contact modal
+		console.log('Contact me clicked');
+	};
+
+	return (
+		<section className='py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800'>
+			<div className='container mx-auto px-4 max-w-6xl'>
+				{/* Header */}
+				<div className='text-center mb-16'>
+					<h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
+						About Me
+					</h2>
+					<div className='w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full'></div>
+				</div>
+
+				{/* Personal Avatar & Introduction */}
+				<div className='grid lg:grid-cols-2 gap-12 mb-16'>
+					{/* Avatar Section */}
+					<div className='flex flex-col items-center text-center space-y-6'>
+						<Avatar
+							src='/avatar.jpg'
+							alt='Nguyên - Personal Avatar'
+							size='xl'
+							className='mb-4'
+						/>
+						<div className='space-y-4'>
+							<h3 className='text-2xl font-semibold text-gray-900 dark:text-white'>
+								Hi, I&apos;m Nguyên. A passionate developer!
+							</h3>
+							<p className='text-gray-600 dark:text-gray-300 leading-relaxed'>
+								I craft functional, beautiful web apps — solving
+								real-world problems with clean code and creative UX.
+							</p>
+						</div>
+					</div>
+
+					{/* Detailed Introduction */}
+					<div className='space-y-6'>
+						<h3 className='text-2xl font-semibold text-gray-900 dark:text-white'>
+							My Journey
+						</h3>
+						<div className='space-y-4'>
+							{/* Timeline list */}
+							<div className='space-y-3'>
+								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
+									<span className='text-xl'>👨‍💻</span>
+									<p className='leading-relaxed'>
+										Self-taught developer driven by
+										curiosity
+									</p>
+								</div>
+								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
+									<span className='text-xl'>📚</span>
+									<p className='leading-relaxed'>
+										Learned through building real projects
+										&amp; online courses
+									</p>
+								</div>
+								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
+									<span className='text-xl'>⚡</span>
+									<p className='leading-relaxed'>
+										Passion for full-stack with maintainable
+										code &amp; intuitive UIs
+									</p>
+								</div>
+								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
+									<span className='text-xl'>🚀</span>
+									<p className='leading-relaxed'>
+										Exploring modern tech, design
+										principles, and open-source
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{/* Personal Information Grid */}
+				<div className='mb-16'>
+					<h3 className='text-2xl font-semibold text-gray-900 dark:text-white mb-8 text-center'>
+						Personal Information
+					</h3>
+					<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
+						{personalInfo.map((info, index) => (
+							<PersonalInfoCard
+								key={index}
+								icon={info.icon}
+								label={info.label}
+								value={info.value}
+							/>
+						))}
+					</div>
+				</div>
+
+				{/* Skills Section */}
+				<div className='grid lg:grid-cols-2 gap-12 mb-16'>
+					{/* Technical Skills */}
+					<div>
+						<SkillsSection title='Technical Skills' skillGroups={technicalSkills} />
+					</div>
+
+					{/* Soft Skills */}
+					<div>
+						<SkillsSection title='Soft Skills' skillGroups={softSkills} />
+					</div>
+				</div>
+
+				{/* Quote and CTA */}
+				<div className='max-w-4xl mx-auto'>
+					<Quote
+						quote='I believe that great software should not only work well, but also feels delightful to use.'
+						ctaText='Get In Touch'
+						ctaAction={handleContactClick}
+					/>
+				</div>
+			</div>
+		</section>
+	);
+}

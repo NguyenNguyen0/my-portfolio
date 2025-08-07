@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import clsx from 'clsx';
 
 export function HeroSection() {
 	const [showTyping, setShowTyping] = useState(true);
@@ -16,11 +17,20 @@ export function HeroSection() {
 	}, []);
 
 	return (
-		<section className='relative flex min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8'>
+		<section
+			className={clsx(
+				'relative flex min-h-screen',
+				'items-center justify-center',
+				'px-4 sm:px-6 lg:px-8'
+			)}
+		>
 			<div className='text-center max-w-6xl mx-auto'>
 				{/* Main Name with Custom Fonts and Animations */}
 				<motion.h1
-					className='text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] xl:text-[9rem] font-black leading-tight'
+					className={clsx(
+						'text-7xl sm:text-7xl md:text-8xl lg:text-[8rem] xl:text-[9rem]',
+						'font-black leading-tight'
+					)}
 					initial={{
 						opacity: 0,
 						y: 50,
@@ -32,31 +42,51 @@ export function HeroSection() {
 						ease: 'easeOut',
 					}}
 				>
-					<div className='hover-float cursor-pointer transition-all duration-300'>
+					<div
+						className={clsx(
+							'hover-float cursor-default',
+							'transition-all duration-300'
+						)}
+					>
 						{/* Surname - Anton */}
-						<span className='block font-anton text-gray-800 dark:text-gray-100 font-normal tracking-wide mb-2 sm:mb-4'>
-							<span
-								className={
-									showTyping
-										? 'typing-animation'
-										: ''
-								}
-							>
+						<span
+							className={clsx(
+								'block font-anton',
+								'text-gray-800 dark:text-gray-100',
+								'font-normal tracking-wide',
+								'mb-2 sm:mb-4'
+							)}
+						>
+							<span className={clsx(showTyping && 'typing-animation')}>
 								Nguyễn Trung
 							</span>
 						</span>
 
-						{/* Given Name - Dancing Script with Gradient */}
-						<span className='scale-110 block font-dancing-script bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent font-bold tracking-wider transform hover:scale-120 transition-transform duration-300'>
+						{/* Given Name - Dancing Script with Gradient Border */}
+						<span
+							className={clsx(
+								'scale-140 block font-dancing-script',
+								'relative',
+								'font-bold tracking-wider',
+								'transform hover:scale-120 transition-transform duration-300'
+							)}
+						>
 							<span
-								className={
-									showTyping
-										? 'typing-animation'
-										: ''
-								}
+								className={clsx(
+									'relative z-10',
+									'text-transparent',
+									'font-dancing-script font-bold tracking-wider',
+									showTyping && 'typing-animation'
+								)}
 								style={{
-									animationDelay:
-										'1.5s',
+									animationDelay: '1.5s',
+									WebkitTextStroke: '2px',
+									WebkitTextStrokeColor: 'transparent',
+									backgroundImage:
+										'linear-gradient(45deg, #9333ea, #ec4899, #2563eb)',
+									WebkitBackgroundClip: 'text',
+									backgroundClip: 'text',
+									WebkitTextFillColor: 'transparent',
 								}}
 							>
 								Nguyên
@@ -67,7 +97,13 @@ export function HeroSection() {
 
 				{/* Title */}
 				<motion.p
-					className='mt-12 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-gray-700 dark:text-gray-300 font-montserrat'
+					className={clsx(
+						'mt-18',
+						'text-xl sm:text-2xl md:text-3xl lg:text-4xl',
+						'font-medium',
+						'text-gray-700 dark:text-gray-300',
+						'font-montserrat'
+					)}
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{
@@ -75,13 +111,18 @@ export function HeroSection() {
 						delay: 0.8,
 					}}
 				>
-					A Backend developer with a flair of
-					Frontend
+					A Backend developer with a flair of Frontend
 				</motion.p>
 
 				{/* Subtitle */}
 				<motion.p
-					className='mt-6 text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-montserrat'
+					className={clsx(
+						'mt-6',
+						'text-base sm:text-lg md:text-xl',
+						'text-gray-600 dark:text-gray-400',
+						'max-w-3xl mx-auto',
+						'font-montserrat'
+					)}
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{
@@ -89,14 +130,16 @@ export function HeroSection() {
 						delay: 1.0,
 					}}
 				>
-					Crafting robust server architectures
-					while creating beautiful user
-					experiences
+					Crafting robust server architectures while creating beautiful user experiences
 				</motion.p>
 
 				{/* Action Buttons */}
 				<motion.div
-					className='mt-12 flex flex-col sm:flex-row gap-6 justify-center items-center'
+					className={clsx(
+						'mt-12',
+						'flex flex-col sm:flex-row',
+						'gap-6 justify-center items-center'
+					)}
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{
@@ -106,15 +149,24 @@ export function HeroSection() {
 				>
 					<motion.a
 						href='#'
-						className='group relative inline-flex items-center justify-center px-10 py-5 text-xl font-semibold text-white bg-gradient-to-r from-purple-600 to-blue-600 rounded-full hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 font-montserrat'
+						className={clsx(
+							'group relative inline-flex items-center justify-center',
+							'px-10 py-5',
+							'text-lg font-semibold text-white',
+							'bg-gradient-to-r from-purple-600 to-blue-600',
+							'hover:from-purple-700 hover:to-blue-700',
+							'rounded-full',
+							'transition-all duration-300',
+							'shadow-xl hover:shadow-2xl',
+							'transform hover:-translate-y-2',
+							'font-montserrat'
+						)}
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
 						onClick={e => {
 							e.preventDefault();
 							// For now, just show an alert. Later you can add actual CV download
-							alert(
-								'CV download functionality will be added soon!'
-							);
+							alert('CV download functionality will be added soon!');
 						}}
 					>
 						<svg
@@ -135,7 +187,21 @@ export function HeroSection() {
 
 					<motion.a
 						href='/contact'
-						className='group relative inline-flex items-center justify-center px-10 py-5 text-xl font-semibold text-gray-700 dark:text-gray-300 bg-white/20 dark:bg-gray-800/60 border-2 border-gray-300 dark:border-gray-600 rounded-full hover:bg-white/30 dark:hover:bg-gray-700/60 hover:border-purple-500 dark:hover:border-purple-400 transition-all duration-300 backdrop-blur-lg transform hover:-translate-y-2 font-montserrat'
+						className={clsx(
+							'group relative inline-flex items-center justify-center',
+							'px-10 py-5',
+							'text-lg font-semibold',
+							'text-gray-700 dark:text-gray-300',
+							'bg-white/20 dark:bg-gray-800/60',
+							'border-2 border-gray-300 dark:border-gray-600',
+							'hover:bg-white/30 dark:hover:bg-gray-700/60',
+							'hover:border-purple-500 dark:hover:border-purple-400',
+							'rounded-full',
+							'transition-all duration-300',
+							'backdrop-blur-lg',
+							'transform hover:-translate-y-2',
+							'font-montserrat'
+						)}
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
 					>
@@ -154,39 +220,6 @@ export function HeroSection() {
 						</svg>
 						Talk with me
 					</motion.a>
-				</motion.div>
-
-				{/* Scroll Indicator */}
-				<motion.div
-					className='absolute bottom-8 left-1/2 transform -translate-x-1/2'
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{
-						duration: 0.8,
-						delay: 1.5,
-					}}
-				>
-					<motion.div
-						className='w-6 h-10 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center'
-						animate={{ y: [0, 10, 0] }}
-						transition={{
-							duration: 1.5,
-							repeat: Infinity,
-							ease: 'easeInOut',
-						}}
-					>
-						<motion.div
-							className='w-1 h-3 bg-gray-400 dark:bg-gray-600 rounded-full mt-2'
-							animate={{
-								y: [0, 6, 0],
-							}}
-							transition={{
-								duration: 1.5,
-								repeat: Infinity,
-								ease: 'easeInOut',
-							}}
-						/>
-					</motion.div>
 				</motion.div>
 			</div>
 		</section>
