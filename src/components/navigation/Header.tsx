@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ThemeToggleButton } from '../theme-toggle-button';
+import { ThemeToggleButton } from './ThemeToggleButton';
 import { HiMenu, HiX } from 'react-icons/hi';
 
 export function Header() {

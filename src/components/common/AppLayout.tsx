@@ -1,6 +1,7 @@
 'use client';
 
-import { SmartBackground, Header } from './layouts';
+import { SmartBackground } from '@/components/backgrounds';
+import { Header } from '@/components/navigation';
 
 interface AppLayoutProps {
 	children: React.ReactNode;

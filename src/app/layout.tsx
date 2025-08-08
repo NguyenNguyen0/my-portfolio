@@ -1,6 +1,6 @@
 import './globals.css';
-import { ThemeProvider } from '@/components/theme-provider';
-import { AppLayout } from '@/components/app-layout';
+import { ThemeProvider } from '@/components/common';
+import { AppLayout } from '@/components/common';
 import { Montserrat, Anton, Dancing_Script } from 'next/font/google';
 
 const montserrat = Montserrat({

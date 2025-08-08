@@ -2,9 +2,9 @@
 
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { StarryBackground } from './starry-background';
-import { PetalFallBackground } from './petal-fall-background';
-import { FallbackBackground } from './fallback-background';
+import { StarryBackground } from './StarryBackground';
+import { PetalFallBackground } from './PetalFallBackground';
+import { FallbackBackground } from './FallbackBackground';
 
 interface SmartBackgroundProps {
 	children: React.ReactNode;
