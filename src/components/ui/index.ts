@@ -3,6 +3,8 @@ export { Avatar } from './Avatar';
 export { Contact } from './Contact';
 export { HeroSection } from './HeroSection';
 export { PersonalInfoCard } from './PersonalInfoCard';
+export { ProjectCard } from './ProjectCard';
+export { ProjectSection } from './ProjectSection';
 export { Quote } from './Quote';
 export { SkillBadge } from './SkillBadge';
 export { SkillsSection } from './SkillsSection';
