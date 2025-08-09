@@ -22,6 +22,7 @@ export function Header() {
 
 	const navItems = [
 		{ href: '#about', label: 'About' },
+		{ href: '#github', label: 'GitHub' },
 		{ href: '#contact', label: 'Contact' },
 	];
 

@@ -1,6 +1,7 @@
 export { AboutMe } from './AboutMe';
 export { Avatar } from './Avatar';
 export { Contact } from './Contact';
+export { GitHubStats } from './GitHubStats';
 export { HeroSection } from './HeroSection';
 export { PersonalInfoCard } from './PersonalInfoCard';
 export { ProjectCard } from './ProjectCard';

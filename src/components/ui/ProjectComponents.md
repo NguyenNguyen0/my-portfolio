@@ -9,11 +9,13 @@ This directory contains the project-related UI components for the portfolio.
 The main section component that displays a collection of projects with filtering capabilities.
 
 **Props:**
+
 - `title` (optional): Section title (default: "Featured Projects")
 - `description` (optional): Section description
 - `initialShowCount` (optional): Number of projects to show initially (default: 3)
 
 **Features:**
+
 - Responsive grid layout (1 column on mobile, 2 on tablet, 3 on desktop)
 - Type-based filtering (All, Personal, Work, Frontend, Backend, Fullstack)
 - Show more/less functionality
@@ -25,9 +27,11 @@ The main section component that displays a collection of projects with filtering
 Individual project card component that displays project information.
 
 **Props:**
+
 - `project`: Project object containing all project details
 
 **Features:**
+
 - Project image with fallback design
 - Hover effects and animations
 - Tech stack badges with icons
@@ -41,14 +45,14 @@ Projects are defined in `/src/data/projects.tsx` with the following interface:
 
 ```typescript
 interface Project {
-  id: string;
-  title: string;
-  description: string;
-  techStack: string[];
-  image?: string; // Optional project image
-  demoUrl?: string; // Optional demo link
-  githubUrl: string; // Required GitHub link
-  type: string[]; // Array of project types for filtering
+	id: string;
+	title: string;
+	description: string;
+	techStack: string[];
+	image?: string; // Optional project image
+	demoUrl?: string; // Optional demo link
+	githubUrl: string; // Required GitHub link
+	type: string[]; // Array of project types for filtering
 }
 ```
 
@@ -61,7 +65,7 @@ import { ProjectSection } from '@/components/ui';
 <ProjectSection />
 
 // With custom props
-<ProjectSection 
+<ProjectSection
   title="My Projects"
   description="Custom description"
   initialShowCount={2}
