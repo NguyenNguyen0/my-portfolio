@@ -11,19 +11,16 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
-		id: 'smart-background',
-		title: 'Smart Background App',
-		description:
-			'A frontend experiment with dynamic background effects based on theme. Features multiple animated backgrounds including starry night, petal fall, and geometric patterns.',
-		techStack: ['Next.js', 'TailwindCSS', 'Framer Motion', 'TypeScript'],
-		image: '/projects/smart-bg.png',
-		demoUrl: 'https://smart-bg-demo.vercel.app',
-		githubUrl: 'https://github.com/NguyenNguyen0/smart-background',
-		type: ['Personal', 'Frontend'],
+		id: 'backend-chatbot-api',
+		title: 'Backend Chatbot API',
+		description: 'A RESTful API and Websocket Chatbot Backend using Ollama, FastAPI and MongoDB.',
+		techStack: ['Ollama', 'FastAPI', 'MongoDB', 'websocket'],
+		githubUrl: 'https://github.com/NguyenNguyen0/chatbot-be',
+		type: ['Personal', 'Backend'],
 	},
 	{
 		id: 'portfolio-website',
-		title: 'Portfolio Website',
+		title: 'My Portfolio website',
 		description:
 			'A modern, responsive portfolio website built with Next.js and TailwindCSS. Features dark/light mode, smooth animations, and dynamic backgrounds.',
 		techStack: ['Next.js', 'TailwindCSS', 'TypeScript', 'Vercel'],
@@ -33,47 +30,24 @@ export const projects: Project[] = [
 		type: ['Personal', 'Frontend'],
 	},
 	{
-		id: 'task-management-api',
-		title: 'Task Management API',
+		id: 'frontend-chatbot',
+		title: 'Frontend Chatbot Website',
 		description:
-			'A RESTful API for task management with user authentication, CRUD operations, and real-time notifications. Built with FastAPI and PostgreSQL.',
-		techStack: ['FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'Python'],
-		githubUrl: 'https://github.com/NguyenNguyen0/task-api',
-		type: ['Personal', 'Backend'],
-	},
-	{
-		id: 'ecommerce-dashboard',
-		title: 'E-commerce Dashboard',
-		description:
-			'A comprehensive dashboard for e-commerce management with analytics, inventory tracking, and order management. Features real-time charts and data visualization.',
-		techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Chart.js'],
-		image: '/projects/ecommerce-dashboard.png',
-		demoUrl: 'https://ecommerce-dashboard-demo.vercel.app',
-		githubUrl: 'https://github.com/NguyenNguyen0/ecommerce-dashboard',
-		type: ['Work', 'Fullstack'],
-	},
-	{
-		id: 'chat-application',
-		title: 'Real-time Chat Application',
-		description:
-			'A modern chat application with real-time messaging, file sharing, and group conversations. Features emoji reactions and message encryption.',
-		techStack: ['React', 'Socket.io', 'Node.js', 'MongoDB', 'Express'],
-		image: '/projects/chat-app.png',
-		demoUrl: 'https://chat-app-demo.vercel.app',
-		githubUrl: 'https://github.com/NguyenNguyen0/chat-app',
-		type: ['Personal', 'Fullstack'],
-	},
-	{
-		id: 'weather-app',
-		title: 'Weather Forecast App',
-		description:
-			'A beautiful weather application with 7-day forecasts, location-based weather, and interactive maps. Features weather alerts and historical data.',
-		techStack: ['React', 'TypeScript', 'OpenWeather API', 'Leaflet'],
-		image: '/projects/weather-app.png',
-		demoUrl: 'https://weather-app-demo.vercel.app',
-		githubUrl: 'https://github.com/NguyenNguyen0/weather-app',
+			'A Modern UI website built with React, TailwindCSS and state management with Redux Toolkit.',
+		techStack: ['React', 'TailwindCSS', 'Redux Toolkit'],
+		image: '/projects/N.aidemo2.gif',
+		githubUrl: 'https://github.com/NguyenNguyen0/chatbot-be',
 		type: ['Personal', 'Frontend'],
+	},
+	{
+		id: 'cli-app',
+		title: 'Calculating Bills CLI App',
+		description: 'Modern CLI app for calculating Electricity & Water bills.',
+		techStack: ['Python', 'Rich', 'Typer', 'Pyfiglet'],
+		image: '/projects/calculating-cli.gif',
+		githubUrl: 'https://github.com/NguyenNguyen0/bill-calculator',
+		type: ['Personal', 'CLI'],
 	},
 ];
 
-export const projectTypes = ['All', 'Personal', 'Work', 'Frontend', 'Backend', 'Fullstack'];
+export const projectTypes = ['All', 'Personal', 'CLI', 'Frontend', 'Backend', 'Fullstack'];
