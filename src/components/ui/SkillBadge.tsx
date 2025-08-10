@@ -47,6 +47,12 @@ const techIcons: Record<string, { iconPath: string; color: string; bgColor: stri
 		bgColor: 'bg-cyan-50 dark:bg-cyan-900/20',
 		borderColor: 'border-cyan-200 dark:border-cyan-800',
 	},
+	'Redux Toolkit': {
+		iconPath: '/icons/Redux.svg',
+		color: '#764abc',
+		bgColor: 'bg-purple-50 dark:bg-purple-900/20',
+		borderColor: 'border-purple-200 dark:border-purple-800',
+	},
 	'Next.js': {
 		iconPath: '/icons/nextjs-icon.svg',
 		color: '#000000',

@@ -4,6 +4,8 @@ import { Avatar } from './Avatar';
 import { PersonalInfoCard } from './PersonalInfoCard';
 import { SkillsSection } from './SkillsSection';
 import { Quote } from './Quote';
+import { GiMountainClimbing } from 'react-icons/gi';
+import { FaUserTie, FaLaptopCode, FaHandPeace } from 'react-icons/fa';
 import {
 	HiLocationMarker,
 	HiChat,
@@ -86,11 +88,6 @@ const softSkills = [
 ];
 
 export function AboutMe() {
-	const handleContactClick = () => {
-		// Scroll to contact section or open contact modal
-		console.log('Contact me clicked');
-	};
-
 	return (
 		<section
 			id='about'
@@ -128,7 +125,8 @@ export function AboutMe() {
 
 					{/* Detailed Introduction */}
 					<div className='space-y-6'>
-						<h3 className='text-2xl font-semibold text-gray-900 dark:text-white'>
+						<h3 className='text-2xl font-semibold text-gray-900 dark:text-white flex items-center'>
+							<GiMountainClimbing className='mr-2 text-shadow-lime-500' />
 							My Journey
 						</h3>
 						<div className='space-y-4'>
@@ -169,7 +167,8 @@ export function AboutMe() {
 
 				{/* Personal Information Grid */}
 				<div className='mb-16'>
-					<h3 className='text-2xl font-semibold text-gray-900 dark:text-white mb-8 text-center'>
+					<h3 className='text-2xl font-semibold text-gray-900 dark:text-white mb-8 text-center flex items-center'>
+						<FaUserTie className='mr-2 text-cyan-600' />
 						Personal Information
 					</h3>
 					<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
@@ -188,12 +187,28 @@ export function AboutMe() {
 				<div className='grid lg:grid-cols-2 gap-12 mb-16'>
 					{/* Technical Skills */}
 					<div>
-						<SkillsSection title='Technical Skills' skillGroups={technicalSkills} />
+						<SkillsSection
+							title={
+								<h3 className='text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center'>
+									<FaLaptopCode className='mr-2 text-green-600' />
+									Technical Skills
+								</h3>
+							}
+							skillGroups={technicalSkills}
+						/>
 					</div>
 
 					{/* Soft Skills */}
 					<div>
-						<SkillsSection title='Soft Skills' skillGroups={softSkills} />
+						<SkillsSection
+							title={
+								<h3 className='text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center'>
+									<FaHandPeace className='mr-2 text-yellow-400' />
+									Soft Skills
+								</h3>
+							}
+							skillGroups={softSkills}
+						/>
 					</div>
 				</div>
 
@@ -202,7 +217,6 @@ export function AboutMe() {
 					<Quote
 						quote='I believe that great software should not only work well, but also feels delightful to use.'
 						ctaText='Get In Touch'
-						ctaAction={handleContactClick}
 					/>
 				</div>
 			</div>

@@ -149,7 +149,8 @@ export function HeroSection() {
 					}}
 				>
 					<motion.a
-						href='#'
+						href='https://www.topcv.vn/xem-cv/VA8HAANcCA5UDlcKVwwFBFQDCwMODgdSCABSAQ9a6b'
+						target='_blank'
 						className={clsx(
 							'group relative inline-flex items-center justify-center',
 							'px-10 py-5',
@@ -164,11 +165,6 @@ export function HeroSection() {
 						)}
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
-						onClick={e => {
-							e.preventDefault();
-							// For now, just show an alert. Later you can add actual CV download
-							alert('CV download functionality will be added soon!');
-						}}
 					>
 						<svg
 							className='w-6 h-6 mr-3'
@@ -187,7 +183,7 @@ export function HeroSection() {
 					</motion.a>
 
 					<motion.a
-						href='/contact'
+						href='#contact'
 						className={clsx(
 							'group relative inline-flex items-center justify-center',
 							'px-10 py-5',

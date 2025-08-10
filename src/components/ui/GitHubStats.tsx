@@ -189,8 +189,8 @@ export function GitHubStats() {
 					</h2>
 					<div className='w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full'></div>
 					<p className='mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto'>
-						Here&apos;s an overview of my coding activity, contributions, and open
-						source projects
+						Here&apos;s an overview of my coding activity, contributions, and
+						projects
 					</p>
 				</div>
 
@@ -202,9 +202,9 @@ export function GitHubStats() {
 								<Image
 									src={user.avatar_url}
 									alt={user.name || user.login}
-									width={96}
-									height={96}
-									className='w-24 h-24 rounded-full border-4 border-blue-500 dark:border-blue-400'
+									width={196}
+									height={196}
+									className='w-32 h-32 rounded-full border-4 border-blue-500 dark:border-blue-400'
 								/>
 							</div>
 							<div className='flex-1 text-center md:text-left'>

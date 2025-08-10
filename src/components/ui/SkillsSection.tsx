@@ -1,5 +1,6 @@
 'use client';
 
+import { ReactElement } from 'react';
 import { SkillBadge } from './SkillBadge';
 
 interface SkillGroup {
@@ -9,14 +10,18 @@ interface SkillGroup {
 }
 
 interface SkillsSectionProps {
-	title: string;
+	title: string | ReactElement;
 	skillGroups: SkillGroup[];
 }
 
 export function SkillsSection({ title, skillGroups }: SkillsSectionProps) {
 	return (
 		<div className='space-y-6'>
-			<h3 className='text-xl font-semibold text-gray-900 dark:text-white mb-4'>{title}</h3>
+			{typeof title === 'string' ? (
+				<h3 className='text-xl font-semibold text-gray-900 dark:text-white mb-4'>{title}</h3>
+			) : (
+				title
+			)}
 			<div className='space-y-6'>
 				{skillGroups.map((group, index) => (
 					<div key={index} className='space-y-3'>
