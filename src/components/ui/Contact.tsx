@@ -2,6 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { MdEmail } from 'react-icons/md';
+import { SiMinutemailer } from 'react-icons/si';
+import { FaGlobe } from 'react-icons/fa';
 import clsx from 'clsx';
 import Image from 'next/image';
 
@@ -134,20 +137,19 @@ export function Contact() {
 						{/* Email Section */}
 						<div
 							className={clsx(
-								'p-6 rounded-2xl',
-								'bg-white/60 dark:bg-gray-800/60',
-								'backdrop-blur-lg border',
-								'border-gray-200 dark:border-gray-700',
-								'shadow-lg'
+								'p-6 rounded-2xl bg-white/60 dark:bg-gray-800/60',
+								'border border-gray-200 dark:border-gray-700 shadow-lg'
 							)}
 						>
 							<h3
 								className={clsx(
 									'text-xl font-semibold mb-4',
 									'text-gray-900 dark:text-white',
-									'font-montserrat'
+									'font-montserrat',
+									'flex items-center'
 								)}
 							>
+								<MdEmail className='mr-2 text-2xl' />
 								Email Me Directly
 							</h3>
 							<div className='flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50'>
@@ -219,20 +221,19 @@ export function Contact() {
 						{/* Social Links */}
 						<div
 							className={clsx(
-								'p-6 rounded-2xl',
-								'bg-white/60 dark:bg-gray-800/60',
-								'backdrop-blur-lg border',
-								'border-gray-200 dark:border-gray-700',
-								'shadow-lg'
+								'p-6 rounded-2xl bg-white/60 dark:bg-gray-800/60',
+								'border border-gray-200 dark:border-gray-700 shadow-lg'
 							)}
 						>
 							<h3
 								className={clsx(
 									'text-xl font-semibold mb-6',
 									'text-gray-900 dark:text-white',
-									'font-montserrat'
+									'font-montserrat',
+									'flex items-center'
 								)}
 							>
+								<FaGlobe className='text-2xl mr-2' />
 								Connect With Me
 							</h3>
 							<div className='grid grid-cols-2 gap-4'>
@@ -293,20 +294,19 @@ export function Contact() {
 					>
 						<div
 							className={clsx(
-								'p-8 rounded-2xl',
-								'bg-white/60 dark:bg-gray-800/60',
-								'backdrop-blur-lg border',
-								'border-gray-200 dark:border-gray-700',
-								'shadow-lg'
+								'p-8 rounded-2xl bg-white/60 dark:bg-gray-800/60',
+								'border border-gray-200 dark:border-gray-700 shadow-lg'
 							)}
 						>
 							<h3
 								className={clsx(
 									'text-2xl font-semibold mb-6',
 									'text-gray-900 dark:text-white',
-									'font-montserrat'
+									'font-montserrat',
+									'flex items-center'
 								)}
 							>
+								<SiMinutemailer className='text-2xl mr-2' />
 								Send Me a Message
 							</h3>
 

@@ -91,7 +91,7 @@ export function AboutMe() {
 	return (
 		<section
 			id='about'
-			className='py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800'
+			className='py-20 bg-gradient-to-b from-white/40 to-gray-50/40 dark:from-gray-900/40 dark:to-gray-800/40'
 		>
 			<div className='container mx-auto px-4 max-w-6xl'>
 				{/* Header */}
@@ -182,7 +182,7 @@ export function AboutMe() {
 						))}
 					</div>
 				</div>
-
+				<hr className='mb-18 border-2 border-dashed border-gray-700/40 dark:border-gray-200/40' />
 				{/* Skills Section */}
 				<div className='grid lg:grid-cols-2 gap-12 mb-16'>
 					{/* Technical Skills */}

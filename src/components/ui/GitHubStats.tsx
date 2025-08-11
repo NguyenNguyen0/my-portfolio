@@ -179,7 +179,7 @@ export function GitHubStats() {
 	return (
 		<section
 			id='github'
-			className='py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900'
+			className='py-20 bg-gradient-to-b from-gray-50/40 to-white/40 dark:from-gray-800/40 dark:to-gray-900/40'
 		>
 			<div className='container mx-auto px-4 max-w-6xl'>
 				{/* Header */}
@@ -196,7 +196,7 @@ export function GitHubStats() {
 
 				{/* GitHub Profile Overview */}
 				{user && (
-					<div className='bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-12 border border-gray-200 dark:border-gray-700'>
+					<div className='bg-white/60 dark:bg-gray-800/60 rounded-2xl shadow-lg p-8 mb-12 border border-gray-200 dark:border-gray-700'>
 						<div className='flex flex-col md:flex-row items-center gap-8'>
 							<div className='flex-shrink-0'>
 								<Image
@@ -261,7 +261,7 @@ export function GitHubStats() {
 				)}
 
 				{/* GitHub Contribution Calendar */}
-				<div className='bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-12 border border-gray-200 dark:border-gray-700'>
+				<div className='bg-white/60 dark:bg-gray-800/60 rounded-2xl shadow-lg p-8 mb-12 border border-gray-200 dark:border-gray-700'>
 					<div className='flex items-center gap-3 mb-6'>
 						<HiCalendar className='text-2xl text-blue-500 dark:text-blue-400' />
 						<h3 className='text-xl font-semibold text-gray-900 dark:text-white'>
@@ -297,7 +297,7 @@ export function GitHubStats() {
 
 				<div className='grid lg:grid-cols-2 gap-12 mb-12'>
 					{/* Language Statistics */}
-					<div className='bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700'>
+					<div className='bg-white/60 dark:bg-gray-800/60 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700'>
 						<div className='flex items-center gap-3 mb-6'>
 							<HiChartPie className='text-2xl text-purple-500 dark:text-purple-400' />
 							<h3 className='text-xl font-semibold text-gray-900 dark:text-white'>
@@ -383,7 +383,7 @@ export function GitHubStats() {
 					</div>
 
 					{/* Activity Overview */}
-					<div className='bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700'>
+					<div className='bg-white/60 dark:bg-gray-800/60 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700'>
 						<div className='flex items-center gap-3 mb-6'>
 							<HiCode className='text-2xl text-green-500 dark:text-green-400' />
 							<h3 className='text-xl font-semibold text-gray-900 dark:text-white'>
@@ -448,7 +448,7 @@ export function GitHubStats() {
 				</div>
 
 				{/* GitHub Repositories */}
-				<div className='bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700'>
+				<div className='bg-white/60 dark:bg-gray-800/60 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700'>
 					<div className='flex items-center gap-3 mb-6'>
 						<HiFolder className='text-2xl text-blue-500 dark:text-blue-400' />
 						<h3 className='text-xl font-semibold text-gray-900 dark:text-white'>

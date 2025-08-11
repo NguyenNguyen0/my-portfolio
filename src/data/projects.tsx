@@ -20,7 +20,7 @@ export const projects: Project[] = [
 	},
 	{
 		id: 'portfolio-website',
-		title: 'My Portfolio website',
+		title: 'My Portfolio Website',
 		description:
 			'A modern, responsive portfolio website built with Next.js and TailwindCSS. Features dark/light mode, smooth animations, and dynamic backgrounds.',
 		techStack: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'],

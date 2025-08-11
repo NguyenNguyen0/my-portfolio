@@ -69,7 +69,7 @@ export function HeroSection() {
 								'scale-140 block font-dancing-script',
 								'relative',
 								'font-bold tracking-wider',
-								'transform hover:scale-120 transition-transform duration-300'
+								'transform transition-transform duration-300'
 							)}
 						>
 							<span
