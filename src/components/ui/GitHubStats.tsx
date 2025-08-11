@@ -65,8 +65,6 @@ const LANGUAGE_COLORS: { [key: string]: string } = {
 	'C#': '#239120',
 };
 
-export async function getStaticProps() {}
-
 export function GitHubStats() {
 	const { theme } = useTheme();
 	const [user, setUser] = useState<GitHubUser | null>(null);

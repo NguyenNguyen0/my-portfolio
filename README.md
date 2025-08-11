@@ -1,4 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trung Nguyen - Portfolio Website
+
+![Portfolio Thumbnail](./public/thumbnail.png)
+
+A modern, responsive portfolio website showcasing my work as a Backend developer with a flair of Frontend development. Built with Next.js and featuring a beautiful starry night theme.
+
+## About
+
+This portfolio website presents my professional journey, skills, and projects. It features:
+
+- **Elegant Design**: Dark theme with animated starry background
+- **Responsive Layout**: Optimized for all device sizes
+- **Modern Stack**: Built with Next.js, TypeScript, and Tailwind CSS
+- **Interactive Elements**: Smooth animations and hover effects
+- **Professional Presentation**: Clean layout highlighting skills and experience
+
+## Features
+
+- ✨ Animated starry background
+- 🎨 Modern gradient text effects
+- 📱 Fully responsive design
+- ⚡ Fast loading with Next.js optimization
+- 🌙 Dark theme interface
+- 📄 CV download functionality
+- 💬 Contact integration
+
+## Technologies Used
+
+- **Framework**: Next.js 14
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Font Optimization**: next/font with Geist
+- **Deployment**: Vercel
 
 ## Getting Started
 
@@ -10,27 +42,13 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This portfolio is deployed on Vercel. Visit the live site at: [Your Portfolio URL]
 
-## Learn More
+The easiest way to deploy your own version is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
