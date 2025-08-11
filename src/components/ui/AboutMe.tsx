@@ -126,7 +126,7 @@ export function AboutMe() {
 					{/* Detailed Introduction */}
 					<div className='space-y-6'>
 						<h3 className='text-2xl font-semibold text-gray-900 dark:text-white flex items-center'>
-							<GiMountainClimbing className='mr-2 text-shadow-lime-500' />
+							<GiMountainClimbing className='mr-2 text-fuchsia-500' />
 							My Journey
 						</h3>
 						<div className='space-y-4'>

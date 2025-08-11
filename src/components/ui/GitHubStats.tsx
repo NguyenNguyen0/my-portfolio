@@ -65,6 +65,8 @@ const LANGUAGE_COLORS: { [key: string]: string } = {
 	'C#': '#239120',
 };
 
+export async function getStaticProps() {}
+
 export function GitHubStats() {
 	const { theme } = useTheme();
 	const [user, setUser] = useState<GitHubUser | null>(null);
@@ -230,16 +232,16 @@ export function GitHubStats() {
 									<HiExternalLink className='text-sm' />
 								</a>
 							</div>
-							<div className='grid grid-cols-3 gap-6 text-center'>
-								<div className='bg-gray-50 dark:bg-gray-700 rounded-lg p-4'>
+							<div className='grid grid-cols-3 gap-4 text-center'>
+								<div className='bg-gray-50 dark:bg-gray-700 rounded-lg p-3'>
 									<div className='text-2xl font-bold text-gray-900 dark:text-white'>
 										{user.public_repos}
 									</div>
 									<div className='text-sm text-gray-600 dark:text-gray-300'>
-										Repositories
+										Repos
 									</div>
 								</div>
-								<div className='bg-gray-50 dark:bg-gray-700 rounded-lg p-4'>
+								<div className='bg-gray-50 dark:bg-gray-700 rounded-lg p-3'>
 									<div className='text-2xl font-bold text-gray-900 dark:text-white'>
 										{user.followers}
 									</div>
@@ -247,7 +249,7 @@ export function GitHubStats() {
 										Followers
 									</div>
 								</div>
-								<div className='bg-gray-50 dark:bg-gray-700 rounded-lg p-4'>
+								<div className='bg-gray-50 dark:bg-gray-700 rounded-lg p-3'>
 									<div className='text-2xl font-bold text-gray-900 dark:text-white'>
 										{user.following}
 									</div>
@@ -539,7 +541,7 @@ export function GitHubStats() {
 							>
 								{showAllRepos
 									? 'Show Less'
-									: `Show More (${repos.length - 3} more repositories)`}
+									: `Show More (${repos.length - 3} more)`}
 							</button>
 						</div>
 					)}

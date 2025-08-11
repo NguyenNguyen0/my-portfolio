@@ -149,7 +149,7 @@ export function Contact() {
 									'flex items-center'
 								)}
 							>
-								<MdEmail className='mr-2 text-2xl' />
+								<MdEmail className='mr-2 text-2xl text-orange-500' />
 								Email Me Directly
 							</h3>
 							<div className='flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50'>
@@ -162,8 +162,9 @@ export function Contact() {
 								/>
 								<span
 									className={clsx(
-										'flex-1 text-gray-800 dark:text-gray-200',
-										'font-medium'
+										'flex-1 text-sm sm:text-base text-gray-800 dark:text-gray-200',
+										'font-medium break-all sm:break-normal',
+										'min-w-0'
 									)}
 								>
 									{myEmail}
@@ -233,7 +234,7 @@ export function Contact() {
 									'flex items-center'
 								)}
 							>
-								<FaGlobe className='text-2xl mr-2' />
+								<FaGlobe className='text-2xl mr-2 text-cyan-400' />
 								Connect With Me
 							</h3>
 							<div className='grid grid-cols-2 gap-4'>
@@ -306,7 +307,7 @@ export function Contact() {
 									'flex items-center'
 								)}
 							>
-								<SiMinutemailer className='text-2xl mr-2' />
+								<SiMinutemailer className='text-2xl mr-2 text-blue-400' />
 								Send Me a Message
 							</h3>
 

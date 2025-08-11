@@ -1,28 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 
 export function HeroSection() {
-	const [showTyping, setShowTyping] = useState(true);
-
-	useEffect(() => {
-		// Remove typing animation after it completes
-		const timer = setTimeout(() => {
-			setShowTyping(false);
-		}, 4500); // Animation duration + buffer
-
-		return () => clearTimeout(timer);
-	}, []);
-
 	return (
 		<section
 			id='hero'
 			className={clsx(
 				'relative flex min-h-screen',
 				'items-center justify-center',
-				'px-4 sm:px-6 lg:px-8'
+				'px-4 sm:px-6 lg:px-8 pb-10'
 			)}
 		>
 			<div className='text-center max-w-6xl mx-auto'>
@@ -58,9 +46,7 @@ export function HeroSection() {
 								'mb-2 sm:mb-4'
 							)}
 						>
-							<span className={clsx(showTyping && 'typing-animation')}>
-								Nguyễn Trung
-							</span>
+							<span>Nguyễn Trung</span>
 						</span>
 
 						{/* Given Name - Dancing Script with Gradient Border */}
@@ -76,8 +62,7 @@ export function HeroSection() {
 								className={clsx(
 									'relative z-10',
 									'text-transparent',
-									'font-dancing-script font-bold tracking-wider',
-									showTyping && 'typing-animation'
+									'font-dancing-script font-bold tracking-wider'
 								)}
 								style={{
 									animationDelay: '1.5s',
@@ -119,7 +104,7 @@ export function HeroSection() {
 				<motion.p
 					className={clsx(
 						'mt-6',
-						'text-base sm:text-lg md:text-xl',
+						'text-sm sm:text-lg md:text-xl',
 						'text-gray-600 dark:text-gray-400',
 						'max-w-3xl mx-auto',
 						'font-montserrat'
