@@ -91,7 +91,7 @@ export function AboutMe() {
 	return (
 		<section
 			id='about'
-			className='py-20 bg-gradient-to-b from-white/40 to-gray-50/40 dark:from-gray-900/40 dark:to-gray-800/40'
+			className='py-20 bg-gradient-to-b from-white/40 to-gray-50/40 dark:from-gray-900/70 dark:to-gray-800/70'
 		>
 			<div className='container mx-auto px-4 max-w-6xl'>
 				{/* Header */}
@@ -109,7 +109,7 @@ export function AboutMe() {
 						<Avatar
 							src='/avatar.jpg'
 							alt='Nguyên - Personal Avatar'
-							size='xl'
+							size='3xl'
 							className='mb-4'
 						/>
 						<div className='space-y-4'>

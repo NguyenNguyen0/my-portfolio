@@ -24,8 +24,8 @@ export const projects: Project[] = [
 		description:
 			'A modern, responsive portfolio website built with Next.js and TailwindCSS. Features dark/light mode, smooth animations, and dynamic backgrounds.',
 		techStack: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'],
-		image: '/projects/portfolio.png',
-		demoUrl: 'https://my-portfolio-demo.vercel.app',
+		image: '/thumbnail.png',
+		demoUrl: 'https://nguyennguyen0.id.vn',
 		githubUrl: 'https://github.com/NguyenNguyen0/my-portfolio',
 		type: ['Personal', 'Frontend'],
 	},
