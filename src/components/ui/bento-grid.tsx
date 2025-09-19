@@ -14,7 +14,7 @@ export const BentoGrid = ({
 	return (
 		<div
 			className={cn(
-				'grid md:auto-rows-[18rem] grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto',
+				'grid md:auto-rows-[28rem] grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto',
 				className,
 			)}
 		>
@@ -41,18 +41,22 @@ export const BentoGridItem = ({
 			whileHover={{ scale: 1.02 }}
 			transition={{ type: 'spring', stiffness: 300 }}
 			className={cn(
-				'row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input bg-card border border-border p-4 justify-between flex flex-col space-y-4',
+				'row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input bg-card border border-border p-5 flex flex-col',
 				className,
 			)}
 		>
 			{header}
-			<div className="group-hover/bento:translate-x-2 transition duration-200">
-				{icon}
-				<div className="font-sans font-bold text-card-foreground mb-2 mt-2">
-					{title}
+			<div className="group-hover/bento:translate-x-2 transition duration-200 mt-4 flex-grow flex flex-col justify-between">
+				<div>
+					<div className="font-sans font-bold text-card-foreground mb-3 text-lg">
+						{title}
+					</div>
+					<div className="font-sans font-normal text-muted-foreground text-sm">
+						{description}
+					</div>
 				</div>
-				<div className="font-sans font-normal text-muted-foreground text-xs">
-					{description}
+				<div className="mt-auto pt-4">
+					{icon}
 				</div>
 			</div>
 		</motion.div>

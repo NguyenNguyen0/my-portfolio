@@ -6,6 +6,7 @@ export interface Project {
 	image?: string;
 	demoUrl?: string;
 	githubUrl: string;
+	className?: string;
 	type: string[];
 }
 
@@ -33,7 +34,7 @@ export const projects: Project[] = [
 		id: 'portfolio-website',
 		title: 'My Portfolio Website',
 		description:
-			'A modern, responsive portfolio website built with Next.js and TailwindCSS. Features dark/light mode, smooth animations, and dynamic backgrounds.',
+			'A modern, responsive portfolio website built with Next.js and TailwindCSS.',
 		techStack: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'],
 		image: '/thumbnail.png',
 		demoUrl: 'https://nguyennguyen0.id.vn',

@@ -4,47 +4,7 @@ import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-const projects = [
-	{
-		title: 'E-Commerce Platform',
-		description:
-			'Full-stack e-commerce solution with Next.js, Stripe integration, and admin dashboard.',
-		image: '/modern-ecommerce-interface.png',
-		tech: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL'],
-		demo: '#',
-		github: '#',
-		className: 'md:col-span-2',
-	},
-	{
-		title: 'Task Management App',
-		description:
-			'Collaborative task management with real-time updates and team features.',
-		image: '/task-management-dashboard.png',
-		tech: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
-		demo: '#',
-		github: '#',
-	},
-	{
-		title: 'Weather Dashboard',
-		description:
-			'Beautiful weather app with location-based forecasts and interactive maps.',
-		image: '/weather-dashboard-interface.png',
-		tech: ['React', 'OpenWeather API', 'Chart.js'],
-		demo: '#',
-		github: '#',
-	},
-	{
-		title: 'Portfolio Website',
-		description:
-			'Responsive portfolio built with modern animations and smooth interactions.',
-		image: '/modern-portfolio-website.png',
-		tech: ['Next.js', 'Framer Motion', 'Tailwind CSS'],
-		demo: '#',
-		github: '#',
-		className: 'md:col-span-2',
-	},
-];
+import { projects } from '@/data/projects';
 
 export const ProjectsSection = () => {
 	return (
@@ -73,46 +33,63 @@ export const ProjectsSection = () => {
 						description={project.description}
 						className={project.className}
 						header={
-							<div className="relative overflow-hidden rounded-lg">
-								<Image
-									width={100}
-									height={128}
-									src={project.image || '/placeholder.svg'}
-									alt={project.title}
-									className="w-full h-32 object-cover transition-transform duration-300 group-hover/bento:scale-105"
-								/>
+							<div className="relative overflow-hidden rounded-lg h-60 -mx-5 -mt-5">
+								{project.image ? (
+									<Image
+										width={600}
+										height={400}
+										src={
+											project.image || '/placeholder.svg'
+										}
+										alt={project.title}
+										className="w-full h-60 object-cover transition-transform duration-300 group-hover/bento:scale-105"
+										priority
+									/>
+								) : (
+									<FallBackProjectImage />
+								)}
 								<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
 							</div>
 						}
 						icon={
 							<div className="space-y-4">
 								<div className="flex flex-wrap gap-2">
-									{project.tech.map((tech) => (
+									{project.techStack.map((tech) => (
 										<span
 											key={tech}
-											className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs"
+											className="px-2.5 py-1.5 bg-secondary text-secondary-foreground rounded text-xs"
 										>
 											{tech}
 										</span>
 									))}
 								</div>
-								<div className="flex gap-2">
-									<Button
-										size="sm"
-										variant="outline"
-										className="h-8 px-3 bg-transparent"
-									>
-										<ExternalLink className="w-3 h-3 mr-1" />
-										Demo
-									</Button>
-									<Button
-										size="sm"
-										variant="outline"
-										className="h-8 px-3 bg-transparent"
-									>
-										<Github className="w-3 h-3 mr-1" />
-										Code
-									</Button>
+								<div className="flex gap-3">
+									{project.demoUrl && (
+										<Button
+											size="sm"
+											variant="outline"
+											className="h-9 px-4 bg-transparent"
+											asChild
+										>
+											<a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+												<ExternalLink className="w-4 h-4 mr-2" />
+												Demo
+											</a>
+										</Button>
+									)}
+									{project.githubUrl && (
+										<Button
+											size="sm"
+											variant="outline"
+											className="h-9 px-4 bg-transparent"
+											asChild
+										>
+											<a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+												<Github className="w-4 h-4 mr-2" />
+												Code
+											</a>
+										</Button>
+									)}
 								</div>
 							</div>
 						}
@@ -120,5 +97,33 @@ export const ProjectsSection = () => {
 				))}
 			</BentoGrid>
 		</section>
+	);
+};
+
+
+const FallBackProjectImage = () => {
+	return (
+		<div className="h-60 w-full bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center">
+			<div className="text-center">
+				<div className="w-20 h-20 mx-auto mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+					<svg
+						className="w-10 h-10 text-blue-600 dark:text-blue-400"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth={2}
+							d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+						/>
+					</svg>
+				</div>
+				<p className="text-base text-gray-600 dark:text-gray-400 font-medium">
+					Code Project
+				</p>
+			</div>
+		</div>
 	);
 };
