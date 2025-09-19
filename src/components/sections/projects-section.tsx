@@ -75,6 +75,8 @@ export const ProjectsSection = () => {
 						header={
 							<div className="relative overflow-hidden rounded-lg">
 								<Image
+									width={100}
+									height={128}
 									src={project.image || '/placeholder.svg'}
 									alt={project.title}
 									className="w-full h-32 object-cover transition-transform duration-300 group-hover/bento:scale-105"

@@ -39,7 +39,9 @@ export const AboutSection = () => {
 				>
 					<SpotlightCard className="h-80 flex items-center justify-center">
 						<Image
-							src="/professional-developer-portrait.png"
+							width={256}
+							height={256}
+							src="/avatar.jpg"
 							alt="Developer Portrait"
 							className="w-64 h-64 rounded-full object-cover"
 						/>
