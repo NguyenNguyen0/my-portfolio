@@ -2,9 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { MdEmail } from 'react-icons/md';
-import { SiMinutemailer } from 'react-icons/si';
-import { FaGlobe } from 'react-icons/fa';
+import { Mail, Globe, SendHorizontal } from 'lucide-react';
 import { socialLinks } from '@/data/socialLink';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -121,7 +119,7 @@ export function Contact() {
 									'flex items-center'
 								)}
 							>
-								<MdEmail className='mr-2 text-2xl text-orange-500' />
+								<Mail className='mr-2 text-2xl text-orange-500' />
 								Email Me Directly
 							</h3>
 							<div className='flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50'>
@@ -206,7 +204,7 @@ export function Contact() {
 									'flex items-center'
 								)}
 							>
-								<FaGlobe className='text-2xl mr-2 text-cyan-400' />
+								<Globe className='text-2xl mr-2 text-cyan-400' />
 								Connect With Me
 							</h3>
 							<div className='grid grid-cols-2 gap-4'>
@@ -279,7 +277,7 @@ export function Contact() {
 									'flex items-center'
 								)}
 							>
-								<SiMinutemailer className='text-2xl mr-2 text-blue-400' />
+								<SendHorizontal className='text-2xl mr-2 text-blue-400' />
 								Send Me a Message
 							</h3>
 

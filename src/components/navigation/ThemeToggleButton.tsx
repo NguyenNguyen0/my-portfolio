@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { MdLightMode, MdDarkMode } from 'react-icons/md';
+import { Sun, Moon } from 'lucide-react';
 
 export function ThemeToggleButton() {
 	const [mounted, setMounted] = useState(false);
@@ -26,7 +26,7 @@ export function ThemeToggleButton() {
 			className='rounded-lg bg-gray-200 p-2 text-gray-800 transition-colors hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'
 			aria-label='Toggle theme'
 		>
-			{theme === 'dark' ? <MdLightMode className='h-5 w-5' /> : <MdDarkMode className='h-5 w-5' />}
+			{theme === 'dark' ? <Sun className='h-5 w-5' /> : <Moon className='h-5 w-5' />}
 		</button>
 	);
 }

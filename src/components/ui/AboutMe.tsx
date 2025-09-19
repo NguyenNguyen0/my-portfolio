@@ -1,14 +1,12 @@
 'use client';
 
 import { Avatar } from './Avatar';
-import { PersonalInfoCard } from './PersonalInfoCard';
 import { SkillsSection } from './SkillsSection';
 import { Quote } from './Quote';
-import { GiMountainClimbing } from 'react-icons/gi';
-import { FaUserTie, FaLaptopCode, FaHandPeace } from 'react-icons/fa';
-import { HiCode, HiBookmark, HiLightningBolt } from 'react-icons/hi';
-import { RiRocketLine } from 'react-icons/ri';
-import { personalInfo, softSkills, technicalSkills } from '@/data/personalInfo';
+import { Mountain, User, Code, Bookmark, Zap, Rocket, Laptop, Hand } from 'lucide-react';
+import { softSkills, technicalSkills } from '@/data/personalInfo';
+import { personalInfo } from '@/data/personalInfo';
+import { PersonalInfoCard } from './PersonalInfoCard';
 
 export function AboutMe() {
 	return (
@@ -49,35 +47,35 @@ export function AboutMe() {
 					{/* Detailed Introduction */}
 					<div className='space-y-6'>
 						<h3 className='text-2xl font-semibold text-gray-900 dark:text-white flex items-center'>
-							<GiMountainClimbing className='mr-2 text-fuchsia-500' />
+							<Mountain className='mr-2 text-fuchsia-500' />
 							My Journey
 						</h3>
 						<div className='space-y-4'>
 							{/* Timeline list */}
 							<div className='space-y-3'>
 								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
-									<HiCode className='text-xl mt-1 flex-shrink-0' />
+									<Code className='text-xl mt-1 flex-shrink-0' />
 									<p className='leading-relaxed'>
 										Self-taught developer driven by
 										curiosity
 									</p>
 								</div>
 								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
-									<HiBookmark className='text-xl mt-1 flex-shrink-0' />
+									<Bookmark className='text-xl mt-1 flex-shrink-0' />
 									<p className='leading-relaxed'>
 										Learned through building real projects
 										&amp; online courses
 									</p>
 								</div>
 								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
-									<HiLightningBolt className='text-xl mt-1 flex-shrink-0' />
+									<Zap className='text-xl mt-1 flex-shrink-0' />
 									<p className='leading-relaxed'>
 										Passion for full-stack with maintainable
 										code &amp; intuitive UIs
 									</p>
 								</div>
 								<div className='flex items-start space-x-3 text-gray-600 dark:text-gray-300'>
-									<RiRocketLine className='text-xl mt-1 flex-shrink-0' />
+									<Rocket className='text-xl mt-1 flex-shrink-0' />
 									<p className='leading-relaxed'>
 										Exploring modern tech, design
 										principles, and open-source
@@ -91,7 +89,7 @@ export function AboutMe() {
 				{/* Personal Information Grid */}
 				<div className='mb-16'>
 					<h3 className='text-2xl font-semibold text-gray-900 dark:text-white mb-8 text-center flex items-center'>
-						<FaUserTie className='mr-2 text-cyan-600' />
+						<User className='mr-2 text-cyan-600' />
 						Personal Information
 					</h3>
 					<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
@@ -113,7 +111,7 @@ export function AboutMe() {
 						<SkillsSection
 							title={
 								<h3 className='text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center'>
-									<FaLaptopCode className='mr-2 text-green-600' />
+									<Laptop className='mr-2 text-green-600' />
 									Technical Skills
 								</h3>
 							}
@@ -126,7 +124,7 @@ export function AboutMe() {
 						<SkillsSection
 							title={
 								<h3 className='text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center'>
-									<FaHandPeace className='mr-2 text-yellow-400' />
+									<Hand className='mr-2 text-yellow-400' />
 									Soft Skills
 								</h3>
 							}

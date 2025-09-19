@@ -6,8 +6,8 @@ import Image from 'next/image';
 import { Octokit } from '@octokit/rest';
 import GitHubCalendar from 'react-github-calendar';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
-import { HiStar, HiCode, HiEye, HiCalendar, HiChartPie, HiFolder, HiExternalLink } from 'react-icons/hi';
-import { FaGithub } from 'react-icons/fa';
+import { Star, Code, Eye, Calendar, PieChart as PieChartIcon, Folder, ExternalLink } from 'lucide-react';
+import { Github } from 'lucide-react';
 
 interface GitHubUser {
 	login: string;
@@ -225,9 +225,9 @@ export function GitHubStats() {
 									rel='noopener noreferrer'
 									className='inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors'
 								>
-									<FaGithub className='text-xl' />
+									<Github className='text-xl' />
 									View GitHub Profile
-									<HiExternalLink className='text-sm' />
+									<ExternalLink className='text-sm' />
 								</a>
 							</div>
 							<div className='grid grid-cols-3 gap-4 text-center'>
@@ -263,7 +263,7 @@ export function GitHubStats() {
 				{/* GitHub Contribution Calendar */}
 				<div className='bg-white/60 dark:bg-gray-800/60 rounded-2xl shadow-lg p-8 mb-12 border border-gray-200 dark:border-gray-700'>
 					<div className='flex items-center gap-3 mb-6'>
-						<HiCalendar className='text-2xl text-blue-500 dark:text-blue-400' />
+						<Calendar className='text-2xl text-blue-500 dark:text-blue-400' />
 						<h3 className='text-xl font-semibold text-gray-900 dark:text-white'>
 							Contribution Activity
 						</h3>
@@ -293,256 +293,6 @@ export function GitHubStats() {
 							}}
 						/>
 					</div>
-				</div>
-
-				<div className='grid lg:grid-cols-2 gap-12 mb-12'>
-					{/* Language Statistics */}
-					<div className='bg-white/60 dark:bg-gray-800/60 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700'>
-						<div className='flex items-center gap-3 mb-6'>
-							<HiChartPie className='text-2xl text-purple-500 dark:text-purple-400' />
-							<h3 className='text-xl font-semibold text-gray-900 dark:text-white'>
-								Language Statistics
-							</h3>
-						</div>
-						{languageStats.length > 0 ? (
-							<div className='space-y-6'>
-								<div className='h-64'>
-									<ResponsiveContainer width='100%' height='100%'>
-										<PieChart>
-											<Pie
-												data={
-													displayedLanguages
-												}
-												cx='50%'
-												cy='50%'
-												outerRadius={80}
-												dataKey='value'
-											>
-												{displayedLanguages.map(
-													(
-														entry,
-														index
-													) => (
-														<Cell
-															key={`cell-${index}`}
-															fill={
-																entry.color
-															}
-														/>
-													)
-												)}
-											</Pie>
-											<Tooltip
-												content={
-													<CustomTooltip />
-												}
-											/>
-										</PieChart>
-									</ResponsiveContainer>
-								</div>
-								<div className='grid grid-cols-2 gap-2'>
-									{displayedLanguages.map((lang, index) => (
-										<div
-											key={index}
-											className='flex items-center gap-2'
-										>
-											<div
-												className='w-3 h-3 rounded-full'
-												style={{
-													backgroundColor:
-														lang.color,
-												}}
-											></div>
-											<span className='text-sm text-gray-600 dark:text-gray-300'>
-												{lang.name} (
-												{lang.value})
-											</span>
-										</div>
-									))}
-								</div>
-								{languageStats.length > 6 && (
-									<button
-										onClick={() =>
-											setShowAllLanguages(
-												!showAllLanguages
-											)
-										}
-										className='w-full mt-4 px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 border border-blue-600 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors'
-									>
-										{showAllLanguages
-											? 'Show Less'
-											: `Show More (${languageStats.length - 6} more)`}
-									</button>
-								)}
-							</div>
-						) : (
-							<p className='text-gray-600 dark:text-gray-300'>
-								No language data available
-							</p>
-						)}
-					</div>
-
-					{/* Activity Overview */}
-					<div className='bg-white/60 dark:bg-gray-800/60 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700'>
-						<div className='flex items-center gap-3 mb-6'>
-							<HiCode className='text-2xl text-green-500 dark:text-green-400' />
-							<h3 className='text-xl font-semibold text-gray-900 dark:text-white'>
-								Activity Overview
-							</h3>
-						</div>
-						<div className='space-y-4'>
-							<div className='flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg'>
-								<div className='flex items-center gap-3'>
-									<HiFolder className='text-xl text-blue-500 dark:text-blue-400' />
-									<span className='text-gray-700 dark:text-gray-300'>
-										Total Repositories
-									</span>
-								</div>
-								<span className='text-xl font-semibold text-gray-900 dark:text-white'>
-									{repos.length}
-								</span>
-							</div>
-							<div className='flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg'>
-								<div className='flex items-center gap-3'>
-									<HiStar className='text-xl text-yellow-500 dark:text-yellow-400' />
-									<span className='text-gray-700 dark:text-gray-300'>
-										Total Stars
-									</span>
-								</div>
-								<span className='text-xl font-semibold text-gray-900 dark:text-white'>
-									{repos.reduce(
-										(acc, repo) =>
-											acc + repo.stargazers_count,
-										0
-									)}
-								</span>
-							</div>
-							<div className='flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg'>
-								<div className='flex items-center gap-3'>
-									<HiEye className='text-xl text-purple-500 dark:text-purple-400' />
-									<span className='text-gray-700 dark:text-gray-300'>
-										Total Watchers
-									</span>
-								</div>
-								<span className='text-xl font-semibold text-gray-900 dark:text-white'>
-									{repos.reduce(
-										(acc, repo) =>
-											acc + repo.watchers_count,
-										0
-									)}
-								</span>
-							</div>
-							<div className='flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg'>
-								<div className='flex items-center gap-3'>
-									<HiCode className='text-xl text-green-500 dark:text-green-400' />
-									<span className='text-gray-700 dark:text-gray-300'>
-										Languages Used
-									</span>
-								</div>
-								<span className='text-xl font-semibold text-gray-900 dark:text-white'>
-									{languageStats.length}
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{/* GitHub Repositories */}
-				<div className='bg-white/60 dark:bg-gray-800/60 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700'>
-					<div className='flex items-center gap-3 mb-6'>
-						<HiFolder className='text-2xl text-blue-500 dark:text-blue-400' />
-						<h3 className='text-xl font-semibold text-gray-900 dark:text-white'>
-							Recent Repositories
-						</h3>
-					</div>
-					<div className='grid md:grid-cols-2 xl:grid-cols-3 gap-6'>
-						{displayedRepos.map(repo => (
-							<div
-								key={repo.id}
-								className='bg-gray-50 dark:bg-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600 hover:shadow-md transition-shadow'
-							>
-								<div className='flex items-start justify-between mb-3'>
-									<h4 className='font-semibold text-gray-900 dark:text-white truncate'>
-										{repo.name}
-									</h4>
-									<a
-										href={repo.html_url}
-										target='_blank'
-										rel='noopener noreferrer'
-										className='text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors'
-									>
-										<HiExternalLink className='text-lg' />
-									</a>
-								</div>
-								<p className='text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3'>
-									{repo.description || 'No description available'}
-								</p>
-								<div className='flex items-center justify-between text-sm'>
-									<div className='flex items-center gap-4'>
-										{repo.language && (
-											<div className='flex items-center gap-1'>
-												<div
-													className='w-3 h-3 rounded-full'
-													style={{
-														backgroundColor:
-															LANGUAGE_COLORS[
-																repo
-																	.language
-															] ||
-															'#8b5cf6',
-													}}
-												></div>
-												<span className='text-gray-600 dark:text-gray-300'>
-													{repo.language}
-												</span>
-											</div>
-										)}
-										<div className='flex items-center gap-1 text-gray-500 dark:text-gray-400'>
-											<HiStar className='text-xs' />
-											<span>
-												{repo.stargazers_count}
-											</span>
-										</div>
-									</div>
-									<div className='text-gray-500 dark:text-gray-400'>
-										{new Date(
-											repo.updated_at
-										).toLocaleDateString()}
-									</div>
-								</div>
-								{repo.topics.length > 0 && (
-									<div className='flex flex-wrap gap-1 mt-3'>
-										{repo.topics.slice(0, 3).map(topic => (
-											<span
-												key={topic}
-												className='px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs rounded-full'
-											>
-												{topic}
-											</span>
-										))}
-										{repo.topics.length > 3 && (
-											<span className='px-2 py-1 bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 text-xs rounded-full'>
-												+
-												{repo.topics.length - 3}
-											</span>
-										)}
-									</div>
-								)}
-							</div>
-						))}
-					</div>
-					{repos.length > 3 && (
-						<div className='text-center mt-8'>
-							<button
-								onClick={() => setShowAllRepos(!showAllRepos)}
-								className='px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-lg transition-colors'
-							>
-								{showAllRepos
-									? 'Show Less'
-									: `Show More (${repos.length - 3} more)`}
-							</button>
-						</div>
-					)}
 				</div>
 			</div>
 		</section>

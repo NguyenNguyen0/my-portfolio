@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggleButton } from './ThemeToggleButton';
-import { HiMenu, HiX } from 'react-icons/hi';
+import { Menu, X } from 'lucide-react';
 
 export function Header() {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -95,9 +95,9 @@ export function Header() {
 							aria-label='Toggle mobile menu'
 						>
 							{isMobileMenuOpen ? (
-								<HiX className='h-6 w-6' />
+								<X className='h-6 w-6' />
 							) : (
-								<HiMenu className='h-6 w-6' />
+								<Menu className='h-6 w-6' />
 							)}
 						</button>
 					</div>

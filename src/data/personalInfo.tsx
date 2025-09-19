@@ -1,28 +1,28 @@
-import { HiLocationMarker, HiChat, HiAcademicCap, HiBookOpen, HiLightBulb } from 'react-icons/hi';
+import { MapPin, MessageSquare, GraduationCap, BookOpen, Lightbulb } from 'lucide-react';
 
 export const personalInfo = [
 	{
-		icon: <HiLocationMarker className='text-xl' />,
+		icon: <MapPin className='text-xl' />,
 		label: 'Location',
 		value: 'Ho Chi Minh City',
 	},
 	{
-		icon: <HiChat className='text-xl' />,
+		icon: <MessageSquare className='text-xl' />,
 		label: 'Foreign language',
 		value: 'Good English communication, reading and understanding technical documents',
 	},
 	{
-		icon: <HiAcademicCap className='text-xl' />,
+		icon: <GraduationCap className='text-xl' />,
 		label: 'Education',
 		value: 'Self-study + online courses',
 	},
 	{
-		icon: <HiBookOpen className='text-xl' />,
+		icon: <BookOpen className='text-xl' />,
 		label: 'Favorite topics',
 		value: 'API Design, AI and UI/UX',
 	},
 	{
-		icon: <HiLightBulb className='text-xl' />,
+		icon: <Lightbulb className='text-xl' />,
 		label: 'Goal',
 		value: 'Become a Fullstack Developer with beautiful design thinking & strong technical skills',
 	},
