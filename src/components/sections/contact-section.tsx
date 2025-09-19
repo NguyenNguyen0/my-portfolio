@@ -4,14 +4,38 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { SpotlightCard } from '@/components/ui/spotlight-card';
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import {
+	Github,
+	Linkedin,
+	Mail,
+	FileUser,
+	MessageCircleMore,
+} from 'lucide-react';
 
 const socialLinks = [
-	{ icon: Github, href: '#', label: 'GitHub' },
-	{ icon: Linkedin, href: '#', label: 'LinkedIn' },
-	{ icon: Twitter, href: '#', label: 'Twitter' },
-	{ icon: Mail, href: 'mailto:john@example.com', label: 'Email' },
+	{ icon: Github, href: 'https://github.com/NguyenNguyen0', label: 'GitHub' },
+	{
+		icon: Linkedin,
+		href: 'https://www.linkedin.com/in/nguyennguyen0/',
+		label: 'LinkedIn',
+	},
+	{
+		icon: FileUser,
+		href: 'https://www.topcv.vn/xem-cv/VA8HAANcCA5UDlcKVwwFBFQDCwMODgdSCABSAQ9a6b',
+		label: 'TopCV',
+	},
+	{
+		icon: MessageCircleMore,
+		href: 'https://zalo.me/0394757329',
+		label: 'Zalo',
+	},
+	{ icon: Mail, href: 'mailto:trungnguyenwork123@gmail.com', label: 'Email' },
 ];
+
+const personalInfo = {
+	email: 'trungnguyenwork123@gmail.com',
+	address: 'Ho Chi Minh City',
+};
 
 export const ContactSection = () => {
 	return (
@@ -27,9 +51,9 @@ export const ContactSection = () => {
 					Let&apos;s Work Together
 				</h2>
 				<p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-					Have a project in mind? I&apos;d love to hear about it. Send me a
-					message and let&apos;s discuss how we can bring your ideas to
-					life.
+					Have a project in mind? I&apos;d love to hear about it. Send
+					me a message and let&apos;s discuss how we can bring your
+					ideas to life.
 				</p>
 			</motion.div>
 
@@ -110,10 +134,10 @@ export const ContactSection = () => {
 							Get in Touch
 						</h3>
 						<p className="text-muted-foreground leading-relaxed">
-							I&apos;m always open to discussing new opportunities,
-							creative ideas, or potential collaborations. Whether
-							you have a project in mind or just want to connect,
-							feel free to reach out!
+							I&apos;m always open to discussing new
+							opportunities, creative ideas, or potential
+							collaborations. Whether you have a project in mind
+							or just want to connect, feel free to reach out!
 						</p>
 					</div>
 
@@ -149,13 +173,13 @@ export const ContactSection = () => {
 						<div>
 							<h4 className="font-semibold">Email</h4>
 							<p className="text-muted-foreground">
-								john@example.com
+								{personalInfo.email}
 							</p>
 						</div>
 						<div>
 							<h4 className="font-semibold">Location</h4>
 							<p className="text-muted-foreground">
-								San Francisco, CA
+								{personalInfo.address}
 							</p>
 						</div>
 					</div>

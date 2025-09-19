@@ -37,7 +37,7 @@ export default function Home() {
 				<footer className="border-t border-border/50 py-12 mt-16 backdrop-blur-sm">
 					<div className="max-w-7xl mx-auto text-center">
 						<p className="text-muted-foreground">
-						© 2025 John Developer. Built with Next.js, Tailwind CSS, and Framer Motion.
+						© {new Date().getFullYear()} Nguyễn Trung Nguyên. Built with Next.js, Tailwind CSS, and Framer Motion.
 						</p>
 						<div className="flex justify-center gap-6 mt-4">
 						<a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
