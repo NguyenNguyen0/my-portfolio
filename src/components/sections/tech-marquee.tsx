@@ -40,8 +40,8 @@ export const TechMarquee = () => {
 			</div>
 			<Marquee
 				pauseOnHover={true}
-				className="[--duration:30s]"
-				speed="normal"
+				className="[--duration:50s]"
+				speed="slow"
 			>
 				{technologies.map((tech) => (
 					<TechBadge key={tech} tech={tech} />

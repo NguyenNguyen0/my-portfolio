@@ -41,7 +41,17 @@
   /* Added for marquee animation */
   --gap: 10px;
   /* Added for marquee animation */
+
+  /* Aurora effect variables */
+  --aurora-blur: 80px;
+  --aurora-primary: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4);
+  --aurora-secondary: linear-gradient(45deg, #f59e0b, #ef4444, #8b5cf6);
+  --aurora-tertiary: linear-gradient(45deg, #06b6d4, #3b82f6, #f59e0b);
+  --aurora-quaternary: linear-gradient(45deg, #8b5cf6, #ec4899, #f43f5e);
+  --aurora-quinary: linear-gradient(45deg, #06b6d4, #0ea5e9, #14b8a6);
+  --aurora-opacity: 0.4;
 }
+
 
 .dark {
   --background: oklch(0.145 0 0);

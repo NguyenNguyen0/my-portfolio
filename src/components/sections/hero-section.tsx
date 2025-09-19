@@ -26,7 +26,7 @@ export const HeroSection = () => {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8 }}
-					className="relative z-10 text-center max-w-4xl mx-auto px-4 pt-20 flex flex-col justify-center h-full"
+					className="relative z-10 text-center max-w-4xl mx-auto px-4 flex flex-col justify-center h-full"
 				>
 					<AnimatedGradientText className="text-5xl md:text-7xl font-bold mb-6">
 						{`<${NAME}/>`}
