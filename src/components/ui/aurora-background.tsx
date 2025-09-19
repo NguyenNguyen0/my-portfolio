@@ -121,14 +121,13 @@ export function AuroraBackground({
 				<motion.div
 					className="absolute top-1/3 left-1/4 w-[15vw] h-[15vw] rounded-full opacity-60 blur-[50px]"
 					style={{
-						background:
-							'linear-gradient(135deg, #a855f7, #ec4899)',
+						background: 'linear-gradient(135deg, #a855f7, #ec4899)',
 					}}
 					animate={{
 						x: [-50, 50, -50],
 						y: [-30, 30, -30],
 						scale: [1, 1.3, 1],
-						opacity: [0.5, 0.8, 0.5],
+						opacity: [1, 1.5, 1],
 					}}
 					transition={{
 						duration: 15,
@@ -140,14 +139,13 @@ export function AuroraBackground({
 				<motion.div
 					className="absolute top-2/3 right-1/4 w-[15vw] h-[15vw] rounded-full opacity-20 blur-[50px]"
 					style={{
-						background:
-							'linear-gradient(135deg, #2dd4bf, #0ea5e9)',
+						background: 'linear-gradient(135deg, #2dd4bf, #0ea5e9)',
 					}}
 					animate={{
 						x: [50, -50, 50],
 						y: [30, -30, 30],
 						scale: [1, 1.2, 1],
-						opacity: [0.5, 0.8, 0.5],
+						opacity: [1, 1.5, 1],
 					}}
 					transition={{
 						duration: 12,
@@ -178,9 +176,7 @@ export function AuroraBackground({
 			/>
 
 			{/* Subtle glow overlay */}
-			<div
-				className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/5 to-transparent opacity-30 mix-blend-overlay"
-			/>
+			<div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/5 to-transparent opacity-30 mix-blend-overlay" />
 
 			{/* Content */}
 			<div className="relative z-10">{children}</div>

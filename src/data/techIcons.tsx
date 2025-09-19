@@ -43,6 +43,12 @@ export const techIcons: Record<string, TechinologyIcon> = {
 		bgColor: 'bg-blue-50 dark:bg-blue-900/20',
 		borderColor: 'border-blue-200 dark:border-blue-800',
 	},
+	Go: {
+		iconPath: '/icons/Go.svg',
+		color: '#3776AB',
+		bgColor: 'bg-blue-50 dark:bg-blue-900/20',
+		borderColor: 'border-blue-200 dark:border-blue-800',
+	},
 	React: {
 		iconPath: '/icons/react-icon.svg',
 		color: '#61DAFB',

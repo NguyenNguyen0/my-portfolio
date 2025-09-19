@@ -20,6 +20,16 @@ export const projects: Project[] = [
 		type: ['Personal', 'Backend'],
 	},
 	{
+		id: 'frontend-chatbot',
+		title: 'Frontend Chatbot Website',
+		description:
+			'A Modern UI website built with React, TailwindCSS and state management with Redux Toolkit.',
+		techStack: ['React', 'Tailwind CSS', 'Redux Toolkit'],
+		image: '/projects/N.aidemo2.gif',
+		githubUrl: 'https://github.com/NguyenNguyen0/chatbot-be',
+		type: ['Personal', 'Frontend'],
+	},
+	{
 		id: 'portfolio-website',
 		title: 'My Portfolio Website',
 		description:
@@ -28,16 +38,6 @@ export const projects: Project[] = [
 		image: '/thumbnail.png',
 		demoUrl: 'https://nguyennguyen0.id.vn',
 		githubUrl: 'https://github.com/NguyenNguyen0/my-portfolio',
-		type: ['Personal', 'Frontend'],
-	},
-	{
-		id: 'frontend-chatbot',
-		title: 'Frontend Chatbot Website',
-		description:
-			'A Modern UI website built with React, TailwindCSS and state management with Redux Toolkit.',
-		techStack: ['React', 'Tailwind CSS', 'Redux Toolkit'],
-		image: '/projects/N.aidemo2.gif',
-		githubUrl: 'https://github.com/NguyenNguyen0/chatbot-be',
 		type: ['Personal', 'Frontend'],
 	},
 	{

@@ -8,7 +8,6 @@ import { globeData, globeConfig } from '@/data/globeData';
 import { Suspense } from 'react';
 
 export const HeroSection = () => {
-	const NAME = "Nguyễn Trung Nguyên";
 	return (
 		<HeroHighlight className="min-h-screen">
 			<div className="relative w-full h-screen">
@@ -28,8 +27,8 @@ export const HeroSection = () => {
 					transition={{ duration: 0.8 }}
 					className="relative z-10 text-center max-w-4xl mx-auto px-4 flex flex-col justify-center h-full"
 				>
-					<AnimatedGradientText className="text-5xl md:text-7xl font-bold mb-6">
-						{`<${NAME}/>`}
+					<AnimatedGradientText className="text-9xl md:text-10xl font-bold mb-6">
+						{`<${"Nguyễn Trung Nguyên"}/>`}
 					</AnimatedGradientText>
 
 					<h2 className="text-2xl md:text-4xl font-semibold text-foreground mb-8">

@@ -20,7 +20,7 @@ export const personalInfo = [
 	{
 		icon: <GraduationCap className="text-xl" />,
 		label: 'Education',
-		value: 'Self-study + online courses',
+		value: 'Software Engineer in IUH and Self-study + online courses',
 	},
 	{
 		icon: <BookOpen className="text-xl" />,
@@ -37,7 +37,7 @@ export const personalInfo = [
 export const technicalSkills = [
 	{
 		title: 'Programing languages',
-		skills: ['JavaScript', 'TypeScript', 'Java', 'Python'],
+		skills: ['JavaScript', 'TypeScript', 'Java', 'Python', "Go"],
 		variant: 'primary' as const,
 	},
 	{
