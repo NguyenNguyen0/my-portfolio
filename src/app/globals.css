@@ -151,10 +151,31 @@
 
 .animate-marquee {
   animation: marquee var(--duration) linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee-vertical {
   animation: marquee-vertical var(--duration) linear infinite;
+  will-change: transform;
+}
+
+/* Add transition for marquee items */
+.animate-marquee > * {
+  transition: transform 0.2s ease;
+}
+
+/* Hover state for tech badges */
+.tech-badge-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hover state for inactive tech badges */
+.animate-marquee:hover > *:not(:hover) {
+  opacity: 0.7;
+}
+
+.animation-paused {
+  animation-play-state: paused !important;
 }
 
 .bg-grid-white\/\[0\.02\] {

@@ -17,6 +17,7 @@ export function ResizableNavbar() {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
+	const logo = "NN";
 	const navItems = [
 		{ name: 'Home', href: '#hero', icon: Home },
 		{ name: 'About', href: '#about', icon: User },
@@ -42,7 +43,7 @@ export function ResizableNavbar() {
 						whileHover={{ scale: 1.05 }}
 						className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
 					>
-						JD
+						{logo}
 					</motion.div>
 
 					{/* Desktop Navigation */}
