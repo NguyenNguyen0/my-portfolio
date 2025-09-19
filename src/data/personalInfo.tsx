@@ -1,0 +1,70 @@
+import { HiLocationMarker, HiChat, HiAcademicCap, HiBookOpen, HiLightBulb } from 'react-icons/hi';
+
+export const personalInfo = [
+	{
+		icon: <HiLocationMarker className='text-xl' />,
+		label: 'Location',
+		value: 'Ho Chi Minh City',
+	},
+	{
+		icon: <HiChat className='text-xl' />,
+		label: 'Foreign language',
+		value: 'Good English communication, reading and understanding technical documents',
+	},
+	{
+		icon: <HiAcademicCap className='text-xl' />,
+		label: 'Education',
+		value: 'Self-study + online courses',
+	},
+	{
+		icon: <HiBookOpen className='text-xl' />,
+		label: 'Favorite topics',
+		value: 'API Design, AI and UI/UX',
+	},
+	{
+		icon: <HiLightBulb className='text-xl' />,
+		label: 'Goal',
+		value: 'Become a Fullstack Developer with beautiful design thinking & strong technical skills',
+	},
+];
+
+export const technicalSkills = [
+	{
+		title: 'Programing languages',
+		skills: ['JavaScript', 'TypeScript', 'Java', 'Python'],
+		variant: 'primary' as const,
+	},
+	{
+		title: 'Frontend',
+		skills: ['HTML', 'CSS', 'React', 'Next.js', 'Tailwind CSS'],
+		variant: 'primary' as const,
+	},
+	{
+		title: 'Backend',
+		skills: [
+			'Node.js',
+			'Express',
+			'RESTful APIs',
+			'FastAPI',
+			'Flask',
+			'MongoDB',
+			'PostgreSQL',
+			'Redis',
+			'Microsoft SQL Server',
+		],
+		variant: 'secondary' as const,
+	},
+	{
+		title: 'Tools & Others',
+		skills: ['Git', 'Docker', 'Postman', 'Vercel', 'Linux CLI'],
+		variant: 'accent' as const,
+	},
+];
+
+export const softSkills = [
+	{
+		title: 'Communication & Learning',
+		skills: ['English reading & communication', 'Self-learning & documentation'],
+		variant: 'primary' as const,
+	},
+];
