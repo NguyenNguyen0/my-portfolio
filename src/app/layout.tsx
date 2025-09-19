@@ -1,31 +1,17 @@
 import './globals.css';
-import { ThemeProvider } from '@/components/common';
-import { AppLayout } from '@/components/common';
-import { Montserrat, Anton, Dancing_Script } from 'next/font/google';
 import type { Metadata } from 'next';
-
-const montserrat = Montserrat({
-	subsets: ['latin'],
-	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-	variable: '--font-montserrat',
-});
-
-const anton = Anton({
-	subsets: ['latin'],
-	weight: ['400'],
-	variable: '--font-anton',
-});
-
-const dancingScript = Dancing_Script({
-	subsets: ['latin'],
-	weight: ['400', '500', '600', '700'],
-	variable: '--font-dancing-script',
-});
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 
 export const metadata: Metadata = {
 	title: 'Portfolio - NguyenNguyen0',
-	description: "NguyenNguyen0's Portfolio - Backend Developer, loving API Design, AI and UI/UX.",
-	keywords: ['NguyenNguyen0', 'Portfolio', 'Next.js', 'Backend Developer', 'API Design', 'AI', 'UI/UX'],
+	description:
+		"NguyenNguyen0's Portfolio - Backend Developer, loving API Design, AI and UI/UX.",
+	keywords: [
+		'NguyenNguyen0',
+		'Portfolio',
+		'Next.js',
+	],
 	authors: [{ name: 'NguyenNguyen0' }],
 	openGraph: {
 		title: 'Portfolio - Nguyễn Trung Nguyên',
@@ -53,13 +39,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en' suppressHydrationWarning>
+		<html lang="en" suppressHydrationWarning className="bg-black">
 			<body
-				className={`preload overflow-x-hidden ${montserrat.variable} ${anton.variable} ${dancingScript.variable}`}
+				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}
 			>
-				<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-					<AppLayout>{children}</AppLayout>
-				</ThemeProvider>
+				{children}
 			</body>
 		</html>
 	);

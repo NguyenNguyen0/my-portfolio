@@ -1,5 +1,8 @@
 // Tech icons mapping to public/icons/ directory with their brand colors
-export const techIcons: Record<string, { iconPath: string; color: string; bgColor: string; borderColor: string }> = {
+export const techIcons: Record<
+	string,
+	{ iconPath: string; color: string; bgColor: string; borderColor: string }
+> = {
 	HTML: {
 		iconPath: '/icons/html-icon.svg',
 		color: '#E34F26',

@@ -1,28 +1,34 @@
-import { MapPin, MessageSquare, GraduationCap, BookOpen, Lightbulb } from 'lucide-react';
+import {
+	MapPin,
+	MessageSquare,
+	GraduationCap,
+	BookOpen,
+	Lightbulb,
+} from 'lucide-react';
 
 export const personalInfo = [
 	{
-		icon: <MapPin className='text-xl' />,
+		icon: <MapPin className="text-xl" />,
 		label: 'Location',
 		value: 'Ho Chi Minh City',
 	},
 	{
-		icon: <MessageSquare className='text-xl' />,
+		icon: <MessageSquare className="text-xl" />,
 		label: 'Foreign language',
 		value: 'Good English communication, reading and understanding technical documents',
 	},
 	{
-		icon: <GraduationCap className='text-xl' />,
+		icon: <GraduationCap className="text-xl" />,
 		label: 'Education',
 		value: 'Self-study + online courses',
 	},
 	{
-		icon: <BookOpen className='text-xl' />,
+		icon: <BookOpen className="text-xl" />,
 		label: 'Favorite topics',
 		value: 'API Design, AI and UI/UX',
 	},
 	{
-		icon: <Lightbulb className='text-xl' />,
+		icon: <Lightbulb className="text-xl" />,
 		label: 'Goal',
 		value: 'Become a Fullstack Developer with beautiful design thinking & strong technical skills',
 	},
@@ -64,7 +70,10 @@ export const technicalSkills = [
 export const softSkills = [
 	{
 		title: 'Communication & Learning',
-		skills: ['English reading & communication', 'Self-learning & documentation'],
+		skills: [
+			'English reading & communication',
+			'Self-learning & documentation',
+		],
 		variant: 'primary' as const,
 	},
 ];

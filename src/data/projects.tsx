@@ -13,7 +13,8 @@ export const projects: Project[] = [
 	{
 		id: 'backend-chatbot-api',
 		title: 'Backend Chatbot API',
-		description: 'A RESTful API and Websocket Chatbot Backend using Ollama, FastAPI and MongoDB.',
+		description:
+			'A RESTful API and Websocket Chatbot Backend using Ollama, FastAPI and MongoDB.',
 		techStack: ['Ollama', 'FastAPI', 'MongoDB', 'Websocket'],
 		githubUrl: 'https://github.com/NguyenNguyen0/chatbot-be',
 		type: ['Personal', 'Backend'],
@@ -42,7 +43,8 @@ export const projects: Project[] = [
 	{
 		id: 'cli-app',
 		title: 'Calculating Bills CLI App',
-		description: 'Modern CLI app for calculating Electricity & Water bills.',
+		description:
+			'Modern CLI app for calculating Electricity & Water bills.',
 		techStack: ['Python', 'Rich', 'Typer', 'Pyfiglet'],
 		image: '/projects/calculating-cli.gif',
 		githubUrl: 'https://github.com/NguyenNguyen0/bill-calculator',
@@ -50,4 +52,11 @@ export const projects: Project[] = [
 	},
 ];
 
-export const projectTypes = ['All', 'Personal', 'CLI', 'Frontend', 'Backend', 'Fullstack'];
+export const projectTypes = [
+	'All',
+	'Personal',
+	'CLI',
+	'Frontend',
+	'Backend',
+	'Fullstack',
+];
