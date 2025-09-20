@@ -6,6 +6,7 @@ import { ProjectsSection } from '@/components/sections/projects-section';
 import { TechMarquee } from '@/components/sections/tech-marquee';
 import { GridBackground } from '@/components/ui/grid-background';
 import { ResizableNavbar } from '@/components/ui/resizable-navbar';
+import { Footer } from '@/components/sections/footer';
 
 export default function Home() {
 	return (
@@ -34,34 +35,7 @@ export default function Home() {
 					<ContactSection />
 				</div>
 
-				<footer className="border-t border-border/50 py-12 mt-16 backdrop-blur-sm">
-					<div className="max-w-7xl mx-auto text-center">
-						<p className="text-muted-foreground">
-							© {new Date().getFullYear()} Nguyễn Trung Nguyên.
-							Built with Next.js, Tailwind CSS, and Framer Motion.
-						</p>
-						<div className="flex justify-center gap-6 mt-4">
-							<a
-								href="#about"
-								className="text-muted-foreground hover:text-foreground transition-colors"
-							>
-								About
-							</a>
-							<a
-								href="#projects"
-								className="text-muted-foreground hover:text-foreground transition-colors"
-							>
-								Projects
-							</a>
-							<a
-								href="#contact"
-								className="text-muted-foreground hover:text-foreground transition-colors"
-							>
-								Contact
-							</a>
-						</div>
-					</div>
-				</footer>
+				<Footer />
 			</main>
 		</GridBackground>
 	);

@@ -87,7 +87,7 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
+  --font-sans: 'Be Vietnam Pro', var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -134,6 +134,15 @@
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02", "case", "liga", "kern";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Vietnamese language specific styles */
+  :lang(vi) {
+    font-family: 'Be Vietnam Pro', var(--font-geist-sans), sans-serif;
+    word-spacing: 0.05em;
+    letter-spacing: 0.01em;
   }
 }
 
