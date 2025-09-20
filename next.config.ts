@@ -23,8 +23,6 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
-	// Optimize for Vietnamese font support
-	optimizeFonts: true,
 	experimental: {
 		optimizeCss: true,
 	},

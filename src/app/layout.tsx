@@ -3,10 +3,15 @@ import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
-import '@fontsource/be-vietnam-pro/400.css';
-import '@fontsource/be-vietnam-pro/500.css';
-import '@fontsource/be-vietnam-pro/600.css';
-import '@fontsource/be-vietnam-pro/700.css';
+import { Be_Vietnam_Pro } from 'next/font/google';
+
+// Configure Be Vietnam Pro font with weights
+const beVietnamPro = Be_Vietnam_Pro({
+	weight: ['400', '500', '600', '700'],
+	subsets: ['vietnamese', 'latin'],
+	display: 'swap',
+	variable: '--font-be-vietnam-pro',
+});
 
 export const metadata: Metadata = {
 	title: 'Portfolio - NguyenNguyen0',
@@ -18,7 +23,7 @@ export const metadata: Metadata = {
 	alternates: {
 		languages: {
 			'en-US': '/en',
-			'vi': '/',
+			vi: '/',
 		},
 	},
 	openGraph: {
@@ -49,8 +54,10 @@ export default function RootLayout({
 	return (
 		<html lang="vi" suppressHydrationWarning>
 			<body
-				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}
-				style={{ fontFamily: "'Be Vietnam Pro', 'Geist Sans', sans-serif" }}
+				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${beVietnamPro.variable} antialiased`}
+				style={{
+					fontFamily: "'Be Vietnam Pro', 'Geist Sans', sans-serif",
+				}}
 			>
 				<ThemeProvider
 					attribute="class"
