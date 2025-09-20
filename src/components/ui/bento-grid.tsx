@@ -55,9 +55,7 @@ export const BentoGridItem = ({
 						{description}
 					</div>
 				</div>
-				<div className="mt-auto pt-4">
-					{icon}
-				</div>
+				<div className="mt-auto pt-4">{icon}</div>
 			</div>
 		</motion.div>
 	);

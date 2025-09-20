@@ -8,7 +8,7 @@ import { projects } from '@/data/projects';
 
 export const ProjectsSection = () => {
 	return (
-		<section className="py-20 px-4 max-w-7xl mx-auto">
+		<section id="projects-section" className="py-20 px-4 max-w-7xl mx-auto">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
@@ -71,7 +71,11 @@ export const ProjectsSection = () => {
 											className="h-9 px-4 bg-transparent"
 											asChild
 										>
-											<a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+											<a
+												href={project.demoUrl}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
 												<ExternalLink className="w-4 h-4 mr-2" />
 												Demo
 											</a>
@@ -84,7 +88,11 @@ export const ProjectsSection = () => {
 											className="h-9 px-4 bg-transparent"
 											asChild
 										>
-											<a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+											<a
+												href={project.githubUrl}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
 												<Github className="w-4 h-4 mr-2" />
 												Code
 											</a>
@@ -99,7 +107,6 @@ export const ProjectsSection = () => {
 		</section>
 	);
 };
-
 
 const FallBackProjectImage = () => {
 	return (

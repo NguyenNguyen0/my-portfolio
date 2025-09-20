@@ -2,16 +2,13 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
+import { ThemeProvider } from 'next-themes';
 
 export const metadata: Metadata = {
 	title: 'Portfolio - NguyenNguyen0',
 	description:
 		"NguyenNguyen0's Portfolio - Backend Developer, loving API Design, AI and UI/UX.",
-	keywords: [
-		'NguyenNguyen0',
-		'Portfolio',
-		'Next.js',
-	],
+	keywords: ['NguyenNguyen0', 'Portfolio', 'Next.js'],
 	authors: [{ name: 'NguyenNguyen0' }],
 	openGraph: {
 		title: 'Portfolio - Nguyễn Trung Nguyên',
@@ -39,11 +36,18 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning className="bg-black scroll-smooth">
+		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased bg-black`}
+				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}
 			>
-				{children}
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="dark"
+					enableSystem
+					disableTransitionOnChange
+				>
+					{children}
+				</ThemeProvider>
 			</body>
 		</html>
 	);

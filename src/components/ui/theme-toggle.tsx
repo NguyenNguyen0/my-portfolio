@@ -1,35 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 export function ThemeToggle() {
-	const [theme, setTheme] = useState<'light' | 'dark'>('dark');
-
-	useEffect(() => {
-		const savedTheme = localStorage.getItem('theme') as
-			| 'light'
-			| 'dark'
-			| null;
-		const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-			.matches
-			? 'dark'
-			: 'light';
-		const initialTheme = savedTheme || systemTheme;
-
-		setTheme(initialTheme);
-		document.documentElement.classList.toggle(
-			'dark',
-			initialTheme === 'dark',
-		);
-	}, []);
+	const { theme, setTheme } = useTheme();
 
 	const toggleTheme = () => {
-		const newTheme = theme === 'light' ? 'dark' : 'light';
-		setTheme(newTheme);
-		localStorage.setItem('theme', newTheme);
-		document.documentElement.classList.toggle('dark', newTheme === 'dark');
+		setTheme(theme === 'light' ? 'dark' : 'light');
 	};
 
 	return (

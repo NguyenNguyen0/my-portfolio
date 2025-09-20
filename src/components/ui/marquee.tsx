@@ -29,7 +29,7 @@ export const Marquee = ({
 	const speedMap = {
 		slow: '60s',
 		normal: '40s',
-		fast: '20s'
+		fast: '20s',
 	};
 
 	const duration = speedMap[speed] || '40s';
@@ -64,7 +64,7 @@ export const Marquee = ({
 							},
 						)}
 						style={{
-							animationPlayState: isPaused ? 'paused' : 'running'
+							animationPlayState: isPaused ? 'paused' : 'running',
 						}}
 					>
 						{children}

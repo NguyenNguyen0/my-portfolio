@@ -94,7 +94,7 @@ export function GitHubSection() {
 			let stars = 0;
 			let forks = 0;
 
-			reposResponse.data.forEach(repo => {
+			reposResponse.data.forEach((repo) => {
 				stars += repo.stargazers_count || 0;
 				forks += repo.forks_count || 0;
 			});
@@ -104,11 +104,13 @@ export function GitHubSection() {
 
 			// Get top repos by stars
 			const sortedRepos = [...reposResponse.data]
-				.sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+				.sort(
+					(a, b) =>
+						(b.stargazers_count || 0) - (a.stargazers_count || 0),
+				)
 				.slice(0, 4);
 
 			setTopRepos(sortedRepos as GitHubRepo[]);
-
 		} catch (err) {
 			setError('Failed to fetch GitHub data');
 			console.error('GitHub API error:', err);
@@ -123,7 +125,9 @@ export function GitHubSection() {
 				<div className="max-w-7xl mx-auto">
 					<div className="flex justify-center items-center h-64">
 						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-						<p className="ml-4 text-muted-foreground">Loading GitHub data...</p>
+						<p className="ml-4 text-muted-foreground">
+							Loading GitHub data...
+						</p>
 					</div>
 				</div>
 			</section>
@@ -135,7 +139,9 @@ export function GitHubSection() {
 			<section id="github" className="py-20 px-4">
 				<div className="max-w-7xl mx-auto">
 					<div className="text-center">
-						<p className="text-red-500 dark:text-red-400">{error}</p>
+						<p className="text-red-500 dark:text-red-400">
+							{error}
+						</p>
 					</div>
 				</div>
 			</section>
@@ -206,7 +212,13 @@ export function GitHubSection() {
 											<div className="flex items-center gap-2 text-sm text-muted-foreground">
 												<LinkIcon size={14} />
 												<a
-													href={user.blog.startsWith('http') ? user.blog : `https://${user.blog}`}
+													href={
+														user.blog.startsWith(
+															'http',
+														)
+															? user.blog
+															: `https://${user.blog}`
+													}
 													target="_blank"
 													rel="noopener noreferrer"
 													className="hover:text-foreground transition-colors"
@@ -219,7 +231,7 @@ export function GitHubSection() {
 											<Calendar size={14} />
 											Joined{' '}
 											{new Date(
-												user.created_at
+												user.created_at,
 											).toLocaleDateString('en-US', {
 												month: 'long',
 												year: 'numeric',
@@ -310,7 +322,8 @@ export function GitHubSection() {
 														/>
 													</div>
 													<p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-														{repo.description || 'No description available'}
+														{repo.description ||
+															'No description available'}
 													</p>
 													<div className="flex items-center justify-between text-sm">
 														{repo.language && (
@@ -319,7 +332,11 @@ export function GitHubSection() {
 																	className="w-3 h-3 rounded-full"
 																	style={{
 																		backgroundColor:
-																			languageColors[repo.language] || '#858585',
+																			languageColors[
+																				repo
+																					.language
+																			] ||
+																			'#858585',
 																	}}
 																/>
 																{repo.language}
@@ -327,14 +344,20 @@ export function GitHubSection() {
 														)}
 														<div className="flex items-center gap-4">
 															<div className="flex items-center gap-1">
-																<Star size={14} />
-																{repo.stargazers_count}
+																<Star
+																	size={14}
+																/>
+																{
+																	repo.stargazers_count
+																}
 															</div>
 															<div className="flex items-center gap-1">
 																<GitFork
 																	size={14}
 																/>
-																{repo.forks_count}
+																{
+																	repo.forks_count
+																}
 															</div>
 														</div>
 													</div>
@@ -359,7 +382,11 @@ export function GitHubSection() {
 										<div className="overflow-x-auto">
 											<GitHubCalendar
 												username={GITHUB_USERNAME}
-												colorScheme={theme === 'dark' ? 'dark' : 'light'}
+												colorScheme={
+													theme === 'dark'
+														? 'dark'
+														: 'light'
+												}
 												fontSize={12}
 												blockSize={12}
 												blockMargin={2}

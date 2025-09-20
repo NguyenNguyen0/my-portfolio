@@ -5,7 +5,7 @@
 
 :root {
   --background: oklch(1 0 0);
-  --foreground: oklch(43.046% 0.00394 16.627);
+  --foreground: oklch(28.094% 0.00003 271.152);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -15,7 +15,7 @@
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(43.588% 0.00129 15.101);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -40,7 +40,6 @@
   --duration: 10s;
   /* Added for marquee animation */
   --gap: 10px;
-  /* Added for marquee animation */
 
   /* Aurora effect variables */
   --aurora-blur: 80px;
@@ -52,9 +51,8 @@
   --aurora-opacity: 0.4;
 }
 
-
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: oklch(23.929% 0.00003 271.152);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -176,7 +174,10 @@
 
 /* Hover state for tech badges */
 .tech-badge-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
 }
 
 /* Hover state for inactive tech badges */

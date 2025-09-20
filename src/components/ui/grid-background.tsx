@@ -16,16 +16,16 @@ export function GridBackground({
 		<div className={`relative overflow-hidden ${className}`}>
 			{/* Grid Pattern */}
 			<motion.div
-				className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07]"
+				className="absolute inset-0 opacity-[0.3] dark:opacity-[0.7]"
 				style={{
 					backgroundImage: `
-						linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-						linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)
+						linear-gradient(rgba(150,150,150,0.5) 1px, transparent 1px),
+						linear-gradient(90deg, rgba(150,150,150,0.5) 1px, transparent 1px)
 					`,
 					backgroundSize: '40px 40px',
 				}}
 				animate={{
-					opacity: [0.1, 0.2, 0.1],
+					opacity: [0.2, 0.4, 0.2],
 				}}
 				transition={{
 					duration: 10,

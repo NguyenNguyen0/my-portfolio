@@ -51,7 +51,10 @@ export const AboutSection = () => {
 									key={info.label}
 									initial={{ opacity: 0, y: 10 }}
 									whileInView={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.5, delay: index * 0.1 }}
+									transition={{
+										duration: 0.5,
+										delay: index * 0.1,
+									}}
 									viewport={{ once: true }}
 									className="flex items-start gap-3 p-3 rounded-lg border bg-card/50"
 								>
@@ -59,8 +62,12 @@ export const AboutSection = () => {
 										{info.icon}
 									</div>
 									<div>
-										<h4 className="font-medium">{info.label}</h4>
-										<p className="text-sm text-muted-foreground">{info.value}</p>
+										<h4 className="font-medium">
+											{info.label}
+										</h4>
+										<p className="text-sm text-muted-foreground">
+											{info.value}
+										</p>
 									</div>
 								</motion.div>
 							))}
@@ -82,11 +89,16 @@ export const AboutSection = () => {
 							key={category.title}
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, delay: catIndex * 0.15 }}
+							transition={{
+								duration: 0.5,
+								delay: catIndex * 0.15,
+							}}
 							viewport={{ once: true }}
 							className="space-y-3"
 						>
-							<h4 className="text-lg font-medium">{category.title}</h4>
+							<h4 className="text-lg font-medium">
+								{category.title}
+							</h4>
 							<div className="flex flex-wrap gap-3">
 								{category.skills.map((skill, index) => {
 									const techIcon = techIcons[skill];
@@ -94,10 +106,15 @@ export const AboutSection = () => {
 										<motion.div
 											key={skill}
 											initial={{ opacity: 0, scale: 0.8 }}
-											whileInView={{ opacity: 1, scale: 1 }}
+											whileInView={{
+												opacity: 1,
+												scale: 1,
+											}}
 											transition={{
 												duration: 0.5,
-												delay: index * 0.05 + catIndex * 0.1,
+												delay:
+													index * 0.05 +
+													catIndex * 0.1,
 											}}
 											viewport={{ once: true }}
 											className={`px-3 py-2 rounded-full text-sm font-medium border flex items-center gap-2 ${techIcon?.borderColor || 'border-primary/20'} ${techIcon?.bgColor || 'bg-primary/5'}`}
@@ -126,10 +143,17 @@ export const AboutSection = () => {
 						transition={{ duration: 0.5, delay: 0.6 }}
 						viewport={{ once: true }}
 					>
-						<h3 className="text-2xl font-semibold mb-4">Soft Skills</h3>
+						<h3 className="text-2xl font-semibold mb-4">
+							Soft Skills
+						</h3>
 						{softSkills.map((category) => (
-							<div key={category.title} className="space-y-3 mb-4">
-								<h4 className="text-lg font-medium">{category.title}</h4>
+							<div
+								key={category.title}
+								className="space-y-3 mb-4"
+							>
+								<h4 className="text-lg font-medium">
+									{category.title}
+								</h4>
 								<div className="space-y-2">
 									{category.skills.map((skill, index) => (
 										<motion.div
@@ -144,7 +168,9 @@ export const AboutSection = () => {
 											className="flex items-center gap-2"
 										>
 											<div className="w-2 h-2 rounded-full bg-primary"></div>
-											<span className="text-muted-foreground">{skill}</span>
+											<span className="text-muted-foreground">
+												{skill}
+											</span>
 										</motion.div>
 									))}
 								</div>

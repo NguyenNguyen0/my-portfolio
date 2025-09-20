@@ -37,7 +37,7 @@ export const personalInfo = [
 export const technicalSkills = [
 	{
 		title: 'Programing languages',
-		skills: ['JavaScript', 'TypeScript', 'Java', 'Python', "Go"],
+		skills: ['JavaScript', 'TypeScript', 'Java', 'Python', 'Go'],
 		variant: 'primary' as const,
 	},
 	{

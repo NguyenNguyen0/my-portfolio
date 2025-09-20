@@ -28,13 +28,13 @@ const technologies = [
 	'Linux CLI',
 	'Postman',
 	'Java',
-].filter(tech => tech in techIcons);
+].filter((tech) => tech in techIcons);
 
 export const TechMarquee = () => {
 	return (
 		<section className="py-12 border-y border-border">
 			<div className="mb-8 text-center">
-				<h3 className="text-lg font-semibold text-muted-foreground">
+				<h3 className="text-lg font-semibold text-primary">
 					Technologies I work with
 				</h3>
 			</div>

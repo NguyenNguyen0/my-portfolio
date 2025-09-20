@@ -17,7 +17,7 @@ export function ResizableNavbar() {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
-	const logo = "NN";
+	const logo = 'NN';
 	const navItems = [
 		{ name: 'Home', href: '#hero', icon: Home },
 		{ name: 'About', href: '#about', icon: User },
