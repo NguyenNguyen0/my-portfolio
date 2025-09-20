@@ -5,6 +5,7 @@ import ThreeGlobe from 'three-globe';
 import { useThree, Canvas, extend } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import countries from '@/data/globe.json';
+import { useTheme } from 'next-themes';
 declare module '@react-three/fiber' {
 	interface ThreeElements {
 		threeGlobe: ThreeElements['mesh'] & {
@@ -56,7 +57,7 @@ export type GlobeConfig = {
 };
 
 interface WorldProps {
-	globeConfig: GlobeConfig;
+	globeConfig?: GlobeConfig;
 	data: Position[];
 }
 
@@ -69,24 +70,34 @@ interface PointData {
 }
 
 export function Globe({ globeConfig, data }: WorldProps) {
+	const theme = useTheme();
 	const globeRef = useRef<ThreeGlobe | null>(null);
 	const groupRef = useRef<Group | null>(null);
 	const [isInitialized, setIsInitialized] = useState(false);
+	console.log(JSON.stringify(theme));
+
 
 	const defaultProps = {
-		pointSize: 1,
-		atmosphereColor: '#ffffff',
+		pointSize: 4,
+		globeColor: theme.theme === 'dark' ? '#062056' : '#43b0f1',
 		showAtmosphere: true,
-		atmosphereAltitude: 0.1,
-		polygonColor: 'rgba(255,255,255,0.7)',
-		globeColor: '#1d072e',
-		emissive: '#000000',
+		atmosphereColor: '#FFFFFF',
+		atmosphereAltitude: 0.2,
+		emissive: '#062056',
 		emissiveIntensity: 0.1,
 		shininess: 0.9,
-		arcTime: 2000,
+		polygonColor: '#ffffff',
+		ambientLight: '#38bdf8',
+		directionalLeftLight: '#ffffff',
+		directionalTopLight: '#ffffff',
+		pointLight: '#ffffff',
+		arcTime: 1000,
 		arcLength: 0.9,
 		rings: 1,
 		maxRings: 3,
+		initialPosition: { lat: 22.3193, lng: 114.1694 },
+		autoRotate: true,
+		autoRotateSpeed: 0.9,
 		...globeConfig,
 	};
 
@@ -109,16 +120,16 @@ export function Globe({ globeConfig, data }: WorldProps) {
 			emissiveIntensity: number;
 			shininess: number;
 		};
-		globeMaterial.color = new Color(globeConfig.globeColor);
-		globeMaterial.emissive = new Color(globeConfig.emissive);
-		globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
-		globeMaterial.shininess = globeConfig.shininess || 0.9;
+		globeMaterial.color = new Color(defaultProps.globeColor);
+		globeMaterial.emissive = new Color(defaultProps.emissive);
+		globeMaterial.emissiveIntensity = defaultProps.emissiveIntensity || 0.1;
+		globeMaterial.shininess = defaultProps.shininess || 0.9;
 	}, [
 		isInitialized,
-		globeConfig.globeColor,
-		globeConfig.emissive,
-		globeConfig.emissiveIntensity,
-		globeConfig.shininess,
+		defaultProps.globeColor,
+		defaultProps.emissive,
+		defaultProps.emissiveIntensity,
+		defaultProps.shininess,
 	]);
 
 	// Build data when globe is initialized or when data changes
@@ -259,22 +270,30 @@ export function World(props: WorldProps) {
 	return (
 		<Canvas
 			scene={scene}
-			style={{ width: '100%', height: '100%', position: 'absolute', overflow: 'visible' }}
+			style={{
+				width: '100%',
+				height: '100%',
+				position: 'absolute',
+				overflow: 'visible',
+			}}
 			camera={new PerspectiveCamera(60, aspect, 100, 2000)}
 			gl={{ antialias: true, alpha: true }}
 		>
 			<WebGLRendererConfig />
-			<ambientLight color={globeConfig.ambientLight} intensity={0.6} />
+			<ambientLight
+				color={globeConfig?.ambientLight || '#38bdf8'}
+				intensity={0.6}
+			/>
 			<directionalLight
-				color={globeConfig.directionalLeftLight}
+				color={globeConfig?.directionalLeftLight}
 				position={new Vector3(-400, 100, 400)}
 			/>
 			<directionalLight
-				color={globeConfig.directionalTopLight}
+				color={globeConfig?.directionalTopLight || '#ffffff'}
 				position={new Vector3(-200, 500, 200)}
 			/>
 			<pointLight
-				color={globeConfig.pointLight}
+				color={globeConfig?.pointLight || '#ffffff'}
 				position={new Vector3(-200, 500, 200)}
 				intensity={0.8}
 			/>
@@ -284,8 +303,12 @@ export function World(props: WorldProps) {
 				enableZoom={false}
 				minDistance={cameraZ}
 				maxDistance={cameraZ}
-				autoRotateSpeed={globeConfig.autoRotateSpeed || 0.6}
-				autoRotate={globeConfig.autoRotate !== undefined ? globeConfig.autoRotate : true}
+				autoRotateSpeed={globeConfig?.autoRotateSpeed || 0.6}
+				autoRotate={
+					globeConfig?.autoRotate !== undefined
+						? globeConfig.autoRotate
+						: true
+				}
 				minPolarAngle={Math.PI / 2.5}
 				maxPolarAngle={Math.PI - Math.PI / 2.5}
 			/>

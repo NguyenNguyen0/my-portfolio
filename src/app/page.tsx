@@ -4,12 +4,12 @@ import { GitHubSection } from "@/components/sections/github-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
 import { TechMarquee } from "@/components/sections/tech-marquee";
-import { AuroraBackground } from "@/components/ui/aurora-background";
+import { GridBackground } from "@/components/ui/grid-background";
 import { ResizableNavbar } from "@/components/ui/resizable-navbar";
 
 export default function Home() {
 	return (
-		<AuroraBackground className="min-h-screen">
+		<GridBackground className="min-h-screen bg-slate-300 dark:bg-primary-foreground">
 			<ResizableNavbar />
 			<main className="pt-16 px-4 md:px-8">
 				<div id="hero">
@@ -53,6 +53,6 @@ export default function Home() {
 					</div>
 				</footer>
 			</main>
-		</AuroraBackground>
+		</GridBackground>
 	);
 }

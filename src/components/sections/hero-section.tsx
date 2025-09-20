@@ -4,7 +4,7 @@ import { AnimatedGradientText } from '@/components/ui/animated-gradient-text';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { World } from '@/components/ui/globe';
-import { globeData, globeConfig } from '@/data/globeData';
+import { globeData } from '@/data/globeData';
 import { Suspense } from 'react';
 
 export const HeroSection = () => {
@@ -15,7 +15,7 @@ export const HeroSection = () => {
 				<div className="absolute inset-0 z-0 opacity-70">
 					<Suspense fallback={<div className="w-full h-full bg-background" />}>
 						<div className="w-full h-full">
-							<World globeConfig={globeConfig} data={globeData} />
+							<World data={globeData} />
 						</div>
 					</Suspense>
 				</div>
