@@ -33,7 +33,6 @@ const nextConfig: NextConfig = {
 	poweredByHeader: false,
 	reactStrictMode: true,
 	compress: true,
-	swcMinify: true,
 	output: 'standalone',
 	distDir: '.next',
 	productionBrowserSourceMaps: false,

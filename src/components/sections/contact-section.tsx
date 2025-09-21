@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -10,6 +11,9 @@ import {
 	Mail,
 	FileUser,
 	MessageCircleMore,
+	CheckCircle,
+	AlertCircle,
+	Loader2,
 } from 'lucide-react';
 
 const socialLinks = [
@@ -37,7 +41,106 @@ const personalInfo = {
 	address: 'Ho Chi Minh City',
 };
 
+interface FormData {
+	name: string;
+	email: string;
+	subject: string;
+	message: string;
+}
+
+interface FormErrors {
+	name?: string;
+	email?: string;
+	subject?: string;
+	message?: string;
+}
+
 export const ContactSection = () => {
+	const [formData, setFormData] = useState<FormData>({
+		name: '',
+		email: '',
+		subject: '',
+		message: '',
+	});
+
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+	const [statusMessage, setStatusMessage] = useState('');
+	const [errors, setErrors] = useState<FormErrors>({});
+	const [submitTimestamp, setSubmitTimestamp] = useState<string | null>(null);
+
+	const handleChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		const { id, value } = e.target;
+		setFormData((prev) => ({ ...prev, [id]: value }));
+
+		if (errors[id as keyof FormErrors]) {
+			setErrors((prev) => ({ ...prev, [id]: undefined }));
+		}
+	};
+
+	const validateForm = (): boolean => {
+		const newErrors: FormErrors = {};
+
+		if (!formData.name.trim()) newErrors.name = 'Name is required';
+		if (!formData.email.trim()) newErrors.email = 'Email is required';
+		if (!formData.message.trim()) newErrors.message = 'Message is required';
+
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (formData.email && !emailRegex.test(formData.email)) {
+			newErrors.email = 'Please enter a valid email address';
+		}
+
+		setErrors(newErrors);
+		return Object.keys(newErrors).length === 0;
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		setSubmitStatus('idle');
+		setStatusMessage('');
+
+		if (!validateForm()) return;
+
+		setIsSubmitting(true);
+
+		try {
+			const response = await fetch('/api/mail', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			});
+
+			const data = await response.json();
+
+			if (response.ok) {
+				setSubmitStatus('success');
+				setStatusMessage('Your message has been sent successfully!');
+				setSubmitTimestamp(data.timestamp);
+
+				setFormData({
+					name: '',
+					email: '',
+					subject: '',
+					message: '',
+				});
+			} else {
+				setSubmitStatus('error');
+				setStatusMessage(data.error || 'Failed to send message. Please try again.');
+				setSubmitTimestamp(data.timestamp);
+			}
+		} catch (error) {
+			setSubmitStatus('error');
+			setStatusMessage('An unexpected error occurred. Please try again later.');
+			console.error(error);
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
 	return (
 		<section id="contact-section" className="py-20 px-4 max-w-7xl mx-auto" aria-labelledby="contact-title">
 			<motion.div
@@ -65,31 +168,79 @@ export const ContactSection = () => {
 					viewport={{ once: true }}
 				>
 					<SpotlightCard>
-						<form className="space-y-6" aria-labelledby="contact-form-title">
+						<form className="space-y-6" aria-labelledby="contact-form-title" onSubmit={handleSubmit}>
 							<h3 id="contact-form-title" className="sr-only">Contact Form</h3>
+
+							{/* Status messages */}
+							{submitStatus === 'success' && (
+								<div className="bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-md flex items-start gap-3">
+									<CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+									<div>
+										<p className="text-green-800 dark:text-green-300 font-medium">{statusMessage}</p>
+										{submitTimestamp && (
+											<p className="text-green-600 dark:text-green-400 text-sm mt-1">
+												Sent at: {new Date(submitTimestamp).toLocaleString()}
+											</p>
+										)}
+									</div>
+								</div>
+							)}
+
+							{submitStatus === 'error' && (
+								<div className="bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-md flex items-start gap-3">
+									<AlertCircle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
+									<div>
+										<p className="text-red-800 dark:text-red-300 font-medium">{statusMessage}</p>
+										{submitTimestamp && (
+											<p className="text-red-600 dark:text-red-400 text-sm mt-1">
+												At: {new Date(submitTimestamp).toLocaleString()}
+											</p>
+										)}
+									</div>
+								</div>
+							)}
+
 							<div className="grid md:grid-cols-2 gap-4">
 								<div>
 									<label
 										htmlFor="name"
 										className="block text-sm font-medium mb-2"
 									>
-										Name
+										Name <span className="text-red-500">*</span>
 									</label>
-									<Input id="name" placeholder="Your name" aria-required="true" />
+									<Input
+										id="name"
+										placeholder="Your name"
+										aria-required="true"
+										value={formData.name}
+										onChange={handleChange}
+										className={errors.name ? "border-red-500" : ""}
+										aria-invalid={errors.name ? "true" : "false"}
+									/>
+									{errors.name && (
+										<p className="text-red-500 text-sm mt-1" role="alert">{errors.name}</p>
+									)}
 								</div>
 								<div>
 									<label
 										htmlFor="email"
 										className="block text-sm font-medium mb-2"
 									>
-										Email
+										Email <span className="text-red-500">*</span>
 									</label>
 									<Input
 										id="email"
 										type="email"
 										placeholder="your@email.com"
 										aria-required="true"
+										value={formData.email}
+										onChange={handleChange}
+										className={errors.email ? "border-red-500" : ""}
+										aria-invalid={errors.email ? "true" : "false"}
 									/>
+									{errors.email && (
+										<p className="text-red-500 text-sm mt-1" role="alert">{errors.email}</p>
+									)}
 								</div>
 							</div>
 							<div>
@@ -102,25 +253,48 @@ export const ContactSection = () => {
 								<Input
 									id="subject"
 									placeholder="Project inquiry"
-									aria-required="true"
+									value={formData.subject}
+									onChange={handleChange}
+									className={errors.subject ? "border-red-500" : ""}
+									aria-invalid={errors.subject ? "true" : "false"}
 								/>
+								{errors.subject && (
+									<p className="text-red-500 text-sm mt-1" role="alert">{errors.subject}</p>
+								)}
 							</div>
 							<div>
 								<label
 									htmlFor="message"
 									className="block text-sm font-medium mb-2"
 								>
-									Message
+									Message <span className="text-red-500">*</span>
 								</label>
 								<Textarea
 									id="message"
 									placeholder="Tell me about your project..."
 									rows={6}
 									aria-required="true"
+									value={formData.message}
+									onChange={handleChange}
+									className={errors.message ? "border-red-500" : ""}
+									aria-invalid={errors.message ? "true" : "false"}
 								/>
+								{errors.message && (
+									<p className="text-red-500 text-sm mt-1" role="alert">{errors.message}</p>
+								)}
 							</div>
-							<Button type="submit" size="lg" className="w-full">
-								Send Message
+							<Button
+								type="submit"
+								size="lg"
+								className="w-full"
+								disabled={isSubmitting}
+							>
+								{isSubmitting ? (
+									<>
+										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+										Sending...
+									</>
+								) : 'Send Message'}
 							</Button>
 						</form>
 					</SpotlightCard>
