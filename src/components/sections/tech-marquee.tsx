@@ -32,9 +32,9 @@ const technologies = [
 
 export const TechMarquee = () => {
 	return (
-		<section className="py-12 border-y border-border">
+		<section className="py-12 border-y border-border" aria-labelledby="tech-title">
 			<div className="mb-8 text-center">
-				<h3 className="text-lg font-semibold text-primary">
+				<h3 id="tech-title" className="text-lg font-semibold text-primary">
 					Technologies I work with
 				</h3>
 			</div>
@@ -42,6 +42,7 @@ export const TechMarquee = () => {
 				pauseOnHover={true}
 				className="[--duration:50s]"
 				speed="slow"
+				aria-label="Scrolling technology icons"
 			>
 				{technologies.map((tech) => (
 					<TechBadge key={tech} tech={tech} />
@@ -67,6 +68,7 @@ export const TechBadge = ({ tech }: { tech: string }) => {
 					width={20}
 					height={20}
 					className="object-contain"
+					loading="lazy"
 				/>
 				<span className="text-sm font-medium whitespace-nowrap">
 					{tech}

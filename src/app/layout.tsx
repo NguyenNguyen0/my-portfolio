@@ -1,9 +1,11 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
 import { Be_Vietnam_Pro } from 'next/font/google';
+
 
 // Configure Be Vietnam Pro font with weights
 const beVietnamPro = Be_Vietnam_Pro({
@@ -11,6 +13,7 @@ const beVietnamPro = Be_Vietnam_Pro({
 	subsets: ['vietnamese', 'latin'],
 	display: 'swap',
 	variable: '--font-be-vietnam-pro',
+	preload: true,
 });
 
 export const metadata: Metadata = {
@@ -22,9 +25,9 @@ export const metadata: Metadata = {
 	metadataBase: new URL('https://nguyennguyen0.id.vn'),
 	alternates: {
 		languages: {
-			'en-US': '/en',
 			vi: '/',
 		},
+		canonical: 'https://nguyennguyen0.id.vn',
 	},
 	openGraph: {
 		title: 'Portfolio - Nguyễn Trung Nguyên',
@@ -44,6 +47,11 @@ export const metadata: Metadata = {
 		shortcut: '/dev-icon.png',
 		apple: '/dev-icon.png',
 	},
+	robots: {
+		index: true,
+		follow: true,
+		nocache: false,
+	},
 };
 
 export default function RootLayout({
@@ -53,12 +61,37 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="vi" suppressHydrationWarning>
+			<head>
+				<link rel="canonical" href="https://nguyennguyen0.id.vn" />
+				<meta name="robots" content="index, follow, max-image-preview:large" />
+			</head>
 			<body
 				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${beVietnamPro.variable} antialiased`}
 				style={{
 					fontFamily: "'Be Vietnam Pro', 'Geist Sans', sans-serif",
 				}}
 			>
+				<Script
+					id="ld-json"
+					type="application/ld+json"
+					strategy="afterInteractive"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify({
+							'@context': 'https://schema.org',
+							'@type': 'Person',
+							name: 'Nguyễn Trung Nguyên',
+							url: 'https://nguyennguyen0.id.vn',
+							jobTitle: 'Backend Developer',
+							image: 'https://nguyennguyen0.id.vn/avatar.jpg',
+							description: 'Backend Developer, loving API Design, AI and UI/UX.',
+							knowsAbout: ['Backend Development', 'API Design', 'AI', 'UI/UX'],
+							sameAs: [
+								'https://github.com/NguyenNguyen0',
+								'https://www.linkedin.com/in/...',
+							],
+						}),
+					}}
+				/>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="dark"

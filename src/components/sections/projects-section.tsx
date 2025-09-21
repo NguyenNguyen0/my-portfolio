@@ -41,9 +41,12 @@ export const ProjectsSection = () => {
 										src={
 											project.image || '/placeholder.svg'
 										}
-										alt={project.title}
+										alt={`Screenshot of ${project.title} project showing ${project.description.substring(0, 30)}...`}
 										className="w-full h-60 object-cover transition-transform duration-300 group-hover/bento:scale-105"
-										priority
+										priority={i < 2} // Only prioritize first two projects
+										loading={i < 2 ? "eager" : "lazy"}
+										blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIiAvPjwvc3ZnPg=="
+										placeholder="blur"
 									/>
 								) : (
 									<FallBackProjectImage />
@@ -53,11 +56,12 @@ export const ProjectsSection = () => {
 						}
 						icon={
 							<div className="space-y-4">
-								<div className="flex flex-wrap gap-2">
+								<div className="flex flex-wrap gap-2" role="list" aria-label={`Technologies used in ${project.title}`}>
 									{project.techStack.map((tech) => (
 										<span
 											key={tech}
 											className="px-2.5 py-1.5 bg-secondary text-secondary-foreground rounded text-xs"
+											role="listitem"
 										>
 											{tech}
 										</span>
@@ -75,8 +79,9 @@ export const ProjectsSection = () => {
 												href={project.demoUrl}
 												target="_blank"
 												rel="noopener noreferrer"
+												aria-label={`View live demo of ${project.title}`}
 											>
-												<ExternalLink className="w-4 h-4 mr-2" />
+												<ExternalLink className="w-4 h-4 mr-2" aria-hidden="true" />
 												Demo
 											</a>
 										</Button>
@@ -92,8 +97,9 @@ export const ProjectsSection = () => {
 												href={project.githubUrl}
 												target="_blank"
 												rel="noopener noreferrer"
+												aria-label={`View source code for ${project.title} on GitHub`}
 											>
-												<Github className="w-4 h-4 mr-2" />
+												<Github className="w-4 h-4 mr-2" aria-hidden="true" />
 												Code
 											</a>
 										</Button>
@@ -110,7 +116,7 @@ export const ProjectsSection = () => {
 
 const FallBackProjectImage = () => {
 	return (
-		<div className="h-60 w-full bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center">
+		<div className="h-60 w-full bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center" role="img" aria-label="Project placeholder image">
 			<div className="text-center">
 				<div className="w-20 h-20 mx-auto mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
 					<svg
@@ -118,6 +124,7 @@ const FallBackProjectImage = () => {
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
+						aria-hidden="true"
 					>
 						<path
 							strokeLinecap="round"

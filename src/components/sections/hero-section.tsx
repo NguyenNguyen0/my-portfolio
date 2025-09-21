@@ -5,6 +5,10 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 
 export const HeroSection = () => {
+	const scrollToSection = (id: string) => {
+		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+	};
+
 	return (
 		<HeroHighlight className="min-h-screen">
 			<div className="relative w-full h-screen overflow-hidden">
@@ -15,9 +19,11 @@ export const HeroSection = () => {
 					transition={{ duration: 0.8 }}
 					className="relative z-10 text-center max-w-4xl mx-auto px-2 sm:px-4 flex flex-col justify-center h-full pb-8 md:py-0"
 				>
-					<AnimatedGradientText className="text-6xl sm:text-7xl md:text-9xl lg:text-10xl font-bold mb-4 md:mb-6">
-						{`<${'Nguyễn Trung Nguyên'}/>`}
-					</AnimatedGradientText>
+					<h1 aria-label="Nguyễn Trung Nguyên, Full Stack Developer">
+						<AnimatedGradientText className="text-6xl sm:text-7xl md:text-9xl lg:text-10xl font-bold mb-4 md:mb-6">
+							{`<${'Nguyễn Trung Nguyên'}/>`}
+						</AnimatedGradientText>
+					</h1>
 
 					<h2 className="text-xl sm:text-2xl md:text-4xl font-semibold text-foreground mb-4 md:mb-8">
 						A Backend developer{' '}
@@ -34,11 +40,8 @@ export const HeroSection = () => {
 						<Button
 							size="lg"
 							className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6"
-							onClick={() => {
-								document
-									.getElementById('projects-section')
-									?.scrollIntoView({ behavior: 'smooth' });
-							}}
+							onClick={() => scrollToSection('projects-section')}
+							aria-label="View my projects"
 						>
 							View My Work
 						</Button>
@@ -46,11 +49,8 @@ export const HeroSection = () => {
 							variant="outline"
 							size="lg"
 							className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-transparent backdrop-blur-sm"
-							onClick={() => {
-								document
-									.getElementById('contact-section')
-									?.scrollIntoView({ behavior: 'smooth' });
-							}}
+							onClick={() => scrollToSection('contact-section')}
+							aria-label="Contact me"
 						>
 							Contact Me
 						</Button>

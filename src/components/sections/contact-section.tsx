@@ -39,7 +39,7 @@ const personalInfo = {
 
 export const ContactSection = () => {
 	return (
-		<section id="contact-section" className="py-20 px-4 max-w-7xl mx-auto">
+		<section id="contact-section" className="py-20 px-4 max-w-7xl mx-auto" aria-labelledby="contact-title">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export const ContactSection = () => {
 				viewport={{ once: true }}
 				className="text-center mb-16"
 			>
-				<h2 className="text-4xl md:text-5xl font-bold mb-4">
+				<h2 id="contact-title" className="text-4xl md:text-5xl font-bold mb-4">
 					Let&apos;s Work Together
 				</h2>
 				<p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -65,7 +65,8 @@ export const ContactSection = () => {
 					viewport={{ once: true }}
 				>
 					<SpotlightCard>
-						<form className="space-y-6">
+						<form className="space-y-6" aria-labelledby="contact-form-title">
+							<h3 id="contact-form-title" className="sr-only">Contact Form</h3>
 							<div className="grid md:grid-cols-2 gap-4">
 								<div>
 									<label
@@ -74,7 +75,7 @@ export const ContactSection = () => {
 									>
 										Name
 									</label>
-									<Input id="name" placeholder="Your name" />
+									<Input id="name" placeholder="Your name" aria-required="true" />
 								</div>
 								<div>
 									<label
@@ -87,6 +88,7 @@ export const ContactSection = () => {
 										id="email"
 										type="email"
 										placeholder="your@email.com"
+										aria-required="true"
 									/>
 								</div>
 							</div>
@@ -100,6 +102,7 @@ export const ContactSection = () => {
 								<Input
 									id="subject"
 									placeholder="Project inquiry"
+									aria-required="true"
 								/>
 							</div>
 							<div>
@@ -113,6 +116,7 @@ export const ContactSection = () => {
 									id="message"
 									placeholder="Tell me about your project..."
 									rows={6}
+									aria-required="true"
 								/>
 							</div>
 							<Button type="submit" size="lg" className="w-full">
@@ -145,7 +149,7 @@ export const ContactSection = () => {
 						<h4 className="text-lg font-semibold mb-4">
 							Connect with me
 						</h4>
-						<div className="flex gap-4">
+						<div className="flex gap-4" role="list" aria-label="Social links">
 							{socialLinks.map((social, index) => (
 								<motion.a
 									key={social.label}
@@ -159,8 +163,12 @@ export const ContactSection = () => {
 									viewport={{ once: true }}
 									whileHover={{ scale: 1.1 }}
 									className="p-3 bg-secondary rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
+									aria-label={`Connect with me on ${social.label}`}
+									rel="noopener noreferrer"
+									target="_blank"
+									role="listitem"
 								>
-									<social.icon className="w-5 h-5" />
+									<social.icon className="w-5 h-5" aria-hidden="true" />
 									<span className="sr-only">
 										{social.label}
 									</span>
@@ -173,7 +181,9 @@ export const ContactSection = () => {
 						<div>
 							<h4 className="font-semibold">Email</h4>
 							<p className="text-muted-foreground">
-								{personalInfo.email}
+								<a href={`mailto:${personalInfo.email}`} className="hover:underline">
+									{personalInfo.email}
+								</a>
 							</p>
 						</div>
 						<div>

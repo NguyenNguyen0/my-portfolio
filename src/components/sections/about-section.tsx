@@ -36,6 +36,9 @@ export const AboutSection = () => {
 							src="/avatar.jpg"
 							alt="Developer Portrait"
 							className="w-64 h-64 rounded-full object-cover m-auto"
+							priority
+							quality={95}
+							fetchPriority="high"
 						/>
 					</SpotlightCard>
 
