@@ -149,25 +149,25 @@ export function GitHubSection() {
 	}
 
 	return (
-		<section id="github" className="py-20 px-4">
+		<section id="github" className="py-16 sm:py-20 px-4">
 			<div className="max-w-7xl mx-auto">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="text-center mb-16"
+					className="text-center mb-10 sm:mb-16"
 				>
-					<h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+					<h2 className="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
 						GitHub Activity
 					</h2>
-					<p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+					<p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
 						Check out my open source contributions and projects on
 						GitHub
 					</p>
 				</motion.div>
 
 				{user && (
-					<div className="grid lg:grid-cols-3 gap-8">
+					<div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
 						{/* GitHub Profile Card */}
 						<motion.div
 							initial={{ opacity: 0, x: -20 }}
@@ -175,19 +175,19 @@ export function GitHubSection() {
 							viewport={{ once: true }}
 							className="lg:col-span-1"
 						>
-							<Card className="p-6 h-fit">
+							<Card className="p-4 sm:p-6 h-fit">
 								<CardContent className="p-0">
-									<div className="flex items-center gap-4 mb-6">
-										<div className="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-500">
+									<div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+										<div className="mx-auto sm:mx-0 w-20 h-20 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-blue-500">
 											<Image
 												src={user.avatar_url}
 												alt={user.name || user.login}
-												width={64}
-												height={64}
+												width={80}
+												height={80}
 												className="w-full h-full object-cover"
 											/>
 										</div>
-										<div>
+										<div className="text-center sm:text-left">
 											<h3 className="font-bold text-xl">
 												{user.name || user.login}
 											</h3>
@@ -197,11 +197,11 @@ export function GitHubSection() {
 										</div>
 									</div>
 
-									<p className="text-sm text-muted-foreground mb-4">
+									<p className="text-sm text-muted-foreground mb-4 text-center sm:text-left">
 										{user.bio}
 									</p>
 
-									<div className="space-y-2 mb-6">
+									<div className="space-y-2 mb-6 flex flex-col items-center sm:items-start">
 										{user.location && (
 											<div className="flex items-center gap-2 text-sm text-muted-foreground">
 												<MapPin size={14} />
@@ -221,7 +221,7 @@ export function GitHubSection() {
 													}
 													target="_blank"
 													rel="noopener noreferrer"
-													className="hover:text-foreground transition-colors"
+													className="hover:text-foreground transition-colors truncate max-w-[180px]"
 												>
 													{user.blog}
 												</a>
@@ -240,7 +240,7 @@ export function GitHubSection() {
 									</div>
 
 									<div className="grid grid-cols-2 gap-4 text-center">
-										<div>
+										<div className="p-2 rounded-md bg-background/50">
 											<div className="font-bold text-lg">
 												{user.followers}
 											</div>
@@ -248,7 +248,7 @@ export function GitHubSection() {
 												Followers
 											</div>
 										</div>
-										<div>
+										<div className="p-2 rounded-md bg-background/50">
 											<div className="font-bold text-lg">
 												{user.following}
 											</div>
@@ -256,7 +256,7 @@ export function GitHubSection() {
 												Following
 											</div>
 										</div>
-										<div>
+										<div className="p-2 rounded-md bg-background/50">
 											<div className="font-bold text-lg">
 												{user.public_repos}
 											</div>
@@ -264,7 +264,7 @@ export function GitHubSection() {
 												Repositories
 											</div>
 										</div>
-										<div>
+										<div className="p-2 rounded-md bg-background/50">
 											<div className="font-bold text-lg">
 												{totalStars}
 											</div>
@@ -272,7 +272,7 @@ export function GitHubSection() {
 												Stars
 											</div>
 										</div>
-										<div className="col-span-2">
+										<div className="col-span-2 p-2 rounded-md bg-background/50">
 											<div className="font-bold text-lg">
 												{totalForks}
 											</div>
@@ -293,7 +293,7 @@ export function GitHubSection() {
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true }}
 							>
-								<h3 className="text-2xl font-bold mb-6">
+								<h3 className="text-2xl font-bold mb-6 text-center sm:text-left">
 									Top Repositories
 								</h3>
 								<div className="grid md:grid-cols-2 gap-4">
@@ -312,7 +312,7 @@ export function GitHubSection() {
 															href={repo.html_url}
 															target="_blank"
 															rel="noopener noreferrer"
-															className="font-semibold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+															className="font-semibold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer truncate max-w-[80%]"
 														>
 															{repo.name}
 														</a>
@@ -325,7 +325,7 @@ export function GitHubSection() {
 														{repo.description ||
 															'No description available'}
 													</p>
-													<div className="flex items-center justify-between text-sm">
+													<div className="flex flex-wrap items-center justify-between text-sm gap-y-2">
 														{repo.language && (
 															<div className="flex items-center gap-2">
 																<div
@@ -374,39 +374,46 @@ export function GitHubSection() {
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 							>
-								<h3 className="text-2xl font-bold mb-6">
+								<h3 className="text-2xl font-bold mb-6 text-center sm:text-left">
 									Contribution Activity
 								</h3>
-								<Card className="p-6">
+								<Card className="p-4 sm:p-6">
 									<CardContent className="p-0">
-										<div className="overflow-x-auto">
-											<GitHubCalendar
-												username={GITHUB_USERNAME}
-												colorScheme={
-													theme === 'dark'
-														? 'dark'
-														: 'light'
-												}
-												fontSize={12}
-												blockSize={12}
-												blockMargin={2}
-												theme={{
-													light: [
-														'#ebedf0',
-														'#9be9a8',
-														'#40c463',
-														'#30a14e',
-														'#216e39',
-													],
-													dark: [
-														'#161b22',
-														'#0e4429',
-														'#006d32',
-														'#26a641',
-														'#39d353',
-													],
-												}}
-											/>
+										{/* Mobile view with horizontal scroll */}
+										<div className="overflow-x-auto scrollbar-hide pb-2">
+											<div className="min-w-[650px] sm:min-w-0">
+												<GitHubCalendar
+													username={GITHUB_USERNAME}
+													colorScheme={
+														theme === 'dark'
+															? 'dark'
+															: 'light'
+													}
+													fontSize={10}
+													blockSize={8}
+													blockMargin={2}
+													hideColorLegend
+													theme={{
+														light: [
+															'#ebedf0',
+															'#9be9a8',
+															'#40c463',
+															'#30a14e',
+															'#216e39',
+														],
+														dark: [
+															'#161b22',
+															'#0e4429',
+															'#006d32',
+															'#26a641',
+															'#39d353',
+														],
+													}}
+												/>
+											</div>
+											<div className="text-center text-xs text-muted-foreground mt-1 sm:hidden">
+												← Scroll to see full calendar →
+											</div>
 										</div>
 									</CardContent>
 								</Card>
