@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Home, User, Briefcase, Github, Mail } from 'lucide-react';
@@ -17,7 +18,6 @@ export function ResizableNavbar() {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
-	const logo = 'NN';
 	const navItems = [
 		{ name: 'Home', href: '#hero', icon: Home },
 		{ name: 'About', href: '#about', icon: User },
@@ -41,9 +41,15 @@ export function ResizableNavbar() {
 					{/* Logo */}
 					<motion.div
 						whileHover={{ scale: 1.05 }}
-						className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+						className="w-12 h-12 bg-transparent dark:bg-white rounded-full flex items-center justify-center"
 					>
-						{logo}
+						<Image
+							className='w-full h-full object-cover mb-0.5'
+							src={'/dev-icon.png'}
+							height={52}
+							width={52}
+							alt='logo icon'
+						/>
 					</motion.div>
 
 					{/* Desktop Navigation */}
