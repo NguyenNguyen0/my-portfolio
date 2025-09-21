@@ -32,9 +32,15 @@ const technologies = [
 
 export const TechMarquee = () => {
 	return (
-		<section className="py-12 border-y border-border" aria-labelledby="tech-title">
+		<section
+			className="py-12 border-y border-border"
+			aria-labelledby="tech-title"
+		>
 			<div className="mb-8 text-center">
-				<h3 id="tech-title" className="text-lg font-semibold text-primary">
+				<h3
+					id="tech-title"
+					className="text-lg font-semibold text-primary"
+				>
 					Technologies I work with
 				</h3>
 			</div>

@@ -11,9 +11,19 @@ import type { Metadata } from 'next';
 
 // Add static metadata for this page to enhance SEO
 export const metadata: Metadata = {
-  title: 'Nguyễn Trung Nguyên - Backend Developer Portfolio',
-  description: 'Full-stack developer passionate about creating beautiful, functional, and user-centered digital experiences. Specializing in backend development, API design, and UI/UX.',
-  keywords: ['Backend Developer', 'Full Stack', 'Node.js', 'TypeScript', 'React', 'Next.js', 'Portfolio', 'Web Development'],
+	title: 'Nguyễn Trung Nguyên - Backend Developer Portfolio',
+	description:
+		'Full-stack developer passionate about creating beautiful, functional, and user-centered digital experiences. Specializing in backend development, API design, and UI/UX.',
+	keywords: [
+		'Backend Developer',
+		'Full Stack',
+		'Node.js',
+		'TypeScript',
+		'React',
+		'Next.js',
+		'Portfolio',
+		'Web Development',
+	],
 };
 
 export default function Home() {

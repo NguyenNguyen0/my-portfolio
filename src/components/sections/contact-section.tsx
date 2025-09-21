@@ -64,13 +64,15 @@ export const ContactSection = () => {
 	});
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+	const [submitStatus, setSubmitStatus] = useState<
+		'idle' | 'success' | 'error'
+	>('idle');
 	const [statusMessage, setStatusMessage] = useState('');
 	const [errors, setErrors] = useState<FormErrors>({});
 	const [submitTimestamp, setSubmitTimestamp] = useState<string | null>(null);
 
 	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
 	) => {
 		const { id, value } = e.target;
 		setFormData((prev) => ({ ...prev, [id]: value }));
@@ -130,19 +132,27 @@ export const ContactSection = () => {
 				});
 			} else {
 				setSubmitStatus('error');
-				setStatusMessage(data.error || 'Failed to send message. Please try again.');
+				setStatusMessage(
+					data.error || 'Failed to send message. Please try again.',
+				);
 				setSubmitTimestamp(data.timestamp);
 			}
 		} catch (error) {
 			setSubmitStatus('error');
-			setStatusMessage('An unexpected error occurred. Please try again later.');
+			setStatusMessage(
+				'An unexpected error occurred. Please try again later.',
+			);
 			console.error(error);
 		} finally {
 			setIsSubmitting(false);
 		}
 	};
 	return (
-		<section id="contact-section" className="py-20 px-4 max-w-7xl mx-auto" aria-labelledby="contact-title">
+		<section
+			id="contact-section"
+			className="py-20 px-4 max-w-7xl mx-auto"
+			aria-labelledby="contact-title"
+		>
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
@@ -150,7 +160,10 @@ export const ContactSection = () => {
 				viewport={{ once: true }}
 				className="text-center mb-16"
 			>
-				<h2 id="contact-title" className="text-4xl md:text-5xl font-bold mb-4">
+				<h2
+					id="contact-title"
+					className="text-4xl md:text-5xl font-bold mb-4"
+				>
 					Let&apos;s Work Together
 				</h2>
 				<p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -168,18 +181,29 @@ export const ContactSection = () => {
 					viewport={{ once: true }}
 				>
 					<SpotlightCard>
-						<form className="space-y-6" aria-labelledby="contact-form-title" onSubmit={handleSubmit}>
-							<h3 id="contact-form-title" className="sr-only">Contact Form</h3>
+						<form
+							className="space-y-6"
+							aria-labelledby="contact-form-title"
+							onSubmit={handleSubmit}
+						>
+							<h3 id="contact-form-title" className="sr-only">
+								Contact Form
+							</h3>
 
 							{/* Status messages */}
 							{submitStatus === 'success' && (
 								<div className="bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-md flex items-start gap-3">
 									<CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
 									<div>
-										<p className="text-green-800 dark:text-green-300 font-medium">{statusMessage}</p>
+										<p className="text-green-800 dark:text-green-300 font-medium">
+											{statusMessage}
+										</p>
 										{submitTimestamp && (
 											<p className="text-green-600 dark:text-green-400 text-sm mt-1">
-												Sent at: {new Date(submitTimestamp).toLocaleString()}
+												Sent at:{' '}
+												{new Date(
+													submitTimestamp,
+												).toLocaleString()}
 											</p>
 										)}
 									</div>
@@ -190,10 +214,15 @@ export const ContactSection = () => {
 								<div className="bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-md flex items-start gap-3">
 									<AlertCircle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
 									<div>
-										<p className="text-red-800 dark:text-red-300 font-medium">{statusMessage}</p>
+										<p className="text-red-800 dark:text-red-300 font-medium">
+											{statusMessage}
+										</p>
 										{submitTimestamp && (
 											<p className="text-red-600 dark:text-red-400 text-sm mt-1">
-												At: {new Date(submitTimestamp).toLocaleString()}
+												At:{' '}
+												{new Date(
+													submitTimestamp,
+												).toLocaleString()}
 											</p>
 										)}
 									</div>
@@ -206,7 +235,8 @@ export const ContactSection = () => {
 										htmlFor="name"
 										className="block text-sm font-medium mb-2"
 									>
-										Name <span className="text-red-500">*</span>
+										Name{' '}
+										<span className="text-red-500">*</span>
 									</label>
 									<Input
 										id="name"
@@ -214,11 +244,20 @@ export const ContactSection = () => {
 										aria-required="true"
 										value={formData.name}
 										onChange={handleChange}
-										className={errors.name ? "border-red-500" : ""}
-										aria-invalid={errors.name ? "true" : "false"}
+										className={
+											errors.name ? 'border-red-500' : ''
+										}
+										aria-invalid={
+											errors.name ? 'true' : 'false'
+										}
 									/>
 									{errors.name && (
-										<p className="text-red-500 text-sm mt-1" role="alert">{errors.name}</p>
+										<p
+											className="text-red-500 text-sm mt-1"
+											role="alert"
+										>
+											{errors.name}
+										</p>
 									)}
 								</div>
 								<div>
@@ -226,7 +265,8 @@ export const ContactSection = () => {
 										htmlFor="email"
 										className="block text-sm font-medium mb-2"
 									>
-										Email <span className="text-red-500">*</span>
+										Email{' '}
+										<span className="text-red-500">*</span>
 									</label>
 									<Input
 										id="email"
@@ -235,11 +275,20 @@ export const ContactSection = () => {
 										aria-required="true"
 										value={formData.email}
 										onChange={handleChange}
-										className={errors.email ? "border-red-500" : ""}
-										aria-invalid={errors.email ? "true" : "false"}
+										className={
+											errors.email ? 'border-red-500' : ''
+										}
+										aria-invalid={
+											errors.email ? 'true' : 'false'
+										}
 									/>
 									{errors.email && (
-										<p className="text-red-500 text-sm mt-1" role="alert">{errors.email}</p>
+										<p
+											className="text-red-500 text-sm mt-1"
+											role="alert"
+										>
+											{errors.email}
+										</p>
 									)}
 								</div>
 							</div>
@@ -255,11 +304,20 @@ export const ContactSection = () => {
 									placeholder="Project inquiry"
 									value={formData.subject}
 									onChange={handleChange}
-									className={errors.subject ? "border-red-500" : ""}
-									aria-invalid={errors.subject ? "true" : "false"}
+									className={
+										errors.subject ? 'border-red-500' : ''
+									}
+									aria-invalid={
+										errors.subject ? 'true' : 'false'
+									}
 								/>
 								{errors.subject && (
-									<p className="text-red-500 text-sm mt-1" role="alert">{errors.subject}</p>
+									<p
+										className="text-red-500 text-sm mt-1"
+										role="alert"
+									>
+										{errors.subject}
+									</p>
 								)}
 							</div>
 							<div>
@@ -267,7 +325,8 @@ export const ContactSection = () => {
 									htmlFor="message"
 									className="block text-sm font-medium mb-2"
 								>
-									Message <span className="text-red-500">*</span>
+									Message{' '}
+									<span className="text-red-500">*</span>
 								</label>
 								<Textarea
 									id="message"
@@ -276,11 +335,20 @@ export const ContactSection = () => {
 									aria-required="true"
 									value={formData.message}
 									onChange={handleChange}
-									className={errors.message ? "border-red-500" : ""}
-									aria-invalid={errors.message ? "true" : "false"}
+									className={
+										errors.message ? 'border-red-500' : ''
+									}
+									aria-invalid={
+										errors.message ? 'true' : 'false'
+									}
 								/>
 								{errors.message && (
-									<p className="text-red-500 text-sm mt-1" role="alert">{errors.message}</p>
+									<p
+										className="text-red-500 text-sm mt-1"
+										role="alert"
+									>
+										{errors.message}
+									</p>
 								)}
 							</div>
 							<Button
@@ -294,7 +362,9 @@ export const ContactSection = () => {
 										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 										Sending...
 									</>
-								) : 'Send Message'}
+								) : (
+									'Send Message'
+								)}
 							</Button>
 						</form>
 					</SpotlightCard>
@@ -323,7 +393,11 @@ export const ContactSection = () => {
 						<h4 className="text-lg font-semibold mb-4">
 							Connect with me
 						</h4>
-						<div className="flex gap-4" role="list" aria-label="Social links">
+						<div
+							className="flex gap-4"
+							role="list"
+							aria-label="Social links"
+						>
 							{socialLinks.map((social, index) => (
 								<motion.a
 									key={social.label}
@@ -342,7 +416,10 @@ export const ContactSection = () => {
 									target="_blank"
 									role="listitem"
 								>
-									<social.icon className="w-5 h-5" aria-hidden="true" />
+									<social.icon
+										className="w-5 h-5"
+										aria-hidden="true"
+									/>
 									<span className="sr-only">
 										{social.label}
 									</span>
@@ -355,7 +432,10 @@ export const ContactSection = () => {
 						<div>
 							<h4 className="font-semibold">Email</h4>
 							<p className="text-muted-foreground">
-								<a href={`mailto:${personalInfo.email}`} className="hover:underline">
+								<a
+									href={`mailto:${personalInfo.email}`}
+									className="hover:underline"
+								>
 									{personalInfo.email}
 								</a>
 							</p>

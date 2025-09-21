@@ -44,11 +44,11 @@ export function ResizableNavbar() {
 						className="w-12 h-12 bg-transparent dark:bg-white rounded-full flex items-center justify-center"
 					>
 						<Image
-							className='w-full h-full object-cover mb-0.5'
+							className="w-full h-full object-cover mb-0.5"
 							src={'/dev-icon.png'}
 							height={52}
 							width={52}
-							alt='logo icon'
+							alt="logo icon"
 						/>
 					</motion.div>
 

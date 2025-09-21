@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 
 		// Format timestamp for better readability
 		const formattedTime = new Date().toLocaleString('vi-VN', {
-			timeZone: 'Asia/Ho_Chi_Minh'
+			timeZone: 'Asia/Ho_Chi_Minh',
 		});
 
 		// Include subject if provided
@@ -57,12 +57,15 @@ export async function POST(req: Request) {
 
 		return NextResponse.json({
 			success: true,
-			timestamp: new Date().toISOString()
+			timestamp: new Date().toISOString(),
 		});
 	} catch (error) {
 		console.error(error);
 		return NextResponse.json(
-			{ error: 'Failed to send email', timestamp: new Date().toISOString() },
+			{
+				error: 'Failed to send email',
+				timestamp: new Date().toISOString(),
+			},
 			{ status: 500 },
 		);
 	}

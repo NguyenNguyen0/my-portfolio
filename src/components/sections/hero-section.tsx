@@ -3,6 +3,7 @@ import { HeroHighlight, Highlight } from '@/components/ui/hero-highlight';
 import { AnimatedGradientText } from '@/components/ui/animated-gradient-text';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { Eye, MessageSquare, ArrowRight } from 'lucide-react';
 
 export const HeroSection = () => {
 	const scrollToSection = (id: string) => {
@@ -37,23 +38,38 @@ export const HeroSection = () => {
 						experiences.
 					</p>
 					<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-						<Button
-							size="lg"
-							className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6"
-							onClick={() => scrollToSection('projects-section')}
-							aria-label="View my projects"
+						<motion.div
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+							transition={{ type: "spring", stiffness: 400, damping: 17 }}
 						>
-							View My Work
-						</Button>
-						<Button
-							variant="outline"
-							size="lg"
-							className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-transparent backdrop-blur-sm"
-							onClick={() => scrollToSection('contact-section')}
-							aria-label="Contact me"
+							<Button
+								size="lg"
+								className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 group"
+								onClick={() => scrollToSection('projects-section')}
+								aria-label="View my projects"
+							>
+								<Eye className="mr-2 h-5 w-5 group-hover:animate-pulse" />
+								View My Work
+								<ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1" />
+							</Button>
+						</motion.div>
+						<motion.div
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+							transition={{ type: "spring", stiffness: 400, damping: 17 }}
 						>
-							Contact Me
-						</Button>
+							<Button
+								variant="outline"
+								size="lg"
+								className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-transparent backdrop-blur-sm group"
+								onClick={() => scrollToSection('contact-section')}
+								aria-label="Contact me"
+							>
+								<MessageSquare className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+								Contact Me
+							</Button>
+						</motion.div>
 					</div>
 				</motion.div>
 			</div>

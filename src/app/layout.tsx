@@ -6,7 +6,6 @@ import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
 import { Be_Vietnam_Pro } from 'next/font/google';
 
-
 // Configure Be Vietnam Pro font with weights
 const beVietnamPro = Be_Vietnam_Pro({
 	weight: ['400', '500', '600', '700'],
@@ -63,7 +62,10 @@ export default function RootLayout({
 		<html lang="vi" suppressHydrationWarning>
 			<head>
 				<link rel="canonical" href="https://nguyennguyen0.id.vn" />
-				<meta name="robots" content="index, follow, max-image-preview:large" />
+				<meta
+					name="robots"
+					content="index, follow, max-image-preview:large"
+				/>
 			</head>
 			<body
 				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${beVietnamPro.variable} antialiased`}
@@ -83,8 +85,14 @@ export default function RootLayout({
 							url: 'https://nguyennguyen0.id.vn',
 							jobTitle: 'Backend Developer',
 							image: 'https://nguyennguyen0.id.vn/avatar.jpg',
-							description: 'Backend Developer, loving API Design, AI and UI/UX.',
-							knowsAbout: ['Backend Development', 'API Design', 'AI', 'UI/UX'],
+							description:
+								'Backend Developer, loving API Design, AI and UI/UX.',
+							knowsAbout: [
+								'Backend Development',
+								'API Design',
+								'AI',
+								'UI/UX',
+							],
 							sameAs: [
 								'https://github.com/NguyenNguyen0',
 								'https://www.linkedin.com/in/...',
