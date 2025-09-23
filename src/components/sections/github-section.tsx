@@ -364,6 +364,7 @@ export function GitHubSection() {
 							</motion.div>
 
 							{/* GitHub Contribution Calendar */}
+							{/* TODO: fix mobile responsive for this section */}
 							<motion.div
 								initial={{ opacity: 0, y: 20 }}
 								whileInView={{ opacity: 1, y: 0 }}
@@ -373,40 +374,35 @@ export function GitHubSection() {
 									Contribution Activity
 								</h3>
 								<Card className="p-4 sm:p-6">
-									<CardContent className="p-0">
-										{/* Mobile view with horizontal scroll */}
-										<div className="w-full overflow-x-auto pb-2 scrollbar-custom">
-											<div>
-												<GitHubCalendar
-													username={GITHUB_USERNAME}
-													colorScheme={
-														theme === 'dark'
-															? 'dark'
-															: 'light'
-													}
-													fontSize={10}
-													blockSize={8}
-													blockMargin={2}
-													hideColorLegend
-													theme={{
-														light: [
-															'#ebedf0',
-															'#9be9a8',
-															'#40c463',
-															'#30a14e',
-															'#216e39',
-														],
-														dark: [
-															'#161b22',
-															'#0e4429',
-															'#006d32',
-															'#26a641',
-															'#39d353',
-														],
-													}}
-												/>
-											</div>
-										</div>
+									<CardContent className="p-2">
+										<GitHubCalendar
+											username={GITHUB_USERNAME}
+											colorScheme={
+												theme === 'dark'
+													? 'dark'
+													: 'light'
+											}
+											fontSize={10}
+											blockSize={8}
+											blockMargin={2}
+											hideColorLegend
+											theme={{
+												light: [
+													'#ebedf0',
+													'#9be9a8',
+													'#40c463',
+													'#30a14e',
+													'#216e39',
+												],
+												dark: [
+													'#161b22',
+													'#0e4429',
+													'#006d32',
+													'#26a641',
+													'#39d353',
+												],
+											}}
+										/>
 									</CardContent>
 								</Card>
 							</motion.div>
