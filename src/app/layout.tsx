@@ -5,8 +5,8 @@ import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
 import { Be_Vietnam_Pro } from 'next/font/google';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
-// Configure Be Vietnam Pro font with weights
 const beVietnamPro = Be_Vietnam_Pro({
 	weight: ['400', '500', '600', '700'],
 	subsets: ['vietnamese', 'latin'],
@@ -95,7 +95,7 @@ export default function RootLayout({
 							],
 							sameAs: [
 								'https://github.com/NguyenNguyen0',
-								'https://www.linkedin.com/in/...',
+								'https://www.linkedin.com/in/nguyennguyen0/',
 							],
 						}),
 					}}
@@ -107,6 +107,7 @@ export default function RootLayout({
 					disableTransitionOnChange
 				>
 					{children}
+					<SpeedInsights />
 				</ThemeProvider>
 			</body>
 		</html>

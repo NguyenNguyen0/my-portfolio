@@ -39,7 +39,6 @@ interface GitHubRepo {
 	html_url: string;
 }
 
-// Language colors map
 const languageColors: { [key: string]: string } = {
 	TypeScript: '#3178c6',
 	JavaScript: '#f1e05a',
@@ -76,21 +75,18 @@ export function GitHubSection() {
 		try {
 			const octokit = new Octokit();
 
-			// Fetch user data
 			const userResponse = await octokit.rest.users.getByUsername({
 				username: GITHUB_USERNAME,
 			});
 
 			setUser(userResponse.data as GitHubUser);
 
-			// Fetch repositories
 			const reposResponse = await octokit.rest.repos.listForUser({
 				username: GITHUB_USERNAME,
 				sort: 'updated',
 				per_page: 100,
 			});
 
-			// Calculate total stars and forks
 			let stars = 0;
 			let forks = 0;
 
@@ -102,7 +98,6 @@ export function GitHubSection() {
 			setTotalStars(stars);
 			setTotalForks(forks);
 
-			// Get top repos by stars
 			const sortedRepos = [...reposResponse.data]
 				.sort(
 					(a, b) =>
@@ -380,8 +375,8 @@ export function GitHubSection() {
 								<Card className="p-4 sm:p-6">
 									<CardContent className="p-0">
 										{/* Mobile view with horizontal scroll */}
-										<div className="overflow-x-auto scrollbar-hide pb-2">
-											<div className="min-w-[650px] sm:min-w-0">
+										<div className="w-full overflow-x-auto pb-2 scrollbar-custom">
+											<div>
 												<GitHubCalendar
 													username={GITHUB_USERNAME}
 													colorScheme={
@@ -410,9 +405,6 @@ export function GitHubSection() {
 														],
 													}}
 												/>
-											</div>
-											<div className="text-center text-xs text-muted-foreground mt-1 sm:hidden">
-												← Scroll to see full calendar →
 											</div>
 										</div>
 									</CardContent>
