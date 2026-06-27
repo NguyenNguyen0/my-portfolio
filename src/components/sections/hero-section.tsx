@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, type Transition } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
+import { PacManRunner } from '@/components/ui/pac-man-runner';
 
 const fadeUp = (delay = 0) => ({
 	initial: { opacity: 0, y: 24 },
@@ -78,10 +79,19 @@ export const HeroSection = () => {
 				</button>
 			</motion.div>
 
-			{/* Scroll indicator */}
+			{/* Pac-Man runner strip */}
 			<motion.div
 				{...(shouldReduce ? {} : fadeUp(0.6))}
-				className="absolute bottom-8 left-1/2 -translate-x-1/2"
+				className="absolute bottom-20 left-4 right-4"
+				aria-hidden="true"
+			>
+				<PacManRunner />
+			</motion.div>
+
+			{/* Scroll indicator */}
+			<motion.div
+				{...(shouldReduce ? {} : fadeUp(0.7))}
+				className="absolute bottom-6 left-1/2 -translate-x-1/2"
 				aria-hidden="true"
 			>
 				<motion.div
