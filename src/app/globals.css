@@ -195,6 +195,58 @@
   50%       { opacity: 1;   }
 }
 
+/* Arcade READY blink — dot + text together, step-end = hard cut like real arcade */
+@keyframes ready-blink {
+  0%, 49% { opacity: 1; }
+  50%, 99% { opacity: 0; }
+  100%     { opacity: 1; }
+}
+.animate-ready-blink {
+  animation: ready-blink 0.9s step-end infinite;
+}
+
+/* ── CRT effects ── */
+
+/* Sweep bar — bright horizontal line scrolling top→bottom */
+@keyframes crt-sweep {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(2000%); }
+}
+
+/* Phosphor flicker — very subtle brightness pulse */
+@keyframes crt-flicker {
+  0%, 87%, 89%, 100% { opacity: 1;    }
+  88%                 { opacity: 0.92; }
+}
+
+/* Glitch displacement band — overlay layer */
+@keyframes crt-band-glitch {
+  /* Mostly invisible — clip hides the overlay entirely */
+  0%,  78%, 100%  { clip-path: inset(0 0 100% 0); transform: translateX(0); filter: none; }
+  /* First band: upper-mid, shift left + color shift */
+  79%  { clip-path: inset(22% 0 58% 0); transform: translateX(-7px);
+          filter: hue-rotate(-30deg) saturate(3) brightness(1.25); }
+  /* Still shifted, now right */
+  80%  { clip-path: inset(22% 0 58% 0); transform: translateX(6px);
+          filter: hue-rotate(20deg) saturate(2.5); }
+  /* Second band: lower */
+  81%  { clip-path: inset(62% 0 18% 0); transform: translateX(-4px);
+          filter: hue-rotate(-10deg) brightness(1.1); }
+  /* Tiny blip */
+  82%  { clip-path: inset(10% 0 85% 0); transform: translateX(3px); filter: none; }
+  /* Gone */
+  83%  { clip-path: inset(0 0 100% 0); transform: translateX(0); filter: none; }
+}
+
+/* Whole-container shake during glitch */
+@keyframes crt-container-glitch {
+  0%,  78%, 84%, 100% { transform: translateX(0) skewX(0deg); filter: none; }
+  79%  { transform: translateX(-2px) skewX(-0.4deg); filter: brightness(1.1); }
+  80%  { transform: translateX(2px)  skewX(0.3deg);  }
+  81%  { transform: translateX(-1px) skewX(0deg);    filter: none; }
+  82%  { transform: translateX(0);                   }
+}
+
 /* ─────────────────────────────────────────
    Animation classes
    ───────────────────────────────────────── */
@@ -276,7 +328,10 @@
   .animate-pixel-blink,
   .animate-marquee,
   .animate-marquee-vertical,
-  .animate-node-pulse {
+  .animate-node-pulse,
+  .crt-sweep,
+  .crt-flicker,
+  .crt-glitch {
     animation: none !important;
   }
 
