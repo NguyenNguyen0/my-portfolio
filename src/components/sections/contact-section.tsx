@@ -2,14 +2,22 @@
 
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { useState } from 'react';
-import { Github, Linkedin, Mail, FileUser, MessageCircleMore, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Github, Linkedin, MessageCircleMore, CheckCircle, AlertCircle, Loader2, Copy, Check } from 'lucide-react';
+
+const EMAIL = 'trungnguyenwork123@gmail.com';
+
+// GitLab SVG — lucide has no GitLab icon
+const GitLabIcon = () => (
+	<svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
+		<path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.49a.42.42 0 0 1 .11-.18.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z"/>
+	</svg>
+);
 
 const socialLinks = [
 	{ icon: Github, href: 'https://github.com/NguyenNguyen0', label: 'GitHub' },
+	{ icon: GitLabIcon, href: 'https://gitlab.com/nguyennguyen0', label: 'GitLab' },
 	{ icon: Linkedin, href: 'https://www.linkedin.com/in/nguyennguyen0/', label: 'LinkedIn' },
-	{ icon: FileUser, href: 'https://www.topcv.vn/xem-cv/VA8HAANcCA5UDlcKVwwFBFQDCwMODgdSCABSAQ9a6b', label: 'TopCV' },
 	{ icon: MessageCircleMore, href: 'https://zalo.me/0394757329', label: 'Zalo' },
-	{ icon: Mail, href: 'mailto:trungnguyenwork123@gmail.com', label: 'Email' },
 ];
 
 const fadeUp: Variants = {
@@ -37,6 +45,13 @@ export const ContactSection = () => {
 	const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 	const [statusMessage, setStatusMessage] = useState('');
 	const [errors, setErrors] = useState<FormErrors>({});
+	const [copied, setCopied] = useState(false);
+
+	const copyEmail = async () => {
+		await navigator.clipboard.writeText(EMAIL);
+		setCopied(true);
+		setTimeout(() => setCopied(false), 2000);
+	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { id, value } = e.target;
@@ -216,13 +231,20 @@ export const ContactSection = () => {
 
 					<div className="pixel-card p-6 space-y-4">
 						<div>
-							<p className="font-pixel text-[9px] text-muted-foreground tracking-widest mb-1">EMAIL</p>
-							<a
-								href="mailto:trungnguyenwork123@gmail.com"
-								className="font-mono-custom text-sm text-foreground hover:text-primary transition-colors"
-							>
-								trungnguyenwork123@gmail.com
-							</a>
+							<p className="font-pixel text-[9px] text-muted-foreground tracking-widest mb-2">EMAIL</p>
+							<div className="flex items-center gap-3">
+								<span className="font-mono-custom text-sm text-foreground break-all">{EMAIL}</span>
+								<button
+									onClick={copyEmail}
+									aria-label={copied ? 'Email copied' : 'Copy email address'}
+									className="flex-shrink-0 p-1.5 border border-dotted border-border text-muted-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
+								>
+									{copied
+										? <Check className="w-3.5 h-3.5 text-success" />
+										: <Copy className="w-3.5 h-3.5" />
+									}
+								</button>
+							</div>
 						</div>
 						<div className="border-t border-dotted border-border" />
 						<div>
