@@ -1,78 +1,96 @@
 'use client';
-import { HeroHighlight, Highlight } from '@/components/ui/hero-highlight';
-import { AnimatedGradientText } from '@/components/ui/animated-gradient-text';
-import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
-import { Eye, MessageSquare, ArrowRight } from 'lucide-react';
+
+import { motion, useReducedMotion, type Transition } from 'framer-motion';
+import { ArrowDown } from 'lucide-react';
+
+const fadeUp = (delay = 0) => ({
+	initial: { opacity: 0, y: 24 },
+	animate: { opacity: 1, y: 0 },
+	transition: { duration: 0.5, ease: 'easeOut' as const, delay } satisfies Transition,
+});
 
 export const HeroSection = () => {
+	const shouldReduce = useReducedMotion();
+
 	const scrollToSection = (id: string) => {
 		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 	};
 
 	return (
-		<HeroHighlight className="min-h-screen">
-			<div className="relative w-full h-screen overflow-hidden">
-				{/* Content overlay */}
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8 }}
-					className="relative z-10 text-center max-w-4xl mx-auto px-2 sm:px-4 flex flex-col justify-center h-full pb-8 md:py-0"
-				>
-					<h1 aria-label="Nguyễn Trung Nguyên, Full Stack Developer">
-						<AnimatedGradientText className="text-6xl sm:text-7xl md:text-9xl lg:text-10xl font-bold mb-4 md:mb-6">
-							{`<${'Nguyễn Trung Nguyên'}/>`}
-						</AnimatedGradientText>
-					</h1>
+		<section
+			className="relative min-h-screen flex flex-col items-center justify-center px-4 text-center overflow-hidden"
+			aria-label="Hero"
+		>
+			{/* INSERT COIN label */}
+			<motion.p
+				{...(shouldReduce ? {} : fadeUp(0))}
+				className="font-pixel text-[10px] sm:text-xs text-primary mb-6 sm:mb-8 animate-pixel-blink tracking-widest"
+				aria-label="Insert coin to start"
+			>
+				INSERT COIN ▶
+			</motion.p>
 
-					<h2 className="text-xl sm:text-2xl md:text-4xl font-semibold text-foreground mb-4 md:mb-8">
-						A Backend developer{' '}
-						<Highlight className="text-foreground">
-							with a flair of Frontend
-						</Highlight>{' '}
-					</h2>
-					<p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-12 max-w-2xl mx-auto leading-relaxed px-2 sm:px-4">
-						Full-stack developer passionate about creating
-						beautiful, functional, and user-centered digital
-						experiences.
-					</p>
-					<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-						<motion.div
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
-							transition={{ type: "spring", stiffness: 400, damping: 17 }}
-						>
-							<Button
-								size="lg"
-								className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 group"
-								onClick={() => scrollToSection('projects-section')}
-								aria-label="View my projects"
-							>
-								<Eye className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-								View My Work
-								<ArrowRight className="ml-2 h-5 w-5 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1" />
-							</Button>
-						</motion.div>
-						<motion.div
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
-							transition={{ type: "spring", stiffness: 400, damping: 17 }}
-						>
-							<Button
-								variant="outline"
-								size="lg"
-								className="text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-transparent backdrop-blur-sm group"
-								onClick={() => scrollToSection('contact-section')}
-								aria-label="Contact me"
-							>
-								<MessageSquare className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-								Contact Me
-							</Button>
-						</motion.div>
-					</div>
+			{/* Name — Be Vietnam Pro, NOT Press Start 2P (no Vietnamese glyph support) */}
+			<motion.h1
+				{...(shouldReduce ? {} : fadeUp(0.15))}
+				className="font-[family-name:var(--font-be-vietnam-pro)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight"
+				aria-label="Nguyễn Trung Nguyên"
+			>
+				Nguyễn Trung Nguyên
+			</motion.h1>
+
+			{/* Role */}
+			<motion.p
+				{...(shouldReduce ? {} : fadeUp(0.25))}
+				className="font-pixel text-[10px] sm:text-xs md:text-sm text-muted-foreground mb-4 sm:mb-6 tracking-wide leading-relaxed"
+			>
+				BACKEND DEVELOPER
+			</motion.p>
+
+			{/* Description */}
+			<motion.p
+				{...(shouldReduce ? {} : fadeUp(0.35))}
+				className="font-mono-custom text-sm sm:text-base text-muted-foreground mb-8 sm:mb-12 max-w-xl leading-relaxed px-2"
+			>
+				Xây dựng APIs mạnh mẽ, giao diện đẹp,<br className="hidden sm:block" />
+				và những thứ hoạt động tốt từ backend đến frontend.
+			</motion.p>
+
+			{/* CTAs */}
+			<motion.div
+				{...(shouldReduce ? {} : fadeUp(0.45))}
+				className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center"
+			>
+				<button
+					onClick={() => scrollToSection('projects-section')}
+					className="font-pixel text-[10px] sm:text-xs px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground border-2 border-primary transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[0_4px_0_0_color-mix(in_oklch,var(--primary)_40%,transparent)] focus-visible:outline-2 focus-visible:outline-dotted focus-visible:outline-ring focus-visible:outline-offset-2 active:translate-y-0 leading-relaxed"
+					aria-label="View my projects"
+				>
+					▶ VIEW WORK
+				</button>
+
+				<button
+					onClick={() => scrollToSection('contact-section')}
+					className="font-pixel text-[10px] sm:text-xs px-6 sm:px-8 py-3 sm:py-4 bg-transparent text-foreground border-2 border-dotted border-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-dotted focus-visible:outline-ring focus-visible:outline-offset-2 leading-relaxed"
+					aria-label="Contact me"
+				>
+					· CONTACT ·
+				</button>
+			</motion.div>
+
+			{/* Scroll indicator */}
+			<motion.div
+				{...(shouldReduce ? {} : fadeUp(0.6))}
+				className="absolute bottom-8 left-1/2 -translate-x-1/2"
+				aria-hidden="true"
+			>
+				<motion.div
+					animate={shouldReduce ? {} : { y: [0, 6, 0] }}
+					transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+				>
+					<ArrowDown className="w-5 h-5 text-muted-foreground" />
 				</motion.div>
-			</div>
-		</HeroHighlight>
+			</motion.div>
+		</section>
 	);
 };

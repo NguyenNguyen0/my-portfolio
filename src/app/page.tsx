@@ -1,55 +1,60 @@
 import { AboutSection } from '@/components/sections/about-section';
 import { ContactSection } from '@/components/sections/contact-section';
-import { GitHubSection } from '@/components/sections/github-section';
+import { Footer } from '@/components/sections/footer';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ProjectsSection } from '@/components/sections/projects-section';
+import { StorySection } from '@/components/sections/story-section';
 import { TechMarquee } from '@/components/sections/tech-marquee';
 import { GridBackground } from '@/components/ui/grid-background';
 import { ResizableNavbar } from '@/components/ui/resizable-navbar';
-import { Footer } from '@/components/sections/footer';
+import { PelletDivider } from '@/components/ui/pellet-divider';
 import type { Metadata } from 'next';
 
-// Add static metadata for this page to enhance SEO
 export const metadata: Metadata = {
-	title: 'Nguyễn Trung Nguyên - Backend Developer Portfolio',
+	title: 'Nguyễn Trung Nguyên — Backend Developer Portfolio',
 	description:
-		'Full-stack developer passionate about creating beautiful, functional, and user-centered digital experiences. Specializing in backend development, API design, and UI/UX.',
+		'Backend Developer specializing in API Design, Node.js, FastAPI, and modern full-stack development. Based in Ho Chi Minh City.',
 	keywords: [
-		'Backend Developer',
-		'Full Stack',
-		'Node.js',
-		'TypeScript',
-		'React',
-		'Next.js',
-		'Portfolio',
-		'Web Development',
+		'Backend Developer', 'Full Stack', 'Node.js', 'TypeScript',
+		'React', 'Next.js', 'FastAPI', 'Portfolio', 'Ho Chi Minh City',
 	],
 };
 
 export default function Home() {
 	return (
-		<GridBackground className="min-h-screen">
+		<GridBackground>
 			<ResizableNavbar />
-			<main className="pt-16 px-4 md:px-8">
-				<div id="hero" role="banner">
+
+			<main className="pt-16">
+				<div id="hero">
 					<HeroSection />
 				</div>
 
+				<PelletDivider />
+
 				<TechMarquee />
 
-				<div id="about" className="mt-16">
+				<PelletDivider />
+
+				<div id="about">
 					<AboutSection />
 				</div>
 
-				<div id="projects" className="mt-16">
+				<PelletDivider />
+
+				<div id="story">
+					<StorySection />
+				</div>
+
+				<PelletDivider />
+
+				<div id="projects-section">
 					<ProjectsSection />
 				</div>
 
-				<div id="github" className="mt-16">
-					<GitHubSection />
-				</div>
+				<PelletDivider />
 
-				<div id="contact" className="mt-16">
+				<div id="contact-section">
 					<ContactSection />
 				</div>
 

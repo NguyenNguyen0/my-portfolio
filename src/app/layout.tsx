@@ -4,7 +4,7 @@ import Script from 'next/script';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
-import { Be_Vietnam_Pro } from 'next/font/google';
+import { Be_Vietnam_Pro, Press_Start_2P, Space_Mono } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -13,6 +13,22 @@ const beVietnamPro = Be_Vietnam_Pro({
 	display: 'swap',
 	variable: '--font-be-vietnam-pro',
 	preload: true,
+});
+
+const pressStart2P = Press_Start_2P({
+	weight: ['400'],
+	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-press-start',
+	preload: false,
+});
+
+const spaceMono = Space_Mono({
+	weight: ['400', '700'],
+	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-space-mono',
+	preload: false,
 });
 
 export const metadata: Metadata = {
@@ -68,9 +84,9 @@ export default function RootLayout({
 				/>
 			</head>
 			<body
-				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${beVietnamPro.variable} antialiased`}
+				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${beVietnamPro.variable} ${pressStart2P.variable} ${spaceMono.variable} antialiased`}
 				style={{
-					fontFamily: "'Be Vietnam Pro', 'Geist Sans', sans-serif",
+					fontFamily: "'Be Vietnam Pro', 'Space Mono', 'Geist Sans', sans-serif",
 				}}
 			>
 				<Script
