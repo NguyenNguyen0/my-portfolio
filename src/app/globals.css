@@ -102,6 +102,10 @@
    Base styles
    ───────────────────────────────────────── */
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     @apply border-border outline-ring/50;
     box-sizing: border-box;
@@ -113,6 +117,7 @@
     font-feature-settings: "ss01", "ss02", "case", "liga", "kern";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.25s ease, color 0.15s ease;
   }
 
   :lang(vi) {

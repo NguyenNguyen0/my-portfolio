@@ -14,6 +14,15 @@ const navItems = [
 	{ name: 'CONTACT', href: '#contact-section' },
 ];
 
+function scrollTo(href: string) {
+	const id = href.replace('#', '');
+	const el = document.getElementById(id);
+	if (!el) return;
+	const offset = 64; // navbar height
+	const top = el.getBoundingClientRect().top + window.scrollY - offset;
+	window.scrollTo({ top, behavior: 'smooth' });
+}
+
 export function ResizableNavbar() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
@@ -38,13 +47,13 @@ export function ResizableNavbar() {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex justify-between items-center h-16">
 					{/* Logo */}
-					<a href="#hero" aria-label="Back to top" className="flex-shrink-0">
-						<div className="w-10 h-10 bg-transparent dark:bg-white flex items-center justify-center overflow-hidden">
+					<a href="#hero" aria-label="Back to top" className="flex-shrink-0 group">
+						<div className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-primary transition-all duration-150 group-hover:shadow-[0_0_0_3px_color-mix(in_oklch,var(--primary)_25%,transparent)]">
 							<Image
-								src="/dev-icon.png"
-								height={40}
-								width={40}
-								alt="NguyenNguyen0 logo"
+								src="/avatar.jpg"
+								height={36}
+								width={36}
+								alt="Nguyễn Trung Nguyên"
 								className="w-full h-full object-cover"
 							/>
 						</div>
@@ -56,6 +65,7 @@ export function ResizableNavbar() {
 							<a
 								key={item.name}
 								href={item.href}
+								onClick={(e) => { e.preventDefault(); scrollTo(item.href); }}
 								className="font-pixel text-[9px] text-muted-foreground tracking-widest transition-colors duration-150 hover:text-primary focus-visible:text-primary focus-visible:outline-none focus-visible:underline"
 							>
 								{item.name}
@@ -94,7 +104,7 @@ export function ResizableNavbar() {
 								<a
 									key={item.name}
 									href={item.href}
-									onClick={() => setIsOpen(false)}
+									onClick={(e) => { e.preventDefault(); setIsOpen(false); scrollTo(item.href); }}
 									className="flex items-center gap-3 font-pixel text-[10px] text-muted-foreground tracking-widest hover:text-primary transition-colors"
 								>
 									<span className="text-primary text-[8px]">▶</span>
