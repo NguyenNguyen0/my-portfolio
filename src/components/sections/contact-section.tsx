@@ -4,7 +4,7 @@ import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { useState } from 'react';
 import { Github, Linkedin, MessageCircleMore, CheckCircle, AlertCircle, Loader2, Copy, Check } from 'lucide-react';
 
-const EMAIL = 'trungnguyenwork123@gmail.com';
+const EMAIL = 'nguyentrungnguyen.dev@gmail.com';
 
 // GitLab SVG — lucide has no GitLab icon
 const GitLabIcon = () => (

@@ -27,18 +27,18 @@ interface ConstellationNode {
 }
 
 const NODES: ConstellationNode[] = [
-	{ id: 'linux',     label: 'Linux',       icon: '/icons/linux.svg',        cat: 'devops',   x: 18, y: 14 },
-	{ id: 'mcp',       label: 'MCP',         icon: null,                       cat: 'ai',       x: 82, y: 10 },
-	{ id: 'langgraph', label: 'LangGraph',   icon: null,                       cat: 'ai',       x: 88, y: 36 },
-	{ id: 'gemini',    label: 'Gemini',      icon: null,                       cat: 'ai',       x: 76, y: 65 },
-	{ id: 'aws',       label: 'AWS',         icon: null,                       cat: 'devops',   x: 54, y: 84 },
-	{ id: 'docker',    label: 'Docker',      icon: '/icons/Docker.svg',        cat: 'devops',   x: 28, y: 82 },
-	{ id: 'terraform', label: 'Terraform',   icon: null,                       cat: 'devops',   x: 10, y: 58 },
-	{ id: 'kafka',     label: 'Kafka',       icon: null,                       cat: 'backend',  x: 8,  y: 32 },
-	{ id: 'spring',    label: 'Spring Boot', icon: null,                       cat: 'backend',  x: 24, y: 50 },
-	{ id: 'fastapi',   label: 'FastAPI',     icon: '/icons/FastAPI-icon.svg',  cat: 'backend',  x: 36, y: 16 },
-	{ id: 'react',     label: 'React',       icon: '/icons/react-icon.svg',    cat: 'frontend', x: 66, y: 16 },
-	{ id: 'rag',       label: 'RAG',         icon: null,                       cat: 'ai',       x: 64, y: 76 },
+	{ id: 'linux',     label: 'Linux',       icon: '/icons/linux.svg',                  cat: 'devops',   x: 18, y: 14 },
+	{ id: 'mcp',       label: 'MCP',         icon: '/icons/mcp.svg',                     cat: 'ai',       x: 82, y: 10 },
+	{ id: 'langgraph', label: 'LangGraph',   icon: '/icons/langgraph-color.svg',         cat: 'ai',       x: 88, y: 36 },
+	{ id: 'gemini',    label: 'Gemini',      icon: '/icons/gemini-color.svg',            cat: 'ai',       x: 76, y: 65 },
+	{ id: 'aws',       label: 'AWS',         icon: '/icons/AWS.svg',                     cat: 'devops',   x: 54, y: 84 },
+	{ id: 'docker',    label: 'Docker',      icon: '/icons/Docker.svg',                  cat: 'devops',   x: 28, y: 82 },
+	{ id: 'terraform', label: 'Terraform',   icon: '/icons/HashiCorp Terraform.svg',     cat: 'devops',   x: 10, y: 58 },
+	{ id: 'kafka',     label: 'Kafka',       icon: '/icons/Apache Kafka.svg',            cat: 'backend',  x: 8,  y: 32 },
+	{ id: 'spring',    label: 'Spring Boot', icon: '/icons/Spring.svg',                  cat: 'backend',  x: 24, y: 50 },
+	{ id: 'fastapi',   label: 'FastAPI',     icon: '/icons/FastAPI-icon.svg',            cat: 'backend',  x: 36, y: 16 },
+	{ id: 'react',     label: 'React',       icon: '/icons/react-icon.svg',              cat: 'frontend', x: 66, y: 16 },
+	{ id: 'rag',       label: 'RAG',         icon: null,                                 cat: 'ai',       x: 64, y: 76 },
 ];
 
 const CROSS: [string, string][] = [
@@ -67,52 +67,56 @@ const STACK: StackGroup[] = [
 			{ name: 'Java',       icon: '/icons/Java.svg' },
 			{ name: 'Python',     icon: '/icons/Python-icon.svg' },
 			{ name: 'TypeScript', icon: '/icons/TypeScript.svg' },
-			{ name: 'Go',         icon: '/icons/Go.svg' },
 		],
 	},
 	{
 		label: 'FRONTEND',
 		color: '#16A34A',
 		items: [
-			{ name: 'React',        icon: '/icons/react-icon.svg' },
-			{ name: 'Next.js',      icon: '/icons/nextjs-icon.svg' },
-			{ name: 'React Native', icon: null },
-			{ name: 'Tailwind',     icon: '/icons/tailwind-icon.svg' },
+			{ name: 'React',    icon: '/icons/react-icon.svg' },
+			{ name: 'Next.js',  icon: '/icons/nextjs-icon.svg' },
+			{ name: 'Expo',     icon: '/icons/logo-type-b.svg' },
+			{ name: 'Tailwind', icon: '/icons/tailwind-icon.svg' },
 		],
 	},
 	{
-		label: 'BACKEND',
+		label: 'BACKEND & DB',
 		color: '#2A3FE5',
 		items: [
-			{ name: 'Spring',     icon: null },
-			{ name: 'FastAPI',    icon: '/icons/FastAPI-icon.svg' },
-			{ name: 'Kafka',      icon: null },
-			{ name: 'Redis',      icon: '/icons/Redis-icon.svg' },
-			{ name: 'MongoDB',    icon: '/icons/MongoDB-icon.svg' },
-			{ name: 'PostgreSQL', icon: '/icons/postgresql-icon.svg' },
-			{ name: 'NestJS',     icon: null },
+			{ name: 'Spring Boot', icon: '/icons/Spring.svg' },
+			{ name: 'FastAPI',     icon: '/icons/FastAPI-icon.svg' },
+			{ name: 'NestJS',      icon: '/icons/Nest.js.svg' },
+			{ name: 'Node.js',     icon: '/icons/nodejs-icon.svg' },
+			{ name: 'Kafka',       icon: '/icons/Apache Kafka.svg' },
+			{ name: 'PostgreSQL',  icon: '/icons/postgresql-icon.svg' },
+			{ name: 'MongoDB',     icon: '/icons/MongoDB-icon.svg' },
+			{ name: 'Redis',       icon: '/icons/Redis-icon.svg' },
+			{ name: 'Qdrant',      icon: '/icons/qdrant-brandmark-red.svg' },
 		],
 	},
 	{
-		label: 'AI & TOOLS',
+		label: 'AI & DEVOPS',
 		color: '#F4B9B0',
 		items: [
-			{ name: 'LangGraph', icon: null },
-			{ name: 'MCP',       icon: null },
-			{ name: 'RAG',       icon: null },
-			{ name: 'Gemini',    icon: null },
-			{ name: 'Docker',    icon: '/icons/Docker.svg' },
-			{ name: 'AWS',       icon: null },
-			{ name: 'Terraform', icon: null },
+			{ name: 'LangGraph',  icon: '/icons/langgraph-color.svg' },
+			{ name: 'MCP',        icon: '/icons/mcp.svg' },
+			{ name: 'RAG',        icon: null },
+			{ name: 'Gemini API', icon: '/icons/gemini-color.svg' },
+			{ name: 'Groq',       icon: '/icons/groq-text.svg' },
+			{ name: 'Ollama',     icon: '/icons/ollama.svg' },
+			{ name: 'Docker',     icon: '/icons/Docker.svg' },
+			{ name: 'Terraform',  icon: '/icons/HashiCorp Terraform.svg' },
+			{ name: 'Ansible',    icon: '/icons/Ansible.svg' },
+			{ name: 'AWS',        icon: '/icons/AWS.svg' },
 		],
 	},
 ];
 
 const META = [
-	{ label: 'LOCATION',  value: 'Ho Chi Minh City, VN' },
-	{ label: 'EDUCATION', value: 'IUH — Software Eng.' },
-	{ label: 'ENGLISH',   value: 'TOEIC 650+' },
-	{ label: 'SPECIALTY', value: 'API Design · AI' },
+	{ label: 'LOCATION',  value: 'Go Vap, Ho Chi Minh City' },
+	{ label: 'EDUCATION', value: 'IUH — Software Eng. 2022–' },
+	{ label: 'ENGLISH',   value: 'TOEIC 625' },
+	{ label: 'SPECIALTY', value: 'Distributed Systems · AI' },
 ];
 
 // ──────────────────────────────────────
@@ -176,13 +180,14 @@ function HeroInfo() {
 				Nguyễn Trung Nguyên
 			</h2>
 			<p className="font-pixel text-[7px] text-primary mb-5 tracking-widest leading-relaxed">
-				FULL-STACK DEVELOPER · AI INTEGRATION
+				FULL-STACK DEVELOPER · AI INTEGRATION · IUH 2022–
 			</p>
 			{/* Bio — left blue border */}
 			<div className="border-l-2 border-secondary pl-4 mb-5">
 				<p className="font-mono-custom text-sm text-muted-foreground leading-relaxed">
-					Backend-first developer who builds clean APIs and ships AI-powered features.
-					Comfortable across the stack — from Spring Boot to React, FastAPI to LangGraph.
+					Full-Stack Developer specializing in distributed systems, AI-powered applications,
+					and cloud-native deployments. Builds end-to-end — microservices to LLM agents,
+					Kafka pipelines to React interfaces — and ships to production on AWS.
 				</p>
 			</div>
 			{/* 2×2 meta grid */}
@@ -234,7 +239,9 @@ function TechNode({
 				style={{ borderColor: color }}
 			>
 				{node.icon ? (
-					<Image src={node.icon} alt={node.label} width={22} height={22} className="object-contain" />
+					<div className="w-7 h-7 bg-white flex items-center justify-center p-[3px]">
+						<Image src={node.icon} alt={node.label} width={22} height={22} className="object-contain w-full h-full" />
+					</div>
 				) : (
 					<span className="font-pixel text-[6px] leading-tight text-center" style={{ color }}>
 						{node.label.slice(0, 3).toUpperCase()}
@@ -388,7 +395,9 @@ function GemItem({ name, icon, color }: { name: string; icon: string | null; col
 				style={{ borderColor: hovered ? color : '#2a2a2a' }}
 			>
 				{icon ? (
-					<Image src={icon} alt={name} width={22} height={22} className="object-contain" />
+					<div className="w-[26px] h-[26px] bg-white flex items-center justify-center p-[3px]">
+						<Image src={icon} alt={name} width={20} height={20} className="object-contain w-full h-full" />
+					</div>
 				) : (
 					<span className="font-pixel text-[6px] leading-tight text-center" style={{ color }}>
 						{name.slice(0, 3).toUpperCase()}

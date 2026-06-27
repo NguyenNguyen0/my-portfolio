@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, GitBranch } from 'lucide-react';
 import { projects } from '@/data/projects';
 
 const fadeUp: Variants = {
@@ -85,6 +85,20 @@ export const ProjectsSection = () => {
 								<h3 className="font-pixel text-[11px] text-foreground mb-2 leading-relaxed">
 									{project.title}
 								</h3>
+								{(project.period || project.role) && (
+									<div className="flex flex-wrap gap-x-3 gap-y-0.5 mb-2">
+										{project.period && (
+											<span className="font-pixel text-[7px] text-muted-foreground tracking-wide">
+												{project.period}
+											</span>
+										)}
+										{project.team && (
+											<span className="font-pixel text-[7px] text-muted-foreground tracking-wide">
+												· {project.team}
+											</span>
+										)}
+									</div>
+								)}
 								<p className="font-mono-custom text-sm text-muted-foreground leading-relaxed">
 									{project.description}
 								</p>
@@ -121,7 +135,7 @@ export const ProjectsSection = () => {
 										DEMO
 									</a>
 								)}
-								{project.githubUrl && (
+								{project.githubUrl && !project.gitlabUrl && (
 									<a
 										href={project.githubUrl}
 										target="_blank"
@@ -131,6 +145,18 @@ export const ProjectsSection = () => {
 									>
 										<Github className="w-3 h-3" aria-hidden="true" />
 										CODE
+									</a>
+								)}
+								{project.gitlabUrl && (
+									<a
+										href={project.gitlabUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={`View source code for ${project.title} on GitLab`}
+										className="font-pixel text-[9px] flex items-center gap-1.5 text-muted-foreground border border-dotted border-border px-3 py-2 transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
+									>
+										<GitBranch className="w-3 h-3" aria-hidden="true" />
+										GITLAB
 									</a>
 								)}
 							</div>

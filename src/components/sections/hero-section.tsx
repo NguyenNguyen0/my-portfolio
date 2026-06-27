@@ -59,7 +59,7 @@ export const HeroSection = () => {
 						{...(shouldReduce ? {} : fadeUp(0.22))}
 						className="font-pixel text-[10px] sm:text-xs text-muted-foreground mb-5 tracking-wide leading-relaxed"
 					>
-						BACKEND DEVELOPER
+						FULL-STACK DEVELOPER · AI INTEGRATION
 					</motion.p>
 
 					{/* Description */}
@@ -67,9 +67,9 @@ export const HeroSection = () => {
 						{...(shouldReduce ? {} : fadeUp(0.32))}
 						className="font-mono-custom text-sm sm:text-base text-muted-foreground mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
 					>
-						Một mê cung có lối đi rõ ràng, có pellet dẫn đường,
-						và một hero luôn tiến về phía trước.
-						Xây server từ con số 0 — request đi vào, response trả ra.
+						Builds distributed systems end-to-end — Spring Boot microservices,
+						Kafka pipelines, LangGraph AI agents, React interfaces.
+						Deployed to production on AWS. Ships things that work.
 					</motion.p>
 
 					{/* CTAs */}
@@ -161,7 +161,7 @@ function PlayerCard() {
 			>
 				{/* Base pixel avatar */}
 				<Image
-					src="/pixel-avatar.png"
+					src="/pixel-avatar.jpg"
 					alt="Pixel avatar of Nguyễn Trung Nguyên"
 					width={320}
 					height={360}
