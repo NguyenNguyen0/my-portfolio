@@ -29,7 +29,7 @@ export function ThemeToggle() {
 					animate={{ opacity: 1, rotate: 0, scale: 1 }}
 					exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
 					transition={{ duration: 0.2, ease: 'easeOut' }}
-					className="absolute font-pixel text-[10px] leading-none select-none"
+					className="absolute font-pixel text-[12px] leading-none select-none"
 					aria-hidden="true"
 				>
 					{isDark ? '☾' : '☀'}
