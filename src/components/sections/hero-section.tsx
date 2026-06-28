@@ -5,6 +5,8 @@ import { motion, useReducedMotion, type Transition } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import { PacManRunner } from '@/components/ui/pac-man-runner';
 
+const NAME_PARTS = ['Nguyễn Trung', 'Nguyên'] as const;
+
 const fadeUp = (delay = 0) => ({
 	initial: { opacity: 0, y: 24 },
 	animate: { opacity: 1, y: 0 },
@@ -28,6 +30,14 @@ export const HeroSection = () => {
 	};
 
 	return (
+		<>
+		<style>{`
+			@keyframes name-pulse {
+				0%, 100% { text-shadow: 0 0 10px oklch(87.6% 0.179 95.4 / 0.75), 0 0 26px oklch(87.6% 0.179 95.4 / 0.4), 0 0 52px oklch(87.6% 0.179 95.4 / 0.15); }
+				50%       { text-shadow: 0 0 16px oklch(87.6% 0.179 95.4 / 0.92), 0 0 40px oklch(87.6% 0.179 95.4 / 0.55), 0 0 72px oklch(87.6% 0.179 95.4 / 0.25); }
+			}
+			.dark .name-glow { animation: name-pulse 3s ease-in-out infinite; }
+		`}</style>
 		<section
 			className="relative min-h-screen flex items-center px-4 py-20 lg:py-0 overflow-hidden"
 			aria-label="Hero"
@@ -43,16 +53,34 @@ export const HeroSection = () => {
 						className="font-pixel text-[10px] sm:text-xs text-primary mb-6 animate-pixel-blink tracking-widest"
 						aria-label="Insert coin to start"
 					>
-						INSERT COIN ▶
+						INSERT COIN &#x25B6;
 					</motion.p>
 
 					{/* Name */}
-					<motion.h1
-						{...(shouldReduce ? {} : fadeUp(0.12))}
-						className="font-[family-name:var(--font-be-vietnam-pro)] text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-4 leading-tight"
-					>
-						Nguyễn Trung Nguyên
-					</motion.h1>
+					<h1 className="name-glow font-[family-name:var(--font-vt323)] text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl text-foreground mb-4 leading-none">
+						{NAME_PARTS.map((part, pi) => {
+							const offset = NAME_PARTS.slice(0, pi).reduce((s, p) => s + p.length, 0);
+							return (
+								<span key={pi} style={{ display: 'block', whiteSpace: 'nowrap' }}>
+									{shouldReduce
+										? part
+										: Array.from(part).map((char, ci) => (
+											<motion.span
+												key={ci}
+												initial={{ opacity: 0, y: 20 }}
+												animate={{ opacity: 1, y: 0 }}
+												transition={{ duration: 0.28, ease: 'easeOut', delay: 0.1 + (offset + ci) * 0.038 }}
+												whileHover={{ y: -6, transition: { duration: 0.1 } }}
+												style={{ display: 'inline-block', cursor: 'default' }}
+											>
+												{char === ' ' ? ' ' : char}
+											</motion.span>
+										))
+									}
+								</span>
+							);
+						})}
+					</h1>
 
 					{/* Role */}
 					<motion.p
@@ -82,7 +110,7 @@ export const HeroSection = () => {
 							className="font-pixel text-[10px] sm:text-xs px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground border-2 border-primary transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[0_4px_0_0_color-mix(in_oklch,var(--primary)_40%,transparent)] focus-visible:outline-2 focus-visible:outline-dotted focus-visible:outline-ring focus-visible:outline-offset-2 active:translate-y-0 leading-relaxed"
 							aria-label="View my projects"
 						>
-							▶ VIEW WORK
+							&#x25B6; VIEW WORK
 						</button>
 						<button
 							onClick={() => scrollToSection('contact-section')}
@@ -126,6 +154,7 @@ export const HeroSection = () => {
 				</motion.div>
 			</motion.div>
 		</section>
+		</>
 	);
 };
 
@@ -173,8 +202,7 @@ function PlayerCard() {
 					}}
 				/>
 
-				{/* Layer 1: Glitch displacement band
-				    Same image as overlay — clip-path reveals only the displaced band */}
+				{/* Layer 1: Glitch displacement band */}
 				<div
 					className="absolute inset-0 pointer-events-none"
 					aria-hidden="true"
@@ -187,7 +215,7 @@ function PlayerCard() {
 					}}
 				/>
 
-				{/* Layer 2: Sweep bar — bright horizontal line drifting down */}
+				{/* Layer 2: Sweep bar */}
 				<div
 					className="absolute left-0 right-0 pointer-events-none"
 					aria-hidden="true"
@@ -209,7 +237,7 @@ function PlayerCard() {
 					}}
 				/>
 
-				{/* Layer 4: Vignette — darkens edges */}
+				{/* Layer 4: Vignette */}
 				<div
 					className="absolute inset-0 pointer-events-none"
 					aria-hidden="true"
@@ -219,7 +247,7 @@ function PlayerCard() {
 					}}
 				/>
 
-				{/* Layer 5: RGB chromatic aberration tint — faint persistent */}
+				{/* Layer 5: RGB chromatic aberration tint */}
 				<div
 					className="absolute inset-0 pointer-events-none mix-blend-screen opacity-[0.04]"
 					aria-hidden="true"
@@ -237,7 +265,7 @@ function PlayerCard() {
 					<div className="w-1.5 h-1.5 rounded-full bg-primary" />
 					<span className="font-pixel text-[8px] text-primary tracking-widest">READY</span>
 				</div>
-				<span className="font-pixel text-[8px] text-muted-foreground">∞ PTS</span>
+				<span className="font-pixel text-[8px] text-muted-foreground">&#x221E; PTS</span>
 			</div>
 		</div>
 	);

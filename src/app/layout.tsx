@@ -4,7 +4,7 @@ import Script from 'next/script';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
-import { Be_Vietnam_Pro, Press_Start_2P, Space_Mono } from 'next/font/google';
+import { Be_Vietnam_Pro, Press_Start_2P, Space_Mono, VT323 } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -28,6 +28,14 @@ const spaceMono = Space_Mono({
 	subsets: ['latin'],
 	display: 'swap',
 	variable: '--font-space-mono',
+	preload: false,
+});
+
+const vt323 = VT323({
+	weight: ['400'],
+	subsets: ['latin', 'vietnamese'],
+	display: 'swap',
+	variable: '--font-vt323',
 	preload: false,
 });
 
@@ -89,7 +97,7 @@ export default function RootLayout({
 				/>
 			</head>
 			<body
-				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${beVietnamPro.variable} ${pressStart2P.variable} ${spaceMono.variable} antialiased`}
+				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${beVietnamPro.variable} ${pressStart2P.variable} ${spaceMono.variable} ${vt323.variable} antialiased`}
 				style={{
 					fontFamily: "'Be Vietnam Pro', 'Space Mono', 'Geist Sans', sans-serif",
 				}}
