@@ -7,6 +7,7 @@ import { ThemeProvider } from 'next-themes';
 import { Be_Vietnam_Pro, Press_Start_2P, Space_Mono, VT323 } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ChatWidget } from '@/components/ui/chat-widget';
+import { PortfolioActionsProvider } from '@/context/portfolio-actions';
 
 const beVietnamPro = Be_Vietnam_Pro({
 	weight: ['400', '500', '600', '700'],
@@ -133,15 +134,17 @@ export default function RootLayout({
 						}),
 					}}
 				/>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="dark"
-					enableSystem
-				>
-					{children}
-					<SpeedInsights />
-					<ChatWidget />
-				</ThemeProvider>
+				<PortfolioActionsProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="dark"
+						enableSystem
+					>
+						{children}
+						<SpeedInsights />
+						<ChatWidget />
+					</ThemeProvider>
+				</PortfolioActionsProvider>
 			</body>
 		</html>
 	);

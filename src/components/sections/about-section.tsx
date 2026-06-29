@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { motion, AnimatePresence, useReducedMotion, type Variants } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { usePortfolioActions } from '@/context/portfolio-actions';
 
 // ──────────────────────────────────────
 // Data
@@ -251,14 +252,17 @@ function TechNode({
 	hovered,
 	onHover,
 	shouldReduce,
+	focusedSkill,
 }: {
 	node:         ConstellationNode;
 	hovered:      string | null;
 	onHover:      (id: string | null) => void;
 	shouldReduce: boolean;
+	focusedSkill: string | null;
 }) {
 	const isHovered = hovered === node.id;
-	const isDimmed  = hovered !== null && !isHovered;
+	const isFocused = focusedSkill === node.id;
+	const isDimmed  = hovered !== null && !isHovered && !isFocused;
 	const color     = CAT_COLORS[node.cat];
 	// Deterministic float params from position (no Math.random → no SSR mismatch)
 	const floatDur  = 2.2 + (node.x % 10) * 0.18;
@@ -283,14 +287,17 @@ function TechNode({
 				className="flex flex-col items-center gap-1"
 			>
 				<motion.div
-					animate={{ scale: isHovered ? 1.22 : 1 }}
-					transition={{ duration: 0.16 }}
+					animate={isFocused && !shouldReduce
+						? { scale: [1, 1.3, 1, 1.3, 1], filter: [`drop-shadow(0 0 8px ${color})`, `drop-shadow(0 0 18px ${color})`, `drop-shadow(0 0 8px ${color})`, `drop-shadow(0 0 18px ${color})`, `drop-shadow(0 0 8px ${color})`] }
+						: { scale: isHovered ? 1.22 : 1, filter: 'none' }
+					}
+					transition={isFocused ? { duration: 1.2, ease: 'easeInOut' } : { duration: 0.16 }}
 					className="w-10 h-10 border p-1.5 flex items-center justify-center"
 					style={{
 						borderColor:    color,
 						background:     'rgba(255, 255, 255, 0.08)',
 						backdropFilter: 'blur(6px)',
-						boxShadow:      isHovered ? `0 0 12px ${color}66` : 'none',
+						boxShadow:      isHovered || isFocused ? `0 0 12px ${color}66` : 'none',
 					}}
 				>
 					{node.icon ? (
@@ -309,7 +316,7 @@ function TechNode({
 	);
 }
 
-function Constellation({ activeCategories }: { activeCategories: Set<Category> }) {
+function Constellation({ activeCategories, focusedSkill }: { activeCategories: Set<Category>; focusedSkill: string | null }) {
 	const [hovered, setHovered] = useState<string | null>(null);
 	const shouldReduce          = useReducedMotion() ?? false;
 	const CENTER                = { x: 50, y: 50 };
@@ -391,6 +398,7 @@ function Constellation({ activeCategories }: { activeCategories: Set<Category> }
 						hovered={hovered}
 						onHover={setHovered}
 						shouldReduce={shouldReduce}
+						focusedSkill={focusedSkill}
 					/>
 				))}
 			</AnimatePresence>
@@ -523,10 +531,17 @@ function TechStackGrid({ activeCategories }: { activeCategories: Set<Category> }
 
 export const AboutSection = () => {
 	const shouldReduce = useReducedMotion();
+	const { state, dispatch } = usePortfolioActions();
 
 	const [activeCategories, setActiveCategories] = useState<Set<Category>>(
 		new Set(Object.keys(CAT_COLORS) as Category[])
 	);
+
+	useEffect(() => {
+		if (!state.focusedSkill) return;
+		const t = setTimeout(() => dispatch({ type: 'SET_FOCUSED_SKILL', skillId: null }), 3000);
+		return () => clearTimeout(t);
+	}, [state.focusedSkill, dispatch]);
 
 	const toggleCategory = (cat: Category) => {
 		setActiveCategories((prev) => {
@@ -591,7 +606,7 @@ export const AboutSection = () => {
 				viewport={{ once: true }}
 				className="mb-16 border border-dotted border-border overflow-hidden"
 			>
-				<Constellation activeCategories={activeCategories} />
+				<Constellation activeCategories={activeCategories} focusedSkill={state.focusedSkill} />
 			</motion.div>
 
 			{/* S3: Inventory */}

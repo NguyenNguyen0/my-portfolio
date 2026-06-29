@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useReducedMotion, type Variants } from 'framer
 import { ExternalLink, Github, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { projects } from '@/data/projects';
+import { usePortfolioActions } from '@/context/portfolio-actions';
 
 // Badge color palette — cycle by tech index
 const BADGE_PALETTE = [
@@ -195,14 +196,14 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
 
 // ── Project Card ──────────────────────────────────────────────────────────────
 
-function ProjectCard({ project, index }: { project: typeof projects[number]; index: number }) {
+function ProjectCard({ project, index, isHighlighted }: { project: typeof projects[number]; index: number; isHighlighted?: boolean }) {
 	const images  = project.images ?? (project.image ? [project.image] : []);
 	const isEven  = index % 2 === 0;
 
 	return (
 		<motion.article
 			variants={fadeUp}
-			className="border border-dotted border-border bg-[#030303] overflow-hidden transition-colors duration-300 hover:border-solid hover:border-primary/50"
+			className={`border border-dotted border-border bg-[#030303] overflow-hidden transition-all duration-300 hover:border-solid hover:border-primary/50${isHighlighted ? ' ring-2 ring-primary shadow-[0_0_24px_oklch(87.6%_0.179_95.4/0.5)]' : ''}`}
 		>
 			<div className={`flex flex-col lg:flex-row lg:min-h-[480px] ${isEven ? '' : 'lg:flex-row-reverse'}`}>
 
@@ -320,6 +321,13 @@ function ProjectCard({ project, index }: { project: typeof projects[number]; ind
 
 export const ProjectsSection = () => {
 	const shouldReduce = useReducedMotion();
+	const { state, dispatch } = usePortfolioActions();
+
+	useEffect(() => {
+		if (!state.highlightedProject) return;
+		const t = setTimeout(() => dispatch({ type: 'SET_HIGHLIGHTED_PROJECT', projectId: null }), 4000);
+		return () => clearTimeout(t);
+	}, [state.highlightedProject, dispatch]);
 
 	return (
 		<section id="projects-section" className="py-16 sm:py-24 px-4 max-w-7xl mx-auto">
@@ -344,7 +352,7 @@ export const ProjectsSection = () => {
 				className="flex flex-col gap-8"
 			>
 				{projects.map((project, i) => (
-					<ProjectCard key={project.id} project={project} index={i} />
+					<ProjectCard key={project.id} project={project} index={i} isHighlighted={state.highlightedProject === project.id} />
 				))}
 			</motion.div>
 		</section>
