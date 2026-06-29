@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { MessageCircle, X, Send } from 'lucide-react';
+import { Bot, X, Send } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { cn } from '@/lib/utils';
@@ -88,7 +88,7 @@ export function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ duration: 0.18 }}
-            className="w-[360px] h-[520px] bg-card border border-border flex flex-col overflow-hidden shadow-2xl"
+            className="w-[min(480px,90vw)] h-[50vh] min-h-[400px] bg-card border border-border flex flex-col overflow-hidden shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-card">
@@ -218,7 +218,7 @@ export function ChatWidget() {
             </motion.span>
           ) : (
             <motion.span key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-              <MessageCircle size={22} />
+              <Bot size={22} />
             </motion.span>
           )}
         </AnimatePresence>
