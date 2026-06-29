@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prebuild": "node scripts/fetch-readmes.mjs"
   },
   "dependencies": {
     "@ai-sdk/groq": "^4.0.1",

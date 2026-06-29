@@ -6,6 +6,7 @@ import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
 import { Be_Vietnam_Pro, Press_Start_2P, Space_Mono, VT323 } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { ChatWidget } from '@/components/ui/chat-widget';
 
 const beVietnamPro = Be_Vietnam_Pro({
 	weight: ['400', '500', '600', '700'],
@@ -139,6 +140,7 @@ export default function RootLayout({
 				>
 					{children}
 					<SpeedInsights />
+					<ChatWidget />
 				</ThemeProvider>
 			</body>
 		</html>
