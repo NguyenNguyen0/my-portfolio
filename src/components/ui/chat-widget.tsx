@@ -75,17 +75,17 @@ export function ChatWidget() {
           let event: Record<string, unknown>;
           try { event = JSON.parse(raw); } catch { continue; }
 
-          if (event.type === 'text' && typeof event.text === 'string') {
+          if (event.type === 'text-delta' && typeof event.delta === 'string') {
             setMessages(prev => {
               const updated = [...prev];
               updated[updated.length - 1] = {
                 ...updated[updated.length - 1],
-                content: updated[updated.length - 1].content + (event.text as string),
+                content: updated[updated.length - 1].content + (event.delta as string),
               };
               return updated;
             });
-          } else if (event.type === 'tool-call') {
-            handleUiAction(event.toolName as string, event.args as Record<string, unknown>);
+          } else if (event.type === 'tool-input-available') {
+            handleUiAction(event.toolName as string, event.input as Record<string, unknown>);
           }
         }
       }
