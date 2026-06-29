@@ -8,7 +8,6 @@ import { TechMarquee } from '@/components/sections/tech-marquee';
 import { GridBackground } from '@/components/ui/grid-background';
 import { ResizableNavbar } from '@/components/ui/resizable-navbar';
 import { PelletDivider } from '@/components/ui/pellet-divider';
-import { ChatWidget } from '@/components/ui/chat-widget';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -61,8 +60,6 @@ export default function Home() {
 
 				<Footer />
 			</main>
-
-			<ChatWidget />
 		</GridBackground>
 	);
 }
