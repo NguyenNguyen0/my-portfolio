@@ -288,7 +288,7 @@ function TechNode({
 					className="w-10 h-10 border p-1.5 flex items-center justify-center"
 					style={{
 						borderColor:    color,
-						background:     'rgba(10, 10, 20, 0.85)',
+						background:     'rgba(255, 255, 255, 0.08)',
 						backdropFilter: 'blur(6px)',
 						boxShadow:      isHovered ? `0 0 12px ${color}66` : 'none',
 					}}
@@ -451,8 +451,8 @@ function GemItem({ name, icon, color }: { name: string; icon: string | null; col
 				transition={{ duration: 0.14 }}
 				className="w-9 h-9 border p-1.5 flex items-center justify-center cursor-pointer"
 				style={{
-					borderColor:    hovered ? color : '#2a2a2a',
-					background:     'rgba(10, 10, 20, 0.85)',
+					borderColor:    hovered ? color : '#3a3a4a',
+					background:     'rgba(255, 255, 255, 0.07)',
 					backdropFilter: 'blur(4px)',
 					boxShadow:      hovered ? `0 0 10px ${color}44` : 'none',
 					transition:     'border-color 0.15s, box-shadow 0.15s',

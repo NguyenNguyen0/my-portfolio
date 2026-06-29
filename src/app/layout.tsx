@@ -88,7 +88,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="vi" suppressHydrationWarning>
+		<html lang="en" suppressHydrationWarning>
 			<head>
 				<link rel="canonical" href="https://nguyennguyen0.id.vn" />
 				<meta

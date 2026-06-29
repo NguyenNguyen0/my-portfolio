@@ -120,12 +120,6 @@
     transition: background-color 0.25s ease, color 0.15s ease;
   }
 
-  :lang(vi) {
-    font-family: "Be Vietnam Pro", var(--font-geist-sans), sans-serif;
-    word-spacing: 0.05em;
-    letter-spacing: 0.01em;
-  }
-
   /* Pixel-sharp scrollbar */
   ::-webkit-scrollbar       { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: var(--background); }

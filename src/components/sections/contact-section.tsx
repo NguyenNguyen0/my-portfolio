@@ -223,9 +223,9 @@ export const ContactSection = () => {
 					<div>
 						<p className="font-pixel text-[10px] text-muted-foreground mb-3 tracking-widest">GET IN TOUCH</p>
 						<p className="font-mono-custom text-sm text-muted-foreground leading-relaxed">
-							Tôi luôn mở với các cơ hội mới, ý tưởng thú vị,
-							hay chỉ đơn giản là một cuộc trò chuyện về tech.
-							Đừng ngại nhắn tin.
+							Always open to new opportunities, interesting ideas,
+							or just a conversation about tech.
+							Don&apos;t hesitate to reach out.
 						</p>
 					</div>
 

@@ -30,7 +30,7 @@ export const StorySection = () => {
 						MY JOURNEY
 					</h2>
 					<p className="font-mono-custom text-sm text-muted-foreground mt-4 max-w-lg mx-auto leading-relaxed">
-						Từng bước từ dòng code đầu tiên đến hôm nay.
+						Every step from the first line of code to today.
 					</p>
 				</motion.div>
 

@@ -4,8 +4,9 @@ export interface Project {
 	description: string;
 	techStack: string[];
 	image?: string;
+	images?: string[];
 	demoUrl?: string;
-	githubUrl: string;
+	githubUrl?: string;
 	gitlabUrl?: string;
 	type: string[];
 	period: string;
@@ -20,8 +21,7 @@ export const projects: Project[] = [
 		description:
 			'Distributed e-commerce platform with polyglot microservices, LangGraph-based multi-agent AI ecosystem, MCP Orchestrator, hybrid recommendation engine, and automated cloud deployment.',
 		techStack: ['Java', 'Spring Cloud', 'FastAPI', 'Kafka', 'MongoDB', 'Redis', 'React', 'Next.js', 'LangGraph', 'Terraform', 'AWS'],
-		githubUrl: 'https://gitlab.com/nguyennguyen0',
-		gitlabUrl: 'https://gitlab.com/nguyennguyen0',
+		gitlabUrl: 'https://gitlab.com/software-architecture264301',
 		type: ['Team', 'Fullstack', 'AI'],
 		period: 'Mar 2026 – Jun 2026',
 		role: 'Full-Stack Developer · AI Engineer · DevOps',
@@ -33,8 +33,9 @@ export const projects: Project[] = [
 		description:
 			'Real-time messaging platform with AI assistant (LangGraph + Qdrant + MCP), RAG workflows, cross-platform React web and React Native mobile, deployed on AWS EC2.',
 		techStack: ['Spring Boot', 'FastAPI', 'LangGraph', 'Qdrant', 'MongoDB', 'PostgreSQL', 'Redis', 'React', 'React Native', 'AWS'],
-		githubUrl: 'https://github.com/NguyenNguyen0',
-		demoUrl: 'https://nguyennguyen0.id.vn',
+		githubUrl: 'https://github.com/giasinguyen/chatly-messaging-platform',
+		demoUrl: 'https://www.chatly.io.vn/',
+		images: ['/chatly/chatly1.png', '/chatly/chatly2.png', '/chatly/chatly3.png'],
 		type: ['Team', 'Fullstack', 'AI'],
 		period: 'Feb 2026 – May 2026',
 		role: 'AI & Full-Stack Developer',
@@ -46,8 +47,9 @@ export const projects: Project[] = [
 		description:
 			'Hotel management system with AI-powered RAG chatbot (LangChain4j + Gemini + pgvector), TipTap-based content management, and full-stack deployment on Railway via Docker.',
 		techStack: ['Spring Boot', 'LangChain4j', 'Gemini API', 'pgvector', 'React', 'PostgreSQL', 'Docker'],
-		githubUrl: 'https://github.com/NguyenNguyen0',
-		demoUrl: 'https://nguyennguyen0.id.vn',
+		githubUrl: 'https://github.com/giasinguyen/aurora-hotel-management-system',
+		demoUrl: 'https://www.aurorahotel.io.vn/',
+		images: ['/aurora/aurora1.png', '/aurora/aurora2.png'],
 		type: ['Team', 'Fullstack', 'AI'],
 		period: 'Sep 2025 – Dec 2025',
 		role: 'Full-Stack Developer · DevOps · AI Integration',
@@ -59,7 +61,7 @@ export const projects: Project[] = [
 		description:
 			'Responsive portfolio built with Next.js, TypeScript, and TailwindCSS. 95+ Lighthouse score, deployed on Vercel with GitHub CI/CD.',
 		techStack: ['Next.js', 'TypeScript', 'TailwindCSS', 'Vercel'],
-		image: '/thumbnail.png',
+		images: ['/portfolio/portfolio.png'],
 		demoUrl: 'https://nguyennguyen0.id.vn',
 		githubUrl: 'https://github.com/NguyenNguyen0/my-portfolio',
 		type: ['Personal', 'Frontend'],

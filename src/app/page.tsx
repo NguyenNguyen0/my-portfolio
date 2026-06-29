@@ -11,9 +11,9 @@ import { PelletDivider } from '@/components/ui/pellet-divider';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: 'Nguyễn Trung Nguyên — Backend Developer Portfolio',
+	title: 'Nguyễn Trung Nguyên — Full-Stack Developer Portfolio',
 	description:
-		'Backend Developer specializing in API Design, Node.js, FastAPI, and modern full-stack development. Based in Ho Chi Minh City.',
+		'Full-Stack Developer specializing in distributed systems, AI-powered applications, and cloud-native deployments. Based in Ho Chi Minh City.',
 	keywords: [
 		'Backend Developer', 'Full Stack', 'Node.js', 'TypeScript',
 		'React', 'Next.js', 'FastAPI', 'Portfolio', 'Ho Chi Minh City',
