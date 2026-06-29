@@ -4,7 +4,7 @@ import Script from 'next/script';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
-import { Be_Vietnam_Pro } from 'next/font/google';
+import { Be_Vietnam_Pro, Press_Start_2P, Space_Mono, VT323 } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -15,30 +15,58 @@ const beVietnamPro = Be_Vietnam_Pro({
 	preload: true,
 });
 
+const pressStart2P = Press_Start_2P({
+	weight: ['400'],
+	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-press-start',
+	preload: false,
+});
+
+const spaceMono = Space_Mono({
+	weight: ['400', '700'],
+	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-space-mono',
+	preload: false,
+});
+
+const vt323 = VT323({
+	weight: ['400'],
+	subsets: ['latin', 'vietnamese'],
+	display: 'swap',
+	variable: '--font-vt323',
+	preload: false,
+});
+
 export const metadata: Metadata = {
-	title: 'Portfolio - NguyenNguyen0',
+	title: 'Nguyễn Trung Nguyên — Full-Stack Developer · AI Integration',
 	description:
-		"NguyenNguyen0's Portfolio - Backend Developer, loving API Design, AI and UI/UX.",
-	keywords: ['NguyenNguyen0', 'Portfolio', 'Next.js', 'Vietnamese'],
-	authors: [{ name: 'NguyenNguyen0' }],
+		'Full-Stack Developer with experience building distributed systems, AI-powered applications, and cloud-native deployments. Skilled in LLMs, multi-agent systems (LangGraph, MCP), and recommendation engines.',
+	keywords: [
+		'Nguyễn Trung Nguyên', 'NguyenNguyen0', 'Full-Stack Developer', 'AI Integration',
+		'LangGraph', 'MCP', 'RAG', 'Spring Boot', 'FastAPI', 'Next.js', 'React',
+		'Microservices', 'Distributed Systems', 'Portfolio', 'Vietnam Developer',
+	],
+	authors: [{ name: 'Nguyễn Trung Nguyên', url: 'https://nguyennguyen0.id.vn' }],
 	metadataBase: new URL('https://nguyennguyen0.id.vn'),
 	alternates: {
-		languages: {
-			vi: '/',
-		},
+		languages: { vi: '/' },
 		canonical: 'https://nguyennguyen0.id.vn',
 	},
 	openGraph: {
-		title: 'Portfolio - Nguyễn Trung Nguyên',
-		description: 'Backend Developer, loving API Design, AI and UI/UX.',
-		images: ['/thumbnail.png'],
+		title: 'Nguyễn Trung Nguyên — Full-Stack Developer · AI Integration',
+		description: 'Building distributed systems and AI-powered applications. LangGraph · MCP · Spring Boot · FastAPI · React.',
+		images: [{ url: '/thumbnail.png', width: 1200, height: 630, alt: 'Nguyễn Trung Nguyên Portfolio' }],
 		url: 'https://nguyennguyen0.id.vn',
 		type: 'website',
+		siteName: 'Nguyễn Trung Nguyên Portfolio',
+		locale: 'vi_VN',
 	},
 	twitter: {
 		card: 'summary_large_image',
-		title: 'Portfolio - Nguyễn Trung Nguyên',
-		description: 'Backend Developer, loving API Design, AI and UI/UX.',
+		title: 'Nguyễn Trung Nguyên — Full-Stack Developer · AI Integration',
+		description: 'Building distributed systems and AI-powered applications. LangGraph · MCP · Spring Boot · FastAPI · React.',
 		images: ['/thumbnail.png'],
 	},
 	icons: {
@@ -50,6 +78,7 @@ export const metadata: Metadata = {
 		index: true,
 		follow: true,
 		nocache: false,
+		googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
 	},
 };
 
@@ -59,7 +88,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="vi" suppressHydrationWarning>
+		<html lang="en" suppressHydrationWarning>
 			<head>
 				<link rel="canonical" href="https://nguyennguyen0.id.vn" />
 				<meta
@@ -68,9 +97,9 @@ export default function RootLayout({
 				/>
 			</head>
 			<body
-				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${beVietnamPro.variable} antialiased`}
+				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${beVietnamPro.variable} ${pressStart2P.variable} ${spaceMono.variable} ${vt323.variable} antialiased`}
 				style={{
-					fontFamily: "'Be Vietnam Pro', 'Geist Sans', sans-serif",
+					fontFamily: "'Be Vietnam Pro', 'Space Mono', 'Geist Sans', sans-serif",
 				}}
 			>
 				<Script
@@ -83,18 +112,21 @@ export default function RootLayout({
 							'@type': 'Person',
 							name: 'Nguyễn Trung Nguyên',
 							url: 'https://nguyennguyen0.id.vn',
-							jobTitle: 'Backend Developer',
+							jobTitle: 'Full-Stack Developer',
 							image: 'https://nguyennguyen0.id.vn/avatar.jpg',
+							email: 'nguyentrungnguyen.dev@gmail.com',
+							telephone: '+84394757329',
 							description:
-								'Backend Developer, loving API Design, AI and UI/UX.',
+								'Full-Stack Developer with experience building distributed systems, AI-powered applications, and cloud-native deployments.',
 							knowsAbout: [
-								'Backend Development',
-								'API Design',
-								'AI',
-								'UI/UX',
+								'Full-Stack Development', 'Distributed Systems', 'Microservices',
+								'AI Integration', 'LangGraph', 'MCP', 'RAG',
+								'Spring Boot', 'FastAPI', 'React', 'Next.js',
+								'Kafka', 'Docker', 'Terraform', 'AWS', 'API Design',
 							],
 							sameAs: [
 								'https://github.com/NguyenNguyen0',
+								'https://gitlab.com/nguyennguyen0',
 								'https://www.linkedin.com/in/nguyennguyen0/',
 							],
 						}),
@@ -104,7 +136,6 @@ export default function RootLayout({
 					attribute="class"
 					defaultTheme="dark"
 					enableSystem
-					disableTransitionOnChange
 				>
 					{children}
 					<SpeedInsights />

@@ -4,60 +4,78 @@ export interface Project {
 	description: string;
 	techStack: string[];
 	image?: string;
+	images?: string[];
 	demoUrl?: string;
-	githubUrl: string;
-	className?: string;
+	githubUrl?: string;
+	gitlabUrl?: string;
 	type: string[];
+	period: string;
+	role: string;
+	team?: string;
 }
 
 export const projects: Project[] = [
 	{
-		id: 'backend-chatbot-api',
-		title: 'Backend Chatbot API',
+		id: 'nexatech',
+		title: 'NexaTech E-Commerce Platform',
 		description:
-			'A RESTful API and Websocket Chatbot Backend using Ollama, FastAPI and MongoDB.',
-		techStack: ['Ollama', 'FastAPI', 'MongoDB', 'Websocket'],
-		githubUrl: 'https://github.com/NguyenNguyen0/chatbot-be',
-		type: ['Personal', 'Backend'],
+			'Distributed e-commerce platform with polyglot microservices, LangGraph-based multi-agent AI ecosystem, MCP Orchestrator, hybrid recommendation engine, and automated cloud deployment.',
+		techStack: ['Java', 'Spring Cloud', 'FastAPI', 'Kafka', 'MongoDB', 'Redis', 'React', 'Next.js', 'LangGraph', 'Terraform', 'AWS'],
+		gitlabUrl: 'https://gitlab.com/software-architecture264301',
+		type: ['Team', 'Fullstack', 'AI'],
+		period: 'Mar 2026 – Jun 2026',
+		role: 'Full-Stack Developer · AI Engineer · DevOps',
+		team: 'Team of 4',
 	},
 	{
-		id: 'frontend-chatbot',
-		title: 'Frontend Chatbot Website',
+		id: 'chatly',
+		title: 'Chatly Messaging Platform',
 		description:
-			'A Modern UI website built with React, TailwindCSS and state management with Redux Toolkit.',
-		techStack: ['React', 'Tailwind CSS', 'Redux Toolkit'],
-		image: '/projects/N.aidemo2.gif',
-		githubUrl: 'https://github.com/NguyenNguyen0/chatbot-be',
-		type: ['Personal', 'Frontend'],
+			'Real-time messaging platform with AI assistant (LangGraph + Qdrant + MCP), RAG workflows, cross-platform React web and React Native mobile, deployed on AWS EC2.',
+		techStack: ['Spring Boot', 'FastAPI', 'LangGraph', 'Qdrant', 'MongoDB', 'PostgreSQL', 'Redis', 'React', 'React Native', 'AWS'],
+		githubUrl: 'https://github.com/giasinguyen/chatly-messaging-platform',
+		demoUrl: 'https://www.chatly.io.vn/',
+		images: ['/chatly/chatly1.png', '/chatly/chatly2.png', '/chatly/chatly3.png'],
+		type: ['Team', 'Fullstack', 'AI'],
+		period: 'Feb 2026 – May 2026',
+		role: 'AI & Full-Stack Developer',
+		team: 'Team of 4',
+	},
+	{
+		id: 'aurora',
+		title: 'Aurora Hotel Management System',
+		description:
+			'Hotel management system with AI-powered RAG chatbot (LangChain4j + Gemini + pgvector), TipTap-based content management, and full-stack deployment on Railway via Docker.',
+		techStack: ['Spring Boot', 'LangChain4j', 'Gemini API', 'pgvector', 'React', 'PostgreSQL', 'Docker'],
+		githubUrl: 'https://github.com/giasinguyen/aurora-hotel-management-system',
+		demoUrl: 'https://www.aurorahotel.io.vn/',
+		images: ['/aurora/aurora1.png', '/aurora/aurora2.png'],
+		type: ['Team', 'Fullstack', 'AI'],
+		period: 'Sep 2025 – Dec 2025',
+		role: 'Full-Stack Developer · DevOps · AI Integration',
+		team: 'Team of 4',
 	},
 	{
 		id: 'portfolio-website',
-		title: 'My Portfolio Website',
+		title: 'Personal Portfolio Website',
 		description:
-			'A modern, responsive portfolio website built with Next.js and TailwindCSS.',
-		techStack: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'],
-		image: '/thumbnail.png',
+			'Responsive portfolio built with Next.js, TypeScript, and TailwindCSS. 95+ Lighthouse score, deployed on Vercel with GitHub CI/CD.',
+		techStack: ['Next.js', 'TypeScript', 'TailwindCSS', 'Vercel'],
+		images: ['/portfolio/portfolio.png'],
 		demoUrl: 'https://nguyennguyen0.id.vn',
 		githubUrl: 'https://github.com/NguyenNguyen0/my-portfolio',
 		type: ['Personal', 'Frontend'],
-	},
-	{
-		id: 'cli-app',
-		title: 'Calculating Bills CLI App',
-		description:
-			'Modern CLI app for calculating Electricity & Water bills.',
-		techStack: ['Python', 'Rich', 'Typer', 'Pyfiglet'],
-		image: '/projects/calculating-cli.gif',
-		githubUrl: 'https://github.com/NguyenNguyen0/bill-calculator',
-		type: ['Personal', 'CLI'],
+		period: 'Aug 2025 – Present',
+		role: 'Frontend Developer',
 	},
 ];
 
 export const projectTypes = [
 	'All',
 	'Personal',
-	'CLI',
+	'Team',
 	'Frontend',
 	'Backend',
 	'Fullstack',
+	'AI',
 ];

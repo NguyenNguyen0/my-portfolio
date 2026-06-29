@@ -1,44 +1,28 @@
 'use client';
-import { motion } from 'framer-motion';
+
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { SpotlightCard } from '@/components/ui/spotlight-card';
-import {
-	Github,
-	Linkedin,
-	Mail,
-	FileUser,
-	MessageCircleMore,
-	CheckCircle,
-	AlertCircle,
-	Loader2,
-} from 'lucide-react';
+import { Github, Linkedin, MessageCircleMore, CheckCircle, AlertCircle, Loader2, Copy, Check } from 'lucide-react';
+
+const EMAIL = 'nguyentrungnguyen.dev@gmail.com';
+
+// GitLab SVG — lucide has no GitLab icon
+const GitLabIcon = () => (
+	<svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
+		<path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.49a.42.42 0 0 1 .11-.18.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z"/>
+	</svg>
+);
 
 const socialLinks = [
 	{ icon: Github, href: 'https://github.com/NguyenNguyen0', label: 'GitHub' },
-	{
-		icon: Linkedin,
-		href: 'https://www.linkedin.com/in/nguyennguyen0/',
-		label: 'LinkedIn',
-	},
-	{
-		icon: FileUser,
-		href: 'https://www.topcv.vn/xem-cv/VA8HAANcCA5UDlcKVwwFBFQDCwMODgdSCABSAQ9a6b',
-		label: 'TopCV',
-	},
-	{
-		icon: MessageCircleMore,
-		href: 'https://zalo.me/0394757329',
-		label: 'Zalo',
-	},
-	{ icon: Mail, href: 'mailto:trungnguyenwork123@gmail.com', label: 'Email' },
+	{ icon: GitLabIcon, href: 'https://gitlab.com/nguyennguyen0', label: 'GitLab' },
+	{ icon: Linkedin, href: 'https://www.linkedin.com/in/nguyennguyen0/', label: 'LinkedIn' },
+	{ icon: MessageCircleMore, href: 'https://zalo.me/0394757329', label: 'Zalo' },
 ];
 
-const personalInfo = {
-	email: 'trungnguyenwork123@gmail.com',
-	address: 'Ho Chi Minh City',
+const fadeUp: Variants = {
+	hidden: { opacity: 0, y: 20 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
 };
 
 interface FormData {
@@ -51,400 +35,241 @@ interface FormData {
 interface FormErrors {
 	name?: string;
 	email?: string;
-	subject?: string;
 	message?: string;
 }
 
 export const ContactSection = () => {
-	const [formData, setFormData] = useState<FormData>({
-		name: '',
-		email: '',
-		subject: '',
-		message: '',
-	});
-
+	const shouldReduce = useReducedMotion();
+	const [formData, setFormData] = useState<FormData>({ name: '', email: '', subject: '', message: '' });
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [submitStatus, setSubmitStatus] = useState<
-		'idle' | 'success' | 'error'
-	>('idle');
+	const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 	const [statusMessage, setStatusMessage] = useState('');
 	const [errors, setErrors] = useState<FormErrors>({});
-	const [submitTimestamp, setSubmitTimestamp] = useState<string | null>(null);
+	const [copied, setCopied] = useState(false);
 
-	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-	) => {
+	const copyEmail = async () => {
+		await navigator.clipboard.writeText(EMAIL);
+		setCopied(true);
+		setTimeout(() => setCopied(false), 2000);
+	};
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { id, value } = e.target;
 		setFormData((prev) => ({ ...prev, [id]: value }));
-
 		if (errors[id as keyof FormErrors]) {
 			setErrors((prev) => ({ ...prev, [id]: undefined }));
 		}
 	};
 
-	const validateForm = (): boolean => {
-		const newErrors: FormErrors = {};
-
-		if (!formData.name.trim()) newErrors.name = 'Name is required';
-		if (!formData.email.trim()) newErrors.email = 'Email is required';
-		if (!formData.message.trim()) newErrors.message = 'Message is required';
-
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		if (formData.email && !emailRegex.test(formData.email)) {
-			newErrors.email = 'Please enter a valid email address';
-		}
-
-		setErrors(newErrors);
-		return Object.keys(newErrors).length === 0;
+	const validate = (): boolean => {
+		const next: FormErrors = {};
+		if (!formData.name.trim()) next.name = 'Required';
+		if (!formData.email.trim()) next.email = 'Required';
+		else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) next.email = 'Invalid email';
+		if (!formData.message.trim()) next.message = 'Required';
+		setErrors(next);
+		return Object.keys(next).length === 0;
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-
 		setSubmitStatus('idle');
-		setStatusMessage('');
-
-		if (!validateForm()) return;
-
+		if (!validate()) return;
 		setIsSubmitting(true);
-
 		try {
-			const response = await fetch('/api/mail', {
+			const res = await fetch('/api/mail', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
+				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(formData),
 			});
-
-			const data = await response.json();
-
-			if (response.ok) {
+			const data = await res.json();
+			if (res.ok) {
 				setSubmitStatus('success');
-				setStatusMessage('Your message has been sent successfully!');
-				setSubmitTimestamp(data.timestamp);
-
-				setFormData({
-					name: '',
-					email: '',
-					subject: '',
-					message: '',
-				});
+				setStatusMessage('Message sent successfully!');
+				setFormData({ name: '', email: '', subject: '', message: '' });
 			} else {
 				setSubmitStatus('error');
-				setStatusMessage(
-					data.error || 'Failed to send message. Please try again.',
-				);
-				setSubmitTimestamp(data.timestamp);
+				setStatusMessage(data.error || 'Failed to send. Please try again.');
 			}
-		} catch (error) {
+		} catch {
 			setSubmitStatus('error');
-			setStatusMessage(
-				'An unexpected error occurred. Please try again later.',
-			);
-			console.error(error);
+			setStatusMessage('An unexpected error occurred.');
 		} finally {
 			setIsSubmitting(false);
 		}
 	};
+
 	return (
-		<section
-			id="contact-section"
-			className="py-20 px-4 max-w-7xl mx-auto"
-			aria-labelledby="contact-title"
-		>
+		<section id="contact-section" className="py-16 sm:py-24 px-4 max-w-7xl mx-auto">
+			{/* Heading */}
 			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.8 }}
+				variants={fadeUp}
+				initial={shouldReduce ? false : 'hidden'}
+				whileInView="visible"
 				viewport={{ once: true }}
-				className="text-center mb-16"
+				className="mb-12 sm:mb-16"
 			>
-				<h2
-					id="contact-title"
-					className="text-4xl md:text-5xl font-bold mb-4"
-				>
-					Let&apos;s Work Together
-				</h2>
-				<p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-					Have a project in mind? I&apos;d love to hear about it. Send
-					me a message and let&apos;s discuss how we can bring your
-					ideas to life.
+				<p className="font-pixel text-[10px] text-primary mb-3 tracking-widest">
+					CONTACT
 				</p>
+				<h2 className="font-pixel text-xl sm:text-2xl md:text-3xl text-foreground leading-relaxed">
+					LET&apos;S TALK
+				</h2>
 			</motion.div>
 
-			<div className="grid md:grid-cols-2 gap-12">
+			<div className="grid md:grid-cols-2 gap-10 md:gap-16">
+				{/* Form */}
 				<motion.div
-					initial={{ opacity: 0, x: -20 }}
-					whileInView={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.8 }}
+					variants={fadeUp}
+					initial={shouldReduce ? false : 'hidden'}
+					whileInView="visible"
 					viewport={{ once: true }}
 				>
-					<SpotlightCard>
+					<div className="pixel-card p-6 sm:p-8">
 						<form
-							className="space-y-6"
-							aria-labelledby="contact-form-title"
 							onSubmit={handleSubmit}
+							className="space-y-5"
+							aria-label="Contact form"
+							noValidate
 						>
-							<h3 id="contact-form-title" className="sr-only">
-								Contact Form
-							</h3>
-
-							{/* Status messages */}
+							{/* Status */}
 							{submitStatus === 'success' && (
-								<div className="bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-md flex items-start gap-3">
-									<CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-									<div>
-										<p className="text-green-800 dark:text-green-300 font-medium">
-											{statusMessage}
-										</p>
-										{submitTimestamp && (
-											<p className="text-green-600 dark:text-green-400 text-sm mt-1">
-												Sent at:{' '}
-												{new Date(
-													submitTimestamp,
-												).toLocaleString()}
-											</p>
-										)}
-									</div>
+								<div className="flex items-start gap-3 p-4 border border-success bg-success/10">
+									<CheckCircle className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
+									<p className="font-mono-custom text-sm text-success">{statusMessage}</p>
 								</div>
 							)}
-
 							{submitStatus === 'error' && (
-								<div className="bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-md flex items-start gap-3">
-									<AlertCircle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
-									<div>
-										<p className="text-red-800 dark:text-red-300 font-medium">
-											{statusMessage}
-										</p>
-										{submitTimestamp && (
-											<p className="text-red-600 dark:text-red-400 text-sm mt-1">
-												At:{' '}
-												{new Date(
-													submitTimestamp,
-												).toLocaleString()}
-											</p>
-										)}
-									</div>
+								<div className="flex items-start gap-3 p-4 border border-destructive bg-destructive/10">
+									<AlertCircle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+									<p className="font-mono-custom text-sm text-destructive">{statusMessage}</p>
 								</div>
 							)}
 
-							<div className="grid md:grid-cols-2 gap-4">
-								<div>
-									<label
-										htmlFor="name"
-										className="block text-sm font-medium mb-2"
-									>
-										Name{' '}
-										<span className="text-red-500">*</span>
-									</label>
-									<Input
-										id="name"
-										placeholder="Your name"
-										aria-required="true"
-										value={formData.name}
-										onChange={handleChange}
-										className={
-											errors.name ? 'border-red-500' : ''
-										}
-										aria-invalid={
-											errors.name ? 'true' : 'false'
-										}
-									/>
-									{errors.name && (
-										<p
-											className="text-red-500 text-sm mt-1"
-											role="alert"
-										>
-											{errors.name}
-										</p>
-									)}
-								</div>
-								<div>
-									<label
-										htmlFor="email"
-										className="block text-sm font-medium mb-2"
-									>
-										Email{' '}
-										<span className="text-red-500">*</span>
-									</label>
-									<Input
-										id="email"
-										type="email"
-										placeholder="your@email.com"
-										aria-required="true"
-										value={formData.email}
-										onChange={handleChange}
-										className={
-											errors.email ? 'border-red-500' : ''
-										}
-										aria-invalid={
-											errors.email ? 'true' : 'false'
-										}
-									/>
-									{errors.email && (
-										<p
-											className="text-red-500 text-sm mt-1"
-											role="alert"
-										>
-											{errors.email}
-										</p>
-									)}
-								</div>
-							</div>
-							<div>
-								<label
-									htmlFor="subject"
-									className="block text-sm font-medium mb-2"
-								>
-									Subject
-								</label>
-								<Input
-									id="subject"
-									placeholder="Project inquiry"
-									value={formData.subject}
+							{/* Name + Email row */}
+							<div className="grid sm:grid-cols-2 gap-4">
+								<PixelField
+									id="name"
+									label="NAME"
+									placeholder="Your name"
+									value={formData.name}
+									error={errors.name}
 									onChange={handleChange}
-									className={
-										errors.subject ? 'border-red-500' : ''
-									}
-									aria-invalid={
-										errors.subject ? 'true' : 'false'
-									}
+									required
 								/>
-								{errors.subject && (
-									<p
-										className="text-red-500 text-sm mt-1"
-										role="alert"
-									>
-										{errors.subject}
-									</p>
-								)}
+								<PixelField
+									id="email"
+									label="EMAIL"
+									type="email"
+									placeholder="your@email.com"
+									value={formData.email}
+									error={errors.email}
+									onChange={handleChange}
+									required
+								/>
 							</div>
+
+							<PixelField
+								id="subject"
+								label="SUBJECT"
+								placeholder="Project inquiry"
+								value={formData.subject}
+								onChange={handleChange}
+							/>
+
+							{/* Message */}
 							<div>
-								<label
-									htmlFor="message"
-									className="block text-sm font-medium mb-2"
-								>
-									Message{' '}
-									<span className="text-red-500">*</span>
+								<label htmlFor="message" className="font-pixel text-[9px] text-muted-foreground block mb-2 tracking-wide">
+									MESSAGE <span className="text-destructive" aria-hidden="true">*</span>
 								</label>
-								<Textarea
+								<textarea
 									id="message"
+									rows={5}
 									placeholder="Tell me about your project..."
-									rows={6}
-									aria-required="true"
 									value={formData.message}
 									onChange={handleChange}
-									className={
-										errors.message ? 'border-red-500' : ''
-									}
-									aria-invalid={
-										errors.message ? 'true' : 'false'
-									}
+									aria-required="true"
+									aria-invalid={errors.message ? 'true' : 'false'}
+									className={`w-full bg-input text-foreground font-mono-custom text-sm px-4 py-3 border border-dotted placeholder:text-muted-foreground focus:outline-none focus:border-solid focus:border-ring resize-none transition-colors ${errors.message ? 'border-destructive border-solid' : 'border-border'}`}
 								/>
 								{errors.message && (
-									<p
-										className="text-red-500 text-sm mt-1"
-										role="alert"
-									>
-										{errors.message}
-									</p>
+									<p className="font-mono-custom text-xs text-destructive mt-1" role="alert">{errors.message}</p>
 								)}
 							</div>
-							<Button
+
+							<button
 								type="submit"
-								size="lg"
-								className="w-full"
 								disabled={isSubmitting}
+								className="w-full font-pixel text-[10px] px-6 py-4 bg-primary text-primary-foreground border-2 border-primary transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[0_4px_0_0_color-mix(in_oklch,var(--primary)_30%,transparent)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none flex items-center justify-center gap-2 leading-relaxed"
 							>
 								{isSubmitting ? (
-									<>
-										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-										Sending...
-									</>
+									<><Loader2 className="w-3 h-3 animate-spin" /> SENDING...</>
 								) : (
-									'Send Message'
+									'▶ SEND MESSAGE'
 								)}
-							</Button>
+							</button>
 						</form>
-					</SpotlightCard>
+					</div>
 				</motion.div>
 
+				{/* Info + Socials */}
 				<motion.div
-					initial={{ opacity: 0, x: 20 }}
-					whileInView={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.8 }}
+					variants={fadeUp}
+					initial={shouldReduce ? false : 'hidden'}
+					whileInView="visible"
 					viewport={{ once: true }}
 					className="space-y-8"
 				>
 					<div>
-						<h3 className="text-2xl font-semibold mb-4">
-							Get in Touch
-						</h3>
-						<p className="text-muted-foreground leading-relaxed">
-							I&apos;m always open to discussing new
-							opportunities, creative ideas, or potential
-							collaborations. Whether you have a project in mind
-							or just want to connect, feel free to reach out!
+						<p className="font-pixel text-[10px] text-muted-foreground mb-3 tracking-widest">GET IN TOUCH</p>
+						<p className="font-mono-custom text-sm text-muted-foreground leading-relaxed">
+							Always open to new opportunities, interesting ideas,
+							or just a conversation about tech.
+							Don&apos;t hesitate to reach out.
 						</p>
 					</div>
 
-					<div>
-						<h4 className="text-lg font-semibold mb-4">
-							Connect with me
-						</h4>
-						<div
-							className="flex gap-4"
-							role="list"
-							aria-label="Social links"
-						>
-							{socialLinks.map((social, index) => (
-								<motion.a
-									key={social.label}
-									href={social.href}
-									initial={{ opacity: 0, y: 20 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									transition={{
-										duration: 0.5,
-										delay: index * 0.1,
-									}}
-									viewport={{ once: true }}
-									whileHover={{ scale: 1.1 }}
-									className="p-3 bg-secondary rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
-									aria-label={`Connect with me on ${social.label}`}
-									rel="noopener noreferrer"
-									target="_blank"
-									role="listitem"
+					<div className="pixel-card p-6 space-y-4">
+						<div>
+							<p className="font-pixel text-[9px] text-muted-foreground tracking-widest mb-2">EMAIL</p>
+							<div className="flex items-center gap-3">
+								<span className="font-mono-custom text-sm text-foreground break-all">{EMAIL}</span>
+								<button
+									onClick={copyEmail}
+									aria-label={copied ? 'Email copied' : 'Copy email address'}
+									className="flex-shrink-0 p-1.5 border border-dotted border-border text-muted-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
 								>
-									<social.icon
-										className="w-5 h-5"
-										aria-hidden="true"
-									/>
-									<span className="sr-only">
-										{social.label}
-									</span>
-								</motion.a>
-							))}
+									{copied
+										? <Check className="w-3.5 h-3.5 text-success" />
+										: <Copy className="w-3.5 h-3.5" />
+									}
+								</button>
+							</div>
+						</div>
+						<div className="border-t border-dotted border-border" />
+						<div>
+							<p className="font-pixel text-[9px] text-muted-foreground tracking-widest mb-1">LOCATION</p>
+							<p className="font-mono-custom text-sm text-foreground">Ho Chi Minh City, Vietnam</p>
 						</div>
 					</div>
 
-					<div className="space-y-4">
-						<div>
-							<h4 className="font-semibold">Email</h4>
-							<p className="text-muted-foreground">
+					<div>
+						<p className="font-pixel text-[10px] text-muted-foreground mb-4 tracking-widest">CONNECT</p>
+						<div className="flex flex-wrap gap-3" role="list" aria-label="Social links">
+							{socialLinks.map((social) => (
 								<a
-									href={`mailto:${personalInfo.email}`}
-									className="hover:underline"
+									key={social.label}
+									href={social.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`Connect on ${social.label}`}
+									role="listitem"
+									className="flex items-center gap-2 px-4 py-3 border border-dotted border-border text-muted-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
 								>
-									{personalInfo.email}
+									<social.icon className="w-4 h-4" aria-hidden="true" />
+									<span className="font-pixel text-[9px]">{social.label.toUpperCase()}</span>
 								</a>
-							</p>
-						</div>
-						<div>
-							<h4 className="font-semibold">Location</h4>
-							<p className="text-muted-foreground">
-								{personalInfo.address}
-							</p>
+							))}
 						</div>
 					</div>
 				</motion.div>
@@ -452,3 +277,35 @@ export const ContactSection = () => {
 		</section>
 	);
 };
+
+interface PixelFieldProps {
+	id: string;
+	label: string;
+	type?: string;
+	placeholder?: string;
+	value: string;
+	error?: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	required?: boolean;
+}
+
+function PixelField({ id, label, type = 'text', placeholder, value, error, onChange, required }: PixelFieldProps) {
+	return (
+		<div>
+			<label htmlFor={id} className="font-pixel text-[9px] text-muted-foreground block mb-2 tracking-wide">
+				{label} {required && <span className="text-destructive" aria-hidden="true">*</span>}
+			</label>
+			<input
+				id={id}
+				type={type}
+				placeholder={placeholder}
+				value={value}
+				onChange={onChange}
+				aria-required={required}
+				aria-invalid={error ? 'true' : 'false'}
+				className={`w-full bg-input text-foreground font-mono-custom text-sm px-4 py-3 border border-dotted placeholder:text-muted-foreground focus:outline-none focus:border-solid focus:border-ring transition-colors ${error ? 'border-destructive border-solid' : 'border-border'}`}
+			/>
+			{error && <p className="font-mono-custom text-xs text-destructive mt-1" role="alert">{error}</p>}
+		</div>
+	);
+}

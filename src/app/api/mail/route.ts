@@ -45,7 +45,7 @@ export async function POST(req: Request) {
 			to: process.env.MAIL_RECEIVER,
 			subject: emailSubject,
 			html: `
-				<h2>Bạn có tin nhắn mới</h2>
+				<h2>New message from portfolio</h2>
 				<p><strong>Name:</strong> ${name}</p>
 				<p><strong>Email:</strong> ${email}</p>
 				${subject ? `<p><strong>Subject:</strong> ${subject}</p>` : ''}
