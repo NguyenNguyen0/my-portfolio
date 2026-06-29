@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       temperature: 0.4,
     });
 
-    return result.toTextStreamResponse();
+    return result.toUIMessageStreamResponse();
   } catch (error) {
     if (error instanceof SyntaxError) {
       return NextResponse.json(

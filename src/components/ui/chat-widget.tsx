@@ -1,6 +1,8 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import { usePortfolioActions } from '@/context/portfolio-actions';
+import { useTheme } from 'next-themes';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bot, X, Send } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -15,6 +17,8 @@ export function ChatWidget() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const { dispatch } = usePortfolioActions();
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -54,19 +58,36 @@ export function ChatWidget() {
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
+      let buffer = '';
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        setMessages(prev => {
-          const updated = [...prev];
-          updated[updated.length - 1] = {
-            ...updated[updated.length - 1],
-            content: updated[updated.length - 1].content + chunk,
-          };
-          return updated;
-        });
+        buffer += decoder.decode(value, { stream: true });
+
+        const lines = buffer.split('\n');
+        buffer = lines.pop() ?? '';
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const raw = line.slice(6).trim();
+          if (!raw) continue;
+          let event: Record<string, unknown>;
+          try { event = JSON.parse(raw); } catch { continue; }
+
+          if (event.type === 'text' && typeof event.text === 'string') {
+            setMessages(prev => {
+              const updated = [...prev];
+              updated[updated.length - 1] = {
+                ...updated[updated.length - 1],
+                content: updated[updated.length - 1].content + (event.text as string),
+              };
+              return updated;
+            });
+          } else if (event.type === 'tool-call') {
+            handleUiAction(event.toolName as string, event.args as Record<string, unknown>);
+          }
+        }
       }
     } catch {
       setMessages(prev => {
@@ -76,6 +97,41 @@ export function ChatWidget() {
       });
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  function handleUiAction(toolName: string, args: Record<string, unknown>) {
+    switch (toolName) {
+      case 'scroll_to_section': {
+        const el = document.getElementById(args.sectionId as string);
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        break;
+      }
+      case 'change_theme':
+        setTheme(args.theme as string);
+        break;
+      case 'change_accent_color':
+        document.documentElement.style.setProperty('--primary', args.primary as string);
+        document.documentElement.style.setProperty('--ring', args.ring as string);
+        dispatch({ type: 'SET_ACCENT_COLOR', color: args.color as string });
+        break;
+      case 'highlight_project': {
+        const el = document.getElementById('projects-section');
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        dispatch({ type: 'SET_HIGHLIGHTED_PROJECT', projectId: args.projectId as string });
+        break;
+      }
+      case 'set_hero_description':
+        dispatch({ type: 'SET_HERO_DESCRIPTION', text: args.text as string });
+        break;
+      case 'focus_skill':
+        dispatch({ type: 'SET_FOCUSED_SKILL', skillId: args.skillId as string });
+        break;
+      case 'reset_ui':
+        document.documentElement.style.removeProperty('--primary');
+        document.documentElement.style.removeProperty('--ring');
+        dispatch({ type: 'RESET' });
+        break;
     }
   }
 
