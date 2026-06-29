@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion, useReducedMotion, type Transition } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import { PacManRunner } from '@/components/ui/pac-man-runner';
+import { usePortfolioActions } from '@/context/portfolio-actions';
 
 const NAME_PARTS = ['Nguyễn Trung', 'Nguyên'] as const;
 
@@ -21,6 +22,7 @@ const fadeIn = (delay = 0) => ({
 
 export const HeroSection = () => {
 	const shouldReduce = useReducedMotion();
+	const { state } = usePortfolioActions();
 
 	const scrollToSection = (id: string) => {
 		const el = document.getElementById(id);
@@ -95,9 +97,7 @@ export const HeroSection = () => {
 						{...(shouldReduce ? {} : fadeUp(0.32))}
 						className="font-mono-custom text-sm sm:text-base text-muted-foreground mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
 					>
-						Builds distributed systems end-to-end — Spring Boot microservices,
-						Kafka pipelines, LangGraph AI agents, React interfaces.
-						Deployed to production on AWS. Ships things that work.
+						{state.heroDescription ?? 'Builds distributed systems end-to-end — Spring Boot microservices, Kafka pipelines, LangGraph AI agents, React interfaces. Deployed to production on AWS. Ships things that work.'}
 					</motion.p>
 
 					{/* CTAs */}
