@@ -40,14 +40,20 @@ export function ResizableNavbar() {
 			animate={{ y: 0 }}
 			transition={{ duration: 0.4, ease: 'easeOut' }}
 			className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 border-b border-dotted border-border ${
-				scrolled ? 'bg-background/90 backdrop-blur-md' : 'bg-transparent'
+				scrolled
+					? 'bg-background/90 backdrop-blur-md'
+					: 'bg-transparent'
 			}`}
 			aria-label="Main navigation"
 		>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex justify-between items-center h-16">
 					{/* Logo */}
-					<a href="#hero" aria-label="Back to top" className="flex-shrink-0 group">
+					<a
+						href="#hero"
+						aria-label="Back to top"
+						className="flex-shrink-0 group"
+					>
 						<div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-primary transition-all duration-150 bg-white group-hover:shadow-[0_0_0_3px_color-mix(in_oklch,var(--primary)_25%,transparent)]">
 							<Image
 								src="/dev-icon.png"
@@ -65,7 +71,10 @@ export function ResizableNavbar() {
 							<a
 								key={item.name}
 								href={item.href}
-								onClick={(e) => { e.preventDefault(); scrollTo(item.href); }}
+								onClick={(e) => {
+									e.preventDefault();
+									scrollTo(item.href);
+								}}
 								className="font-pixel text-[9px] text-muted-foreground tracking-widest transition-colors duration-150 hover:text-primary focus-visible:text-primary focus-visible:outline-none focus-visible:underline"
 							>
 								{item.name}
@@ -93,21 +102,32 @@ export function ResizableNavbar() {
 			<AnimatePresence>
 				{isOpen && (
 					<motion.div
-						initial={shouldReduce ? false : { opacity: 0, height: 0 }}
+						initial={
+							shouldReduce ? false : { opacity: 0, height: 0 }
+						}
 						animate={{ opacity: 1, height: 'auto' }}
 						exit={{ opacity: 0, height: 0 }}
 						transition={{ duration: 0.2, ease: 'easeOut' }}
 						className="md:hidden bg-background/95 backdrop-blur-md border-t border-dotted border-border overflow-hidden"
 					>
-						<nav className="px-6 py-6 space-y-5" aria-label="Mobile navigation">
+						<nav
+							className="px-6 py-6 space-y-5"
+							aria-label="Mobile navigation"
+						>
 							{navItems.map((item) => (
 								<a
 									key={item.name}
 									href={item.href}
-									onClick={(e) => { e.preventDefault(); setIsOpen(false); scrollTo(item.href); }}
+									onClick={(e) => {
+										e.preventDefault();
+										setIsOpen(false);
+										scrollTo(item.href);
+									}}
 									className="flex items-center gap-3 font-pixel text-[10px] text-muted-foreground tracking-widest hover:text-primary transition-colors"
 								>
-									<span className="text-primary text-[8px]">▶</span>
+									<span className="text-primary text-[8px]">
+										▶
+									</span>
 									{item.name}
 								</a>
 							))}

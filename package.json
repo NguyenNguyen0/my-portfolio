@@ -14,7 +14,6 @@
   "dependencies": {
     "@ai-sdk/groq": "^4.0.1",
     "@octokit/rest": "^22.0.0",
-    "@radix-ui/react-slot": "^1.2.3",
     "@vercel/speed-insights": "^1.2.0",
     "ai": "^7.0.4",
     "class-variance-authority": "^0.7.1",

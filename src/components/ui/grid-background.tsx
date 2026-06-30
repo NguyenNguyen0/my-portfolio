@@ -6,28 +6,28 @@ import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 
 const BG_PELLETS = [
-	{ x: 3,  y: 12, d: 0.0, dur: 1.6 },
-	{ x: 96, y: 8,  d: 0.5, dur: 2.0 },
-	{ x: 8,  y: 35, d: 1.1, dur: 1.4 },
+	{ x: 3, y: 12, d: 0.0, dur: 1.6 },
+	{ x: 96, y: 8, d: 0.5, dur: 2.0 },
+	{ x: 8, y: 35, d: 1.1, dur: 1.4 },
 	{ x: 92, y: 30, d: 0.3, dur: 1.8 },
-	{ x: 5,  y: 58, d: 0.8, dur: 1.5 },
+	{ x: 5, y: 58, d: 0.8, dur: 1.5 },
 	{ x: 95, y: 55, d: 1.4, dur: 2.2 },
-	{ x: 2,  y: 78, d: 0.2, dur: 1.7 },
+	{ x: 2, y: 78, d: 0.2, dur: 1.7 },
 	{ x: 97, y: 75, d: 0.9, dur: 1.3 },
-	{ x: 15, y: 5,  d: 1.6, dur: 1.9 },
-	{ x: 80, y: 4,  d: 0.4, dur: 1.6 },
+	{ x: 15, y: 5, d: 1.6, dur: 1.9 },
+	{ x: 80, y: 4, d: 0.4, dur: 1.6 },
 	{ x: 20, y: 92, d: 1.2, dur: 2.1 },
 	{ x: 78, y: 94, d: 0.6, dur: 1.4 },
-	{ x: 50, y: 3,  d: 1.8, dur: 1.8 },
+	{ x: 50, y: 3, d: 1.8, dur: 1.8 },
 	{ x: 48, y: 96, d: 0.1, dur: 2.0 },
 	{ x: 30, y: 48, d: 1.5, dur: 1.5 },
 	{ x: 68, y: 52, d: 0.7, dur: 1.7 },
 ];
 
 const PAC_LANES = [
-	{ y: 22, dir:  1, delay:  0, dur: 30 },
+	{ y: 22, dir: 1, delay: 0, dur: 30 },
 	{ y: 55, dir: -1, delay: 10, dur: 35 },
-	{ y: 80, dir:  1, delay: 20, dur: 28 },
+	{ y: 80, dir: 1, delay: 20, dur: 28 },
 ] as const;
 
 // Blinky / Pinky / Inky
@@ -45,18 +45,22 @@ interface GridBackgroundProps {
 export function GridBackground({ children, className }: GridBackgroundProps) {
 	const { resolvedTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
-	const auraRef    = useRef<HTMLDivElement>(null);
+	const auraRef = useRef<HTMLDivElement>(null);
 	const pelletRefs = useRef<(HTMLDivElement | null)[]>([]);
 	const eatenTimers = useRef<(ReturnType<typeof setTimeout> | null)[]>(
-		Array.from({ length: BG_PELLETS.length }, () => null)
+		Array.from({ length: BG_PELLETS.length }, () => null),
 	);
 	const isDarkRef = useRef(true);
 
-	useEffect(() => { setMounted(true); }, []);
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	const isDark = !mounted || resolvedTheme !== 'light';
 
-	useEffect(() => { isDarkRef.current = isDark; }, [isDark]);
+	useEffect(() => {
+		isDarkRef.current = isDark;
+	}, [isDark]);
 
 	useEffect(() => {
 		const timers = eatenTimers.current;
@@ -66,19 +70,26 @@ export function GridBackground({ children, className }: GridBackgroundProps) {
 				const c = isDarkRef.current
 					? 'oklch(87.6% 0.179 95.4 / 0.07)'
 					: 'oklch(44.8% 0.249 264.1 / 0.07)';
-				auraRef.current.style.background =
-					`radial-gradient(260px circle at ${e.clientX}px ${e.clientY}px, ${c}, transparent 70%)`;
+				auraRef.current.style.background = `radial-gradient(260px circle at ${e.clientX}px ${e.clientY}px, ${c}, transparent 70%)`;
 			}
 
 			// Layer 2: dot consumption
 			pelletRefs.current.forEach((el, i) => {
 				if (!el || eatenTimers.current[i]) return;
 				const r = el.getBoundingClientRect();
-				if (Math.hypot(e.clientX - r.left - 2.5, e.clientY - r.top - 2.5) < 80) {
+				if (
+					Math.hypot(
+						e.clientX - r.left - 2.5,
+						e.clientY - r.top - 2.5,
+					) < 80
+				) {
 					el.style.transform = 'scale(0)';
-					el.style.opacity   = '0';
+					el.style.opacity = '0';
 					eatenTimers.current[i] = setTimeout(() => {
-						if (el) { el.style.transform = ''; el.style.opacity = '0.55'; }
+						if (el) {
+							el.style.transform = '';
+							el.style.opacity = '0.55';
+						}
 						eatenTimers.current[i] = null;
 					}, 3000);
 				}
@@ -88,7 +99,9 @@ export function GridBackground({ children, className }: GridBackgroundProps) {
 		window.addEventListener('mousemove', onMouseMove, { passive: true });
 		return () => {
 			window.removeEventListener('mousemove', onMouseMove);
-			timers.forEach(t => { if (t) clearTimeout(t); });
+			timers.forEach((t) => {
+				if (t) clearTimeout(t);
+			});
 		};
 	}, []);
 
@@ -135,9 +148,13 @@ export function GridBackground({ children, className }: GridBackgroundProps) {
 				}
 			`}</style>
 
-			<div className={cn('relative min-h-screen bg-background', className)}>
-				<div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-
+			<div
+				className={cn('relative min-h-screen bg-background', className)}
+			>
+				<div
+					className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
+					aria-hidden="true"
+				>
 					{/* Dark maze grid */}
 					<div
 						className="absolute inset-0 transition-opacity duration-500"
@@ -218,7 +235,8 @@ export function GridBackground({ children, className }: GridBackgroundProps) {
 									background: GHOST_COLORS[i],
 									borderRadius: '50% 50% 20% 20%',
 									opacity: 0.22,
-									animation: 'ghost-float 1.1s ease-in-out infinite',
+									animation:
+										'ghost-float 1.1s ease-in-out infinite',
 									animationDelay: `${i * 0.3}s`,
 								}}
 							/>
@@ -229,7 +247,9 @@ export function GridBackground({ children, className }: GridBackgroundProps) {
 					{BG_PELLETS.map((p, i) => (
 						<div
 							key={i}
-							ref={el => { pelletRefs.current[i] = el; }}
+							ref={(el) => {
+								pelletRefs.current[i] = el;
+							}}
 							className="absolute rounded-full bg-primary animate-pixel-blink"
 							style={{
 								left: `${p.x}%`,
@@ -239,7 +259,8 @@ export function GridBackground({ children, className }: GridBackgroundProps) {
 								opacity: 0.55,
 								animationDelay: `${p.d}s`,
 								animationDuration: `${p.dur}s`,
-								transition: 'transform 0.25s ease, opacity 0.25s ease, background-color 0.3s ease',
+								transition:
+									'transform 0.25s ease, opacity 0.25s ease, background-color 0.3s ease',
 							}}
 						/>
 					))}

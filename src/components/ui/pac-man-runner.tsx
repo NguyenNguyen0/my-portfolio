@@ -9,7 +9,7 @@ const PELLET_COUNT = 12;
 
 function eatAtPercent(index: number, total: number): number {
 	const x = 4 + index * (92 / (total - 1)); // pellet x position (%)
-	return Math.round((x + 5) / 110 * 86);    // % into animation when pac reaches it
+	return Math.round(((x + 5) / 110) * 86); // % into animation when pac reaches it
 }
 
 export function PacManRunner() {

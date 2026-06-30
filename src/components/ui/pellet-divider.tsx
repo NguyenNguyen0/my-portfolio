@@ -7,7 +7,10 @@ interface PelletDividerProps {
 	count?: number;
 }
 
-export function PelletDivider({ className = '', count = 32 }: PelletDividerProps) {
+export function PelletDivider({
+	className = '',
+	count = 32,
+}: PelletDividerProps) {
 	const shouldReduce = useReducedMotion();
 
 	return (
@@ -19,7 +22,10 @@ export function PelletDivider({ className = '', count = 32 }: PelletDividerProps
 				<motion.span
 					key={i}
 					className="block w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"
-					initial={{ opacity: shouldReduce ? 1 : 0, scale: shouldReduce ? 1 : 0 }}
+					initial={{
+						opacity: shouldReduce ? 1 : 0,
+						scale: shouldReduce ? 1 : 0,
+					}}
 					whileInView={{ opacity: 1, scale: 1 }}
 					viewport={{ once: true, margin: '-20px' }}
 					transition={{
