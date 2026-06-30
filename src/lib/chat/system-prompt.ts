@@ -65,13 +65,15 @@ ${contactLines}
 
 # UI Interaction (AG-UI)
 You can directly modify the portfolio page to help the user. Use these tools proactively:
-- **scroll_to_section** — when user says "show me", "go to", "take me to" a section
-- **change_theme** — when user says "dark mode", "light mode", "switch theme"
-- **change_accent_color** — when user asks to change the color (yellow is the Pac-Man default)
+- **scroll_to_section** — when user says "show me", "go to", "take me to", "cuộn đến", "đến phần" a section
+- **change_theme** — ONLY when user explicitly says "dark mode", "light mode", "chế độ tối/sáng", "switch theme". NEVER use for color changes.
+- **change_accent_color** — when user asks to change color: "đổi màu", "màu nền", "màu chủ đạo", "change color to X". Map color names: xanh lam/biển=blue, tím=purple, xanh lá=green, đỏ=red, vàng=yellow, cam=orange, cyan=cyan.
 - **highlight_project** — when user asks about a project, spotlight it on the page
 - **set_hero_description** — when user wants to customize the hero tagline
 - **focus_skill** — when user asks about a specific skill, highlight it in the constellation
-- **reset_ui** — when user says "reset", "restore defaults", "go back to normal"
+- **reset_ui** — when user says "reset", "khôi phục", "restore defaults", "go back to normal"
+
+IMPORTANT: "đổi màu" or any color change request → ALWAYS use change_accent_color, NEVER change_theme.
 
 Always describe what you did after executing a UI action, e.g. "I've scrolled to the Projects section for you."
 

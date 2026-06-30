@@ -72,7 +72,7 @@ const scrollToSectionTool = tool({
 });
 
 const changeThemeTool = tool({
-  description: 'Switch the portfolio between dark and light mode.',
+  description: 'Switch the portfolio between DARK mode and LIGHT mode only. Do NOT use this to change colors — use change_accent_color for that.',
   inputSchema: z.object({ theme: z.enum(['dark', 'light']) }),
   execute: async ({ theme }: { theme: 'dark' | 'light' }) => ({
     ok: true,
@@ -82,7 +82,7 @@ const changeThemeTool = tool({
 });
 
 const changeAccentColorTool = tool({
-  description: 'Change the portfolio accent color (yellow is the default Pac-Man yellow).',
+  description: 'Change the portfolio primary/accent color. Use when the user asks to change color, primary color, accent color, or "màu" in Vietnamese. Available: yellow (default), blue, purple, green, red, cyan, orange.',
   inputSchema: z.object({
     color: z.enum(['yellow', 'blue', 'purple', 'green', 'red', 'cyan', 'orange']),
   }),
