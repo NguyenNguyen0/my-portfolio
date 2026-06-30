@@ -7,31 +7,31 @@
    PACMAN DESIGN SYSTEM — Dark Mode (default)
    ───────────────────────────────────────── */
 :root {
-  --background:            oklch(0% 0 0);
-  --foreground:            oklch(95% 0 0);
-  --card:                  oklch(6% 0 0);
-  --card-foreground:       oklch(95% 0 0);
-  --popover:               oklch(6% 0 0);
-  --popover-foreground:    oklch(95% 0 0);
-  --primary:               oklch(87.6% 0.179 95.4);   /* #FFD700 Pac-Man yellow */
-  --primary-foreground:    oklch(0% 0 0);
-  --secondary:             oklch(44.8% 0.249 264.1);  /* #2A3FE5 ghost blue */
-  --secondary-foreground:  oklch(95% 0 0);
-  --accent:                oklch(82.7% 0.071 18.5);   /* #F4B9B0 ghost pink */
-  --accent-foreground:     oklch(0% 0 0);
-  --muted:                 oklch(12% 0 0);
-  --muted-foreground:      oklch(50% 0 0);
-  --border:                oklch(22% 0 0);
-  --input:                 oklch(12% 0 0);
-  --ring:                  oklch(87.6% 0.179 95.4);
-  --destructive:           oklch(50.6% 0.214 27.3);
-  --destructive-foreground:oklch(95% 0 0);
-  --success:               oklch(51.8% 0.177 152.3);
-  --radius:                0px;
-  --radius-sm:             0px;
-  --radius-md:             0px;
-  --radius-lg:             0px;
-  --radius-xl:             2px;
+  --background: oklch(0% 0 0);
+  --foreground: oklch(95% 0 0);
+  --card: oklch(6% 0 0);
+  --card-foreground: oklch(95% 0 0);
+  --popover: oklch(6% 0 0);
+  --popover-foreground: oklch(95% 0 0);
+  --primary: oklch(87.6% 0.179 95.4); /* #FFD700 Pac-Man yellow */
+  --primary-foreground: oklch(0% 0 0);
+  --secondary: oklch(44.8% 0.249 264.1); /* #2A3FE5 ghost blue */
+  --secondary-foreground: oklch(95% 0 0);
+  --accent: oklch(82.7% 0.071 18.5); /* #F4B9B0 ghost pink */
+  --accent-foreground: oklch(0% 0 0);
+  --muted: oklch(12% 0 0);
+  --muted-foreground: oklch(50% 0 0);
+  --border: oklch(22% 0 0);
+  --input: oklch(12% 0 0);
+  --ring: oklch(87.6% 0.179 95.4);
+  --destructive: oklch(50.6% 0.214 27.3);
+  --destructive-foreground: oklch(95% 0 0);
+  --success: oklch(51.8% 0.177 152.3);
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 2px;
 
   /* marquee */
   --duration: 50s;
@@ -42,55 +42,55 @@
    Light Mode
    ───────────────────────────────────────── */
 .light {
-  --background:            oklch(98% 0 0);
-  --foreground:            oklch(10% 0 0);
-  --card:                  oklch(100% 0 0);
-  --card-foreground:       oklch(10% 0 0);
-  --popover:               oklch(100% 0 0);
-  --popover-foreground:    oklch(10% 0 0);
-  --primary:               oklch(44.8% 0.249 264.1);  /* blue in light mode */
-  --primary-foreground:    oklch(98% 0 0);
-  --secondary:             oklch(87.6% 0.179 95.4);   /* yellow as secondary in light */
-  --secondary-foreground:  oklch(10% 0 0);
-  --accent:                oklch(82.7% 0.071 18.5);
-  --accent-foreground:     oklch(10% 0 0);
-  --muted:                 oklch(94% 0 0);
-  --muted-foreground:      oklch(45% 0 0);
-  --border:                oklch(80% 0 0);
-  --input:                 oklch(94% 0 0);
-  --ring:                  oklch(44.8% 0.249 264.1);
-  --destructive:           oklch(50.6% 0.214 27.3);
-  --destructive-foreground:oklch(98% 0 0);
+  --background: oklch(98% 0 0);
+  --foreground: oklch(10% 0 0);
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(10% 0 0);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(10% 0 0);
+  --primary: oklch(44.8% 0.249 264.1); /* blue in light mode */
+  --primary-foreground: oklch(98% 0 0);
+  --secondary: oklch(87.6% 0.179 95.4); /* yellow as secondary in light */
+  --secondary-foreground: oklch(10% 0 0);
+  --accent: oklch(82.7% 0.071 18.5);
+  --accent-foreground: oklch(10% 0 0);
+  --muted: oklch(94% 0 0);
+  --muted-foreground: oklch(45% 0 0);
+  --border: oklch(80% 0 0);
+  --input: oklch(94% 0 0);
+  --ring: oklch(44.8% 0.249 264.1);
+  --destructive: oklch(50.6% 0.214 27.3);
+  --destructive-foreground: oklch(98% 0 0);
 }
 
 /* ─────────────────────────────────────────
    Theme mapping
    ───────────────────────────────────────── */
 @theme inline {
-  --font-sans:   "Be Vietnam Pro", var(--font-geist-sans);
-  --font-mono:   "Space Mono", var(--font-geist-mono);
-  --font-pixel:  "Press Start 2P", monospace;
+  --font-sans: "Be Vietnam Pro", var(--font-geist-sans);
+  --font-mono: "Space Mono", var(--font-geist-mono);
+  --font-pixel: "Press Start 2P", monospace;
 
-  --color-background:              var(--background);
-  --color-foreground:              var(--foreground);
-  --color-card:                    var(--card);
-  --color-card-foreground:         var(--card-foreground);
-  --color-popover:                 var(--popover);
-  --color-popover-foreground:      var(--popover-foreground);
-  --color-primary:                 var(--primary);
-  --color-primary-foreground:      var(--primary-foreground);
-  --color-secondary:               var(--secondary);
-  --color-secondary-foreground:    var(--secondary-foreground);
-  --color-accent:                  var(--accent);
-  --color-accent-foreground:       var(--accent-foreground);
-  --color-muted:                   var(--muted);
-  --color-muted-foreground:        var(--muted-foreground);
-  --color-border:                  var(--border);
-  --color-input:                   var(--input);
-  --color-ring:                    var(--ring);
-  --color-destructive:             var(--destructive);
-  --color-destructive-foreground:  var(--destructive-foreground);
-  --color-success:                 var(--success);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
 
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
@@ -117,83 +117,167 @@
     font-feature-settings: "ss01", "ss02", "case", "liga", "kern";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    transition: background-color 0.25s ease, color 0.15s ease;
+    transition:
+      background-color 0.25s ease,
+      color 0.15s ease;
   }
 
   /* Pixel-sharp scrollbar */
-  ::-webkit-scrollbar       { width: 4px; height: 4px; }
-  ::-webkit-scrollbar-track { background: var(--background); }
-  ::-webkit-scrollbar-thumb { background: var(--border); }
-  ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
 }
 
 /* ─────────────────────────────────────────
    Typography utilities
    ───────────────────────────────────────── */
-.font-pixel { font-family: "Press Start 2P", monospace; }
-.font-mono-custom { font-family: "Space Mono", monospace; }
+.font-pixel {
+  font-family: "Press Start 2P", monospace;
+}
+.font-mono-custom {
+  font-family: "Space Mono", monospace;
+}
 
 /* ─────────────────────────────────────────
    Keyframes
    ───────────────────────────────────────── */
 @keyframes pixel-blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(calc(-100% - var(--gap))); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
 }
 
 @keyframes marquee-vertical {
-  from { transform: translateY(0); }
-  to   { transform: translateY(calc(-100% - var(--gap))); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
 }
 
 @keyframes node-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--primary) 40%, transparent); }
-  50%       { box-shadow: 0 0 0 8px color-mix(in oklch, var(--primary) 0%, transparent); }
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--primary) 40%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 8px color-mix(in oklch, var(--primary) 0%, transparent);
+  }
 }
 
 /* Pac-Man mouth halves */
 @keyframes munch-top {
-  0%, 100% { transform: rotate(-28deg); }
-  50%       { transform: rotate(-1deg); }
+  0%,
+  100% {
+    transform: rotate(-28deg);
+  }
+  50% {
+    transform: rotate(-1deg);
+  }
 }
 @keyframes munch-bottom {
-  0%, 100% { transform: rotate(28deg); }
-  50%       { transform: rotate(1deg); }
+  0%,
+  100% {
+    transform: rotate(28deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
 }
 
 /* Pac-Man runner — left to right loop */
 @keyframes pac-run {
-  0%   { left: -5%;  opacity: 1; }
-  86%  { left: 105%; opacity: 1; }
-  87%  { left: 105%; opacity: 0; }
-  99%  { left: -5%;  opacity: 0; }
-  100% { left: -5%;  opacity: 1; }
+  0% {
+    left: -5%;
+    opacity: 1;
+  }
+  86% {
+    left: 105%;
+    opacity: 1;
+  }
+  87% {
+    left: 105%;
+    opacity: 0;
+  }
+  99% {
+    left: -5%;
+    opacity: 0;
+  }
+  100% {
+    left: -5%;
+    opacity: 1;
+  }
 }
 
 /* Pellet eaten — fades after pac-man passes */
 @keyframes pellet-eaten {
-  0%, var(--eat-at)    { opacity: 0.65; transform: scale(1); }
-  calc(var(--eat-at) + 2%) { opacity: 0;    transform: scale(0); }
-  90%                  { opacity: 0;    transform: scale(0); }
-  100%                 { opacity: 0.65; transform: scale(1); }
+  0%,
+  var(--eat-at) {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  calc(var(--eat-at) + 2%) {
+    opacity: 0;
+    transform: scale(0);
+  }
+  90% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
 }
 
 /* Subtle neon glow pulse on maze grid */
 @keyframes grid-glow {
-  0%, 100% { opacity: 0.7; }
-  50%       { opacity: 1;   }
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* Arcade READY blink — dot + text together, step-end = hard cut like real arcade */
 @keyframes ready-blink {
-  0%, 49% { opacity: 1; }
-  50%, 99% { opacity: 0; }
-  100%     { opacity: 1; }
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .animate-ready-blink {
   animation: ready-blink 0.9s step-end infinite;
@@ -203,42 +287,92 @@
 
 /* Sweep bar — bright horizontal line scrolling top→bottom */
 @keyframes crt-sweep {
-  from { transform: translateY(-100%); }
-  to   { transform: translateY(2000%); }
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(2000%);
+  }
 }
 
 /* Phosphor flicker — very subtle brightness pulse */
 @keyframes crt-flicker {
-  0%, 87%, 89%, 100% { opacity: 1;    }
-  88%                 { opacity: 0.92; }
+  0%,
+  87%,
+  89%,
+  100% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 0.92;
+  }
 }
 
 /* Glitch displacement band — overlay layer */
 @keyframes crt-band-glitch {
   /* Mostly invisible — clip hides the overlay entirely */
-  0%,  78%, 100%  { clip-path: inset(0 0 100% 0); transform: translateX(0); filter: none; }
+  0%,
+  78%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+    transform: translateX(0);
+    filter: none;
+  }
   /* First band: upper-mid, shift left + color shift */
-  79%  { clip-path: inset(22% 0 58% 0); transform: translateX(-7px);
-          filter: hue-rotate(-30deg) saturate(3) brightness(1.25); }
+  79% {
+    clip-path: inset(22% 0 58% 0);
+    transform: translateX(-7px);
+    filter: hue-rotate(-30deg) saturate(3) brightness(1.25);
+  }
   /* Still shifted, now right */
-  80%  { clip-path: inset(22% 0 58% 0); transform: translateX(6px);
-          filter: hue-rotate(20deg) saturate(2.5); }
+  80% {
+    clip-path: inset(22% 0 58% 0);
+    transform: translateX(6px);
+    filter: hue-rotate(20deg) saturate(2.5);
+  }
   /* Second band: lower */
-  81%  { clip-path: inset(62% 0 18% 0); transform: translateX(-4px);
-          filter: hue-rotate(-10deg) brightness(1.1); }
+  81% {
+    clip-path: inset(62% 0 18% 0);
+    transform: translateX(-4px);
+    filter: hue-rotate(-10deg) brightness(1.1);
+  }
   /* Tiny blip */
-  82%  { clip-path: inset(10% 0 85% 0); transform: translateX(3px); filter: none; }
+  82% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translateX(3px);
+    filter: none;
+  }
   /* Gone */
-  83%  { clip-path: inset(0 0 100% 0); transform: translateX(0); filter: none; }
+  83% {
+    clip-path: inset(0 0 100% 0);
+    transform: translateX(0);
+    filter: none;
+  }
 }
 
 /* Whole-container shake during glitch */
 @keyframes crt-container-glitch {
-  0%,  78%, 84%, 100% { transform: translateX(0) skewX(0deg); filter: none; }
-  79%  { transform: translateX(-2px) skewX(-0.4deg); filter: brightness(1.1); }
-  80%  { transform: translateX(2px)  skewX(0.3deg);  }
-  81%  { transform: translateX(-1px) skewX(0deg);    filter: none; }
-  82%  { transform: translateX(0);                   }
+  0%,
+  78%,
+  84%,
+  100% {
+    transform: translateX(0) skewX(0deg);
+    filter: none;
+  }
+  79% {
+    transform: translateX(-2px) skewX(-0.4deg);
+    filter: brightness(1.1);
+  }
+  80% {
+    transform: translateX(2px) skewX(0.3deg);
+  }
+  81% {
+    transform: translateX(-1px) skewX(0deg);
+    filter: none;
+  }
+  82% {
+    transform: translateX(0);
+  }
 }
 
 /* ─────────────────────────────────────────
@@ -305,7 +439,10 @@
 .pixel-card {
   border: 1px dotted var(--border);
   background: var(--card);
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .pixel-card:hover {

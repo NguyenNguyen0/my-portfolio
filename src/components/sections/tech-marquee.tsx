@@ -5,10 +5,28 @@ import { techIcons } from '@/data/techIcons';
 import Image from 'next/image';
 
 const technologies = [
-	'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Redux Toolkit',
-	'Next.js', 'Node.js', 'Express', 'Python', 'FastAPI', 'Flask',
-	'MongoDB', 'PostgreSQL', 'Redis',
-	'Tailwind CSS', 'Docker', 'Git', 'Vercel', 'Linux CLI', 'Postman', 'Java',
+	'HTML',
+	'CSS',
+	'JavaScript',
+	'TypeScript',
+	'React',
+	'Redux Toolkit',
+	'Next.js',
+	'Node.js',
+	'Express',
+	'Python',
+	'FastAPI',
+	'Flask',
+	'MongoDB',
+	'PostgreSQL',
+	'Redis',
+	'Tailwind CSS',
+	'Docker',
+	'Git',
+	'Vercel',
+	'Linux CLI',
+	'Postman',
+	'Java',
 ].filter((tech) => tech in techIcons);
 
 export const TechMarquee = () => {

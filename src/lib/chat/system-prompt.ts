@@ -3,32 +3,32 @@ import { projects } from '@/data/projects';
 import { socialLinks } from '@/data/socialLink';
 
 export function buildSystemPrompt(): string {
-  const infoLines = personalInfo
-    .map((item) => `- ${item.label}: ${item.value}`)
-    .join('\n');
+	const infoLines = personalInfo
+		.map((item) => `- ${item.label}: ${item.value}`)
+		.join('\n');
 
-  const skillLines = technicalSkills
-    .map((cat) => `- ${cat.title}: ${cat.skills.join(', ')}`)
-    .join('\n');
+	const skillLines = technicalSkills
+		.map((cat) => `- ${cat.title}: ${cat.skills.join(', ')}`)
+		.join('\n');
 
-  const projectLines = projects
-    .map((p) => {
-      const links = [
-        p.githubUrl ? `GitHub: ${p.githubUrl}` : '',
-        p.gitlabUrl ? `GitLab: ${p.gitlabUrl}` : '',
-        p.demoUrl ? `Demo: ${p.demoUrl}` : '',
-      ]
-        .filter(Boolean)
-        .join('; ');
-      return `- **${p.title}** (${p.period}): ${p.description}\n  Tech: ${p.techStack.join(', ')}. Role: ${p.role}${p.team ? `. Team: ${p.team}` : ''}${links ? `.\n  Links: ${links}` : ''}.`;
-    })
-    .join('\n');
+	const projectLines = projects
+		.map((p) => {
+			const links = [
+				p.githubUrl ? `GitHub: ${p.githubUrl}` : '',
+				p.gitlabUrl ? `GitLab: ${p.gitlabUrl}` : '',
+				p.demoUrl ? `Demo: ${p.demoUrl}` : '',
+			]
+				.filter(Boolean)
+				.join('; ');
+			return `- **${p.title}** (${p.period}): ${p.description}\n  Tech: ${p.techStack.join(', ')}. Role: ${p.role}${p.team ? `. Team: ${p.team}` : ''}${links ? `.\n  Links: ${links}` : ''}.`;
+		})
+		.join('\n');
 
-  const contactLines = socialLinks
-    .map((s) => `- ${s.label}: ${s.url}`)
-    .join('\n');
+	const contactLines = socialLinks
+		.map((s) => `- ${s.label}: ${s.url}`)
+		.join('\n');
 
-  return `You are the AI assistant of Nguyễn Trung Nguyên's personal portfolio.
+	return `You are the AI assistant of Nguyễn Trung Nguyên's personal portfolio.
 
 # Role
 Answer visitors' questions about Nguyễn Trung Nguyên and his projects.

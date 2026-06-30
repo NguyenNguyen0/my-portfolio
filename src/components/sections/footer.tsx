@@ -10,7 +10,8 @@ export const Footer = () => {
 					1ST &nbsp; NGUYENNGUYEN0 &nbsp; ∞ PTS
 				</p>
 				<p className="font-mono-custom text-xs text-muted-foreground">
-					© {currentYear} · Built with Next.js, Tailwind CSS &amp; Framer Motion
+					© {currentYear} · Built with Next.js, Tailwind CSS &amp;
+					Framer Motion
 				</p>
 			</div>
 		</footer>

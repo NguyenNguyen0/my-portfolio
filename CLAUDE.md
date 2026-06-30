@@ -21,16 +21,19 @@ Single-page Next.js 15 portfolio site (App Router, React 19, TypeScript, Tailwin
 **Page structure** (`src/app/page.tsx`): one route renders all sections stacked vertically — `HeroSection → TechMarquee → AboutSection → ProjectsSection → GitHubSection → ContactSection → Footer` — wrapped in `GridBackground` with a fixed `ResizableNavbar`.
 
 **Component split:**
+
 - `src/components/sections/` — page sections (almost all `'use client'` with framer-motion animations)
 - `src/components/ui/` — reusable primitives (shadcn/ui style: `button`, `card`, `input`, `textarea`, plus custom `bento-grid`, `marquee`, `spotlight-card`, `hero-highlight`, etc.)
 
 **Data layer** (`src/data/`): all portfolio content lives here as exported constants — no CMS, no database.
+
 - `personalInfo.tsx` — bio facts and skill categories
 - `projects.tsx` — `Project[]` array with the `Project` interface
 - `socialLink.tsx` — social links array
 - `techIcons.tsx` — tech stack icons for the marquee
 
 **API route** (`src/app/api/mail/route.ts`): contact form POST handler using nodemailer over Gmail. Requires two environment variables:
+
 - `MAIL_USER` — Gmail address used to send
 - `MAIL_PASS` — Gmail app password
 - `MAIL_RECEIVER` — destination email address
