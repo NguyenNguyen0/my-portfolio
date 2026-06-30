@@ -45,7 +45,7 @@ export const TechBadge = ({ tech }: { tech: string }) => {
 
 	return (
 		<div className="pixel-card flex items-center gap-2 px-4 py-2 mx-2 cursor-default select-none">
-			<div className="w-5 h-5 flex-shrink-0 flex items-center justify-center bg-white/10 p-0.5">
+			<div className="w-5 h-5 flex-shrink-0 flex items-center justify-center bg-foreground/10 p-0.5">
 				<Image
 					src={techIcon.iconPath}
 					alt={`${tech} icon`}

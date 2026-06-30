@@ -76,7 +76,7 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
 							src={images[idx]}
 							alt={`${title} — screenshot ${idx + 1} of ${images.length}`}
 							fill
-							className="object-contain bg-[#050508]"
+							className="object-contain bg-muted"
 							sizes="(max-width: 768px) 100vw, 45vw"
 						/>
 					</motion.div>
@@ -178,7 +178,7 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
 										src={src}
 										alt={`${title} screenshot ${i + 1}`}
 										fill
-										className="object-contain bg-[#050508]"
+										className="object-contain bg-muted"
 										sizes="(max-width: 1024px) 100vw, 896px"
 									/>
 									<span className="absolute bottom-2 left-2 font-pixel text-[7px] bg-black/80 text-muted-foreground px-2 py-1">
@@ -203,7 +203,7 @@ function ProjectCard({ project, index, isHighlighted }: { project: typeof projec
 	return (
 		<motion.article
 			variants={fadeUp}
-			className={`border border-dotted border-border bg-[#030303] overflow-hidden transition-all duration-300 hover:border-solid hover:border-primary/50${isHighlighted ? ' ring-2 ring-primary shadow-[0_0_24px_oklch(87.6%_0.179_95.4/0.5)]' : ''}`}
+			className={`border border-dotted border-border bg-card overflow-hidden transition-all duration-300 hover:border-solid hover:border-primary/50${isHighlighted ? ' ring-2 ring-primary shadow-[0_0_24px_oklch(87.6%_0.179_95.4/0.5)]' : ''}`}
 		>
 			<div className={`flex flex-col lg:flex-row lg:min-h-[480px] ${isEven ? '' : 'lg:flex-row-reverse'}`}>
 

@@ -157,8 +157,8 @@ function CategoryFilter({
 						onClick={() => onToggle(cat)}
 						className="font-pixel text-[8px] px-3 py-1.5 border tracking-widest transition-all duration-200"
 						style={{
-							borderColor: on ? color : '#333',
-							color:       on ? color : '#555',
+							borderColor: on ? color : 'var(--border)',
+							color:       on ? color : 'var(--muted-foreground)',
 							background:  on ? `${color}18` : 'transparent',
 						}}
 					>
@@ -233,7 +233,7 @@ function HeroInfo() {
 			</div>
 			<div className="grid grid-cols-2 gap-2">
 				{META.map((m) => (
-					<div key={m.label} className="border border-dotted border-border p-3 bg-[#080808]">
+					<div key={m.label} className="border border-dotted border-border p-3 bg-muted">
 						<p className="font-pixel text-[7px] text-muted-foreground mb-1 tracking-widest">{m.label}</p>
 						<p className="font-mono-custom text-xs text-foreground leading-snug">{m.value}</p>
 					</div>
@@ -295,7 +295,7 @@ function TechNode({
 					className="w-10 h-10 border p-1.5 flex items-center justify-center"
 					style={{
 						borderColor:    color,
-						background:     'rgba(255, 255, 255, 0.08)',
+						background:     'color-mix(in oklch, var(--foreground) 8%, transparent)',
 						backdropFilter: 'blur(6px)',
 						boxShadow:      isHovered || isFocused ? `0 0 12px ${color}66` : 'none',
 					}}
@@ -338,8 +338,7 @@ function Constellation({ activeCategories, focusedSkill }: { activeCategories: S
 
 	return (
 		<div
-			className="relative w-full min-h-screen overflow-hidden"
-			style={{ background: '#0a0a0f' }}
+			className="relative w-full min-h-screen overflow-hidden bg-card"
 			aria-label="Interactive skill constellation"
 		>
 			{/* Dot-grid texture */}
@@ -379,7 +378,7 @@ function Constellation({ activeCategories, focusedSkill }: { activeCategories: S
 							key={`x-${a}-${b}`}
 							x1={na.x} y1={na.y}
 							x2={nb.x} y2={nb.y}
-							stroke="#ffffff"
+							stroke="var(--foreground)"
 							strokeWidth="0.18"
 							strokeDasharray="1 2"
 							strokeOpacity={crossOpacity(a, b)}
@@ -412,7 +411,7 @@ function Constellation({ activeCategories, focusedSkill }: { activeCategories: S
 				>
 					<div
 						className="relative h-40 w-40 border-2 border-primary overflow-hidden flex-shrink-0"
-						style={{ background: 'linear-gradient(180deg, #0e1020 0%, #080810 100%)' }}
+						style={{ background: 'linear-gradient(180deg, color-mix(in oklch, var(--foreground) 10%, var(--card)) 0%, var(--card) 100%)' }}
 					>
 						<Image
 							src="/cool_software_engineer_rotations_8dir.gif"
@@ -459,8 +458,8 @@ function GemItem({ name, icon, color }: { name: string; icon: string | null; col
 				transition={{ duration: 0.14 }}
 				className="w-9 h-9 border p-1.5 flex items-center justify-center cursor-pointer"
 				style={{
-					borderColor:    hovered ? color : '#3a3a4a',
-					background:     'rgba(255, 255, 255, 0.07)',
+					borderColor:    hovered ? color : 'var(--border)',
+					background:     'color-mix(in oklch, var(--foreground) 7%, transparent)',
 					backdropFilter: 'blur(4px)',
 					boxShadow:      hovered ? `0 0 10px ${color}44` : 'none',
 					transition:     'border-color 0.15s, box-shadow 0.15s',
@@ -477,7 +476,7 @@ function GemItem({ name, icon, color }: { name: string; icon: string | null; col
 			{hovered && (
 				<div
 					className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-1 whitespace-nowrap z-30 pointer-events-none"
-					style={{ background: 'rgba(6,6,16,0.95)', border: `1px solid ${color}` }}
+					style={{ background: 'var(--popover)', border: `1px solid ${color}` }}
 				>
 					<span className="font-pixel text-[7px]" style={{ color }}>{name}</span>
 				</div>
@@ -493,8 +492,7 @@ function TechStackGrid({ activeCategories }: { activeCategories: Set<Category> }
 
 	return (
 		<div
-			className="border border-dotted border-border overflow-hidden"
-			style={{ background: 'rgba(10, 10, 20, 0.5)' }}
+			className="border border-dotted border-border overflow-hidden bg-muted/50"
 		>
 			<div className="grid grid-cols-2 md:grid-cols-4">
 				<AnimatePresence mode="popLayout">
@@ -576,7 +574,7 @@ export const AboutSection = () => {
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
 				viewport={{ once: true }}
-				className="flex flex-col sm:flex-row gap-10 sm:gap-0 items-center mb-16 border border-dotted border-border bg-[#030303] overflow-hidden"
+				className="flex flex-col sm:flex-row gap-10 sm:gap-0 items-center mb-16 border border-dotted border-border bg-card overflow-hidden"
 			>
 				<HeroAvatar />
 				<HeroInfo />
