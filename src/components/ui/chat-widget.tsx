@@ -4,12 +4,23 @@ import { useRef, useEffect, useState } from 'react';
 import { usePortfolioActions } from '@/context/portfolio-actions';
 import { useTheme } from 'next-themes';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Bot, X, Send } from 'lucide-react';
+import { Bot, X, Send, Info } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { cn } from '@/lib/utils';
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string };
+
+const PROMPT_CHIPS = [
+  { label: '🎨 Đổi màu nền', text: 'Đổi màu nền sang xanh dương' },
+  { label: '📝 Đổi nội dung', text: 'Đổi nội dung hero thành một lời chào vui vẻ' },
+  { label: '💼 Hỏi về project', text: 'Cho tôi xem các project nổi bật' },
+  { label: '🙋 Giới thiệu Trung Nguyên', text: 'Giới thiệu về Trung Nguyên' },
+  { label: '🌙 Đổi theme', text: 'Chuyển sang dark mode' },
+  { label: '🛠 Kỹ năng', text: 'Trung Nguyên có những kỹ năng gì?' },
+  { label: '📬 Liên hệ', text: 'Làm sao để liên hệ với Trung Nguyên?' },
+  { label: '🔄 Reset UI', text: 'Reset lại giao diện về mặc định' },
+];
 
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -24,9 +35,7 @@ export function ChatWidget() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const userInput = input.trim();
+  async function sendMessage(userInput: string) {
     if (!userInput || isLoading) return;
 
     const newMessages: ChatMessage[] = [
@@ -166,7 +175,7 @@ export function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ duration: 0.18 }}
-            className="w-[min(480px,90vw)] h-[50vh] min-h-[400px] bg-card border border-border flex flex-col overflow-hidden shadow-2xl"
+            className="w-[min(560px,92vw)] h-[min(70vh,640px)] min-h-[480px] bg-card border border-border flex flex-col overflow-hidden shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-card">
@@ -176,23 +185,45 @@ export function ChatWidget() {
                   ASK ME
                 </span>
               </div>
-              <button
-                onClick={() => setOpen(false)}
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Close chat"
-              >
-                <X size={16} />
-              </button>
+              <div className="flex items-center gap-3">
+                <div className="relative group">
+                  <Info size={15} className="text-muted-foreground hover:text-foreground transition-colors cursor-help" />
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-popover border border-border p-3 text-[11px] leading-relaxed text-muted-foreground opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity z-10 shadow-xl">
+                    <p className="text-foreground font-semibold mb-1">⚠️ Demo showcase</p>
+                    <p className="mb-1.5">Minh họa AG-UI, tool calling, context engineering — không phải chatbot sản xuất.</p>
+                    <p className="mb-1.5">Model: Groq <code className="text-primary">llama-3.3-70b</code> (free tier). Giới hạn ~100k token/ngày, có thể bị rate limit bất kỳ lúc nào.</p>
+                    <p>Không lưu lịch sử giữa các lần tải lại trang.</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="Close chat"
+                >
+                  <X size={16} />
+                </button>
+              </div>
             </div>
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto px-3 py-3 space-y-3">
               {messages.length === 0 && (
-                <div className="text-center text-muted-foreground text-xs mt-8 space-y-1">
+                <div className="text-center text-muted-foreground text-xs mt-6 space-y-3">
                   <p className="font-[family-name:var(--font-vt323)] text-3xl text-primary">
                     👾 Hello!
                   </p>
                   <p>Ask me anything about Nguyễn Trung Nguyên and his projects.</p>
+                  <div className="flex flex-wrap justify-center gap-2 pt-2 px-2">
+                    {PROMPT_CHIPS.map((chip) => (
+                      <button
+                        key={chip.label}
+                        onClick={() => sendMessage(chip.text)}
+                        className="px-3 py-1.5 text-[11px] border border-dotted border-border text-foreground hover:border-solid hover:border-primary hover:text-primary transition-colors"
+                      >
+                        {chip.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
 
@@ -260,7 +291,7 @@ export function ChatWidget() {
 
             {/* Input */}
             <form
-              onSubmit={handleSubmit}
+              onSubmit={(e) => { e.preventDefault(); sendMessage(input.trim()); }}
               className="border-t border-border flex items-center"
             >
               <input
