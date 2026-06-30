@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
 
     return result.toUIMessageStreamResponse();
   } catch (error) {
+    console.error('[chat] route error:', error);
     if (error instanceof SyntaxError) {
       return NextResponse.json(
         { error: 'Invalid request body' },

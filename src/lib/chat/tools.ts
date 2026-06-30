@@ -134,7 +134,7 @@ const focusSkillTool = tool({
 
 const resetUiTool = tool({
   description: 'Reset all chatbot UI modifications back to defaults (colors, text overrides, highlights).',
-  inputSchema: z.object({}).nullable(),
+  inputSchema: z.preprocess((v) => v ?? {}, z.object({})),
   execute: async () => ({ ok: true, action: 'reset_ui' }),
 });
 
