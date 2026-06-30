@@ -19,7 +19,16 @@ export async function POST(req: NextRequest) {
       temperature: 0.4,
     });
 
-    return result.toUIMessageStreamResponse();
+    return result.toUIMessageStreamResponse({
+      onError: (error) => {
+        console.error('[chat] stream error:', error);
+        const message = error instanceof Error ? error.message : String(error);
+        if (message.includes('Rate limit') || message.includes('rate_limit')) {
+          return 'Bot đang quá tải (hết hạn mức Groq). Vui lòng thử lại sau ít phút.';
+        }
+        return 'Đã có lỗi xảy ra khi xử lý yêu cầu. Vui lòng thử lại.';
+      },
+    });
   } catch (error) {
     console.error('[chat] route error:', error);
     if (error instanceof SyntaxError) {

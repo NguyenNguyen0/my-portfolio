@@ -59,6 +59,8 @@ export function ChatWidget() {
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let buffer = '';
+      let accumulatedText = '';
+      let errorText: string | null = null;
 
       while (true) {
         const { done, value } = await reader.read();
@@ -76,6 +78,7 @@ export function ChatWidget() {
           try { event = JSON.parse(raw); } catch { continue; }
 
           if (event.type === 'text-delta' && typeof event.delta === 'string') {
+            accumulatedText += event.delta;
             setMessages(prev => {
               const updated = [...prev];
               updated[updated.length - 1] = {
@@ -89,13 +92,29 @@ export function ChatWidget() {
             if (output?.ok && typeof output.action === 'string') {
               handleUiAction(output.action, output);
             }
+          } else if (event.type === 'error') {
+            errorText = typeof event.errorText === 'string' ? event.errorText : 'Đã có lỗi xảy ra.';
           }
         }
+      }
+
+      if (errorText) {
+        setMessages(prev => {
+          const updated = [...prev];
+          updated[updated.length - 1] = { role: 'assistant', content: errorText as string };
+          return updated;
+        });
+      } else if (!accumulatedText) {
+        setMessages(prev => {
+          const updated = [...prev];
+          updated[updated.length - 1] = { role: 'assistant', content: 'Bot không trả lời được. Vui lòng thử lại.' };
+          return updated;
+        });
       }
     } catch {
       setMessages(prev => {
         const updated = [...prev];
-        updated[updated.length - 1] = { role: 'assistant', content: 'Sorry, something went wrong.' };
+        updated[updated.length - 1] = { role: 'assistant', content: 'Mất kết nối đến server. Vui lòng thử lại.' };
         return updated;
       });
     } finally {
