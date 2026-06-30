@@ -9,17 +9,29 @@ interface TimelineProps {
 
 const fadeUp: Variants = {
 	hidden: { opacity: 0, y: 20 },
-	visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.5, ease: 'easeOut' as const },
+	},
 };
 
 const slideLeft: Variants = {
 	hidden: { opacity: 0, x: -24 },
-	visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
+	visible: {
+		opacity: 1,
+		x: 0,
+		transition: { duration: 0.5, ease: 'easeOut' as const },
+	},
 };
 
 const slideRight: Variants = {
 	hidden: { opacity: 0, x: 24 },
-	visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
+	visible: {
+		opacity: 1,
+		x: 0,
+		transition: { duration: 0.5, ease: 'easeOut' as const },
+	},
 };
 
 const nodeVariant: Variants = {
@@ -56,11 +68,14 @@ export function Timeline({ items }: TimelineProps) {
 					const cardVariant = shouldReduce
 						? fadeUp
 						: isEven
-						? slideLeft
-						: slideRight;
+							? slideLeft
+							: slideRight;
 
 					return (
-						<div key={item.year} className="relative flex items-start">
+						<div
+							key={item.year}
+							className="relative flex items-start"
+						>
 							{/* ─── Desktop layout ─── */}
 							<div className="hidden md:flex w-full items-start gap-0">
 								{/* Left content (even items) */}
@@ -70,7 +85,10 @@ export function Timeline({ items }: TimelineProps) {
 											variants={cardVariant}
 											initial="hidden"
 											whileInView="visible"
-											viewport={{ once: true, margin: '-60px' }}
+											viewport={{
+												once: true,
+												margin: '-60px',
+											}}
 											className="w-full max-w-sm"
 										>
 											<TimelineCard item={item} />
@@ -84,7 +102,10 @@ export function Timeline({ items }: TimelineProps) {
 										variants={nodeVariant}
 										initial="hidden"
 										whileInView="visible"
-										viewport={{ once: true, margin: '-60px' }}
+										viewport={{
+											once: true,
+											margin: '-60px',
+										}}
 										transition={{ delay: index * 0.1 }}
 										className="relative flex items-center justify-center w-4 h-4 animate-node-pulse"
 									>
@@ -100,7 +121,10 @@ export function Timeline({ items }: TimelineProps) {
 											variants={cardVariant}
 											initial="hidden"
 											whileInView="visible"
-											viewport={{ once: true, margin: '-60px' }}
+											viewport={{
+												once: true,
+												margin: '-60px',
+											}}
 											className="w-full max-w-sm"
 										>
 											<TimelineCard item={item} />

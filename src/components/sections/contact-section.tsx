@@ -2,27 +2,57 @@
 
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { useState } from 'react';
-import { Github, Linkedin, MessageCircleMore, CheckCircle, AlertCircle, Loader2, Copy, Check } from 'lucide-react';
+import {
+	Github,
+	Linkedin,
+	MessageCircleMore,
+	CheckCircle,
+	AlertCircle,
+	Loader2,
+	Copy,
+	Check,
+} from 'lucide-react';
 
 const EMAIL = 'nguyentrungnguyen.dev@gmail.com';
 
 // GitLab SVG — lucide has no GitLab icon
 const GitLabIcon = () => (
-	<svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
-		<path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.49a.42.42 0 0 1 .11-.18.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z"/>
+	<svg
+		viewBox="0 0 24 24"
+		className="w-4 h-4"
+		fill="currentColor"
+		aria-hidden="true"
+	>
+		<path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 4.82 2a.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.49h8.1l2.44-7.49a.42.42 0 0 1 .11-.18.43.43 0 0 1 .58 0 .42.42 0 0 1 .11.18l2.44 7.51L23 13.45a.84.84 0 0 1-.35.94z" />
 	</svg>
 );
 
 const socialLinks = [
 	{ icon: Github, href: 'https://github.com/NguyenNguyen0', label: 'GitHub' },
-	{ icon: GitLabIcon, href: 'https://gitlab.com/nguyennguyen0', label: 'GitLab' },
-	{ icon: Linkedin, href: 'https://www.linkedin.com/in/nguyennguyen0/', label: 'LinkedIn' },
-	{ icon: MessageCircleMore, href: 'https://zalo.me/0394757329', label: 'Zalo' },
+	{
+		icon: GitLabIcon,
+		href: 'https://gitlab.com/nguyennguyen0',
+		label: 'GitLab',
+	},
+	{
+		icon: Linkedin,
+		href: 'https://www.linkedin.com/in/nguyennguyen0/',
+		label: 'LinkedIn',
+	},
+	{
+		icon: MessageCircleMore,
+		href: 'https://zalo.me/0394757329',
+		label: 'Zalo',
+	},
 ];
 
 const fadeUp: Variants = {
 	hidden: { opacity: 0, y: 20 },
-	visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.5, ease: 'easeOut' as const },
+	},
 };
 
 interface FormData {
@@ -40,9 +70,16 @@ interface FormErrors {
 
 export const ContactSection = () => {
 	const shouldReduce = useReducedMotion();
-	const [formData, setFormData] = useState<FormData>({ name: '', email: '', subject: '', message: '' });
+	const [formData, setFormData] = useState<FormData>({
+		name: '',
+		email: '',
+		subject: '',
+		message: '',
+	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+	const [submitStatus, setSubmitStatus] = useState<
+		'idle' | 'success' | 'error'
+	>('idle');
 	const [statusMessage, setStatusMessage] = useState('');
 	const [errors, setErrors] = useState<FormErrors>({});
 	const [copied, setCopied] = useState(false);
@@ -53,7 +90,9 @@ export const ContactSection = () => {
 		setTimeout(() => setCopied(false), 2000);
 	};
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	const handleChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
 		const { id, value } = e.target;
 		setFormData((prev) => ({ ...prev, [id]: value }));
 		if (errors[id as keyof FormErrors]) {
@@ -65,7 +104,8 @@ export const ContactSection = () => {
 		const next: FormErrors = {};
 		if (!formData.name.trim()) next.name = 'Required';
 		if (!formData.email.trim()) next.email = 'Required';
-		else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) next.email = 'Invalid email';
+		else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+			next.email = 'Invalid email';
 		if (!formData.message.trim()) next.message = 'Required';
 		setErrors(next);
 		return Object.keys(next).length === 0;
@@ -89,7 +129,9 @@ export const ContactSection = () => {
 				setFormData({ name: '', email: '', subject: '', message: '' });
 			} else {
 				setSubmitStatus('error');
-				setStatusMessage(data.error || 'Failed to send. Please try again.');
+				setStatusMessage(
+					data.error || 'Failed to send. Please try again.',
+				);
 			}
 		} catch {
 			setSubmitStatus('error');
@@ -100,7 +142,10 @@ export const ContactSection = () => {
 	};
 
 	return (
-		<section id="contact-section" className="py-16 sm:py-24 px-4 max-w-7xl mx-auto">
+		<section
+			id="contact-section"
+			className="py-16 sm:py-24 px-4 max-w-7xl mx-auto"
+		>
 			{/* Heading */}
 			<motion.div
 				variants={fadeUp}
@@ -136,13 +181,17 @@ export const ContactSection = () => {
 							{submitStatus === 'success' && (
 								<div className="flex items-start gap-3 p-4 border border-success bg-success/10">
 									<CheckCircle className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
-									<p className="font-mono-custom text-sm text-success">{statusMessage}</p>
+									<p className="font-mono-custom text-sm text-success">
+										{statusMessage}
+									</p>
 								</div>
 							)}
 							{submitStatus === 'error' && (
 								<div className="flex items-start gap-3 p-4 border border-destructive bg-destructive/10">
 									<AlertCircle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
-									<p className="font-mono-custom text-sm text-destructive">{statusMessage}</p>
+									<p className="font-mono-custom text-sm text-destructive">
+										{statusMessage}
+									</p>
 								</div>
 							)}
 
@@ -179,8 +228,17 @@ export const ContactSection = () => {
 
 							{/* Message */}
 							<div>
-								<label htmlFor="message" className="font-pixel text-[9px] text-muted-foreground block mb-2 tracking-wide">
-									MESSAGE <span className="text-destructive" aria-hidden="true">*</span>
+								<label
+									htmlFor="message"
+									className="font-pixel text-[9px] text-muted-foreground block mb-2 tracking-wide"
+								>
+									MESSAGE{' '}
+									<span
+										className="text-destructive"
+										aria-hidden="true"
+									>
+										*
+									</span>
 								</label>
 								<textarea
 									id="message"
@@ -189,11 +247,18 @@ export const ContactSection = () => {
 									value={formData.message}
 									onChange={handleChange}
 									aria-required="true"
-									aria-invalid={errors.message ? 'true' : 'false'}
+									aria-invalid={
+										errors.message ? 'true' : 'false'
+									}
 									className={`w-full bg-input text-foreground font-mono-custom text-sm px-4 py-3 border border-dotted placeholder:text-muted-foreground focus:outline-none focus:border-solid focus:border-ring resize-none transition-colors ${errors.message ? 'border-destructive border-solid' : 'border-border'}`}
 								/>
 								{errors.message && (
-									<p className="font-mono-custom text-xs text-destructive mt-1" role="alert">{errors.message}</p>
+									<p
+										className="font-mono-custom text-xs text-destructive mt-1"
+										role="alert"
+									>
+										{errors.message}
+									</p>
 								)}
 							</div>
 
@@ -203,7 +268,10 @@ export const ContactSection = () => {
 								className="w-full font-pixel text-[10px] px-6 py-4 bg-primary text-primary-foreground border-2 border-primary transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[0_4px_0_0_color-mix(in_oklch,var(--primary)_30%,transparent)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none flex items-center justify-center gap-2 leading-relaxed"
 							>
 								{isSubmitting ? (
-									<><Loader2 className="w-3 h-3 animate-spin" /> SENDING...</>
+									<>
+										<Loader2 className="w-3 h-3 animate-spin" />{' '}
+										SENDING...
+									</>
 								) : (
 									'▶ SEND MESSAGE'
 								)}
@@ -221,41 +289,62 @@ export const ContactSection = () => {
 					className="space-y-8"
 				>
 					<div>
-						<p className="font-pixel text-[10px] text-muted-foreground mb-3 tracking-widest">GET IN TOUCH</p>
+						<p className="font-pixel text-[10px] text-muted-foreground mb-3 tracking-widest">
+							GET IN TOUCH
+						</p>
 						<p className="font-mono-custom text-sm text-muted-foreground leading-relaxed">
 							Always open to new opportunities, interesting ideas,
-							or just a conversation about tech.
-							Don&apos;t hesitate to reach out.
+							or just a conversation about tech. Don&apos;t
+							hesitate to reach out.
 						</p>
 					</div>
 
 					<div className="pixel-card p-6 space-y-4">
 						<div>
-							<p className="font-pixel text-[9px] text-muted-foreground tracking-widest mb-2">EMAIL</p>
+							<p className="font-pixel text-[9px] text-muted-foreground tracking-widest mb-2">
+								EMAIL
+							</p>
 							<div className="flex items-center gap-3">
-								<span className="font-mono-custom text-sm text-foreground break-all">{EMAIL}</span>
+								<span className="font-mono-custom text-sm text-foreground break-all">
+									{EMAIL}
+								</span>
 								<button
 									onClick={copyEmail}
-									aria-label={copied ? 'Email copied' : 'Copy email address'}
+									aria-label={
+										copied
+											? 'Email copied'
+											: 'Copy email address'
+									}
 									className="flex-shrink-0 p-1.5 border border-dotted border-border text-muted-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
 								>
-									{copied
-										? <Check className="w-3.5 h-3.5 text-success" />
-										: <Copy className="w-3.5 h-3.5" />
-									}
+									{copied ? (
+										<Check className="w-3.5 h-3.5 text-success" />
+									) : (
+										<Copy className="w-3.5 h-3.5" />
+									)}
 								</button>
 							</div>
 						</div>
 						<div className="border-t border-dotted border-border" />
 						<div>
-							<p className="font-pixel text-[9px] text-muted-foreground tracking-widest mb-1">LOCATION</p>
-							<p className="font-mono-custom text-sm text-foreground">Ho Chi Minh City, Vietnam</p>
+							<p className="font-pixel text-[9px] text-muted-foreground tracking-widest mb-1">
+								LOCATION
+							</p>
+							<p className="font-mono-custom text-sm text-foreground">
+								Ho Chi Minh City, Vietnam
+							</p>
 						</div>
 					</div>
 
 					<div>
-						<p className="font-pixel text-[10px] text-muted-foreground mb-4 tracking-widest">CONNECT</p>
-						<div className="flex flex-wrap gap-3" role="list" aria-label="Social links">
+						<p className="font-pixel text-[10px] text-muted-foreground mb-4 tracking-widest">
+							CONNECT
+						</p>
+						<div
+							className="flex flex-wrap gap-3"
+							role="list"
+							aria-label="Social links"
+						>
 							{socialLinks.map((social) => (
 								<a
 									key={social.label}
@@ -266,8 +355,13 @@ export const ContactSection = () => {
 									role="listitem"
 									className="flex items-center gap-2 px-4 py-3 border border-dotted border-border text-muted-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
 								>
-									<social.icon className="w-4 h-4" aria-hidden="true" />
-									<span className="font-pixel text-[9px]">{social.label.toUpperCase()}</span>
+									<social.icon
+										className="w-4 h-4"
+										aria-hidden="true"
+									/>
+									<span className="font-pixel text-[9px]">
+										{social.label.toUpperCase()}
+									</span>
 								</a>
 							))}
 						</div>
@@ -289,11 +383,28 @@ interface PixelFieldProps {
 	required?: boolean;
 }
 
-function PixelField({ id, label, type = 'text', placeholder, value, error, onChange, required }: PixelFieldProps) {
+function PixelField({
+	id,
+	label,
+	type = 'text',
+	placeholder,
+	value,
+	error,
+	onChange,
+	required,
+}: PixelFieldProps) {
 	return (
 		<div>
-			<label htmlFor={id} className="font-pixel text-[9px] text-muted-foreground block mb-2 tracking-wide">
-				{label} {required && <span className="text-destructive" aria-hidden="true">*</span>}
+			<label
+				htmlFor={id}
+				className="font-pixel text-[9px] text-muted-foreground block mb-2 tracking-wide"
+			>
+				{label}{' '}
+				{required && (
+					<span className="text-destructive" aria-hidden="true">
+						*
+					</span>
+				)}
 			</label>
 			<input
 				id={id}
@@ -305,7 +416,14 @@ function PixelField({ id, label, type = 'text', placeholder, value, error, onCha
 				aria-invalid={error ? 'true' : 'false'}
 				className={`w-full bg-input text-foreground font-mono-custom text-sm px-4 py-3 border border-dotted placeholder:text-muted-foreground focus:outline-none focus:border-solid focus:border-ring transition-colors ${error ? 'border-destructive border-solid' : 'border-border'}`}
 			/>
-			{error && <p className="font-mono-custom text-xs text-destructive mt-1" role="alert">{error}</p>}
+			{error && (
+				<p
+					className="font-mono-custom text-xs text-destructive mt-1"
+					role="alert"
+				>
+					{error}
+				</p>
+			)}
 		</div>
 	);
 }

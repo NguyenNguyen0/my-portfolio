@@ -4,8 +4,15 @@ import Script from 'next/script';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
-import { Be_Vietnam_Pro, Press_Start_2P, Space_Mono, VT323 } from 'next/font/google';
+import {
+	Be_Vietnam_Pro,
+	Press_Start_2P,
+	Space_Mono,
+	VT323,
+} from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { ChatWidget } from '@/components/ui/chat-widget';
+import { PortfolioActionsProvider } from '@/context/portfolio-actions';
 
 const beVietnamPro = Be_Vietnam_Pro({
 	weight: ['400', '500', '600', '700'],
@@ -44,11 +51,25 @@ export const metadata: Metadata = {
 	description:
 		'Full-Stack Developer with experience building distributed systems, AI-powered applications, and cloud-native deployments. Skilled in LLMs, multi-agent systems (LangGraph, MCP), and recommendation engines.',
 	keywords: [
-		'Nguyễn Trung Nguyên', 'NguyenNguyen0', 'Full-Stack Developer', 'AI Integration',
-		'LangGraph', 'MCP', 'RAG', 'Spring Boot', 'FastAPI', 'Next.js', 'React',
-		'Microservices', 'Distributed Systems', 'Portfolio', 'Vietnam Developer',
+		'Nguyễn Trung Nguyên',
+		'NguyenNguyen0',
+		'Full-Stack Developer',
+		'AI Integration',
+		'LangGraph',
+		'MCP',
+		'RAG',
+		'Spring Boot',
+		'FastAPI',
+		'Next.js',
+		'React',
+		'Microservices',
+		'Distributed Systems',
+		'Portfolio',
+		'Vietnam Developer',
 	],
-	authors: [{ name: 'Nguyễn Trung Nguyên', url: 'https://nguyennguyen0.id.vn' }],
+	authors: [
+		{ name: 'Nguyễn Trung Nguyên', url: 'https://nguyennguyen0.id.vn' },
+	],
 	metadataBase: new URL('https://nguyennguyen0.id.vn'),
 	alternates: {
 		languages: { vi: '/' },
@@ -56,8 +77,16 @@ export const metadata: Metadata = {
 	},
 	openGraph: {
 		title: 'Nguyễn Trung Nguyên — Full-Stack Developer · AI Integration',
-		description: 'Building distributed systems and AI-powered applications. LangGraph · MCP · Spring Boot · FastAPI · React.',
-		images: [{ url: '/thumbnail.png', width: 1200, height: 630, alt: 'Nguyễn Trung Nguyên Portfolio' }],
+		description:
+			'Building distributed systems and AI-powered applications. LangGraph · MCP · Spring Boot · FastAPI · React.',
+		images: [
+			{
+				url: '/thumbnail.png',
+				width: 1200,
+				height: 630,
+				alt: 'Nguyễn Trung Nguyên Portfolio',
+			},
+		],
 		url: 'https://nguyennguyen0.id.vn',
 		type: 'website',
 		siteName: 'Nguyễn Trung Nguyên Portfolio',
@@ -66,7 +95,8 @@ export const metadata: Metadata = {
 	twitter: {
 		card: 'summary_large_image',
 		title: 'Nguyễn Trung Nguyên — Full-Stack Developer · AI Integration',
-		description: 'Building distributed systems and AI-powered applications. LangGraph · MCP · Spring Boot · FastAPI · React.',
+		description:
+			'Building distributed systems and AI-powered applications. LangGraph · MCP · Spring Boot · FastAPI · React.',
 		images: ['/thumbnail.png'],
 	},
 	icons: {
@@ -99,7 +129,8 @@ export default function RootLayout({
 			<body
 				className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${beVietnamPro.variable} ${pressStart2P.variable} ${spaceMono.variable} ${vt323.variable} antialiased`}
 				style={{
-					fontFamily: "'Be Vietnam Pro', 'Space Mono', 'Geist Sans', sans-serif",
+					fontFamily:
+						"'Be Vietnam Pro', 'Space Mono', 'Geist Sans', sans-serif",
 				}}
 			>
 				<Script
@@ -119,10 +150,22 @@ export default function RootLayout({
 							description:
 								'Full-Stack Developer with experience building distributed systems, AI-powered applications, and cloud-native deployments.',
 							knowsAbout: [
-								'Full-Stack Development', 'Distributed Systems', 'Microservices',
-								'AI Integration', 'LangGraph', 'MCP', 'RAG',
-								'Spring Boot', 'FastAPI', 'React', 'Next.js',
-								'Kafka', 'Docker', 'Terraform', 'AWS', 'API Design',
+								'Full-Stack Development',
+								'Distributed Systems',
+								'Microservices',
+								'AI Integration',
+								'LangGraph',
+								'MCP',
+								'RAG',
+								'Spring Boot',
+								'FastAPI',
+								'React',
+								'Next.js',
+								'Kafka',
+								'Docker',
+								'Terraform',
+								'AWS',
+								'API Design',
 							],
 							sameAs: [
 								'https://github.com/NguyenNguyen0',
@@ -132,14 +175,17 @@ export default function RootLayout({
 						}),
 					}}
 				/>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="dark"
-					enableSystem
-				>
-					{children}
-					<SpeedInsights />
-				</ThemeProvider>
+				<PortfolioActionsProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="dark"
+						enableSystem
+					>
+						{children}
+						<SpeedInsights />
+						<ChatWidget />
+					</ThemeProvider>
+				</PortfolioActionsProvider>
 			</body>
 		</html>
 	);

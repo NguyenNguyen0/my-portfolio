@@ -15,8 +15,15 @@ export const metadata: Metadata = {
 	description:
 		'Full-Stack Developer specializing in distributed systems, AI-powered applications, and cloud-native deployments. Based in Ho Chi Minh City.',
 	keywords: [
-		'Backend Developer', 'Full Stack', 'Node.js', 'TypeScript',
-		'React', 'Next.js', 'FastAPI', 'Portfolio', 'Ho Chi Minh City',
+		'Backend Developer',
+		'Full Stack',
+		'Node.js',
+		'TypeScript',
+		'React',
+		'Next.js',
+		'FastAPI',
+		'Portfolio',
+		'Ho Chi Minh City',
 	],
 };
 
