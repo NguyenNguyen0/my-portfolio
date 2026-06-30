@@ -84,8 +84,11 @@ export function ChatWidget() {
               };
               return updated;
             });
-          } else if (event.type === 'tool-input-available') {
-            handleUiAction(event.toolName as string, event.input as Record<string, unknown>);
+          } else if (event.type === 'tool-output-available') {
+            const output = event.output as Record<string, unknown>;
+            if (output?.ok && typeof output.action === 'string') {
+              handleUiAction(output.action, output);
+            }
           }
         }
       }
