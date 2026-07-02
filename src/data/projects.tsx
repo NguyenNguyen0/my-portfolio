@@ -11,6 +11,7 @@ export interface Project {
 	type: string[];
 	period: string;
 	role: string;
+	responsibilities: string[];
 	team?: string;
 }
 
@@ -37,6 +38,13 @@ export const projects: Project[] = [
 		type: ['Team', 'Fullstack', 'AI'],
 		period: 'Mar 2026 – Jun 2026',
 		role: 'Full-Stack Developer · AI Engineer · DevOps',
+		responsibilities: [
+			'Owned the Product domain (catalog, category, brand, review, wishlist) using CQRS, MongoDB, and Redis',
+			'Designed a distributed system combining Event-Driven, Space-Based, and Pipeline Architectures across 10+ microservices',
+			"Built the platform's AI layer: LangGraph multi-agent system, MCP Orchestrator, and domain-specific MCP servers",
+			'Built a real-time user-behavior pipeline with Kafka and Redis feeding a FastAPI/MongoDB recommendation service',
+			'Automated infrastructure and deployment via GitLab CI/CD, Terraform, Ansible, and AWS EC2',
+		],
 		team: 'Team of 4',
 	},
 	{
@@ -66,6 +74,13 @@ export const projects: Project[] = [
 		type: ['Team', 'Fullstack', 'AI'],
 		period: 'Feb 2026 – May 2026',
 		role: 'AI & Full-Stack Developer',
+		responsibilities: [
+			'Built an AI assistant with LangGraph, Groq LLM, Qdrant, and MCP — mentions, summarization, reminders, polls, Q&A',
+			'Implemented RAG workflows with FastAPI: session persistence, streaming responses, contextual retrieval over Qdrant',
+			'Developed real-time messaging with WebSocket (JWT auth, group chat, GIFs, stickers, voice messages)',
+			'Delivered cross-platform parity across React web and React Native mobile',
+			'Set up CI/CD with GitHub Actions and Docker Compose, with LangSmith tracing and EAS Build for Android',
+		],
 		team: 'Team of 4',
 	},
 	{
@@ -89,6 +104,12 @@ export const projects: Project[] = [
 		type: ['Team', 'Fullstack', 'AI'],
 		period: 'Sep 2025 – Dec 2025',
 		role: 'Full-Stack Developer · DevOps · AI Integration',
+		responsibilities: [
+			'Built a RAG chatbot with LangChain4j, Gemini API, and pgvector, streaming answers over WebSocket',
+			"Developed a Document Management module feeding the chatbot's RAG knowledge base",
+			'Built a News Management module with a TipTap rich-text editor, decoupled from the RAG pipeline',
+			'Deployed the full stack to Railway using Docker multi-stage builds',
+		],
 		team: 'Team of 4',
 	},
 	{
@@ -103,6 +124,12 @@ export const projects: Project[] = [
 		type: ['Personal', 'Frontend'],
 		period: 'Aug 2025 – Present',
 		role: 'Frontend Developer',
+		responsibilities: [
+			'Designed a retro/pixel-art UI system with a Pac-Man-inspired visual language',
+			'Integrated an AI Q&A assistant (Groq via Vercel AI SDK v7) with AG-UI-style tool calling',
+			'Wired up the contact form (Nodemailer/Gmail), Vercel Speed Insights, and Framer Motion animations',
+			'Reached 95+ Lighthouse scores; deployed to Vercel with automated GitHub CI/CD',
+		],
 	},
 ];
 

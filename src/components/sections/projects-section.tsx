@@ -300,6 +300,24 @@ function ProjectCard({
 								{project.role}
 							</p>
 						)}
+						{project.responsibilities?.length > 0 && (
+							<ul className="mt-3 space-y-1">
+								{project.responsibilities.map((item) => (
+									<li
+										key={item}
+										className="font-mono-custom text-xs text-muted-foreground leading-relaxed flex gap-2"
+									>
+										<span
+											className="text-primary flex-shrink-0"
+											aria-hidden="true"
+										>
+											&#x25B8;
+										</span>
+										{item}
+									</li>
+								))}
+							</ul>
+						)}
 					</div>
 
 					{/* Description */}

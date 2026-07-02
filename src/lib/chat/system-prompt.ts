@@ -20,7 +20,10 @@ export function buildSystemPrompt(): string {
 			]
 				.filter(Boolean)
 				.join('; ');
-			return `- **${p.title}** (${p.period}): ${p.description}\n  Tech: ${p.techStack.join(', ')}. Role: ${p.role}${p.team ? `. Team: ${p.team}` : ''}${links ? `.\n  Links: ${links}` : ''}.`;
+			const responsibilities = p.responsibilities?.length
+				? `\n  Responsibilities: ${p.responsibilities.join('; ')}.`
+				: '';
+			return `- **${p.title}** (${p.period}): ${p.description}\n  Tech: ${p.techStack.join(', ')}. Role: ${p.role}${p.team ? `. Team: ${p.team}` : ''}${links ? `.\n  Links: ${links}` : ''}.${responsibilities}`;
 		})
 		.join('\n');
 
