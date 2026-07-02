@@ -28,9 +28,9 @@ export async function POST(req: NextRequest) {
 					message.includes('Rate limit') ||
 					message.includes('rate_limit')
 				) {
-					return 'Bot đang quá tải (hết hạn mức Groq). Vui lòng thử lại sau ít phút.';
+					return 'The bot is overloaded right now (Groq quota exhausted). Please try again in a few minutes.';
 				}
-				return 'Đã có lỗi xảy ra khi xử lý yêu cầu. Vui lòng thử lại.';
+				return 'Something went wrong while processing your request. Please try again.';
 			},
 		});
 	} catch (error) {

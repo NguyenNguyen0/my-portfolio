@@ -18,6 +18,8 @@ There are no tests in this project.
 
 Single-page Next.js 15 portfolio site (App Router, React 19, TypeScript, Tailwind CSS v4). Deployed to Vercel as `output: 'standalone'`.
 
+**Language policy**: English is the default written language for all UI copy, chatbot prompts, and error strings. Vietnamese is used ONLY for the proper name "Nguyễn Trung Nguyên" / "Trung Nguyên", or where a user explicitly asks for Vietnamese output.
+
 **Page structure** (`src/app/page.tsx`): one route renders sections stacked vertically — `HeroSection → TechMarquee → AboutSection → StorySection → ProjectsSection → ContactSection → Footer` (separated by `PelletDivider`) — wrapped in `GridBackground` with a fixed `ResizableNavbar`. `ChatWidget` and `PortfolioActionsProvider` are mounted globally in `src/app/layout.tsx`, not in `page.tsx`. Note: `github-section.tsx` exists but is currently **not imported anywhere** — orphaned, not part of the live page.
 
 **Component split:**
@@ -41,14 +43,14 @@ Single-page Next.js 15 portfolio site (App Router, React 19, TypeScript, Tailwin
 
 See `.env.example` for the full list of required environment variables.
 
-**AI chatbot** (`src/lib/chat/`, `src/components/ui/chat-widget.tsx`, `src/context/portfolio-actions.tsx`): a Groq-backed (`llama-3.3-70b-versatile`, free tier — ~100k tokens/day) chat widget built on Vercel AI SDK v7, showcasing AG-UI-style tool calling and context engineering. Explicitly not a production support bot — the widget's hover tooltip states the limitation.
+**AI chatbot** (`src/lib/chat/`, `src/components/ui/chat-widget.tsx`, `src/context/portfolio-actions.tsx`): a Groq-backed (`openai/gpt-oss-120b`, free tier — ~100k tokens/day) chat widget built on Vercel AI SDK v7, showcasing AG-UI-style tool calling and context engineering. Explicitly not a production support bot — the widget's hover tooltip states the limitation.
 
 - `lib/chat/model.ts` — `createGroq` model instance
 - `lib/chat/system-prompt.ts` — builds the system prompt injected into `streamText`
 - `lib/chat/readme-cache.ts` — reads cached project READMEs from `data/readme-cache.json`
 - `lib/chat/tools.ts` — `chatTools` passed to `streamText`: `read_readme` (fetches a project's cached README) plus AG-UI tools that return `{ ok, action, ...payload }` instead of mutating server state — `scroll_to_section`, `change_theme`, `change_accent_color`, `highlight_project`, `set_hero_description`, `focus_skill`, `reset_ui`
-- `app/api/chat/route.ts` — `streamText` with `chatTools`, `stopWhen: stepCountIs(3)`, `temperature: 0.4`, and `toUIMessageStreamResponse({ onError })`. `onError` classifies Groq rate-limit errors vs. other runtime errors into a Vietnamese message sent down the stream as an `error` SSE event — the UI must never go silent.
-- `components/ui/chat-widget.tsx` — manually parses the `text/event-stream` body (`text-delta`, `tool-output-available`, `error` events), renders assistant replies as Markdown, and on `tool-output-available` either calls a browser API directly (`scroll_to_section` → `scrollIntoView`, `change_theme` → `next-themes`'s `setTheme`) or dispatches to `usePortfolioActions()` (`change_accent_color`, `highlight_project`, `set_hero_description`, `focus_skill`, `reset_ui`). Empty state shows `PROMPT_CHIPS` — quick prompts demoing each tool. Falls back to a Vietnamese error string if the stream ends with no text and no error event.
+- `app/api/chat/route.ts` — `streamText` with `chatTools`, `stopWhen: stepCountIs(3)`, `temperature: 0.4`, and `toUIMessageStreamResponse({ onError })`. `onError` classifies Groq rate-limit errors vs. other runtime errors into an English message sent down the stream as an `error` SSE event — the UI must never go silent.
+- `components/ui/chat-widget.tsx` — manually parses the `text/event-stream` body (`text-delta`, `tool-output-available`, `error` events), renders assistant replies as Markdown, and on `tool-output-available` either calls a browser API directly (`scroll_to_section` → `scrollIntoView`, `change_theme` → `next-themes`'s `setTheme`) or dispatches to `usePortfolioActions()` (`change_accent_color`, `highlight_project`, `set_hero_description`, `focus_skill`, `reset_ui`). Empty state shows `PROMPT_CHIPS` — quick prompts demoing each tool. Falls back to an English error string if the stream ends with no text and no error event.
 - `context/portfolio-actions.tsx` — `PortfolioActionsContext`, a `useReducer` store (`accentColor`, `highlightedProject`, `heroDescription`, `focusedSkill`) that sections read to render chatbot-driven UI overrides (e.g. `projects-section.tsx` rings the highlighted card, `hero-section.tsx` swaps its description text).
 
 **Theming**: `next-themes` with `attribute="class"`, `defaultTheme="dark"`, `enableSystem`. Theme tokens are CSS custom properties in `src/app/globals.css` (`:root` = dark/default palette, `.light` = light overrides, mapped to Tailwind utilities via `@theme inline`) — `bg-card`, `bg-muted`, `text-muted-foreground`, etc. When styling sections, never hardcode `#hex` or `rgba(255,255,255,…)` backgrounds; use the token classes, or `color-mix(in oklch, var(--foreground) X%, transparent)` for tint overlays that need to flip with the theme. `ThemeToggle` lives in `src/components/ui/theme-toggle.tsx`.

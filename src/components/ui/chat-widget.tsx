@@ -12,17 +12,17 @@ import { cn } from '@/lib/utils';
 type ChatMessage = { role: 'user' | 'assistant'; content: string };
 
 const PROMPT_CHIPS = [
-	{ label: '🎨 Đổi màu nền', text: 'Đổi màu nền sang xanh dương' },
+	{ label: '🎨 Change color', text: 'Change the background color to blue' },
 	{
-		label: '📝 Đổi nội dung',
-		text: 'Đổi nội dung hero thành một lời chào vui vẻ',
+		label: '📝 Edit content',
+		text: 'Change the hero description to a cheerful greeting',
 	},
-	{ label: '💼 Hỏi về project', text: 'Cho tôi xem các project nổi bật' },
-	{ label: '🙋 Giới thiệu Trung Nguyên', text: 'Giới thiệu về Trung Nguyên' },
-	{ label: '🌙 Đổi theme', text: 'Chuyển sang dark mode' },
-	{ label: '🛠 Kỹ năng', text: 'Trung Nguyên có những kỹ năng gì?' },
-	{ label: '📬 Liên hệ', text: 'Làm sao để liên hệ với Trung Nguyên?' },
-	{ label: '🔄 Reset UI', text: 'Reset lại giao diện về mặc định' },
+	{ label: '💼 View projects', text: 'Show me the featured projects' },
+	{ label: '🙋 About Trung Nguyên', text: 'Introduce Trung Nguyên' },
+	{ label: '🌙 Switch theme', text: 'Switch to light mode' },
+	{ label: '🛠 Skills', text: 'What skills does Trung Nguyên have?' },
+	{ label: '📬 Contact', text: 'How can I contact Trung Nguyên?' },
+	{ label: '🔄 Reset UI', text: 'Reset the UI back to default' },
 ];
 
 export function ChatWidget() {
@@ -120,7 +120,7 @@ export function ChatWidget() {
 						errorText =
 							typeof event.errorText === 'string'
 								? event.errorText
-								: 'Đã có lỗi xảy ra.';
+								: 'An error occurred while processing your request.';
 					}
 				}
 			}
@@ -139,7 +139,7 @@ export function ChatWidget() {
 					const updated = [...prev];
 					updated[updated.length - 1] = {
 						role: 'assistant',
-						content: 'Bot không trả lời được. Vui lòng thử lại.',
+						content: "The bot couldn't generate a reply. Please try again.",
 					};
 					return updated;
 				});
@@ -149,7 +149,7 @@ export function ChatWidget() {
 				const updated = [...prev];
 				updated[updated.length - 1] = {
 					role: 'assistant',
-					content: 'Mất kết nối đến server. Vui lòng thử lại.',
+					content: 'Lost connection to the server. Please try again.',
 				};
 				return updated;
 			});
@@ -241,22 +241,22 @@ export function ChatWidget() {
 											⚠️ Demo showcase
 										</p>
 										<p className="mb-1.5">
-											Minh họa AG-UI, tool calling,
-											context engineering — không phải
-											chatbot sản xuất.
+											Demonstrates AG-UI, tool calling,
+											and context engineering — not a
+											production support bot.
 										</p>
 										<p className="mb-1.5">
 											Model: Groq{' '}
 											<code className="text-primary">
-												llama-3.3-70b
+												openai/gpt-oss-120b
 											</code>{' '}
-											(free tier). Giới hạn ~100k
-											token/ngày, có thể bị rate limit bất
-											kỳ lúc nào.
+											(free tier). Limited to ~100k
+											tokens/day, may hit rate limits at
+											any time.
 										</p>
 										<p>
-											Không lưu lịch sử giữa các lần tải
-											lại trang.
+											Conversation history isn&apos;t
+											saved across page reloads.
 										</p>
 									</div>
 								</div>
