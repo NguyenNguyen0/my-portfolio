@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion, type Transition } from 'framer-motion';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Download } from 'lucide-react';
 import { PacManRunner } from '@/components/ui/pac-man-runner';
 import { usePortfolioActions } from '@/context/portfolio-actions';
 
@@ -145,7 +145,7 @@ export const HeroSection = () => {
 						{/* CTAs */}
 						<motion.div
 							{...(shouldReduce ? {} : fadeUp(0.42))}
-							className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center lg:items-start justify-center lg:justify-start mb-10"
+							className="flex flex-wrap gap-3 sm:gap-4 items-center justify-center lg:justify-start mb-10"
 						>
 							<button
 								onClick={() =>
@@ -165,6 +165,18 @@ export const HeroSection = () => {
 							>
 								· CONTACT ·
 							</button>
+							<a
+								href="/cv_nguyen_trung_nguyen_fullstack.pdf"
+								download="Nguyen_Trung_Nguyen_CV.pdf"
+								className="font-pixel text-[10px] sm:text-xs px-6 sm:px-8 py-3 sm:py-4 bg-transparent text-foreground border-2 border-dotted border-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-dotted focus-visible:outline-ring focus-visible:outline-offset-2 leading-relaxed inline-flex items-center gap-2"
+								aria-label="Download CV"
+							>
+								<Download
+									className="w-3 h-3"
+									aria-hidden="true"
+								/>
+								DOWNLOAD CV
+							</a>
 						</motion.div>
 
 						{/* Pac-Man runner */}
