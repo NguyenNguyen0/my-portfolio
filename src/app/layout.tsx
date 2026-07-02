@@ -106,9 +106,9 @@ export const metadata: Metadata = {
 		images: ['/thumbnail.webp'],
 	},
 	icons: {
-		icon: '/dev-icon.webp',
-		shortcut: '/dev-icon.webp',
-		apple: '/dev-icon.webp',
+		icon: '/dev-icon.png',
+		shortcut: '/dev-icon.png',
+		apple: '/dev-icon.png',
 	},
 	robots: {
 		index: true,

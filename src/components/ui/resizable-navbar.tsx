@@ -54,9 +54,9 @@ export function ResizableNavbar() {
 						aria-label="Back to top"
 						className="flex-shrink-0 group"
 					>
-						<div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-primary transition-all duration-150 bg-white group-hover:shadow-[0_0_0_3px_color-mix(in_oklch,var(--primary)_25%,transparent)]">
+						<div className="relative w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-150 bg-white group-hover:shadow-[0_0_0_3px_color-mix(in_oklch,var(--primary)_25%,transparent)]">
 							<Image
-								src="/dev-icon.webp"
+								src="/dev-icon.png"
 								height={36}
 								width={36}
 								alt="Nguyễn Trung Nguyên"
