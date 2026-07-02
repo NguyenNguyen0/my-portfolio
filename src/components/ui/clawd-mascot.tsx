@@ -4,34 +4,111 @@ import { useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
+// Anthropic's Clawd mascot color — fixed brand color, not a theme token
+// (same reasoning as hardcoded brand hexes elsewhere, e.g. the tech badge
+// palette in projects-section.tsx).
+const CLAWD_ORANGE = '#D97757';
+const CLAWD_EYE = '#171310';
+const CELL = 5; // px per pixel
+
+// Two hand-drawn frames (legs alternate) for a real sprite-style scuttle —
+// not a transform tween. 'X' = body pixel, 'E' = eye pixel, '.' = empty.
+type Frame = string[];
+
+const FRAME_A: Frame = [
+	'.E....E.',
+	'XXXXXXXX',
+	'XXXXXXXX',
+	'XXXXXXXX',
+	'X.X..X.X',
+];
+
+const FRAME_B: Frame = [
+	'.E....E.',
+	'XXXXXXXX',
+	'XXXXXXXX',
+	'XXXXXXXX',
+	'.X.XX.X.',
+];
+
+const WINK_FRAME: Frame = [
+	'.X....E.',
+	'XXXXXXXX',
+	'XXXXXXXX',
+	'XXXXXXXX',
+	'X.X..X.X',
+];
+
+function PixelFrame({
+	frame,
+	className,
+}: {
+	frame: Frame;
+	className?: string;
+}) {
+	const cols = frame[0].length;
+	return (
+		<div
+			className={className}
+			style={{
+				display: 'grid',
+				gridTemplateColumns: `repeat(${cols}, ${CELL}px)`,
+			}}
+		>
+			{frame.flatMap((row, y) =>
+				[...row].map((ch, x) => (
+					<span
+						key={`${y}-${x}`}
+						style={{
+							width: CELL,
+							height: CELL,
+							background:
+								ch === 'X'
+									? CLAWD_ORANGE
+									: ch === 'E'
+										? CLAWD_EYE
+										: 'transparent',
+						}}
+					/>
+				)),
+			)}
+		</div>
+	);
+}
+
 const QUIPS = [
 	"hi, I'm Clawd",
 	'built with Claude Code',
-	'*pinch*',
+	'*scuttle*',
 	'ship it 🚀',
 	'vibes: immaculate',
 	'reviewing your PR...',
 	'lgtm 🦀',
 ];
 
-// Scattered easter-egg mascot — pure div/CSS crab (same technique as
-// PacManRunner), no image asset, no new JS dependency. Idle bob is
-// continuous; hover pinches the claws; click plays a punch animation and
-// cycles a speech-bubble quip. Fully decorative, so it just disappears for
-// prefers-reduced-motion rather than rendering static.
+// Scattered easter-egg mascot — pixel-matrix crab, real sprite frames (no
+// image asset, no new dependency). Idle: two leg frames swap via a CSS hard
+// keyframe cut, a genuine scuttle rather than an interpolated transform.
+// Hover: scuttle speeds up. Click: punch bounce + a one-off wink frame +
+// a cycling speech-bubble quip. Bails out entirely under
+// prefers-reduced-motion.
 export function ClawdMascot({ className }: { className?: string }) {
 	const shouldReduce = useReducedMotion();
 	const [pokeCount, setPokeCount] = useState(0);
+	const [winking, setWinking] = useState(false);
 
 	if (shouldReduce) return null;
 
 	return (
 		<button
 			type="button"
-			onClick={() => setPokeCount((c) => c + 1)}
+			onClick={() => {
+				setPokeCount((c) => c + 1);
+				setWinking(true);
+			}}
 			aria-label="Clawd the crab — click to poke"
 			className={cn(
-				'clawd clawd-idle relative inline-flex bg-transparent border-0 p-0 cursor-pointer select-none',
+				'clawd group relative inline-flex bg-transparent border-0 p-0 cursor-pointer select-none',
 				className,
 			)}
 		>
@@ -46,27 +123,23 @@ export function ClawdMascot({ className }: { className?: string }) {
 
 			<span
 				key={pokeCount}
-				className={cn(
-					'flex flex-col items-center gap-0.5',
-					pokeCount > 0 && 'clawd-poke',
-				)}
+				className={cn('relative block', pokeCount > 0 && 'clawd-poke')}
+				onAnimationEnd={() => setWinking(false)}
 			>
-				{/* Eyes */}
-				<span className="flex gap-2">
-					<span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-					<span className="w-1.5 h-1.5 rounded-full bg-foreground" />
-				</span>
-				{/* Claws + body */}
-				<span className="flex items-center">
-					<span className="clawd-claw w-3 h-3 rounded-full bg-primary" />
-					<span className="w-6 h-4 rounded-[50%] bg-primary -mx-0.5" />
-					<span className="clawd-claw w-3 h-3 rounded-full bg-primary" />
-				</span>
-				{/* Legs */}
-				<span className="flex gap-3">
-					<span className="w-2 h-[2px] bg-primary rotate-[25deg] origin-right" />
-					<span className="w-2 h-[2px] bg-primary -rotate-[25deg] origin-left" />
-				</span>
+				{winking ? (
+					<PixelFrame frame={WINK_FRAME} />
+				) : (
+					<>
+						<PixelFrame
+							frame={FRAME_A}
+							className="clawd-frame-a group-hover:[animation-duration:0.25s]"
+						/>
+						<PixelFrame
+							frame={FRAME_B}
+							className="clawd-frame-b absolute inset-0 group-hover:[animation-duration:0.25s]"
+						/>
+					</>
+				)}
 			</span>
 		</button>
 	);
