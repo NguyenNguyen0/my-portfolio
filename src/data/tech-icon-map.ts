@@ -53,4 +53,9 @@ export const techIconMap: Record<string, TechIconEntry> = {
 	ollama: { lightSrc: '/icons/stack/ollama-light.svg', darkSrc: '/icons/stack/ollama-dark.svg' },
 	ansible: { lightSrc: '/icons/Ansible.svg', invert: true },
 	rag: {},
+	claude: { lightSrc: '/icons/stack/claude-light.svg', darkSrc: '/icons/stack/claude-dark.svg' },
+	langsmith: { lightSrc: '/icons/stack/langsmith-light.svg', darkSrc: '/icons/stack/langsmith-dark.svg' },
+	bash: { lightSrc: '/icons/stack/bash-light.svg', darkSrc: '/icons/stack/bash-dark.svg' },
+	openai: { lightSrc: '/icons/stack/openai-light.svg', darkSrc: '/icons/stack/openai-dark.svg' },
+	shadcn: { lightSrc: '/icons/stack/shadcn-light.svg', darkSrc: '/icons/stack/shadcn-dark.svg' },
 };

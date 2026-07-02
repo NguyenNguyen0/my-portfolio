@@ -27,6 +27,12 @@ const technologies = [
 	'Linux CLI',
 	'Postman',
 	'Java',
+	'LangGraph',
+	'Claude',
+	'LangSmith',
+	'Bash',
+	'OpenAI',
+	'shadcn/ui',
 ].filter((tech) => tech in techIcons);
 
 export const TechMarquee = () => {

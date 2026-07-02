@@ -28,7 +28,7 @@ const ICONS = {
 	go: 'go',
 	react: 'react',
 	redux: 'redux',
-	nextjs: 'nextjs',
+	nextjs: 'nextjs2',
 	tailwindcss: 'tailwindcss',
 	nodejs: 'nodejs',
 	express: 'expressjs',
@@ -50,6 +50,11 @@ const ICONS = {
 	nestjs: 'nestjs',
 	groq: 'groq',
 	ollama: 'ollama',
+	claude: 'claude',
+	langsmith: 'langsmith',
+	bash: 'bash',
+	openai: 'openai',
+	shadcn: 'shadcnui',
 };
 
 const src = await readFile(pkgEntry, 'utf8');

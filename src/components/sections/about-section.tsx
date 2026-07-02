@@ -21,6 +21,7 @@ const CAT_COLORS = {
 	backend: '#16A34A',
 	devops: '#888888',
 	frontend: '#2A3FE5',
+	tools: '#A855F7',
 } as const;
 
 type Category = keyof typeof CAT_COLORS;
@@ -46,6 +47,16 @@ const NODES: ConstellationNodeData[] = [
 	{ id: 'fastapi', label: 'FastAPI', cat: 'backend', x: 36, y: 16 },
 	{ id: 'react', label: 'React', cat: 'frontend', x: 66, y: 16 },
 	{ id: 'rag', label: 'RAG', cat: 'ai', x: 64, y: 76 },
+	{ id: 'html', label: 'HTML', cat: 'frontend', x: 46, y: 6 },
+	{ id: 'css', label: 'CSS', cat: 'frontend', x: 60, y: 6 },
+	{ id: 'javascript', label: 'JavaScript', cat: 'frontend', x: 6, y: 10 },
+	{ id: 'git', label: 'Git', cat: 'tools', x: 92, y: 56 },
+	{ id: 'postman', label: 'Postman', cat: 'tools', x: 90, y: 76 },
+	{ id: 'bash', label: 'Bash', cat: 'tools', x: 8, y: 76 },
+	{ id: 'claude', label: 'Claude', cat: 'tools', x: 38, y: 94 },
+	{ id: 'langsmith', label: 'LangSmith', cat: 'tools', x: 68, y: 94 },
+	{ id: 'openai', label: 'OpenAI', cat: 'tools', x: 96, y: 22 },
+	{ id: 'shadcn', label: 'shadcn/ui', cat: 'tools', x: 12, y: 92 },
 ];
 
 const CROSS: [string, string][] = [
@@ -58,6 +69,10 @@ const CROSS: [string, string][] = [
 	['docker', 'terraform'],
 	['react', 'fastapi'],
 	['spring', 'fastapi'],
+	['claude', 'langsmith'],
+	['langsmith', 'langgraph'],
+	['git', 'postman'],
+	['openai', 'gemini'],
 ];
 
 interface StackGroup {
@@ -76,6 +91,7 @@ const STACK: StackGroup[] = [
 			{ name: 'Java', techId: 'java' },
 			{ name: 'Python', techId: 'python' },
 			{ name: 'TypeScript', techId: 'typescript' },
+			{ name: 'JavaScript', techId: 'javascript' },
 		],
 	},
 	{
@@ -87,6 +103,8 @@ const STACK: StackGroup[] = [
 			{ name: 'Next.js', techId: 'nextjs' },
 			{ name: 'Expo', techId: 'expo' },
 			{ name: 'Tailwind', techId: 'tailwindcss' },
+			{ name: 'HTML', techId: 'html' },
+			{ name: 'CSS', techId: 'css' },
 		],
 	},
 	{
@@ -120,6 +138,20 @@ const STACK: StackGroup[] = [
 			{ name: 'Terraform', techId: 'terraform' },
 			{ name: 'Ansible', techId: 'ansible' },
 			{ name: 'AWS', techId: 'aws' },
+		],
+	},
+	{
+		label: 'TOOLS',
+		color: '#A855F7',
+		cats: ['tools'],
+		items: [
+			{ name: 'Git', techId: 'git' },
+			{ name: 'Postman', techId: 'postman' },
+			{ name: 'Bash', techId: 'bash' },
+			{ name: 'Claude', techId: 'claude' },
+			{ name: 'LangSmith', techId: 'langsmith' },
+			{ name: 'OpenAI', techId: 'openai' },
+			{ name: 'shadcn/ui', techId: 'shadcn' },
 		],
 	},
 ];
@@ -603,21 +635,53 @@ function GemItem({
 	);
 }
 
+function StackGroupCard({ group }: { group: StackGroup }) {
+	return (
+		<>
+			<p
+				className="font-pixel text-[8px] mb-3 tracking-widest"
+				style={{ color: group.color }}
+			>
+				{group.label}
+			</p>
+			<div
+				className="border-t border-dashed mb-4"
+				style={{ borderColor: group.color + '55' }}
+			/>
+			<div className="flex flex-wrap gap-2">
+				{group.items.map((item) => (
+					<GemItem
+						key={item.name}
+						name={item.name}
+						techId={item.techId}
+						color={group.color}
+					/>
+				))}
+			</div>
+		</>
+	);
+}
+
 function TechStackGrid({
 	activeCategories,
 }: {
 	activeCategories: Set<Category>;
 }) {
-	const visibleGroups = STACK.filter(
+	const languagesGroup = STACK.find((g) => g.label === 'LANGUAGES')!;
+	const otherGroups = STACK.filter(
 		(g) =>
-			g.cats.length === 0 || g.cats.some((c) => activeCategories.has(c)),
+			g.label !== 'LANGUAGES' &&
+			(g.cats.length === 0 || g.cats.some((c) => activeCategories.has(c))),
 	);
 
 	return (
 		<div className="border border-dotted border-border overflow-hidden bg-muted/50">
+			<div className="p-5 border-b border-dotted border-border">
+				<StackGroupCard group={languagesGroup} />
+			</div>
 			<div className="grid grid-cols-2 md:grid-cols-4">
 				<AnimatePresence mode="popLayout">
-					{visibleGroups.map((group) => (
+					{otherGroups.map((group) => (
 						<motion.div
 							key={group.label}
 							layout
@@ -627,26 +691,7 @@ function TechStackGrid({
 							transition={{ duration: 0.22 }}
 							className="p-5 border-r border-b border-dotted border-border"
 						>
-							<p
-								className="font-pixel text-[8px] mb-3 tracking-widest"
-								style={{ color: group.color }}
-							>
-								{group.label}
-							</p>
-							<div
-								className="border-t border-dashed mb-4"
-								style={{ borderColor: group.color + '55' }}
-							/>
-							<div className="flex flex-wrap gap-2">
-								{group.items.map((item) => (
-									<GemItem
-										key={item.name}
-										name={item.name}
-										techId={item.techId}
-										color={group.color}
-									/>
-								))}
-							</div>
+							<StackGroupCard group={group} />
 						</motion.div>
 					))}
 				</AnimatePresence>

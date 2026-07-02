@@ -24,4 +24,10 @@ export const techIcons: Record<string, TechIconEntry> = {
 	Postman: techIconMap.postman,
 	Vercel: techIconMap.vercel,
 	'Linux CLI': techIconMap.linux,
+	LangGraph: techIconMap.langgraph,
+	Claude: techIconMap.claude,
+	LangSmith: techIconMap.langsmith,
+	Bash: techIconMap.bash,
+	OpenAI: techIconMap.openai,
+	'shadcn/ui': techIconMap.shadcn,
 };
