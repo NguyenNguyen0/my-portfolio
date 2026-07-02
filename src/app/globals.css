@@ -254,6 +254,62 @@
   }
 }
 
+/* Clawd mascot — idle bob, claw pinch on hover, punch + quip on click */
+@keyframes clawd-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes clawd-pinch {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.7);
+  }
+}
+@keyframes clawd-poke {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  30% {
+    transform: scale(1.3) rotate(-10deg);
+  }
+  60% {
+    transform: scale(0.9) rotate(8deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+@keyframes clawd-quip-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 4px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+.clawd-idle {
+  animation: clawd-bob 2.4s ease-in-out infinite;
+}
+.clawd:hover .clawd-claw {
+  animation: clawd-pinch 0.35s ease-in-out infinite;
+}
+.clawd-poke {
+  animation: clawd-poke 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.clawd-quip {
+  animation: clawd-quip-in 0.15s ease-out;
+}
+
 /* Subtle neon glow pulse on maze grid */
 @keyframes grid-glow {
   0%,
@@ -462,7 +518,14 @@
   .animate-node-pulse,
   .crt-sweep,
   .crt-flicker,
-  .crt-glitch {
+  .crt-glitch,
+  .clawd-idle,
+  .clawd-poke,
+  .clawd-quip {
+    animation: none !important;
+  }
+
+  .clawd:hover .clawd-claw {
     animation: none !important;
   }
 

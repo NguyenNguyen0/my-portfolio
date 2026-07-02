@@ -12,6 +12,7 @@ import {
 	Copy,
 	Check,
 } from 'lucide-react';
+import { ClawdMascot } from '@/components/ui/clawd-mascot';
 
 const EMAIL = 'nguyentrungnguyen.dev@gmail.com';
 
@@ -152,14 +153,17 @@ export const ContactSection = () => {
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
 				viewport={{ once: true }}
-				className="mb-12 sm:mb-16"
+				className="mb-12 sm:mb-16 flex items-end justify-between gap-4"
 			>
-				<p className="font-pixel text-[10px] text-primary mb-3 tracking-widest">
-					CONTACT
-				</p>
-				<h2 className="font-pixel text-xl sm:text-2xl md:text-3xl text-foreground leading-relaxed">
-					LET&apos;S TALK
-				</h2>
+				<div>
+					<p className="font-pixel text-[10px] text-primary mb-3 tracking-widest">
+						CONTACT
+					</p>
+					<h2 className="font-pixel text-xl sm:text-2xl md:text-3xl text-foreground leading-relaxed">
+						LET&apos;S TALK
+					</h2>
+				</div>
+				<ClawdMascot className="hidden sm:inline-flex mb-1" />
 			</motion.div>
 
 			<div className="grid md:grid-cols-2 gap-10 md:gap-16">

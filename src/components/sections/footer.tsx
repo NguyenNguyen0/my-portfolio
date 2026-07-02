@@ -1,8 +1,13 @@
+import { ClawdMascot } from '@/components/ui/clawd-mascot';
+
 export const Footer = () => {
 	const currentYear = new Date().getFullYear();
 	return (
 		<footer className="border-t border-dotted border-border py-10 mt-8">
 			<div className="max-w-7xl mx-auto px-4 text-center space-y-3">
+				<div className="flex justify-center mb-1">
+					<ClawdMascot />
+				</div>
 				<p className="font-pixel text-[9px] text-muted-foreground tracking-widest">
 					HIGH SCORE
 				</p>
