@@ -1,15 +1,68 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { usePortfolioActions } from '@/context/portfolio-actions';
 import { useTheme } from 'next-themes';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bot, X, Send, Info } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { cn } from '@/lib/utils';
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string };
+
+// react-markdown + remark-gfm are ~150KB and unused until the first assistant
+// reply exists — code-split them out of the eager initial bundle.
+const Markdown = dynamic(
+	() =>
+		import('react-markdown').then((rm) =>
+			import('remark-gfm').then((gfm) => {
+				const ReactMarkdown = rm.default;
+				const remarkGfm = gfm.default;
+				return function Markdown({ children }: { children: string }) {
+					return (
+						<ReactMarkdown
+							remarkPlugins={[remarkGfm]}
+							components={{
+								p: ({ children }) => (
+									<p className="mb-1 last:mb-0">
+										{children}
+									</p>
+								),
+								ul: ({ children }) => (
+									<ul className="list-disc pl-4 mb-1">
+										{children}
+									</ul>
+								),
+								ol: ({ children }) => (
+									<ol className="list-decimal pl-4 mb-1">
+										{children}
+									</ol>
+								),
+								code: ({ children }) => (
+									<code className="bg-background/60 px-1 rounded text-xs font-mono">
+										{children}
+									</code>
+								),
+								a: ({ href, children }) => (
+									<a
+										href={href}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-primary underline"
+									>
+										{children}
+									</a>
+								),
+							}}
+						>
+							{children}
+						</ReactMarkdown>
+					);
+				};
+			}),
+		),
+	{ ssr: false },
+);
 
 const PROMPT_CHIPS = [
 	{ label: '🎨 Change color', text: 'Change the background color to blue' },
@@ -316,43 +369,7 @@ export function ChatWidget() {
 										)}
 									>
 										{msg.role === 'assistant' ? (
-											<ReactMarkdown
-												remarkPlugins={[remarkGfm]}
-												components={{
-													p: ({ children }) => (
-														<p className="mb-1 last:mb-0">
-															{children}
-														</p>
-													),
-													ul: ({ children }) => (
-														<ul className="list-disc pl-4 mb-1">
-															{children}
-														</ul>
-													),
-													ol: ({ children }) => (
-														<ol className="list-decimal pl-4 mb-1">
-															{children}
-														</ol>
-													),
-													code: ({ children }) => (
-														<code className="bg-background/60 px-1 rounded text-xs font-mono">
-															{children}
-														</code>
-													),
-													a: ({ href, children }) => (
-														<a
-															href={href}
-															target="_blank"
-															rel="noopener noreferrer"
-															className="text-primary underline"
-														>
-															{children}
-														</a>
-													),
-												}}
-											>
-												{msg.content}
-											</ReactMarkdown>
+											<Markdown>{msg.content}</Markdown>
 										) : (
 											msg.content
 										)}

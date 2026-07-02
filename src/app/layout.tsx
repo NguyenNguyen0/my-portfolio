@@ -43,7 +43,7 @@ const vt323 = VT323({
 	subsets: ['latin', 'vietnamese'],
 	display: 'swap',
 	variable: '--font-vt323',
-	preload: false,
+	preload: true,
 });
 
 export const metadata: Metadata = {
