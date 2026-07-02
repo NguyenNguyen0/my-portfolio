@@ -56,7 +56,7 @@ export function ResizableNavbar() {
 					>
 						<div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-primary transition-all duration-150 bg-white group-hover:shadow-[0_0_0_3px_color-mix(in_oklch,var(--primary)_25%,transparent)]">
 							<Image
-								src="/dev-icon.png"
+								src="/dev-icon.webp"
 								height={36}
 								width={36}
 								alt="Nguyễn Trung Nguyên"

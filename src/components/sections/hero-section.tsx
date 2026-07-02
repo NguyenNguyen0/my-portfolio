@@ -270,7 +270,7 @@ function PlayerCard() {
 			>
 				{/* Base pixel avatar */}
 				<Image
-					src="/pixel-avatar.jpg"
+					src="/pixel-avatar.webp"
 					alt="Pixel avatar of Nguyễn Trung Nguyên"
 					width={320}
 					height={360}
@@ -287,7 +287,7 @@ function PlayerCard() {
 					className="absolute inset-0 pointer-events-none"
 					aria-hidden="true"
 					style={{
-						backgroundImage: 'url(/pixel-avatar.png)',
+						backgroundImage: 'url(/pixel-avatar.webp)',
 						backgroundSize: '100% auto',
 						backgroundPosition: 'top center',
 						backgroundRepeat: 'no-repeat',

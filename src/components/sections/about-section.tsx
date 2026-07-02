@@ -234,7 +234,7 @@ function HeroAvatar() {
 				/>
 				<div className="relative w-48 h-48 rounded-full border-2 border-primary overflow-hidden z-10 flex-shrink-0">
 					<Image
-						src="/avatar.jpg"
+						src="/avatar.webp"
 						alt="Nguyễn Trung Nguyên"
 						fill
 						className="object-cover object-top"

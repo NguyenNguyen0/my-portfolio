@@ -87,7 +87,7 @@ export const metadata: Metadata = {
 			'Building distributed systems and AI-powered applications. LangGraph · MCP · RAG · Spring Boot · FastAPI · Next.js.',
 		images: [
 			{
-				url: '/thumbnail.png',
+				url: '/thumbnail.webp',
 				width: 1200,
 				height: 630,
 				alt: 'Nguyễn Trung Nguyên Portfolio',
@@ -103,12 +103,12 @@ export const metadata: Metadata = {
 		title: 'Nguyễn Trung Nguyên — Full-Stack Developer · AI Integration',
 		description:
 			'Building distributed systems and AI-powered applications. LangGraph · MCP · RAG · Spring Boot · FastAPI · Next.js.',
-		images: ['/thumbnail.png'],
+		images: ['/thumbnail.webp'],
 	},
 	icons: {
-		icon: '/dev-icon.png',
-		shortcut: '/dev-icon.png',
-		apple: '/dev-icon.png',
+		icon: '/dev-icon.webp',
+		shortcut: '/dev-icon.webp',
+		apple: '/dev-icon.webp',
 	},
 	robots: {
 		index: true,
@@ -150,7 +150,7 @@ export default function RootLayout({
 							name: 'Nguyễn Trung Nguyên',
 							url: 'https://nguyennguyen0.id.vn',
 							jobTitle: 'Full-Stack Developer',
-							image: 'https://nguyennguyen0.id.vn/avatar.jpg',
+							image: 'https://nguyennguyen0.id.vn/avatar.webp',
 							email: 'nguyentrungnguyen.dev@gmail.com',
 							telephone: '+84394757329',
 							alumniOf: {
