@@ -458,24 +458,12 @@ export function ChatWidget() {
 						)}
 					>
 						<div className="absolute inset-0 flex items-center justify-center bg-primary text-primary-foreground border border-primary-foreground/20 shadow-lg [transform:translateZ(28px)]">
-							<Bot size={22} />
+							{open ? <X size={22} /> : <Bot size={22} />}
 						</div>
 						<div className="absolute inset-0 bg-primary/85 border border-primary-foreground/20 [transform:rotateY(90deg)_translateZ(28px)]" />
 						<div className="absolute inset-0 bg-primary/70 border border-primary-foreground/20 [transform:rotateY(180deg)_translateZ(28px)]" />
 						<div className="absolute inset-0 bg-primary/85 border border-primary-foreground/20 [transform:rotateY(-90deg)_translateZ(28px)]" />
 					</div>
-
-					{/* Close badge — small circle, not a full overlay, so the cube stays visible underneath */}
-					<span
-						className={cn(
-							'absolute inset-0 flex items-center justify-center transition-opacity duration-150 pointer-events-none',
-							open ? 'opacity-100' : 'opacity-0',
-						)}
-					>
-						<span className="flex items-center justify-center w-7 h-7 rounded-full bg-foreground text-background shadow-md">
-							<X size={16} />
-						</span>
-					</span>
 
 					{/* ponytail: pulse ring only when closed — no additional state needed */}
 					{!open && (
