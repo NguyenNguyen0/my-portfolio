@@ -49,72 +49,42 @@ const WINK_FRAME: Frame = [
 	'.X.X..X.X.',
 ];
 
-// Renders a frame as a single element via the box-shadow pixel-art trick
-// (one shadow entry per lit pixel) instead of one <span> per cell. With 4
-// mascot instances x 2-3 stacked frame layers running continuous CSS
-// animations, a ~60-node-per-frame grid measurably raised Style/Layout and
-// Rendering cost in a Lighthouse trace; this drops it to 1 DOM node per
-// frame layer.
-interface Sprite {
-	shadow: string;
-	width: number;
-	height: number;
-}
-
-function compileFrame(frame: Frame): Sprite {
-	const shadows: string[] = [];
-	frame.forEach((row, y) => {
-		[...row].forEach((ch, x) => {
-			if (ch === '.') return;
-			shadows.push(
-				`${x * CELL}px ${y * CELL}px 0 0 ${ch === 'E' ? CLAWD_EYE : CLAWD_ORANGE}`,
-			);
-		});
-	});
-	return {
-		shadow: shadows.join(', '),
-		width: frame[0].length * CELL,
-		height: frame.length * CELL,
-	};
-}
-
-const SPRITE_A = compileFrame(FRAME_A);
-const SPRITE_B = compileFrame(FRAME_B);
-const SPRITE_WINK = compileFrame(WINK_FRAME);
-
 function PixelFrame({
-	sprite,
+	frame,
 	className,
 }: {
-	sprite: Sprite;
+	frame: Frame;
 	className?: string;
 }) {
-	// Every box-shadow copy inherits the *element's own* size — so the
-	// shadow-bearing element must be a single CELL square (the "seed"
-	// pixel), not the full sprite box. A separate, normally-sized wrapper
-	// carries the className/layout so the frame still occupies the right
-	// footprint in the flex row / absolute-inset overlay.
+	const cols = frame[0].length;
+	const rows = frame.length;
 	return (
-		<span
+		<div
 			className={className}
 			style={{
-				display: 'block',
-				position: 'relative',
-				width: sprite.width,
-				height: sprite.height,
+				display: 'grid',
+				gridTemplateColumns: `repeat(${cols}, ${CELL}px)`,
+				gridTemplateRows: `repeat(${rows}, ${CELL}px)`,
 			}}
 		>
-			<span
-				style={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					width: CELL,
-					height: CELL,
-					boxShadow: sprite.shadow,
-				}}
-			/>
-		</span>
+			{frame.flatMap((row, y) =>
+				[...row].map((ch, x) => (
+					<span
+						key={`${y}-${x}`}
+						style={{
+							width: CELL,
+							height: CELL,
+							background:
+								ch === 'X'
+									? CLAWD_ORANGE
+									: ch === 'E'
+										? CLAWD_EYE
+										: 'transparent',
+						}}
+					/>
+				)),
+			)}
+		</div>
 	);
 }
 
@@ -150,13 +120,13 @@ export function ClawdMascot({ className }: { className?: string }) {
 			}}
 			aria-label="Clawd the crab — click to poke"
 			className={cn(
-				'clawd group relative inline-flex bg-transparent border-0 p-0 cursor-pointer select-none [contain:layout_paint]',
+				'clawd group relative inline-flex bg-transparent border-0 p-0 cursor-pointer select-none',
 				className,
 			)}
 		>
 			{pokeCount > 0 && (
 				<span
-					key={pokeCount}
+					key={`quip-${pokeCount}`}
 					className="clawd-quip absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap font-pixel text-[6px] bg-popover border border-border px-1.5 py-1 text-foreground pointer-events-none z-20"
 				>
 					{QUIPS[(pokeCount - 1) % QUIPS.length]}
@@ -164,20 +134,20 @@ export function ClawdMascot({ className }: { className?: string }) {
 			)}
 
 			<span
-				key={pokeCount}
+				key={`frame-${pokeCount}`}
 				className={cn('relative block', pokeCount > 0 && 'clawd-poke')}
 				onAnimationEnd={() => setWinking(false)}
 			>
 				{winking ? (
-					<PixelFrame sprite={SPRITE_WINK} />
+					<PixelFrame frame={WINK_FRAME} />
 				) : (
 					<>
 						<PixelFrame
-							sprite={SPRITE_A}
+							frame={FRAME_A}
 							className="clawd-frame-a group-hover:[animation-duration:0.25s]"
 						/>
 						<PixelFrame
-							sprite={SPRITE_B}
+							frame={FRAME_B}
 							className="clawd-frame-b absolute inset-0 group-hover:[animation-duration:0.25s]"
 						/>
 					</>
