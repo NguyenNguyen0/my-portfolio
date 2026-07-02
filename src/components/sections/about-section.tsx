@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import { usePortfolioActions } from '@/context/portfolio-actions';
 import { TechNode } from '@/components/ui/tech-node';
 import { techIconMap } from '@/data/tech-icon-map';
+import { ClawdMascot } from '@/components/ui/clawd-mascot';
 
 // ──────────────────────────────────────
 // Data
@@ -741,14 +742,17 @@ export const AboutSection = () => {
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
 				viewport={{ once: true }}
-				className="mb-12"
+				className="mb-12 flex items-end justify-between gap-4"
 			>
-				<p className="font-pixel text-[10px] text-primary mb-3 tracking-widest">
-					ABOUT
-				</p>
-				<h2 className="font-pixel text-xl sm:text-2xl md:text-3xl text-foreground leading-relaxed">
-					PLAYER PROFILE
-				</h2>
+				<div>
+					<p className="font-pixel text-[10px] text-primary mb-3 tracking-widest">
+						ABOUT
+					</p>
+					<h2 className="font-pixel text-xl sm:text-2xl md:text-3xl text-foreground leading-relaxed">
+						PLAYER PROFILE
+					</h2>
+				</div>
+				<ClawdMascot className="hidden sm:inline-flex mb-1" />
 			</motion.div>
 
 			{/* S1: Hero card */}

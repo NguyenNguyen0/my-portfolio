@@ -22,65 +22,83 @@ const CELL = 6; // px per pixel
 type Frame = string[];
 
 const FRAME_A: Frame = [
-	'.XEXXXXEX.',
 	'.XXXXXXXX.',
+	'.XEXXXXEX.',
+	'.XEXXXXEX.',
 	'XXXXXXXXXX',
 	'.XXXXXXXX.',
 	'.X.X..X.X.',
 ];
 
 const FRAME_B: Frame = [
-	'.XEXXXXEX.',
 	'.XXXXXXXX.',
+	'.XEXXXXEX.',
+	'.XEXXXXEX.',
 	'XXXXXXXXXX',
 	'.XXXXXXXX.',
 	'..X.XX.X..',
 ];
 
 const WINK_FRAME: Frame = [
-	'.XXXXXXEX.',
 	'.XXXXXXXX.',
+	'.XXXXXXEX.',
+	'.XXXXXXEX.',
 	'XXXXXXXXXX',
+	'.XXXXXXXX.',
 	'.XXXXXXXX.',
 	'.X.X..X.X.',
 ];
 
+// Renders a frame as a single element via the box-shadow pixel-art trick
+// (one shadow entry per lit pixel) instead of one <span> per cell. With 4
+// mascot instances x 2-3 stacked frame layers running continuous CSS
+// animations, a ~60-node-per-frame grid measurably raised Style/Layout and
+// Rendering cost in a Lighthouse trace; this drops it to 1 DOM node per
+// frame layer.
+interface Sprite {
+	shadow: string;
+	width: number;
+	height: number;
+}
+
+function compileFrame(frame: Frame): Sprite {
+	const shadows: string[] = [];
+	frame.forEach((row, y) => {
+		[...row].forEach((ch, x) => {
+			if (ch === '.') return;
+			shadows.push(
+				`${x * CELL}px ${y * CELL}px 0 0 ${ch === 'E' ? CLAWD_EYE : CLAWD_ORANGE}`,
+			);
+		});
+	});
+	return {
+		shadow: shadows.join(', '),
+		width: frame[0].length * CELL,
+		height: frame.length * CELL,
+	};
+}
+
+const SPRITE_A = compileFrame(FRAME_A);
+const SPRITE_B = compileFrame(FRAME_B);
+const SPRITE_WINK = compileFrame(WINK_FRAME);
+
 function PixelFrame({
-	frame,
+	sprite,
 	className,
 }: {
-	frame: Frame;
+	sprite: Sprite;
 	className?: string;
 }) {
-	const cols = frame[0].length;
-	const rows = frame.length;
 	return (
-		<div
+		<span
 			className={className}
 			style={{
-				display: 'grid',
-				gridTemplateColumns: `repeat(${cols}, ${CELL}px)`,
-				gridTemplateRows: `repeat(${rows}, ${CELL}px)`,
+				display: 'block',
+				width: sprite.width,
+				height: sprite.height,
+				boxShadow: sprite.shadow,
 			}}
-		>
-			{frame.flatMap((row, y) =>
-				[...row].map((ch, x) => (
-					<span
-						key={`${y}-${x}`}
-						style={{
-							width: CELL,
-							height: CELL,
-							background:
-								ch === 'X'
-									? CLAWD_ORANGE
-									: ch === 'E'
-										? CLAWD_EYE
-										: 'transparent',
-						}}
-					/>
-				)),
-			)}
-		</div>
+		/>
 	);
 }
 
@@ -116,7 +134,7 @@ export function ClawdMascot({ className }: { className?: string }) {
 			}}
 			aria-label="Clawd the crab — click to poke"
 			className={cn(
-				'clawd group relative inline-flex bg-transparent border-0 p-0 cursor-pointer select-none',
+				'clawd group relative inline-flex bg-transparent border-0 p-0 cursor-pointer select-none [contain:layout_paint]',
 				className,
 			)}
 		>
@@ -135,15 +153,15 @@ export function ClawdMascot({ className }: { className?: string }) {
 				onAnimationEnd={() => setWinking(false)}
 			>
 				{winking ? (
-					<PixelFrame frame={WINK_FRAME} />
+					<PixelFrame sprite={SPRITE_WINK} />
 				) : (
 					<>
 						<PixelFrame
-							frame={FRAME_A}
+							sprite={SPRITE_A}
 							className="clawd-frame-a group-hover:[animation-duration:0.25s]"
 						/>
 						<PixelFrame
-							frame={FRAME_B}
+							sprite={SPRITE_B}
 							className="clawd-frame-b absolute inset-0 group-hover:[animation-duration:0.25s]"
 						/>
 					</>
