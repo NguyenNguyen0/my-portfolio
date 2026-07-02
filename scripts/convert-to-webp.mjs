@@ -15,6 +15,12 @@ const PUBLIC_DIR = path.join(
 	'../public',
 );
 
+// Paths (relative to public/) always skipped, regardless of what the
+// alpha check finds — for assets you want to guarantee stay PNG/JPG (e.g.
+// a favicon you're actively re-editing) without depending on transparency
+// detection being right every time.
+const IGNORE_LIST = ['dev-icon.png'];
+
 async function findImages(dir) {
 	const entries = await readdir(dir, { withFileTypes: true });
 	const files = [];
@@ -42,10 +48,18 @@ let totalBefore = 0;
 let totalAfter = 0;
 let converted = 0;
 const skipped = [];
+const ignored = [];
 
 for (const file of images) {
+	const relPath = path.relative(PUBLIC_DIR, file);
+
+	if (IGNORE_LIST.includes(relPath)) {
+		ignored.push(relPath);
+		continue;
+	}
+
 	if (await hasRealTransparency(file)) {
-		skipped.push(path.relative(PUBLIC_DIR, file));
+		skipped.push(relPath);
 		continue;
 	}
 
@@ -63,6 +77,9 @@ for (const file of images) {
 	);
 }
 
+if (ignored.length) {
+	console.log(`\nIgnored (in IGNORE_LIST): ${ignored.join(', ')}`);
+}
 if (skipped.length) {
 	console.log(
 		`\nSkipped (real transparency detected, kept as-is): ${skipped.join(', ')}`,
