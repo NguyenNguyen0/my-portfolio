@@ -403,6 +403,47 @@ function ProjectCard({
 	);
 }
 
+// ── Explore More ────────────────────────────────────────────────────────────
+
+function ExploreMoreCard() {
+	return (
+		<motion.div
+			variants={fadeUp}
+			className="border border-dashed border-primary/50 bg-card p-8 sm:p-12 flex flex-col items-center justify-center text-center gap-4"
+		>
+			<p className="font-pixel text-xs sm:text-sm text-primary tracking-widest">
+				&#x25B6; EXPLORE MORE PROJECTS
+			</p>
+			<p className="font-mono-custom text-sm text-muted-foreground max-w-md">
+				More repositories, experiments, and side projects live on
+				GitHub and GitLab.
+			</p>
+			<div className="flex flex-wrap gap-3 justify-center pt-2">
+				<a
+					href="https://github.com/NguyenNguyen0?tab=repositories"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="Explore more projects on GitHub"
+					className="font-pixel text-[9px] flex items-center gap-2 px-4 py-2.5 bg-primary text-primary-foreground border-2 border-primary transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[0_3px_0_0_color-mix(in_oklch,var(--primary)_40%,transparent)]"
+				>
+					<Github className="w-3 h-3" aria-hidden="true" />
+					GITHUB
+				</a>
+				<a
+					href="https://gitlab.com/users/nguyennguyen0/groups"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="Explore more projects on GitLab"
+					className="font-pixel text-[9px] flex items-center gap-2 px-4 py-2.5 border border-dotted border-border text-muted-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
+				>
+					<GitLabIcon />
+					GITLAB
+				</a>
+			</div>
+		</motion.div>
+	);
+}
+
 // ── Section ───────────────────────────────────────────────────────────────────
 
 export const ProjectsSection = () => {
@@ -457,6 +498,7 @@ export const ProjectsSection = () => {
 						isHighlighted={state.highlightedProject === project.id}
 					/>
 				))}
+				<ExploreMoreCard />
 			</motion.div>
 		</section>
 	);
