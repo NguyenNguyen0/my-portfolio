@@ -89,16 +89,32 @@ function PixelFrame({
 	sprite: Sprite;
 	className?: string;
 }) {
+	// Every box-shadow copy inherits the *element's own* size — so the
+	// shadow-bearing element must be a single CELL square (the "seed"
+	// pixel), not the full sprite box. A separate, normally-sized wrapper
+	// carries the className/layout so the frame still occupies the right
+	// footprint in the flex row / absolute-inset overlay.
 	return (
 		<span
 			className={className}
 			style={{
 				display: 'block',
+				position: 'relative',
 				width: sprite.width,
 				height: sprite.height,
-				boxShadow: sprite.shadow,
 			}}
-		/>
+		>
+			<span
+				style={{
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					width: CELL,
+					height: CELL,
+					boxShadow: sprite.shadow,
+				}}
+			/>
+		</span>
 	);
 }
 
