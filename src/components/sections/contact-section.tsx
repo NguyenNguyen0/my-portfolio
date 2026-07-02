@@ -12,7 +12,6 @@ import {
 	Copy,
 	Check,
 } from 'lucide-react';
-import { ClawdMascot } from '@/components/ui/clawd-mascot';
 
 const EMAIL = 'nguyentrungnguyen.dev@gmail.com';
 
@@ -163,7 +162,6 @@ export const ContactSection = () => {
 						LET&apos;S TALK
 					</h2>
 				</div>
-				<ClawdMascot className="hidden sm:inline-flex mb-1" />
 			</motion.div>
 
 			<div className="grid md:grid-cols-2 gap-10 md:gap-16">

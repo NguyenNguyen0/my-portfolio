@@ -45,7 +45,6 @@ const WINK_FRAME: Frame = [
 	'.XXXXXXEX.',
 	'XXXXXXXXXX',
 	'.XXXXXXXX.',
-	'.XXXXXXXX.',
 	'.X.X..X.X.',
 ];
 
