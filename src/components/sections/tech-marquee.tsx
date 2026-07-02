@@ -1,8 +1,8 @@
 'use client';
 
 import { Marquee } from '@/components/ui/marquee';
+import { TechNode } from '@/components/ui/tech-node';
 import { techIcons } from '@/data/techIcons';
-import Image from 'next/image';
 
 const technologies = [
 	'HTML',
@@ -64,14 +64,7 @@ export const TechBadge = ({ tech }: { tech: string }) => {
 	return (
 		<div className="pixel-card flex items-center gap-2 px-4 py-2 mx-2 cursor-default select-none">
 			<div className="w-5 h-5 flex-shrink-0 flex items-center justify-center bg-foreground/10 p-0.5">
-				<Image
-					src={techIcon.iconPath}
-					alt={`${tech} icon`}
-					width={16}
-					height={16}
-					className="object-contain w-full h-full"
-					loading="lazy"
-				/>
+				<TechNode label={tech} {...techIcon} />
 			</div>
 			<span className="font-mono-custom text-xs text-foreground whitespace-nowrap">
 				{tech}

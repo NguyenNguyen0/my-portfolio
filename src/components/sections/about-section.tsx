@@ -9,6 +9,8 @@ import {
 } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { usePortfolioActions } from '@/context/portfolio-actions';
+import { TechNode } from '@/components/ui/tech-node';
+import { techIconMap } from '@/data/tech-icon-map';
 
 // ──────────────────────────────────────
 // Data
@@ -23,105 +25,27 @@ const CAT_COLORS = {
 
 type Category = keyof typeof CAT_COLORS;
 
-interface ConstellationNode {
+interface ConstellationNodeData {
 	id: string;
 	label: string;
-	icon: string | null;
 	cat: Category;
 	x: number;
 	y: number;
 }
 
-const NODES: ConstellationNode[] = [
-	{
-		id: 'linux',
-		label: 'Linux',
-		icon: '/icons/linux.svg',
-		cat: 'devops',
-		x: 18,
-		y: 14,
-	},
-	{
-		id: 'mcp',
-		label: 'MCP',
-		icon: '/icons/mcp.svg',
-		cat: 'ai',
-		x: 82,
-		y: 10,
-	},
-	{
-		id: 'langgraph',
-		label: 'LangGraph',
-		icon: '/icons/langgraph-color.svg',
-		cat: 'ai',
-		x: 88,
-		y: 36,
-	},
-	{
-		id: 'gemini',
-		label: 'Gemini',
-		icon: '/icons/gemini-color.svg',
-		cat: 'ai',
-		x: 76,
-		y: 65,
-	},
-	{
-		id: 'aws',
-		label: 'AWS',
-		icon: '/icons/AWS.svg',
-		cat: 'devops',
-		x: 54,
-		y: 84,
-	},
-	{
-		id: 'docker',
-		label: 'Docker',
-		icon: '/icons/Docker.svg',
-		cat: 'devops',
-		x: 28,
-		y: 82,
-	},
-	{
-		id: 'terraform',
-		label: 'Terraform',
-		icon: '/icons/HashiCorp Terraform.svg',
-		cat: 'devops',
-		x: 10,
-		y: 58,
-	},
-	{
-		id: 'kafka',
-		label: 'Kafka',
-		icon: '/icons/Apache Kafka.svg',
-		cat: 'backend',
-		x: 8,
-		y: 32,
-	},
-	{
-		id: 'spring',
-		label: 'Spring Boot',
-		icon: '/icons/Spring.svg',
-		cat: 'backend',
-		x: 24,
-		y: 50,
-	},
-	{
-		id: 'fastapi',
-		label: 'FastAPI',
-		icon: '/icons/FastAPI-icon.svg',
-		cat: 'backend',
-		x: 36,
-		y: 16,
-	},
-	{
-		id: 'react',
-		label: 'React',
-		icon: '/icons/react-icon.svg',
-		cat: 'frontend',
-		x: 66,
-		y: 16,
-	},
-	{ id: 'rag', label: 'RAG', icon: null, cat: 'ai', x: 64, y: 76 },
+const NODES: ConstellationNodeData[] = [
+	{ id: 'linux', label: 'Linux', cat: 'devops', x: 18, y: 14 },
+	{ id: 'mcp', label: 'MCP', cat: 'ai', x: 82, y: 10 },
+	{ id: 'langgraph', label: 'LangGraph', cat: 'ai', x: 88, y: 36 },
+	{ id: 'gemini', label: 'Gemini', cat: 'ai', x: 76, y: 65 },
+	{ id: 'aws', label: 'AWS', cat: 'devops', x: 54, y: 84 },
+	{ id: 'docker', label: 'Docker', cat: 'devops', x: 28, y: 82 },
+	{ id: 'terraform', label: 'Terraform', cat: 'devops', x: 10, y: 58 },
+	{ id: 'kafka', label: 'Kafka', cat: 'backend', x: 8, y: 32 },
+	{ id: 'spring', label: 'Spring Boot', cat: 'backend', x: 24, y: 50 },
+	{ id: 'fastapi', label: 'FastAPI', cat: 'backend', x: 36, y: 16 },
+	{ id: 'react', label: 'React', cat: 'frontend', x: 66, y: 16 },
+	{ id: 'rag', label: 'RAG', cat: 'ai', x: 64, y: 76 },
 ];
 
 const CROSS: [string, string][] = [
@@ -140,7 +64,7 @@ interface StackGroup {
 	label: string;
 	color: string;
 	cats: Category[];
-	items: { name: string; icon: string | null }[];
+	items: { name: string; techId: string }[];
 }
 
 const STACK: StackGroup[] = [
@@ -149,9 +73,9 @@ const STACK: StackGroup[] = [
 		color: '#D97706',
 		cats: [],
 		items: [
-			{ name: 'Java', icon: '/icons/Java.svg' },
-			{ name: 'Python', icon: '/icons/Python-icon.svg' },
-			{ name: 'TypeScript', icon: '/icons/TypeScript.svg' },
+			{ name: 'Java', techId: 'java' },
+			{ name: 'Python', techId: 'python' },
+			{ name: 'TypeScript', techId: 'typescript' },
 		],
 	},
 	{
@@ -159,10 +83,10 @@ const STACK: StackGroup[] = [
 		color: '#16A34A',
 		cats: ['frontend'],
 		items: [
-			{ name: 'React', icon: '/icons/react-icon.svg' },
-			{ name: 'Next.js', icon: '/icons/nextjs-icon.svg' },
-			{ name: 'Expo', icon: '/icons/logo-type-b.svg' },
-			{ name: 'Tailwind', icon: '/icons/tailwind-icon.svg' },
+			{ name: 'React', techId: 'react' },
+			{ name: 'Next.js', techId: 'nextjs' },
+			{ name: 'Expo', techId: 'expo' },
+			{ name: 'Tailwind', techId: 'tailwindcss' },
 		],
 	},
 	{
@@ -170,15 +94,15 @@ const STACK: StackGroup[] = [
 		color: '#2A3FE5',
 		cats: ['backend'],
 		items: [
-			{ name: 'Spring Boot', icon: '/icons/Spring.svg' },
-			{ name: 'FastAPI', icon: '/icons/FastAPI-icon.svg' },
-			{ name: 'NestJS', icon: '/icons/Nest.js.svg' },
-			{ name: 'Node.js', icon: '/icons/nodejs-icon.svg' },
-			{ name: 'Kafka', icon: '/icons/Apache Kafka.svg' },
-			{ name: 'PostgreSQL', icon: '/icons/postgresql-icon.svg' },
-			{ name: 'MongoDB', icon: '/icons/MongoDB-icon.svg' },
-			{ name: 'Redis', icon: '/icons/Redis-icon.svg' },
-			{ name: 'Qdrant', icon: '/icons/qdrant-brandmark-red.svg' },
+			{ name: 'Spring Boot', techId: 'spring' },
+			{ name: 'FastAPI', techId: 'fastapi' },
+			{ name: 'NestJS', techId: 'nestjs' },
+			{ name: 'Node.js', techId: 'nodejs' },
+			{ name: 'Kafka', techId: 'kafka' },
+			{ name: 'PostgreSQL', techId: 'postgresql' },
+			{ name: 'MongoDB', techId: 'mongodb' },
+			{ name: 'Redis', techId: 'redis' },
+			{ name: 'Qdrant', techId: 'qdrant' },
 		],
 	},
 	{
@@ -186,16 +110,16 @@ const STACK: StackGroup[] = [
 		color: '#F4B9B0',
 		cats: ['ai', 'devops'],
 		items: [
-			{ name: 'LangGraph', icon: '/icons/langgraph-color.svg' },
-			{ name: 'MCP', icon: '/icons/mcp.svg' },
-			{ name: 'RAG', icon: null },
-			{ name: 'Gemini API', icon: '/icons/gemini-color.svg' },
-			{ name: 'Groq', icon: '/icons/groq-text.svg' },
-			{ name: 'Ollama', icon: '/icons/ollama.svg' },
-			{ name: 'Docker', icon: '/icons/Docker.svg' },
-			{ name: 'Terraform', icon: '/icons/HashiCorp Terraform.svg' },
-			{ name: 'Ansible', icon: '/icons/Ansible.svg' },
-			{ name: 'AWS', icon: '/icons/AWS.svg' },
+			{ name: 'LangGraph', techId: 'langgraph' },
+			{ name: 'MCP', techId: 'mcp' },
+			{ name: 'RAG', techId: 'rag' },
+			{ name: 'Gemini API', techId: 'gemini' },
+			{ name: 'Groq', techId: 'groq' },
+			{ name: 'Ollama', techId: 'ollama' },
+			{ name: 'Docker', techId: 'docker' },
+			{ name: 'Terraform', techId: 'terraform' },
+			{ name: 'Ansible', techId: 'ansible' },
+			{ name: 'AWS', techId: 'aws' },
 		],
 	},
 ];
@@ -367,14 +291,14 @@ function HeroInfo() {
 // S2 — Constellation
 // ──────────────────────────────────────
 
-function TechNode({
+function ConstellationNode({
 	node,
 	hovered,
 	onHover,
 	shouldReduce,
 	focusedSkill,
 }: {
-	node: ConstellationNode;
+	node: ConstellationNodeData;
 	hovered: string | null;
 	onHover: (id: string | null) => void;
 	shouldReduce: boolean;
@@ -447,22 +371,7 @@ function TechNode({
 								: 'none',
 					}}
 				>
-					{node.icon ? (
-						<Image
-							src={node.icon}
-							alt={node.label}
-							width={24}
-							height={24}
-							className="object-contain w-full h-full"
-						/>
-					) : (
-						<span
-							className="font-pixel text-[6px] leading-tight text-center"
-							style={{ color }}
-						>
-							{node.label.slice(0, 3).toUpperCase()}
-						</span>
-					)}
+					<TechNode label={node.label} {...techIconMap[node.id]} />
 				</motion.div>
 				<span
 					className="font-pixel text-[6px] whitespace-nowrap"
@@ -565,7 +474,7 @@ function Constellation({
 			{/* Tech nodes with AnimatePresence */}
 			<AnimatePresence>
 				{visibleNodes.map((n) => (
-					<TechNode
+					<ConstellationNode
 						key={n.id}
 						node={n}
 						hovered={hovered}
@@ -648,11 +557,11 @@ function Constellation({
 
 function GemItem({
 	name,
-	icon,
+	techId,
 	color,
 }: {
 	name: string;
-	icon: string | null;
+	techId: string;
 	color: string;
 }) {
 	const [hovered, setHovered] = useState(false);
@@ -675,22 +584,7 @@ function GemItem({
 					transition: 'border-color 0.15s, box-shadow 0.15s',
 				}}
 			>
-				{icon ? (
-					<Image
-						src={icon}
-						alt={name}
-						width={22}
-						height={22}
-						className="object-contain w-full h-full"
-					/>
-				) : (
-					<span
-						className="font-pixel text-[6px] leading-tight text-center"
-						style={{ color }}
-					>
-						{name.slice(0, 3).toUpperCase()}
-					</span>
-				)}
+				<TechNode label={name} {...techIconMap[techId]} />
 			</motion.div>
 			{hovered && (
 				<div
@@ -748,7 +642,7 @@ function TechStackGrid({
 									<GemItem
 										key={item.name}
 										name={item.name}
-										icon={item.icon}
+										techId={item.techId}
 										color={group.color}
 									/>
 								))}
