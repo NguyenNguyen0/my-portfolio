@@ -9,34 +9,40 @@ import { cn } from '@/lib/utils';
 // palette in projects-section.tsx).
 const CLAWD_ORANGE = '#D97757';
 const CLAWD_EYE = '#171310';
-const CELL = 5; // px per pixel
+const CELL = 6; // px per pixel
 
 // Two hand-drawn frames (legs alternate) for a real sprite-style scuttle —
-// not a transform tween. 'X' = body pixel, 'E' = eye pixel, '.' = empty.
+// not a transform tween. 'X' = body/arm pixel, 'E' = eye pixel, '.' = empty.
+// Eyes sit embedded in the body row (orange neighbors on every side) rather
+// than floating in an empty row above it — a dark eye pixel surrounded by
+// '.' (transparent, showing the page background through) is invisible
+// against a dark theme. Arms are just row 2 running the full grid width,
+// wider than the body rows above/below it, so they poke out past the
+// silhouette.
 type Frame = string[];
 
 const FRAME_A: Frame = [
-	'.E....E.',
-	'XXXXXXXX',
-	'XXXXXXXX',
-	'XXXXXXXX',
-	'X.X..X.X',
+	'.XEXXXXEX.',
+	'.XXXXXXXX.',
+	'XXXXXXXXXX',
+	'.XXXXXXXX.',
+	'.X.X..X.X.',
 ];
 
 const FRAME_B: Frame = [
-	'.E....E.',
-	'XXXXXXXX',
-	'XXXXXXXX',
-	'XXXXXXXX',
-	'.X.XX.X.',
+	'.XEXXXXEX.',
+	'.XXXXXXXX.',
+	'XXXXXXXXXX',
+	'.XXXXXXXX.',
+	'..X.XX.X..',
 ];
 
 const WINK_FRAME: Frame = [
-	'.X....E.',
-	'XXXXXXXX',
-	'XXXXXXXX',
-	'XXXXXXXX',
-	'X.X..X.X',
+	'.XXXXXXEX.',
+	'.XXXXXXXX.',
+	'XXXXXXXXXX',
+	'.XXXXXXXX.',
+	'.X.X..X.X.',
 ];
 
 function PixelFrame({
@@ -47,12 +53,14 @@ function PixelFrame({
 	className?: string;
 }) {
 	const cols = frame[0].length;
+	const rows = frame.length;
 	return (
 		<div
 			className={className}
 			style={{
 				display: 'grid',
 				gridTemplateColumns: `repeat(${cols}, ${CELL}px)`,
+				gridTemplateRows: `repeat(${rows}, ${CELL}px)`,
 			}}
 		>
 			{frame.flatMap((row, y) =>
