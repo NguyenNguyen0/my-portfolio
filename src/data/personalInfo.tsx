@@ -4,23 +4,24 @@ import {
 	GraduationCap,
 	BookOpen,
 	Lightbulb,
+	Award,
 } from 'lucide-react';
 
 export const personalInfo = [
 	{
 		icon: <MapPin className="text-xl" />,
 		label: 'Location',
-		value: 'Ho Chi Minh City',
+		value: 'Go Vap, Ho Chi Minh City',
 	},
 	{
 		icon: <MessageSquare className="text-xl" />,
 		label: 'Foreign language',
-		value: 'Good English communication, reading and understanding technical documents',
+		value: 'TOEIC Listening & Reading 625 — comfortable reading and discussing technical documentation in English',
 	},
 	{
 		icon: <GraduationCap className="text-xl" />,
 		label: 'Education',
-		value: 'Software Engineer in IUH and Self-study + online courses',
+		value: 'Software Engineering @ Industrial University of Ho Chi Minh City (IUH), 2022–Present · GPA 3.2/4.0',
 	},
 	{
 		icon: <BookOpen className="text-xl" />,
@@ -30,40 +31,74 @@ export const personalInfo = [
 	{
 		icon: <Lightbulb className="text-xl" />,
 		label: 'Goal',
-		value: 'Become a Fullstack Developer with beautiful design thinking & strong technical skills',
+		value: 'Contribute to scalable products as a Backend/Full-Stack Engineer while deepening expertise in software architecture and LLM integration',
+	},
+	{
+		icon: <Award className="text-xl" />,
+		label: 'Certification',
+		value: 'CS50: Introduction to Computer Science — Harvard University (edX), Dec 2023',
 	},
 ];
 
 export const technicalSkills = [
 	{
-		title: 'Programing languages',
-		skills: ['JavaScript', 'TypeScript', 'Java', 'Python', 'Go'],
+		title: 'Languages',
+		skills: ['Java', 'Python', 'TypeScript'],
 		variant: 'primary' as const,
 	},
 	{
 		title: 'Frontend',
-		skills: ['HTML', 'CSS', 'React', 'Next.js', 'Tailwind CSS'],
+		skills: ['React', 'React Native (Expo)', 'Tailwind CSS'],
 		variant: 'primary' as const,
 	},
 	{
 		title: 'Backend',
 		skills: [
-			'Node.js',
-			'Express',
-			'RESTful APIs',
+			'Spring Boot',
 			'FastAPI',
-			'Flask',
-			'MongoDB',
-			'PostgreSQL',
-			'Redis',
-			'Microsoft SQL Server',
+			'NestJS',
+			'Node.js',
+			'WebSocket',
+			'REST APIs',
 		],
 		variant: 'secondary' as const,
 	},
 	{
-		title: 'Tools & Others',
-		skills: ['Git', 'Docker', 'Postman', 'Vercel', 'Linux CLI'],
+		title: 'Databases',
+		skills: ['PostgreSQL', 'MongoDB', 'Redis', 'Qdrant', 'pgvector'],
+		variant: 'secondary' as const,
+	},
+	{
+		title: 'AI & LLM',
+		skills: [
+			'LangGraph',
+			'MCP',
+			'RAG',
+			'Gemini API',
+			'Groq',
+			'LangChain4j',
+			'AG-UI',
+			'Vercel AI SDK',
+		],
 		variant: 'accent' as const,
+	},
+	{
+		title: 'Cloud & DevOps',
+		skills: [
+			'Docker',
+			'GitHub Actions',
+			'GitLab CI/CD',
+			'Terraform',
+			'Ansible',
+			'AWS',
+			'Vercel',
+		],
+		variant: 'accent' as const,
+	},
+	{
+		title: 'Tools',
+		skills: ['Git', 'Postman', 'LangSmith'],
+		variant: 'primary' as const,
 	},
 ];
 

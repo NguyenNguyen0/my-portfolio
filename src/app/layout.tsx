@@ -49,21 +49,27 @@ const vt323 = VT323({
 export const metadata: Metadata = {
 	title: 'Nguyễn Trung Nguyên — Full-Stack Developer · AI Integration',
 	description:
-		'Full-Stack Developer with experience building distributed systems, AI-powered applications, and cloud-native deployments. Skilled in LLMs, multi-agent systems (LangGraph, MCP), and recommendation engines.',
+		'Full-Stack Developer with hands-on experience building distributed systems, AI-powered applications, and cloud-native deployments. Skilled in LangGraph, MCP, RAG, Spring Boot, FastAPI, and Next.js.',
 	keywords: [
 		'Nguyễn Trung Nguyên',
 		'NguyenNguyen0',
 		'Full-Stack Developer',
+		'Backend Developer',
 		'AI Integration',
 		'LangGraph',
 		'MCP',
 		'RAG',
+		'LangChain4j',
+		'Gemini API',
 		'Spring Boot',
 		'FastAPI',
+		'NestJS',
 		'Next.js',
 		'React',
+		'React Native',
 		'Microservices',
 		'Distributed Systems',
+		'Qdrant',
 		'Portfolio',
 		'Vietnam Developer',
 	],
@@ -78,7 +84,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: 'Nguyễn Trung Nguyên — Full-Stack Developer · AI Integration',
 		description:
-			'Building distributed systems and AI-powered applications. LangGraph · MCP · Spring Boot · FastAPI · React.',
+			'Building distributed systems and AI-powered applications. LangGraph · MCP · RAG · Spring Boot · FastAPI · Next.js.',
 		images: [
 			{
 				url: '/thumbnail.png',
@@ -96,7 +102,7 @@ export const metadata: Metadata = {
 		card: 'summary_large_image',
 		title: 'Nguyễn Trung Nguyên — Full-Stack Developer · AI Integration',
 		description:
-			'Building distributed systems and AI-powered applications. LangGraph · MCP · Spring Boot · FastAPI · React.',
+			'Building distributed systems and AI-powered applications. LangGraph · MCP · RAG · Spring Boot · FastAPI · Next.js.',
 		images: ['/thumbnail.png'],
 	},
 	icons: {
@@ -147,6 +153,15 @@ export default function RootLayout({
 							image: 'https://nguyennguyen0.id.vn/avatar.jpg',
 							email: 'nguyentrungnguyen.dev@gmail.com',
 							telephone: '+84394757329',
+							alumniOf: {
+								'@type': 'CollegeOrUniversity',
+								name: 'Industrial University of Ho Chi Minh City',
+							},
+							address: {
+								'@type': 'PostalAddress',
+								addressLocality: 'Go Vap, Ho Chi Minh City',
+								addressCountry: 'VN',
+							},
 							description:
 								'Full-Stack Developer with experience building distributed systems, AI-powered applications, and cloud-native deployments.',
 							knowsAbout: [
@@ -157,13 +172,19 @@ export default function RootLayout({
 								'LangGraph',
 								'MCP',
 								'RAG',
+								'LangChain4j',
+								'Gemini API',
 								'Spring Boot',
 								'FastAPI',
+								'NestJS',
 								'React',
 								'Next.js',
+								'React Native',
 								'Kafka',
+								'Qdrant',
 								'Docker',
 								'Terraform',
+								'Ansible',
 								'AWS',
 								'API Design',
 							],

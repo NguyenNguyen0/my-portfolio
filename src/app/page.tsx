@@ -13,7 +13,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
 	title: 'Nguyễn Trung Nguyên — Full-Stack Developer Portfolio',
 	description:
-		'Full-Stack Developer specializing in distributed systems, AI-powered applications, and cloud-native deployments. Based in Ho Chi Minh City.',
+		'Backend/Full-Stack Developer specializing in distributed systems, AI-powered applications, and cloud-native deployments. Based in Ho Chi Minh City.',
 	keywords: [
 		'Backend Developer',
 		'Full Stack',
@@ -22,6 +22,9 @@ export const metadata: Metadata = {
 		'React',
 		'Next.js',
 		'FastAPI',
+		'NestJS',
+		'LangGraph',
+		'RAG',
 		'Portfolio',
 		'Ho Chi Minh City',
 	],
