@@ -1,6 +1,6 @@
 # Nguyễn Trung Nguyên — Portfolio
 
-![Portfolio Thumbnail](./public/thumbnail.png)
+![Portfolio Thumbnail](./public/thumbnail.webp)
 
 Single-page portfolio site for a Full-Stack Developer, with an AI chatbot that can drive live UI changes (theme, accent color, hero copy, project highlighting) via tool calling.
 
