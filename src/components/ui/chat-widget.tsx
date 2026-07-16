@@ -218,12 +218,10 @@ export function ChatWidget() {
 		for (const effect of effects) {
 			switch (effect.kind) {
 				case 'scrollTo':
-					document
-						.getElementById(effect.elementId)
-						?.scrollIntoView({
-							behavior: 'smooth',
-							block: 'start',
-						});
+					document.getElementById(effect.elementId)?.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start',
+					});
 					break;
 				case 'setTheme':
 					setTheme(effect.theme);
@@ -369,6 +367,26 @@ export function ChatWidget() {
 										</div>
 									</div>
 								))}
+
+								{!isLoading &&
+									messages.length > 0 &&
+									messages[messages.length - 1].role ===
+										'assistant' &&
+									messages[messages.length - 1].content && (
+										<div className="flex flex-wrap gap-2 pt-1">
+											{PROMPT_CHIPS.map((chip) => (
+												<button
+													key={chip.label}
+													onClick={() =>
+														sendMessage(chip.text)
+													}
+													className="px-3 py-1.5 text-[11px] border border-dotted border-border text-foreground hover:border-solid hover:border-primary hover:text-primary transition-colors"
+												>
+													{chip.label}
+												</button>
+											))}
+										</div>
+									)}
 
 								{isLoading &&
 									messages[messages.length - 1]?.content ===
