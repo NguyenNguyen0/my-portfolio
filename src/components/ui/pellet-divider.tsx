@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 
 interface PelletDividerProps {
 	className?: string;
@@ -19,7 +19,7 @@ export function PelletDivider({
 			aria-hidden="true"
 		>
 			{Array.from({ length: count }).map((_, i) => (
-				<motion.span
+				<m.span
 					key={i}
 					className="block w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"
 					initial={{

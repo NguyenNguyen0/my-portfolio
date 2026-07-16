@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import {
-	motion,
+	m,
 	AnimatePresence,
 	useReducedMotion,
 	type Variants,
@@ -90,7 +90,7 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
 			>
 				{/* Slides */}
 				<AnimatePresence mode="wait" initial={false}>
-					<motion.div
+					<m.div
 						key={idx}
 						initial={{ opacity: 0, x: 16 }}
 						animate={{ opacity: 1, x: 0 }}
@@ -105,7 +105,7 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
 							className="object-contain bg-muted"
 							sizes="(max-width: 768px) 100vw, 45vw"
 						/>
-					</motion.div>
+					</m.div>
 				</AnimatePresence>
 
 				{/* Scanline overlay */}
@@ -182,7 +182,7 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
 			{/* Lightbox */}
 			<AnimatePresence>
 				{lightbox && (
-					<motion.div
+					<m.div
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
@@ -229,7 +229,7 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
 								</div>
 							))}
 						</div>
-					</motion.div>
+					</m.div>
 				)}
 			</AnimatePresence>
 		</>
@@ -251,7 +251,7 @@ function ProjectCard({
 	const isEven = index % 2 === 0;
 
 	return (
-		<motion.article
+		<m.article
 			variants={fadeUp}
 			className={`border border-dotted border-border bg-card overflow-hidden transition-all duration-300 hover:border-solid hover:border-primary/50${isHighlighted ? ' ring-2 ring-primary shadow-[0_0_24px_oklch(87.6%_0.179_95.4/0.5)]' : ''}`}
 		>
@@ -400,7 +400,7 @@ function ProjectCard({
 					</div>
 				</div>
 			</div>
-		</motion.article>
+		</m.article>
 	);
 }
 
@@ -408,7 +408,7 @@ function ProjectCard({
 
 function ExploreMoreCard() {
 	return (
-		<motion.div
+		<m.div
 			variants={fadeUp}
 			className="border border-dashed border-primary/50 bg-card p-8 sm:p-12 flex flex-col items-center justify-center text-center gap-4"
 		>
@@ -416,8 +416,8 @@ function ExploreMoreCard() {
 				&#x25B6; EXPLORE MORE PROJECTS
 			</p>
 			<p className="font-mono-custom text-sm text-muted-foreground max-w-md">
-				More repositories, experiments, and side projects live on
-				GitHub and GitLab.
+				More repositories, experiments, and side projects live on GitHub
+				and GitLab.
 			</p>
 			<div className="flex flex-wrap gap-3 justify-center pt-2">
 				<a
@@ -441,7 +441,7 @@ function ExploreMoreCard() {
 					GITLAB
 				</a>
 			</div>
-		</motion.div>
+		</m.div>
 	);
 }
 
@@ -466,7 +466,7 @@ export const ProjectsSection = () => {
 			id="projects-section"
 			className="py-16 sm:py-24 px-4 max-w-7xl mx-auto"
 		>
-			<motion.div
+			<m.div
 				variants={fadeUp}
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
@@ -482,9 +482,9 @@ export const ProjectsSection = () => {
 					</h2>
 				</div>
 				<ClawdMascot className="hidden sm:inline-flex mb-1" />
-			</motion.div>
+			</m.div>
 
-			<motion.div
+			<m.div
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
 				viewport={{ once: true }}
@@ -503,7 +503,7 @@ export const ProjectsSection = () => {
 					/>
 				))}
 				<ExploreMoreCard />
-			</motion.div>
+			</m.div>
 		</section>
 	);
 };

@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { LazyMotion, domMax } from 'framer-motion';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
@@ -202,9 +203,11 @@ export default function RootLayout({
 						defaultTheme="dark"
 						enableSystem
 					>
-						{children}
+						<LazyMotion features={domMax} strict>
+							{children}
+							<ChatWidget />
+						</LazyMotion>
 						<SpeedInsights />
-						<ChatWidget />
 					</ThemeProvider>
 				</PortfolioActionsProvider>
 			</body>

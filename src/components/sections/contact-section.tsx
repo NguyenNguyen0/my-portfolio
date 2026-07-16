@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import { m, useReducedMotion, type Variants } from 'framer-motion';
 import { useState } from 'react';
 import {
 	Github,
@@ -147,7 +147,7 @@ export const ContactSection = () => {
 			className="py-16 sm:py-24 px-4 max-w-7xl mx-auto"
 		>
 			{/* Heading */}
-			<motion.div
+			<m.div
 				variants={fadeUp}
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
@@ -162,11 +162,11 @@ export const ContactSection = () => {
 						LET&apos;S TALK
 					</h2>
 				</div>
-			</motion.div>
+			</m.div>
 
 			<div className="grid md:grid-cols-2 gap-10 md:gap-16">
 				{/* Form */}
-				<motion.div
+				<m.div
 					variants={fadeUp}
 					initial={shouldReduce ? false : 'hidden'}
 					whileInView="visible"
@@ -280,10 +280,10 @@ export const ContactSection = () => {
 							</button>
 						</form>
 					</div>
-				</motion.div>
+				</m.div>
 
 				{/* Info + Socials */}
-				<motion.div
+				<m.div
 					variants={fadeUp}
 					initial={shouldReduce ? false : 'hidden'}
 					whileInView="visible"
@@ -368,7 +368,7 @@ export const ContactSection = () => {
 							))}
 						</div>
 					</div>
-				</motion.div>
+				</m.div>
 			</div>
 		</section>
 	);
