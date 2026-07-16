@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { m, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from './theme-toggle';
 
@@ -35,7 +35,7 @@ export function ResizableNavbar() {
 	}, []);
 
 	return (
-		<motion.nav
+		<m.nav
 			initial={shouldReduce ? false : { y: -80 }}
 			animate={{ y: 0 }}
 			transition={{ duration: 0.4, ease: 'easeOut' }}
@@ -101,7 +101,7 @@ export function ResizableNavbar() {
 			{/* Mobile dropdown */}
 			<AnimatePresence>
 				{isOpen && (
-					<motion.div
+					<m.div
 						initial={
 							shouldReduce ? false : { opacity: 0, height: 0 }
 						}
@@ -132,9 +132,9 @@ export function ResizableNavbar() {
 								</a>
 							))}
 						</nav>
-					</motion.div>
+					</m.div>
 				)}
 			</AnimatePresence>
-		</motion.nav>
+		</m.nav>
 	);
 }

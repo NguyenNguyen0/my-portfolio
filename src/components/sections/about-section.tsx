@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import {
-	motion,
+	m,
 	AnimatePresence,
 	useReducedMotion,
 	type Variants,
@@ -230,7 +230,7 @@ function HeroAvatar() {
 	return (
 		<div className="flex-shrink-0 w-full sm:w-auto sm:ml-12 sm:mr-12 flex flex-col items-center justify-center gap-4 py-10 sm:py-12 border-b sm:border-b-0 sm:border-r border-dotted border-border">
 			<div className="relative flex items-center justify-center w-48 h-48">
-				<motion.div
+				<m.div
 					className="absolute w-64 h-64 rounded-full border-2 border-dashed border-primary pointer-events-none"
 					animate={
 						shouldReduce
@@ -247,7 +247,7 @@ function HeroAvatar() {
 					}}
 					aria-hidden="true"
 				/>
-				<motion.div
+				<m.div
 					className="absolute w-56 h-56 rounded-full border border-dashed border-primary pointer-events-none"
 					animate={
 						shouldReduce
@@ -302,16 +302,16 @@ function HeroInfo() {
 				</p>
 			</div>
 			<div className="grid grid-cols-2 gap-2">
-				{META.map((m) => (
+				{META.map((meta) => (
 					<div
-						key={m.label}
+						key={meta.label}
 						className="border border-dotted border-border p-3 bg-muted"
 					>
 						<p className="font-pixel text-[7px] text-muted-foreground mb-1 tracking-widest">
-							{m.label}
+							{meta.label}
 						</p>
 						<p className="font-mono-custom text-xs text-foreground leading-snug">
-							{m.value}
+							{meta.value}
 						</p>
 					</div>
 				))}
@@ -346,7 +346,7 @@ function ConstellationNode({
 	const floatDel = (node.y * 0.05) % 2.5;
 
 	return (
-		<motion.div
+		<m.div
 			className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10"
 			style={{ left: `${node.x}%`, top: `${node.y}%` }}
 			initial={{ opacity: 0, scale: 0.5 }}
@@ -357,7 +357,7 @@ function ConstellationNode({
 			onMouseLeave={() => onHover(null)}
 		>
 			{/* Float + hover-stop wrapper */}
-			<motion.div
+			<m.div
 				animate={shouldReduce ? {} : { y: [0, -7, 0] }}
 				transition={
 					shouldReduce
@@ -372,7 +372,7 @@ function ConstellationNode({
 				whileHover={shouldReduce ? {} : { y: 0 }}
 				className="flex flex-col items-center gap-1"
 			>
-				<motion.div
+				<m.div
 					animate={
 						isFocused && !shouldReduce
 							? {
@@ -405,7 +405,7 @@ function ConstellationNode({
 					}}
 				>
 					<TechNode label={node.label} {...techIconMap[node.id]} />
-				</motion.div>
+				</m.div>
 				<span
 					className="font-pixel text-[6px] whitespace-nowrap"
 					style={{
@@ -416,8 +416,8 @@ function ConstellationNode({
 				>
 					{node.label}
 				</span>
-			</motion.div>
-		</motion.div>
+			</m.div>
+		</m.div>
 	);
 }
 
@@ -520,7 +520,7 @@ function Constellation({
 
 			{/* Center — GIF character */}
 			<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-				<motion.div
+				<m.div
 					animate={shouldReduce ? {} : { y: [0, -7, 0] }}
 					transition={{
 						duration: 3,
@@ -545,7 +545,7 @@ function Constellation({
 							unoptimized
 						/>
 					</div>
-				</motion.div>
+				</m.div>
 			</div>
 
 			{/* Legend — dims when category inactive */}
@@ -604,7 +604,7 @@ function GemItem({
 			onMouseEnter={() => setHovered(true)}
 			onMouseLeave={() => setHovered(false)}
 		>
-			<motion.div
+			<m.div
 				whileHover={{ scale: 1.18 }}
 				transition={{ duration: 0.14 }}
 				className="w-9 h-9 border p-1.5 flex items-center justify-center cursor-pointer"
@@ -618,7 +618,7 @@ function GemItem({
 				}}
 			>
 				<TechNode label={name} {...techIconMap[techId]} />
-			</motion.div>
+			</m.div>
 			{hovered && (
 				<div
 					className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-1 whitespace-nowrap z-30 pointer-events-none"
@@ -672,7 +672,8 @@ function TechStackGrid({
 	const otherGroups = STACK.filter(
 		(g) =>
 			g.label !== 'LANGUAGES' &&
-			(g.cats.length === 0 || g.cats.some((c) => activeCategories.has(c))),
+			(g.cats.length === 0 ||
+				g.cats.some((c) => activeCategories.has(c))),
 	);
 
 	return (
@@ -683,7 +684,7 @@ function TechStackGrid({
 			<div className="grid grid-cols-2 md:grid-cols-4">
 				<AnimatePresence mode="popLayout">
 					{otherGroups.map((group) => (
-						<motion.div
+						<m.div
 							key={group.label}
 							layout
 							initial={{ opacity: 0, y: 12 }}
@@ -693,7 +694,7 @@ function TechStackGrid({
 							className="p-5 border-r border-b border-dotted border-border"
 						>
 							<StackGroupCard group={group} />
-						</motion.div>
+						</m.div>
 					))}
 				</AnimatePresence>
 			</div>
@@ -737,7 +738,7 @@ export const AboutSection = () => {
 	return (
 		<section className="py-16 sm:py-24 px-4 max-w-7xl mx-auto" id="about">
 			{/* Header */}
-			<motion.div
+			<m.div
 				variants={fadeUp}
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
@@ -753,10 +754,10 @@ export const AboutSection = () => {
 					</h2>
 				</div>
 				<ClawdMascot className="hidden sm:inline-flex mb-1" />
-			</motion.div>
+			</m.div>
 
 			{/* S1: Hero card */}
-			<motion.div
+			<m.div
 				variants={fadeUp}
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
@@ -765,10 +766,10 @@ export const AboutSection = () => {
 			>
 				<HeroAvatar />
 				<HeroInfo />
-			</motion.div>
+			</m.div>
 
 			{/* S2: Constellation */}
-			<motion.div
+			<m.div
 				variants={fadeUp}
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
@@ -783,8 +784,8 @@ export const AboutSection = () => {
 					onToggle={toggleCategory}
 					onReset={resetCategories}
 				/>
-			</motion.div>
-			<motion.div
+			</m.div>
+			<m.div
 				variants={fadeUp}
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
@@ -795,10 +796,10 @@ export const AboutSection = () => {
 					activeCategories={activeCategories}
 					focusedSkill={state.focusedSkill}
 				/>
-			</motion.div>
+			</m.div>
 
 			{/* S3: Inventory */}
-			<motion.div
+			<m.div
 				variants={fadeUp}
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
@@ -808,15 +809,15 @@ export const AboutSection = () => {
 				<p className="font-pixel text-[10px] text-muted-foreground mb-4 tracking-widest">
 					INVENTORY
 				</p>
-			</motion.div>
-			<motion.div
+			</m.div>
+			<m.div
 				variants={fadeUp}
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
 				viewport={{ once: true }}
 			>
 				<TechStackGrid activeCategories={activeCategories} />
-			</motion.div>
+			</m.div>
 		</section>
 	);
 };

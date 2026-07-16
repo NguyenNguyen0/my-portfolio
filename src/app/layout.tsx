@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { LazyMotion, domMax } from 'framer-motion';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
@@ -11,7 +12,7 @@ import {
 	VT323,
 } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { ChatWidget } from '@/components/ui/chat-widget';
+import { ChatWidget } from '@/components/ui/chat-widget-loader';
 import { PortfolioActionsProvider } from '@/context/portfolio-actions';
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -27,7 +28,10 @@ const pressStart2P = Press_Start_2P({
 	subsets: ['latin'],
 	display: 'swap',
 	variable: '--font-press-start',
-	preload: false,
+	// Used above-the-fold in Hero (INSERT COIN, CTA buttons) via .font-pixel —
+	// preload so it's not discovered only after CSS parses (Lighthouse: deep
+	// font dependency chain).
+	preload: true,
 });
 
 const spaceMono = Space_Mono({
@@ -35,7 +39,8 @@ const spaceMono = Space_Mono({
 	subsets: ['latin'],
 	display: 'swap',
 	variable: '--font-space-mono',
-	preload: false,
+	// Used above-the-fold in Hero's description paragraph via .font-mono-custom.
+	preload: true,
 });
 
 const vt323 = VT323({
@@ -202,9 +207,11 @@ export default function RootLayout({
 						defaultTheme="dark"
 						enableSystem
 					>
-						{children}
+						<LazyMotion features={domMax} strict>
+							{children}
+							<ChatWidget />
+						</LazyMotion>
 						<SpeedInsights />
-						<ChatWidget />
 					</ThemeProvider>
 				</PortfolioActionsProvider>
 			</body>

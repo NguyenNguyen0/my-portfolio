@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import { m, useReducedMotion, type Variants } from 'framer-motion';
 import { useState } from 'react';
 import {
 	Github,
@@ -147,7 +147,7 @@ export const ContactSection = () => {
 			className="py-16 sm:py-24 px-4 max-w-7xl mx-auto"
 		>
 			{/* Heading */}
-			<motion.div
+			<m.div
 				variants={fadeUp}
 				initial={shouldReduce ? false : 'hidden'}
 				whileInView="visible"
@@ -162,11 +162,11 @@ export const ContactSection = () => {
 						LET&apos;S TALK
 					</h2>
 				</div>
-			</motion.div>
+			</m.div>
 
 			<div className="grid md:grid-cols-2 gap-10 md:gap-16">
 				{/* Form */}
-				<motion.div
+				<m.div
 					variants={fadeUp}
 					initial={shouldReduce ? false : 'hidden'}
 					whileInView="visible"
@@ -280,10 +280,10 @@ export const ContactSection = () => {
 							</button>
 						</form>
 					</div>
-				</motion.div>
+				</m.div>
 
 				{/* Info + Socials */}
-				<motion.div
+				<m.div
 					variants={fadeUp}
 					initial={shouldReduce ? false : 'hidden'}
 					whileInView="visible"
@@ -342,33 +342,32 @@ export const ContactSection = () => {
 						<p className="font-pixel text-[10px] text-muted-foreground mb-4 tracking-widest">
 							CONNECT
 						</p>
-						<div
-							className="flex flex-wrap gap-3"
-							role="list"
+						<ul
+							className="flex flex-wrap gap-3 list-none"
 							aria-label="Social links"
 						>
 							{socialLinks.map((social) => (
-								<a
-									key={social.label}
-									href={social.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label={`Connect on ${social.label}`}
-									role="listitem"
-									className="flex items-center gap-2 px-4 py-3 border border-dotted border-border text-muted-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
-								>
-									<social.icon
-										className="w-4 h-4"
-										aria-hidden="true"
-									/>
-									<span className="font-pixel text-[9px]">
-										{social.label.toUpperCase()}
-									</span>
-								</a>
+								<li key={social.label}>
+									<a
+										href={social.href}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={`Connect on ${social.label}`}
+										className="flex items-center gap-2 px-4 py-3 border border-dotted border-border text-muted-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
+									>
+										<social.icon
+											className="w-4 h-4"
+											aria-hidden="true"
+										/>
+										<span className="font-pixel text-[9px]">
+											{social.label.toUpperCase()}
+										</span>
+									</a>
+								</li>
 							))}
-						</div>
+						</ul>
 					</div>
-				</motion.div>
+				</m.div>
 			</div>
 		</section>
 	);

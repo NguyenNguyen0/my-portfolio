@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useReducedMotion, type Transition } from 'framer-motion';
+import { m, useReducedMotion, type Transition } from 'framer-motion';
 import { ArrowDown, Download } from 'lucide-react';
 import { PacManRunner } from '@/components/ui/pac-man-runner';
 import { usePortfolioActions } from '@/context/portfolio-actions';
@@ -56,13 +56,13 @@ export const HeroSection = () => {
 					{/* ── Left: text content ── */}
 					<div className="text-center lg:text-left order-2 lg:order-1">
 						{/* INSERT COIN */}
-						<motion.p
+						<m.p
 							{...(shouldReduce ? {} : fadeUp(0))}
 							className="font-pixel text-[10px] sm:text-xs text-primary mb-6 animate-pixel-blink tracking-widest"
 							aria-label="Insert coin to start"
 						>
 							INSERT COIN &#x25B6;
-						</motion.p>
+						</m.p>
 
 						{/* Name */}
 						<h1 className="name-glow font-[family-name:var(--font-vt323)] text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl text-foreground mb-4 leading-none">
@@ -83,7 +83,7 @@ export const HeroSection = () => {
 											? part
 											: Array.from(part).map(
 													(char, ci) => (
-														<motion.span
+														<m.span
 															key={ci}
 															initial={{
 																opacity: 0,
@@ -117,7 +117,7 @@ export const HeroSection = () => {
 															{char === ' '
 																? ' '
 																: char}
-														</motion.span>
+														</m.span>
 													),
 												)}
 									</span>
@@ -126,24 +126,24 @@ export const HeroSection = () => {
 						</h1>
 
 						{/* Role */}
-						<motion.p
+						<m.p
 							{...(shouldReduce ? {} : fadeUp(0.22))}
 							className="font-pixel text-[10px] sm:text-xs text-muted-foreground mb-5 tracking-wide leading-relaxed"
 						>
 							FULL-STACK DEVELOPER · AI INTEGRATION
-						</motion.p>
+						</m.p>
 
 						{/* Description */}
-						<motion.p
+						<m.p
 							{...(shouldReduce ? {} : fadeUp(0.32))}
 							className="font-mono-custom text-sm sm:text-base text-muted-foreground mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
 						>
 							{state.heroDescription ??
 								'Builds distributed systems end-to-end — Spring Boot microservices, Kafka pipelines, LangGraph AI agents, React interfaces. Deployed to production on AWS. Ships things that work.'}
-						</motion.p>
+						</m.p>
 
 						{/* CTAs */}
-						<motion.div
+						<m.div
 							{...(shouldReduce ? {} : fadeUp(0.42))}
 							className="flex flex-wrap gap-3 sm:gap-4 items-center justify-center lg:justify-start mb-10"
 						>
@@ -152,18 +152,19 @@ export const HeroSection = () => {
 									scrollToSection('projects-section')
 								}
 								className="font-pixel text-[10px] sm:text-xs px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground border-2 border-primary transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[0_4px_0_0_color-mix(in_oklch,var(--primary)_40%,transparent)] focus-visible:outline-2 focus-visible:outline-dotted focus-visible:outline-ring focus-visible:outline-offset-2 active:translate-y-0 leading-relaxed"
-								aria-label="View my projects"
 							>
-								&#x25B6; VIEW WORK
+								<span aria-hidden="true">&#x25B6; </span>
+								VIEW WORK
 							</button>
 							<button
 								onClick={() =>
 									scrollToSection('contact-section')
 								}
 								className="font-pixel text-[10px] sm:text-xs px-6 sm:px-8 py-3 sm:py-4 bg-transparent text-foreground border-2 border-dotted border-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-dotted focus-visible:outline-ring focus-visible:outline-offset-2 leading-relaxed"
-								aria-label="Contact me"
 							>
-								· CONTACT ·
+								<span aria-hidden="true">&middot; </span>
+								CONTACT
+								<span aria-hidden="true"> &middot;</span>
 							</button>
 							<a
 								href="/cv_nguyen_trung_nguyen_fullstack.pdf"
@@ -177,34 +178,34 @@ export const HeroSection = () => {
 								/>
 								DOWNLOAD CV
 							</a>
-						</motion.div>
+						</m.div>
 
 						{/* Pac-Man runner */}
-						<motion.div
+						<m.div
 							{...(shouldReduce ? {} : fadeUp(0.55))}
 							className="flex justify-center lg:justify-start"
 							aria-hidden="true"
 						>
 							<PacManRunner />
-						</motion.div>
+						</m.div>
 					</div>
 
 					{/* ── Right: Player card ── */}
-					<motion.div
+					<m.div
 						{...(shouldReduce ? {} : fadeIn(0.3))}
 						className="order-1 lg:order-2 flex justify-center lg:justify-end"
 					>
 						<PlayerCard />
-					</motion.div>
+					</m.div>
 				</div>
 
 				{/* Scroll indicator */}
-				<motion.div
+				<m.div
 					{...(shouldReduce ? {} : fadeUp(0.7))}
 					className="absolute bottom-6 left-1/2 -translate-x-1/2"
 					aria-hidden="true"
 				>
-					<motion.div
+					<m.div
 						animate={shouldReduce ? {} : { y: [0, 6, 0] }}
 						transition={{
 							duration: 1.4,
@@ -213,8 +214,8 @@ export const HeroSection = () => {
 						}}
 					>
 						<ArrowDown className="w-5 h-5 text-muted-foreground" />
-					</motion.div>
-				</motion.div>
+					</m.div>
+				</m.div>
 			</section>
 		</>
 	);

@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { usePortfolioActions } from '@/context/portfolio-actions';
 import { useTheme } from 'next-themes';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { Bot, X, Send, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { parseSSEBuffer } from '@/lib/chat/parse-sse';
@@ -257,7 +257,7 @@ export function ChatWidget() {
 			<div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
 				<AnimatePresence>
 					{open && (
-						<motion.div
+						<m.div
 							initial={{ opacity: 0, y: 16, scale: 0.96 }}
 							animate={{ opacity: 1, y: 0, scale: 1 }}
 							exit={{ opacity: 0, y: 16, scale: 0.96 }}
@@ -394,7 +394,7 @@ export function ChatWidget() {
 										<div className="flex justify-start">
 											<div className="bg-muted px-3 py-2 flex gap-1 items-center">
 												{[0, 1, 2].map((i) => (
-													<motion.span
+													<m.span
 														key={i}
 														className="w-1.5 h-1.5 rounded-full bg-primary"
 														animate={{
@@ -440,7 +440,7 @@ export function ChatWidget() {
 									<Send size={16} />
 								</button>
 							</form>
-						</motion.div>
+						</m.div>
 					)}
 				</AnimatePresence>
 

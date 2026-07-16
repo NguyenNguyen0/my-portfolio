@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -20,7 +19,9 @@
   --accent: oklch(82.7% 0.071 18.5); /* #F4B9B0 ghost pink */
   --accent-foreground: oklch(0% 0 0);
   --muted: oklch(12% 0 0);
-  --muted-foreground: oklch(50% 0 0);
+  /* 60% not 50%: 50% measured 3.49:1 on black (Lighthouse-flagged, needs 4.5:1).
+     60% -> ~5.3:1, verified via WCAG relative-luminance formula. */
+  --muted-foreground: oklch(60% 0 0);
   --border: oklch(22% 0 0);
   --input: oklch(12% 0 0);
   --ring: oklch(87.6% 0.179 95.4);

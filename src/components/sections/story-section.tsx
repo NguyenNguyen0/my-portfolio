@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import { m, useReducedMotion, type Variants } from 'framer-motion';
 import { Timeline } from '@/components/ui/timeline';
 import { storyEntries } from '@/data/story';
 
@@ -20,7 +20,7 @@ export const StorySection = () => {
 		<section className="py-16 sm:py-24 px-4" id="story">
 			<div className="max-w-7xl mx-auto">
 				{/* Heading */}
-				<motion.div
+				<m.div
 					variants={fadeUp}
 					initial={shouldReduce ? false : 'hidden'}
 					whileInView="visible"
@@ -36,7 +36,7 @@ export const StorySection = () => {
 					<p className="font-mono-custom text-sm text-muted-foreground mt-4 max-w-lg mx-auto leading-relaxed">
 						Every step from the first line of code to today.
 					</p>
-				</motion.div>
+				</m.div>
 
 				<Timeline items={storyEntries} />
 			</div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
@@ -25,7 +25,7 @@ export function ThemeToggle() {
 			aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
 		>
 			<AnimatePresence mode="wait" initial={false}>
-				<motion.span
+				<m.span
 					key={isDark ? 'moon' : 'sun'}
 					initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
 					animate={{ opacity: 1, rotate: 0, scale: 1 }}
@@ -35,7 +35,7 @@ export function ThemeToggle() {
 					aria-hidden="true"
 				>
 					{isDark ? '☾' : '☀'}
-				</motion.span>
+				</m.span>
 			</AnimatePresence>
 		</button>
 	);
