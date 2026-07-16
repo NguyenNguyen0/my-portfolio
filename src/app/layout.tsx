@@ -28,7 +28,10 @@ const pressStart2P = Press_Start_2P({
 	subsets: ['latin'],
 	display: 'swap',
 	variable: '--font-press-start',
-	preload: false,
+	// Used above-the-fold in Hero (INSERT COIN, CTA buttons) via .font-pixel —
+	// preload so it's not discovered only after CSS parses (Lighthouse: deep
+	// font dependency chain).
+	preload: true,
 });
 
 const spaceMono = Space_Mono({
@@ -36,7 +39,8 @@ const spaceMono = Space_Mono({
 	subsets: ['latin'],
 	display: 'swap',
 	variable: '--font-space-mono',
-	preload: false,
+	// Used above-the-fold in Hero's description paragraph via .font-mono-custom.
+	preload: true,
 });
 
 const vt323 = VT323({
