@@ -152,18 +152,19 @@ export const HeroSection = () => {
 									scrollToSection('projects-section')
 								}
 								className="font-pixel text-[10px] sm:text-xs px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground border-2 border-primary transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[0_4px_0_0_color-mix(in_oklch,var(--primary)_40%,transparent)] focus-visible:outline-2 focus-visible:outline-dotted focus-visible:outline-ring focus-visible:outline-offset-2 active:translate-y-0 leading-relaxed"
-								aria-label="View my projects"
 							>
-								&#x25B6; VIEW WORK
+								<span aria-hidden="true">&#x25B6; </span>
+								VIEW WORK
 							</button>
 							<button
 								onClick={() =>
 									scrollToSection('contact-section')
 								}
 								className="font-pixel text-[10px] sm:text-xs px-6 sm:px-8 py-3 sm:py-4 bg-transparent text-foreground border-2 border-dotted border-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-dotted focus-visible:outline-ring focus-visible:outline-offset-2 leading-relaxed"
-								aria-label="Contact me"
 							>
-								· CONTACT ·
+								<span aria-hidden="true">&middot; </span>
+								CONTACT
+								<span aria-hidden="true"> &middot;</span>
 							</button>
 							<a
 								href="/cv_nguyen_trung_nguyen_fullstack.pdf"
