@@ -342,31 +342,30 @@ export const ContactSection = () => {
 						<p className="font-pixel text-[10px] text-muted-foreground mb-4 tracking-widest">
 							CONNECT
 						</p>
-						<div
-							className="flex flex-wrap gap-3"
-							role="list"
+						<ul
+							className="flex flex-wrap gap-3 list-none"
 							aria-label="Social links"
 						>
 							{socialLinks.map((social) => (
-								<a
-									key={social.label}
-									href={social.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label={`Connect on ${social.label}`}
-									role="listitem"
-									className="flex items-center gap-2 px-4 py-3 border border-dotted border-border text-muted-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
-								>
-									<social.icon
-										className="w-4 h-4"
-										aria-hidden="true"
-									/>
-									<span className="font-pixel text-[9px]">
-										{social.label.toUpperCase()}
-									</span>
-								</a>
+								<li key={social.label}>
+									<a
+										href={social.href}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={`Connect on ${social.label}`}
+										className="flex items-center gap-2 px-4 py-3 border border-dotted border-border text-muted-foreground transition-all duration-150 hover:border-solid hover:border-primary hover:text-primary hover:-translate-y-0.5"
+									>
+										<social.icon
+											className="w-4 h-4"
+											aria-hidden="true"
+										/>
+										<span className="font-pixel text-[9px]">
+											{social.label.toUpperCase()}
+										</span>
+									</a>
+								</li>
 							))}
-						</div>
+						</ul>
 					</div>
 				</m.div>
 			</div>
