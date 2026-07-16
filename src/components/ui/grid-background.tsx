@@ -47,6 +47,11 @@ export function GridBackground({ children, className }: GridBackgroundProps) {
 	const [mounted, setMounted] = useState(false);
 	const auraRef = useRef<HTMLDivElement>(null);
 	const pelletRefs = useRef<(HTMLDivElement | null)[]>([]);
+	// Pellets are positioned with left/top percentages inside a `fixed inset-0`
+	// container, so their rects only change on resize — cache them there
+	// instead of calling getBoundingClientRect() (forces layout) for all 16
+	// pellets on every single mousemove.
+	const pelletRectsRef = useRef<(DOMRect | null)[]>([]);
 	const eatenTimers = useRef<(ReturnType<typeof setTimeout> | null)[]>(
 		Array.from({ length: BG_PELLETS.length }, () => null),
 	);
@@ -63,6 +68,16 @@ export function GridBackground({ children, className }: GridBackgroundProps) {
 	}, [isDark]);
 
 	useEffect(() => {
+		const measurePelletRects = () => {
+			pelletRectsRef.current = pelletRefs.current.map(
+				(el) => el?.getBoundingClientRect() ?? null,
+			);
+		};
+		measurePelletRects();
+		window.addEventListener('resize', measurePelletRects, {
+			passive: true,
+		});
+
 		const timers = eatenTimers.current;
 		const onMouseMove = (e: MouseEvent) => {
 			// Layer 1: cursor aura
@@ -73,10 +88,12 @@ export function GridBackground({ children, className }: GridBackgroundProps) {
 				auraRef.current.style.background = `radial-gradient(260px circle at ${e.clientX}px ${e.clientY}px, ${c}, transparent 70%)`;
 			}
 
-			// Layer 2: dot consumption
+			// Layer 2: dot consumption — reads from the cached rects above
+			// instead of querying the DOM (forced reflow) on every move.
 			pelletRefs.current.forEach((el, i) => {
 				if (!el || eatenTimers.current[i]) return;
-				const r = el.getBoundingClientRect();
+				const r = pelletRectsRef.current[i];
+				if (!r) return;
 				if (
 					Math.hypot(
 						e.clientX - r.left - 2.5,
@@ -98,6 +115,7 @@ export function GridBackground({ children, className }: GridBackgroundProps) {
 
 		window.addEventListener('mousemove', onMouseMove, { passive: true });
 		return () => {
+			window.removeEventListener('resize', measurePelletRects);
 			window.removeEventListener('mousemove', onMouseMove);
 			timers.forEach((t) => {
 				if (t) clearTimeout(t);
