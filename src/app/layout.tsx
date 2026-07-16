@@ -12,7 +12,7 @@ import {
 	VT323,
 } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { ChatWidget } from '@/components/ui/chat-widget';
+import { ChatWidget } from '@/components/ui/chat-widget-loader';
 import { PortfolioActionsProvider } from '@/context/portfolio-actions';
 
 const beVietnamPro = Be_Vietnam_Pro({
