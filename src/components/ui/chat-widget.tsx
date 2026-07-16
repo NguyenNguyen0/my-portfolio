@@ -7,6 +7,9 @@ import { useTheme } from 'next-themes';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bot, X, Send, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { parseSSEBuffer } from '@/lib/chat/parse-sse';
+import { resolveUiEffects } from '@/lib/chat/ui-actions';
+import type { UiActionName } from '@/lib/chat/tools';
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string };
 
@@ -115,7 +118,10 @@ export function ChatWidget() {
 					const updated = [...prev];
 					updated[updated.length - 1] = {
 						role: 'assistant',
-						content: 'Sorry, something went wrong.',
+						content:
+							res.status === 429
+								? "You're sending messages too fast — please wait a minute and try again."
+								: 'Sorry, something went wrong.',
 					};
 					return updated;
 				});
@@ -133,20 +139,10 @@ export function ChatWidget() {
 				if (done) break;
 				buffer += decoder.decode(value, { stream: true });
 
-				const lines = buffer.split('\n');
-				buffer = lines.pop() ?? '';
+				const { events, rest } = parseSSEBuffer(buffer);
+				buffer = rest;
 
-				for (const line of lines) {
-					if (!line.startsWith('data: ')) continue;
-					const raw = line.slice(6).trim();
-					if (!raw) continue;
-					let event: Record<string, unknown>;
-					try {
-						event = JSON.parse(raw);
-					} catch {
-						continue;
-					}
-
+				for (const event of events) {
 					if (
 						event.type === 'text-delta' &&
 						typeof event.delta === 'string'
@@ -211,55 +207,40 @@ export function ChatWidget() {
 	}
 
 	function handleUiAction(toolName: string, args: Record<string, unknown>) {
-		switch (toolName) {
-			case 'scroll_to_section': {
-				const el = document.getElementById(args.sectionId as string);
-				el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-				break;
+		let effects;
+		try {
+			effects = resolveUiEffects(toolName as UiActionName, args);
+		} catch (err) {
+			console.error('[chat] unknown UI action:', toolName, err);
+			return;
+		}
+
+		for (const effect of effects) {
+			switch (effect.kind) {
+				case 'scrollTo':
+					document
+						.getElementById(effect.elementId)
+						?.scrollIntoView({
+							behavior: 'smooth',
+							block: 'start',
+						});
+					break;
+				case 'setTheme':
+					setTheme(effect.theme);
+					break;
+				case 'setCssVar':
+					document.documentElement.style.setProperty(
+						effect.name,
+						effect.value,
+					);
+					break;
+				case 'removeCssVar':
+					document.documentElement.style.removeProperty(effect.name);
+					break;
+				case 'dispatch':
+					dispatch(effect.action);
+					break;
 			}
-			case 'change_theme':
-				setTheme(args.theme as string);
-				break;
-			case 'change_accent_color':
-				document.documentElement.style.setProperty(
-					'--primary',
-					args.primary as string,
-				);
-				document.documentElement.style.setProperty(
-					'--ring',
-					args.ring as string,
-				);
-				dispatch({
-					type: 'SET_ACCENT_COLOR',
-					color: args.color as string,
-				});
-				break;
-			case 'highlight_project': {
-				const el = document.getElementById('projects-section');
-				el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-				dispatch({
-					type: 'SET_HIGHLIGHTED_PROJECT',
-					projectId: args.projectId as string,
-				});
-				break;
-			}
-			case 'set_hero_description':
-				dispatch({
-					type: 'SET_HERO_DESCRIPTION',
-					text: args.text as string,
-				});
-				break;
-			case 'focus_skill':
-				dispatch({
-					type: 'SET_FOCUSED_SKILL',
-					skillId: args.skillId as string,
-				});
-				break;
-			case 'reset_ui':
-				document.documentElement.style.removeProperty('--primary');
-				document.documentElement.style.removeProperty('--ring');
-				dispatch({ type: 'RESET' });
-				break;
 		}
 	}
 

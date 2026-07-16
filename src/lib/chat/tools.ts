@@ -206,3 +206,7 @@ export const chatTools = {
 	focus_skill: focusSkillTool,
 	reset_ui: resetUiTool,
 };
+
+// Derived (not hand-maintained) so a new AG-UI tool added to chatTools above
+// forces a compile error in ui-actions.ts's resolveUiEffects until a case is added.
+export type UiActionName = Exclude<keyof typeof chatTools, 'read_readme'>;

@@ -3,10 +3,20 @@ import { NextRequest, NextResponse } from 'next/server';
 import { chatModel } from '@/lib/chat/model';
 import { buildSystemPrompt } from '@/lib/chat/system-prompt';
 import { chatTools } from '@/lib/chat/tools';
+import { isRateLimited } from '@/lib/chat/rate-limit';
 
 export const runtime = 'nodejs';
 
 export async function POST(req: NextRequest) {
+	const ip =
+		req.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown';
+	if (isRateLimited(ip)) {
+		return NextResponse.json(
+			{ error: 'Too many requests. Please try again in a minute.' },
+			{ status: 429 },
+		);
+	}
+
 	try {
 		const { messages } = await req.json();
 
