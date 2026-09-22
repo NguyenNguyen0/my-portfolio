@@ -201,6 +201,13 @@ export default function RootLayout({
 						}),
 					}}
 				/>
+				{/* Cloudflare Web Analytics — works on any host, Vercel included */}
+				<Script
+					id="cf-beacon"
+					src="https://static.cloudflareinsights.com/beacon.min.js"
+					strategy="afterInteractive"
+					data-cf-beacon='{"token": "2cdac528d1774ddda676654ebb62a72c"}'
+				/>
 				<PortfolioActionsProvider>
 					<ThemeProvider
 						attribute="class"
