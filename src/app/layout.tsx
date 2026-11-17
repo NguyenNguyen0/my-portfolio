@@ -11,6 +11,7 @@ import {
 	Space_Mono,
 	VT323,
 } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ChatWidget } from '@/components/ui/chat-widget-loader';
 import { PortfolioActionsProvider } from '@/context/portfolio-actions';
@@ -201,13 +202,6 @@ export default function RootLayout({
 						}),
 					}}
 				/>
-				{/* Cloudflare Web Analytics — works on any host, Vercel included */}
-				<Script
-					id="cf-beacon"
-					src="https://static.cloudflareinsights.com/beacon.min.js"
-					strategy="afterInteractive"
-					data-cf-beacon='{"token": "2cdac528d1774ddda676654ebb62a72c"}'
-				/>
 				<PortfolioActionsProvider>
 					<ThemeProvider
 						attribute="class"
@@ -219,6 +213,7 @@ export default function RootLayout({
 							<ChatWidget />
 						</LazyMotion>
 						<SpeedInsights />
+						<Analytics />
 					</ThemeProvider>
 				</PortfolioActionsProvider>
 			</body>

@@ -15,6 +15,7 @@
   "dependencies": {
     "@ai-sdk/groq": "^4.0.1",
     "@octokit/rest": "^22.0.0",
+    "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^1.2.0",
     "ai": "^7.0.4",
     "class-variance-authority": "^0.7.1",
